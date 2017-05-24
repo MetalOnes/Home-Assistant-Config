@@ -42,13 +42,19 @@ logbook:
 tts:
   platform: google
 
+##########################################
 # Vera
+##########################################
+
 vera:
   vera_controller_url: !secret vera_ip
   exclude: [ 166, 152, 144]
   lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120, 108]
 
-#Kodi
+##########################################
+# Media Players
+##########################################
+ 
 media_player:
   - platform: kodi
     host: !secret kodi1_ip
@@ -63,7 +69,9 @@ media_player:
   - platform: denonavr
     host: !secret denonavr_ip
 
+##########################################
 # Cams
+##########################################
 
 camera:
   - platform: mjpeg
@@ -72,9 +80,12 @@ camera:
     username: !secret bdcam_user
     password: !secret bdcam_pass
 
-# Weather
+##########################################
+# Sensors
+##########################################
 
 sensor:
+# Weather
   - platform: wunderground
     api_key: !secret wu_api
     monitored_conditions:
@@ -96,6 +107,32 @@ sensor:
       - wind_mph
       - wind_1d_mph
       - alerts
+
+# Pi-Hole
+  - platform: pi_hole
+    host: !secret pi_hole_ip
+    monitored_conditions:
+      - dns_queries_today
+      - ads_blocked_today
+      - ads_percentage_today
+
+# Harmony Status
+  - platform: template
+    sensors:
+      harmony_living_room:
+        value_template: '{{states.remote.living_room.attributes.current_activity }}'
+        friendly_name: 'Living Room'
+
+
+##########################################
+# Remote
+##########################################
+
+remote:
+  - platform: harmony
+    name: Living Room
+    host: 192.168.1.110
+
 
 group: !include groups.yaml
 automation: !include automations.yaml
