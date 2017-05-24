@@ -1,0 +1,33 @@
+group.harmony:
+  icon: mdi:remote
+
+sensor.temperature_sensor_167:
+  friendly_name: Man Cave Temp
+
+climate.thermostat_147:
+  friendly_name: Living Room Thermostat
+
+binary_sensor.front_door1_1_139:
+  friendly_name: Front Door
+  device_class: opening
+
+binary_sensor.back_door_1_138:
+  friendly_name: Back Door
+  device_class: opening
+
+binary_sensor.smoke_sensor_122:
+  friendly_name: Smoke Alarm
+  device_class: smoke
+
+binary_sensor.motion_sensor_128:
+  device_class: motion
+
+binary_sensor.master_bath_sensor_121:
+  device_class: motion
+
+sensor.humidity_sensor_169:
+  friendly_name: Man Cave Humidity
+
+sensor.light_sensor_168:
+  friendly_name: Man Cave Light
+

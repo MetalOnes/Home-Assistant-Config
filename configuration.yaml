@@ -1,0 +1,101 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret lat
+  longitude: !secret long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  customize: !include custom.yaml
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret http_pass
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url:
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Text to speech
+tts:
+  platform: google
+
+# Vera
+vera:
+  vera_controller_url: !secret vera_ip
+  exclude: [ 166, 152, 144]
+  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120, 108]
+
+#Kodi
+media_player:
+  - platform: kodi
+    host: !secret kodi1_ip
+    port: 8080
+    name: Living Room Kodi
+    username: !secret kodi1_user
+    password: !secret kodi1_pass
+  - platform: kodi
+    host: !secret kodi2_ip
+    port: 8080
+    name: Bedroom Kodi
+  - platform: denonavr
+    host: !secret denonavr_ip
+
+# Cams
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: !secret bdcam_url
+    name: Back Door
+    username: !secret bdcam_user
+    password: !secret bdcam_pass
+
+# Weather
+
+sensor:
+  - platform: wunderground
+    api_key: !secret wu_api
+    monitored_conditions:
+      - weather_1d
+      - weather_1n
+      - weather_2d
+      - weather_2n
+      - weather_3d
+      - weather_3n
+      - weather_4d
+      - weather_4n
+      - temp_high_record_f
+      - temp_high_1d_f
+      - temp_f
+      - temp_low_1d_f
+      - temp_low_record_f
+      - precip_1d
+      - precip_1d_in
+      - wind_mph
+      - wind_1d_mph
+      - alerts
+
+group: !include groups.yaml
+automation: !include automations.yaml
