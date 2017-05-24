@@ -131,7 +131,7 @@ sensor:
 remote:
   - platform: harmony
     name: Living Room
-    host: 192.168.1.110
+    host: !secret livingroom_harmony_ip
 
 
 group: !include groups.yaml
