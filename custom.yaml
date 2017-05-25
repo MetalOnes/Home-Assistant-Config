@@ -31,3 +31,10 @@ sensor.humidity_sensor_169:
 sensor.light_sensor_168:
   friendly_name: Man Cave Light
 
+switch.back_door_1_138:
+  friendly_name: Back Door Sensor
+
+switch.front_door1_1_139:
+  friendly_name: Front Door Sensor
+ 
+

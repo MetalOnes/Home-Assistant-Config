@@ -1,6 +1,6 @@
 default_view:
   view: true
-  icon: mdi:home
+#  icon: mdi:home
   entities:
   - group.exterior
   - group.living_room
@@ -49,12 +49,14 @@ Security Sensors:
 - switch.siren_113
 Cameras:
   view: true
-  icon: mdi:camcorder
+#  icon: mdi:camcorder
   entities:
   - camera.back_door
+  - camera.front_door
+  - camera.man_cave_camera
 Media:
   view: true
-  icon: mdi:play-circle
+#  icon: mdi:play-circle
   entities:
   - sensor.harmony_living_room
   - remote.living_room
@@ -76,7 +78,7 @@ Chromecast:
   - media_player.man_cave
 Weather:
   view: true
-  icon: mdi:weather-partlycloudy
+#  icon: mdi:weather-partlycloudy
   entities:
   - group.daily_forecast
   - group.weather_overview

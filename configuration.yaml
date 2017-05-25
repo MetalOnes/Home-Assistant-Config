@@ -73,12 +73,26 @@ media_player:
 # Cams
 ##########################################
 
+# Back Door Camera
+
 camera:
   - platform: mjpeg
     mjpeg_url: !secret bdcam_url
     name: Back Door
     username: !secret bdcam_user
     password: !secret bdcam_pass
+
+  - platform: mjpeg
+    mjpeg_url: !secret fdcam_url
+    name: Front Door
+    username: !secret fdcam_user
+    password: !secret fdcam_pass
+
+  - platform: mjpeg
+    mjpeg_url: !secret mccam_url
+    name: Man Cave Camera
+    username: !secret mccam_user
+    password: !secret mccam_pass
 
 ##########################################
 # Sensors
@@ -133,6 +147,25 @@ remote:
     name: Living Room
     host: !secret livingroom_harmony_ip
 
+##########################################
+# Telegram Bot
+##########################################
+
+telegram_bot:
+  platform: polling
+  api_key:  !secret telegram_bot_api_key
+  allowed_chat_ids:
+    - !secret my_chat_id
+
+notify:
+  - name: telegram
+    platform: telegram
+    chat_id: !secret my_chat_id
+
+
+#########################################
+# Includes
+#########################################
 
 group: !include groups.yaml
 automation: !include automations.yaml
