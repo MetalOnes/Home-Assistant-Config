@@ -37,4 +37,5 @@ switch.back_door_1_138:
 switch.front_door1_1_139:
   friendly_name: Front Door Sensor
  
-
+light.mancave_desk:
+  friendly_name: Desk LEDs

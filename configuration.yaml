@@ -21,8 +21,13 @@ config:
 http:
   api_password: !secret http_pass
   # Uncomment this if you are using SSL or running in Docker etc
-  # base_url:
-
+  base_url: !secret base_url
+  server_port: 8254 
+#  ssl_certificate: /etc/letsencrypt/live/slack-hass.crabdance.com/fullchain.pem
+#  ssl_key: /etc/letsencrypt/live/slack-hass.crabdance.com/privkey.pem
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+  use_x_forwarded_for: true
 # Checks for available updates
 updater:
 
@@ -45,6 +50,17 @@ tts:
 # Track sun
 sun:
 
+##########################################
+# Lights
+##########################################
+
+# Enable led strip control
+light:
+  - platform: flux_led
+    devices:
+      192.168.1.103:
+        name: mancave_desk
+        mode: rgb
 ##########################################
 # Vera
 ##########################################
@@ -124,6 +140,11 @@ sensor:
       - wind_mph
       - wind_1d_mph
       - alerts
+
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - precip_probability
 
 # Pi-Hole
   - platform: pi_hole

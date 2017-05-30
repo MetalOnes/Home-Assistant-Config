@@ -28,7 +28,8 @@ Kitchen:
 - light.dining_room_lamp_160
 Man Cave:
 - light.man_cave_lights_133
-- light.desk_leds_170
+# - light.desk_leds_170
+- light.mancave_desk
 - sensor.temperature_sensor_167
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
@@ -41,8 +42,8 @@ Int Lights:
 - light.lamp_107
 - light.cabinet_lights_123
 - light.dining_room_lamp_160
-- light.man_cave_lights_133
 - light.desk_leds_170
+- light.mancave_desk
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139
@@ -113,7 +114,7 @@ weather_overview:
   - sensor.pws_wind_mph
   - sensor.pws_wind_1d_mph
   - sensor.pws_alerts
-
+  - sensor.dark_sky_precip_probability
 Network:
   view: true
   entities:
