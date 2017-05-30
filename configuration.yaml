@@ -50,6 +50,14 @@ tts:
 # Track sun
 sun:
 
+# Device Tracker
+device_tracker:
+  - platform: tplink
+    host: !secret router_ip
+    username: !secret router_username
+    password: !secret router_password
+    track_new_devices: false
+
 ##########################################
 # Lights
 ##########################################
@@ -179,12 +187,12 @@ telegram_bot:
   platform: polling
   api_key:  !secret telegram_bot_api_key
   allowed_chat_ids:
-    - !secret my_chat_id
+    - !secret e_chat_id
 
 notify:
-  - name: telegram
+  - name: telegram_e
     platform: telegram
-    chat_id: !secret my_chat_id
+    chat_id: !secret e_chat_id
 
 
 #########################################
