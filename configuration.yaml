@@ -18,6 +18,12 @@ frontend:
 # Enables configuration UI
 config:
 
+# Logging options, and kills Denon errors
+logger:
+  default: error
+  logs:
+    DenonAVR: fatal
+
 http:
   api_password: !secret http_pass
   # Uncomment this if you are using SSL or running in Docker etc
@@ -28,6 +34,7 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 5
   use_x_forwarded_for: true
+
 # Checks for available updates
 updater:
 

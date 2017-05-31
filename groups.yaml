@@ -30,6 +30,7 @@ Man Cave:
 - light.man_cave_lights_133
 # - light.desk_leds_170
 - light.mancave_desk
+- switch.man_cave_fan_171
 - sensor.temperature_sensor_167
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
@@ -130,3 +131,4 @@ People:
   view: true
   entities:
   - device_tracker.eric_s7
+  - device_tracker.val_j7
