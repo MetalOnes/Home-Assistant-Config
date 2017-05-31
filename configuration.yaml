@@ -29,8 +29,8 @@ http:
   # Uncomment this if you are using SSL or running in Docker etc
   base_url: !secret base_url
   server_port: 8254 
-#  ssl_certificate: /etc/letsencrypt/live/slack-hass.crabdance.com/fullchain.pem
-#  ssl_key: /etc/letsencrypt/live/slack-hass.crabdance.com/privkey.pem
+#  ssl_certificate: !secret ssl_fullchain
+#  ssl_key: !secret ssl_key
   ip_ban_enabled: true
   login_attempts_threshold: 5
   use_x_forwarded_for: true
