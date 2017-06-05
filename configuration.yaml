@@ -21,8 +21,10 @@ config:
 # Logging options, and kills Denon errors
 logger:
   default: error
+#  default: info
   logs:
     DenonAVR: fatal
+    homeassistant.components.telegram_bot: info
 
 http:
   api_password: !secret http_pass
@@ -160,6 +162,19 @@ sensor:
     api_key: !secret darksky_api_key
     monitored_conditions:
       - precip_probability
+
+# Next Sunrise/Sunset Times
+  - platform: template
+    sensors:
+      sunset_time:
+        value_template: '{% set timestamp = as_timestamp(states.sun.sun.attributes.next_setting) | timestamp_custom("%I:%M %p") %} {{ timestamp.lstrip("0") }}'
+        friendly_name: "Sunset"
+
+  - platform: template
+    sensors:
+      sunrise_time:
+        value_template: '{% set timestamp = as_timestamp(states.sun.sun.attributes.next_rising) | timestamp_custom("%I:%M %p") %} {{ timestamp.lstrip("0") }}'
+        friendly_name: "Sunrise"
 
 # Pi-Hole
   - platform: pi_hole
