@@ -115,10 +115,12 @@ weather_overview:
   - sensor.pws_precip_1f
   - sensor.pws_precip_1d
   - sensor.dark_sky_precip_probability
+  - sensor.dark_sky_precip_intensity
   - sensor.sunrise_time
   - sensor.sunset_time
   - sensor.pws_temp_high_record_f
   - sensor.pws_temp_low_record_f
+  - binary_sensor.iss
 
 sun_times:
   name: Next Sunrise and Sunset
@@ -128,7 +130,12 @@ sun_times:
 Network:
   view: true
   entities:
+  - group.public_ip
   - group.pihole
+  - group.sabnzbd
+Public IP:
+  entities:
+  - sensor.myipopendnscom
 
 PiHole:
   entities:
@@ -136,8 +143,28 @@ PiHole:
   - sensor.pihole_ads_blocked_today
   - sensor.pihole_ads_percentage_blocked_today
 
+SABnzbd:
+  entities:
+  - sensor.sabnzbd_status
+  - sensor.sabnzbd_speed
+  - sensor.sabnzbd_queue
+  - sensor.sabnzbd_left
+  - sensor.sabnzbd_disk
+  - sensor.sabnzbd_disk_free
+
+Crypto Currency:
+  entities:
+    - sensor.ethereum
+    - sensor.exchange_rate_1_btc
+
+
 People:
   view: true
   entities:
   - device_tracker.eric_s7
   - device_tracker.val_j7
+
+Other:
+  view: true
+  entities:
+    - group.crypto_currency

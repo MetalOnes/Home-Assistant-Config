@@ -39,3 +39,10 @@ switch.front_door1_1_139:
  
 light.mancave_desk:
   friendly_name: Desk LEDs
+
+sensor.exchange_rate_1_btc:
+  friendly_name: Bitcoin
+
+sensor.myipopendnscom:
+  friendly_name: Public IP
+  icon: mdi:earth
