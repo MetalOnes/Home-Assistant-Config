@@ -222,17 +222,17 @@ sensor:
         friendly_name: 'Living Room'
 
 # SABnzbd - not working
-#  - platform: sabnzbd
-#    host: !secret sabnzbd_ip
-#    port: !secret sabnzbd_port
-#    api_key: !secret sabnzbd_api
-#    monitored_variables:
-#      - 'current_status'
-#      - 'speed'
-#      - 'queue_size'
-#      - 'queue_remaining'
-#      - 'disk_size'
-#      - 'disk_free'
+  - platform: sabnzbd
+    host: !secret sabnzbd_ip
+    port: !secret sabnzbd_port
+    api_key: !secret sabnzbd_api
+    monitored_variables:
+      - 'current_status'
+      - 'speed'
+      - 'queue_size'
+      - 'queue_remaining'
+      - 'disk_size'
+      - 'disk_free'
 
 # CoinMarketCap
   - platform: coinmarketcap
