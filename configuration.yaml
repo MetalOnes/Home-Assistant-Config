@@ -61,6 +61,16 @@ tts:
 # Track sun
 sun:
 
+# Enable MQTT
+mqtt:
+  broker: !secret mqtt_ip
+  port: 8883
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  certificate: /etc/ssl/certs/ca-certificates.crt
+  tls_insecure: true
+  protocol: 3.1
+
 # Device Tracker
 device_tracker:
   - platform: tplink
@@ -68,6 +78,8 @@ device_tracker:
     username: !secret router_username
     password: !secret router_password
     track_new_devices: false
+  - platform: owntracks
+    max_gps_accuracy: 200
 
 ##########################################
 # Lights
@@ -261,7 +273,23 @@ notify:
   - name: telegram_e
     platform: telegram
     chat_id: !secret e_chat_id
+    
+#########################################
+# Zones
+#########################################
+zone:
+  name: !secret e_work_name
+  latitude: !secret e_work_lat
+  longitude: !secret e_work_long
+  radius: 200
+  icon: mdi:company
 
+zone 2:
+  name: !secret v_work_name
+  latitude: !secret v_work_lat
+  longitude: !secret v_work_long
+  radius: 200
+  icon: mdi:cart
 
 #########################################
 # Includes
@@ -269,3 +297,4 @@ notify:
 
 group: !include groups.yaml
 automation: !include automations.yaml
+

@@ -161,6 +161,11 @@ Crypto Currency:
 People:
   view: true
   entities:
+  - group.tracked_people
+
+tracked_people:
+  name: Tracked People
+  entities:
   - device_tracker.eric_s7
   - device_tracker.val_j7
 
