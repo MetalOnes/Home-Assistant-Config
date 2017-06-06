@@ -1,6 +1,6 @@
 # Home-Assistant-Config
 
-Just my backup of my config for [https://home-assistant.io/](Home Assistant
+Just my backup of my config for [https://home-assistant.io/](Home Assistant)
 
 ### Recent Changes worth mentioning:
 
