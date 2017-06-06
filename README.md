@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Set up MQTT and Owntracks
 * Added ISS sensor & notification when visible
 * Added SABnzbd sensor (not working)
 * Added Bitcoin & Ethereum sensors
