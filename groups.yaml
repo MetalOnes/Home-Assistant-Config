@@ -28,7 +28,6 @@ Kitchen:
 - light.dining_room_lamp_160
 Man Cave:
 - light.man_cave_lights_133
-# - light.desk_leds_170
 - light.mancave_desk
 - switch.man_cave_fan_171
 - sensor.temperature_sensor_167
@@ -43,7 +42,6 @@ Int Lights:
 - light.lamp_107
 - light.cabinet_lights_123
 - light.dining_room_lamp_160
-- light.desk_leds_170
 - light.mancave_desk
 Security Sensors:
 - switch.front_door1_1_139
@@ -64,9 +62,8 @@ Cameras:
   - camera.man_cave_camera
 Media:
   view: true
-#  icon: mdi:play-circle
   entities:
-  - sensor.harmony_living_room
+  - group.harmony_status
   - remote.living_room
   - media_player.living_room_kodi
   - media_player.bedroom_kodi
@@ -78,6 +75,9 @@ Harmony:
   - switch.hrm_rjtech_dvr_154
   - switch.hrm_sceptre_tv_155
   - switch.hrm_soundbar_153
+Harmony Status:
+  entities:
+  - sensor.harmony_living_room
 Chromecast:
   entities:
   - media_player.cca_group
@@ -91,6 +91,8 @@ Weather:
   - group.daily_forecast
   - group.weather_overview
   - group.sun_times
+  - group.radar
+  - group.space_weather
 daily_forecast:
   name: Daily Forecast
   entities:
@@ -121,6 +123,17 @@ weather_overview:
   - sensor.pws_temp_high_record_f
   - sensor.pws_temp_low_record_f
   - binary_sensor.iss
+
+radar:
+  name: Radar
+  entities:
+  - camera.radar
+
+Space Weather:
+  name: Space Weather
+  entities:
+  - camera.solar_xrays
+  - camera.geomagnetic_field
 
 sun_times:
   name: Next Sunrise and Sunset

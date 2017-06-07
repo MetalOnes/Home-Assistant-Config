@@ -27,9 +27,11 @@ binary_sensor.master_bath_sensor_121:
 
 sensor.humidity_sensor_169:
   friendly_name: Man Cave Humidity
+  icon: mdi:water-percent
 
 sensor.light_sensor_168:
   friendly_name: Man Cave Light
+  icon: mdi:camera-metering-center
 
 switch.back_door_1_138:
   friendly_name: Back Door Sensor
@@ -46,3 +48,16 @@ sensor.exchange_rate_1_btc:
 sensor.myipopendnscom:
   friendly_name: Public IP
   icon: mdi:earth
+
+switch.man_cave_fan_171:
+  icon: mdi:fan
+
+light.dining_room_lamp_160:
+  icon: mdi:lamp
+
+light.man_cave_lights_133:
+  icon: mdi:lamp
+
+light.lamp_107:
+  friendly_name: Living Room Lamp
+  icon: mdi:lamp

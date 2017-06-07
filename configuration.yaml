@@ -67,9 +67,10 @@ mqtt:
   port: 8883
   username: !secret mqtt_user
   password: !secret mqtt_password
+#  certificate: /etc/mosquitto/certs/ca.crt
   certificate: /etc/ssl/certs/ca-certificates.crt
-  tls_insecure: true
-  protocol: 3.1
+#  tls_insecure: true
+#  protocol: 3.1
 
 # Device Tracker
 device_tracker:
@@ -152,6 +153,25 @@ camera:
     name: Man Cave Camera
     username: !secret mccam_user
     password: !secret mccam_pass
+
+#### Not actual cams, but images to use in HA
+
+# RDU Radar image
+
+  - platform: generic
+    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=RAX&brand=wui&num=1&delay=15&type=N0R&frame=0&scale=1.000&noclutter=1&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=1&smooth=0&rand=24947440&lat=35.59000015&lon=-78.77999878&label=Fuquay-Varina%2C+NC
+    name: Radar
+
+# Solar alerts
+
+  - platform: generic
+    still_image_url: http://www.n3kl.org/sun/images/status.gif
+    name: Solar X-Rays
+
+  - platform: generic
+    still_image_url: http://www.n3kl.org/sun/images/kpstatus.gif
+    name: Geomagnetic Field
+    
 
 ##########################################
 # Sensors
@@ -290,6 +310,16 @@ zone 2:
   longitude: !secret v_work_long
   radius: 200
   icon: mdi:cart
+
+#########################################
+# MDI Index
+#########################################
+panel_iframe:
+  mdiindex:
+    title: MDI Icon Index
+    icon: mdi:vector-square
+    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+
 
 #########################################
 # Includes
