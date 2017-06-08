@@ -20,8 +20,8 @@ Exterior:
 - light.front_spotlight_135
 - light.deck_lights_108
 Living Room:
+- sensor.harmony_living_room
 - light.lamp_107
-- group.harmony
 - lock.front_door_19
 Kitchen:
 - light.cabinet_lights_123
