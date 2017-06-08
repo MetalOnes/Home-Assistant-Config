@@ -63,21 +63,17 @@ Cameras:
 Media:
   view: true
   entities:
-  - group.harmony_status
-  - remote.living_room
-  - media_player.living_room_kodi
-  - media_player.bedroom_kodi
+  - group.harmony
+  - group.kodi
   - group.chromecast
   - media_player.denon_avrs720w
 Harmony:
   entities:
-  - switch.hrm_denon_av_receiv_164
-  - switch.hrm_rjtech_dvr_154
-  - switch.hrm_sceptre_tv_155
-  - switch.hrm_soundbar_153
-Harmony Status:
-  entities:
   - sensor.harmony_living_room
+  - input_select.living_room_tv
+Kodi:
+  - media_player.living_room_kodi
+  - media_player.bedroom_kodi
 Chromecast:
   entities:
   - media_player.cca_group

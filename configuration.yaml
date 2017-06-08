@@ -241,7 +241,7 @@ sensor:
         value_template: '{{states.remote.living_room.attributes.current_activity }}'
         friendly_name: 'Living Room'
 
-# SABnzbd - not working
+# SABnzbd
   - platform: sabnzbd
     host: !secret sabnzbd_ip
     port: !secret sabnzbd_port
@@ -319,6 +319,67 @@ panel_iframe:
     title: MDI Icon Index
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+
+#########################################
+# Harmony Control
+#########################################
+
+input_select:
+  living_room_tv:
+    name: Living Room TV
+    options:
+      - Select Activity
+      - Watch TV
+      - Watch Kodi
+      - Listen to Music
+      - Chromecast
+      - WiiU
+      - Power Off
+    initial: Select Activity
+    icon: mdi:monitor
+
+script:
+  watch_kodi:
+    sequence:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502126"
+
+  tv:
+    sequence:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502319"
+
+  chromecast:
+    sequence:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502458"
+
+  wiiu:
+    sequence:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502478"
+
+  music:
+    sequence:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502405"
+
+  tv_off:
+    sequence:
+    - service: remote.turn_off
+      entity_id: remote.living_room
+
+  
 
 
 #########################################
