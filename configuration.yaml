@@ -21,20 +21,13 @@ config:
 # Logging options, and kills Denon errors
 logger:
   default: error
-#  default: info
   logs:
     DenonAVR: fatal
-    homeassistant.components.telegram_bot: info
-    homeassistant.components.telegram: info
-    homeassistant.components.sabnzbd: info
-
+    homeassistant.components.device_tracker.tplink: critical
 http:
   api_password: !secret http_pass
-  # Uncomment this if you are using SSL or running in Docker etc
   base_url: !secret base_url
   server_port: 8254 
-#  ssl_certificate: !secret ssl_fullchain
-#  ssl_key: !secret ssl_key
   ip_ban_enabled: true
   login_attempts_threshold: 5
   use_x_forwarded_for: true
@@ -288,6 +281,7 @@ telegram_bot:
   api_key:  !secret telegram_bot_api_key
   allowed_chat_ids:
     - !secret e_chat_id
+    - !secret v_chat_id
 
 notify:
   - name: telegram_e
@@ -379,13 +373,9 @@ script:
     - service: remote.turn_off
       entity_id: remote.living_room
 
-  
-
-
 #########################################
 # Includes
 #########################################
-
 group: !include groups.yaml
 automation: !include automations.yaml
 

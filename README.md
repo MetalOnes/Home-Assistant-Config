@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Telegram bot working now.  Added commands and responses.
 * Harmony control (input_select script)
 * Customization
 * Added radar image and space weather status
