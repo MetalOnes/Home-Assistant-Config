@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Added Emulated Hue bridge, to control lights from Harmony Remote
 * Telegram bot working now.  Added commands and responses.
 * Harmony control (input_select script)
 * Customization

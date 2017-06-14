@@ -51,15 +51,25 @@ switch.man_cave_fan_171:
 
 light.dining_room_lamp_160:
   icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Dining Room Lamp"
 
 light.man_cave_lights_133:
   icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Man Cave Lights"
 
 light.lamp_107:
   friendly_name: Living Room Lamp
   icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Living Room Lamp"
 
 sensor.harmony_living_room:
   entity_picture: /local/harmony.png
   friendly_name: "Current Activity"
 
+switch.deck_lights_108:
+  emulated_hue: true
+  emulated_hue_name: "Deck Lights"
+  icon: mdi:lamp

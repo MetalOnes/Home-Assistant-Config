@@ -18,7 +18,7 @@ Exterior:
 - light.back_spotlight_118
 - light.front_porch_115
 - light.front_spotlight_135
-- light.deck_lights_108
+- switch.deck_lights_108
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
@@ -82,7 +82,6 @@ Chromecast:
   - media_player.man_cave
 Weather:
   view: true
-#  icon: mdi:weather-partlycloudy
   entities:
   - group.daily_forecast
   - group.weather_overview
@@ -114,6 +113,7 @@ weather_overview:
   - sensor.pws_precip_1d
   - sensor.dark_sky_precip_probability
   - sensor.dark_sky_precip_intensity
+  - sensor.dark_sky_cloud_coverage
   - sensor.sunrise_time
   - sensor.sunset_time
   - sensor.pws_temp_high_record_f

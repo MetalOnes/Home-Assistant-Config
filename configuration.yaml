@@ -94,7 +94,7 @@ light:
 vera:
   vera_controller_url: !secret vera_ip
   exclude: [ 166, 152, 144]
-  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120, 108]
+  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120]
 
 ##########################################
 # Media Players
@@ -201,6 +201,7 @@ sensor:
     monitored_conditions:
       - precip_probability
       - precip_intensity
+      - cloud_cover
 
 # Next Sunrise/Sunset Times
   - platform: template
@@ -287,6 +288,9 @@ notify:
   - name: telegram_e
     platform: telegram
     chat_id: !secret e_chat_id
+  - name: telegram_v
+    platform: telegram
+    chat_id: !secret v_chat_id
     
 #########################################
 # Zones
@@ -313,6 +317,16 @@ panel_iframe:
     title: MDI Icon Index
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+
+#########################################
+# Emulated Hue Bridge
+#########################################
+emulated_hue:
+  type: alexa
+  expose_by_default: false
+
+
+ 
 
 #########################################
 # Harmony Control
