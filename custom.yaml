@@ -8,7 +8,7 @@ binary_sensor.front_door1_1_139:
   friendly_name: Front Door
   device_class: opening
 
-binary_sensor.back_door_1_138:
+binary_sensor.back_door_172:
   friendly_name: Back Door
   device_class: opening
 
@@ -38,6 +38,7 @@ switch.front_door1_1_139:
  
 light.mancave_desk:
   friendly_name: Desk LEDs
+  icon: mdi:white-balance-iridescent
 
 sensor.exchange_rate_1_btc:
   friendly_name: Bitcoin
@@ -54,7 +55,7 @@ light.dining_room_lamp_160:
   emulated_hue: true
   emulated_hue_name: "Dining Room Lamp"
 
-light.man_cave_lights_133:
+switch.man_cave_lights_133:
   icon: mdi:lamp
   emulated_hue: true
   emulated_hue_name: "Man Cave Lights"
@@ -72,4 +73,16 @@ sensor.harmony_living_room:
 switch.deck_lights_108:
   emulated_hue: true
   emulated_hue_name: "Deck Lights"
-  icon: mdi:lamp
+  icon: mdi:white-balance-iridescent
+
+switch.front_porch_115:
+  icon: mdi:white-balance-incandescent
+
+switch.back_spotlight_118:
+  icon: mdi:white-balance-incandescent
+
+switch.front_spotlight_135:
+  icon: mdi:white-balance-incandescent
+
+switch.cabinet_lights_123:
+  icon: mdi:white-balance-iridescent

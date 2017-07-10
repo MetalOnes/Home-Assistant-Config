@@ -15,19 +15,19 @@ Climate:
 - sensor.temperature_sensor_167
 - climate.thermostat_147
 Exterior:
-- light.back_spotlight_118
-- light.front_porch_115
-- light.front_spotlight_135
+- switch.back_spotlight_118
+- switch.front_porch_115
+- switch.front_spotlight_135
 - switch.deck_lights_108
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
 - lock.front_door_19
 Kitchen:
-- light.cabinet_lights_123
+- switch.cabinet_lights_123
 - light.dining_room_lamp_160
 Man Cave:
-- light.man_cave_lights_133
+- switch.man_cave_lights_133
 - light.mancave_desk
 - switch.man_cave_fan_171
 - sensor.temperature_sensor_167
@@ -40,14 +40,14 @@ Bedroom:
 - binary_sensor.master_bath_sensor_121
 Int Lights:
 - light.lamp_107
-- light.cabinet_lights_123
+- switch.cabinet_lights_123
 - light.dining_room_lamp_160
 - light.mancave_desk
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139
 - switch.back_door_1_138
-- binary_sensor.back_door_1_138
+- binary_sensor.back_door_172
 - switch.smoke_sensor_122
 - binary_sensor.smoke_sensor_122
 - binary_sensor.motion_sensor_128
@@ -119,11 +119,6 @@ weather_overview:
   - sensor.pws_temp_high_record_f
   - sensor.pws_temp_low_record_f
   - binary_sensor.iss
-
-radar:
-  name: Radar
-  entities:
-  - camera.radar
 
 Space Weather:
   name: Space Weather

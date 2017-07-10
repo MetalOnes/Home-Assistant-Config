@@ -94,7 +94,7 @@ light:
 vera:
   vera_controller_url: !secret vera_ip
   exclude: [ 166, 152, 144]
-  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120]
+#  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120]
 
 ##########################################
 # Media Players
@@ -148,12 +148,6 @@ camera:
     password: !secret mccam_pass
 
 #### Not actual cams, but images to use in HA
-
-# RDU Radar image
-
-  - platform: generic
-    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=RAX&brand=wui&num=1&delay=15&type=N0R&frame=0&scale=1.000&noclutter=1&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=1&smooth=0&rand=24947440&lat=35.59000015&lon=-78.77999878&label=Fuquay-Varina%2C+NC
-    name: Radar
 
 # Solar alerts
 
