@@ -86,3 +86,9 @@ switch.front_spotlight_135:
 
 switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
+
+sensor.usps_mail:
+  friendly_name: Mail Today
+
+sensor.usps_packages:
+  friendly_name: Incoming Packages

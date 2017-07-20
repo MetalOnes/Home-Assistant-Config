@@ -14,6 +14,47 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+  themes:
+    minimal:
+      dark-primary-color: "#192231"
+      primary-color: "#98878f"
+      light-primary-color: "#98878f"
+      paper-toggle-button-checked-ink-color: "#494e6b"
+      paper-toggle-button-checked-button-color: "#494e6b"
+      paper-toggle-button-checked-bar-color: "#494e6b"
+      paper-slider-knob-color: "#494e6b"
+      paper-slider-knob-start-color: "#494e6b"
+      paper-slider-pin-color: "#494e6b"
+      paper-slider-active-color: "#494e6b"
+    vintage:
+      dark-primary-color: "#373f27"
+      primary-color: "#636b46"
+      light-primary-color: "#e9e7da"
+      paper-toggle-button-checked-ink-color: "#cda34f"
+      paper-toggle-button-checked-button-color: "#cda34f"
+      paper-toggle-button-checked-bar-color: "#cda34f"
+      paper-slider-knob-color: "#cda34f"
+      paper-slider-knob-start-color: "#cda34f"
+      paper-slider-pin-color: "#cda34f"
+      paper-slider-active-color: "#cda34f"
+    edark:
+      dark-primary-color: "#131617"
+      primary-color: "#3872a4"
+      primary-background-color: "#131617"
+      primary-text-color: "#d2d2d2"
+      paper-grey-50: "#131617"
+      paper-drawer-panel: "#131617"
+      paper-listbox-background-color: "#131617"
+      light-primary-color: "#3872a4"
+      paper-toggle-button-checked-ink-color: "#76323F"
+      paper-toggle-button-checked-button-color: "#76323F"
+      paper-toggle-button-checked-bar-color: "#76323F"
+      paper-slider-knob-color: "#3872a4"
+      paper-slider-knob-start-color: "#76323F"
+      paper-slider-pin-color: "#76323F"
+      paper-slider-active-color: "#76323F"
+      paper-slider-secondary-color: "#FFE0B2"
+
 
 # Enables configuration UI
 config:
@@ -250,11 +291,17 @@ sensor:
     display_options:
       - exchangerate
 
+# USPS
+  - platform: usps
+    username: !secret usps_username
+    password: !secret usps_password
+
+
 binary_sensor:
 
 # Detect ISS position
-  - platform: iss
-    name: ISS
+#  - platform: iss
+#    name: ISS
 
 ##########################################
 # Remote
