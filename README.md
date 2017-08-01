@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Added DAKboard iFrame panel
 * Excluded lots of stuff from history, logbook, and recorder
 * Started working on themes
 * Added USPS Sensor

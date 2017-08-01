@@ -182,3 +182,9 @@ Other:
   entities:
     - group.crypto_currency
     - group.usps
+
+#Events:
+#  view: true
+#  entities:
+#    - calendar.slacktishevents
+#    - calendar.holidays_in_united_states

@@ -423,7 +423,7 @@ zone 2:
   icon: mdi:cart
 
 #########################################
-# MDI Index
+# iframes
 #########################################
 panel_iframe:
   mdiindex:
@@ -431,12 +431,27 @@ panel_iframe:
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
 
+  dakboard:
+    title: Events
+    url: !secret dakboard_url
+    icon: mdi:calendar
+
 #########################################
 # Emulated Hue Bridge
 #########################################
+
 emulated_hue:
   type: alexa
   expose_by_default: false
+
+#########################################
+# Google Calendar
+#########################################
+
+#google:
+#  client_id: !secret gcal_client
+#  client_secret: !secret gcal_secret
+#  track_new_calendar: False
 
 #########################################
 # Harmony Control
