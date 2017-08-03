@@ -1,7 +1,7 @@
 default_view:
   view: true
-#  icon: mdi:home
   entities:
+  - group.house_modes
   - group.exterior
   - group.living_room
   - group.kitchen
@@ -11,6 +11,7 @@ default_view:
   - group.security_sensors
   - group.cameras
   - group.weather_overview
+  name: default_view
 Climate:
 - sensor.temperature_sensor_167
 - climate.thermostat_147
@@ -36,6 +37,7 @@ Man Cave:
 Bedroom:
 - light.bedroom__eric_103
 - light.bedroom__val_104
+- script.br_lightsoff
 - light.vanity_light_120
 - binary_sensor.master_bath_sensor_121
 Int Lights:
@@ -55,7 +57,6 @@ Security Sensors:
 - switch.siren_113
 Cameras:
   view: true
-#  icon: mdi:camcorder
   entities:
   - camera.back_door
   - camera.front_door
@@ -72,8 +73,8 @@ Harmony:
   - sensor.harmony_living_room
   - input_select.living_room_tv
 Kodi:
-  - media_player.living_room_kodi
-  - media_player.bedroom_kodi
+- media_player.living_room_kodi
+- media_player.bedroom_kodi
 Chromecast:
   entities:
   - media_player.cca_group
@@ -118,19 +119,16 @@ weather_overview:
   - sensor.sunset_time
   - sensor.pws_temp_high_record_f
   - sensor.pws_temp_low_record_f
-#  - binary_sensor.iss
-
 Space Weather:
   name: Space Weather
   entities:
   - camera.solar_xrays
   - camera.geomagnetic_field
-
 sun_times:
   name: Next Sunrise and Sunset
   entities:
-    - sensor.sunrise_time
-    - sensor.sunset_time
+  - sensor.sunrise_time
+  - sensor.sunset_time
 Network:
   view: true
   entities:
@@ -140,13 +138,11 @@ Network:
 Public IP:
   entities:
   - sensor.myipopendnscom
-
 PiHole:
   entities:
   - sensor.pihole_dns_queries_today
   - sensor.pihole_ads_blocked_today
   - sensor.pihole_ads_percentage_blocked_today
-
 SABnzbd:
   entities:
   - sensor.sabnzbd_status
@@ -155,36 +151,29 @@ SABnzbd:
   - sensor.sabnzbd_left
   - sensor.sabnzbd_disk
   - sensor.sabnzbd_disk_free
-
 Crypto Currency:
   entities:
-    - sensor.ethereum
-    - sensor.exchange_rate_1_btc
-
+  - sensor.ethereum
+  - sensor.exchange_rate_1_btc
 USPS:
   entities:
-    - sensor.usps_mail
-    - sensor.usps_packages
-
+  - sensor.usps_mail
+  - sensor.usps_packages
 People:
   view: true
   entities:
   - group.tracked_people
-
 tracked_people:
   name: Tracked People
   entities:
   - device_tracker.eric_s7
   - device_tracker.val_j7
-
 Other:
   view: true
   entities:
-    - group.crypto_currency
-    - group.usps
-
-#Events:
-#  view: true
-#  entities:
-#    - calendar.slacktishevents
-#    - calendar.holidays_in_united_states
+  - group.crypto_currency
+  - group.usps
+House Modes:
+  entities:
+  - script.vera_mode_home
+  - script.vera_mode_night

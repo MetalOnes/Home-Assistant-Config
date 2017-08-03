@@ -56,7 +56,7 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
-    homeassistant.components.device_tracker.tplink: critical
+#    homeassistant.components.device_tracker.tplink: critical
 
 http:
   api_password: !secret http_pass
@@ -306,6 +306,13 @@ sensor:
   - platform: darksky
     api_key: !secret darksky_api_key
     monitored_conditions:
+      - temperature
+      - humidity
+      - wind_speed
+      - pressure
+      - wind_bearing
+      - apparent_temperature
+      - icon
       - precip_probability
       - precip_intensity
       - cloud_cover
@@ -437,6 +444,16 @@ panel_iframe:
     icon: mdi:calendar
 
 #########################################
+# Shell Commands
+#########################################
+
+shell_command:
+  br_lightsoff: !secret brlightsoff_url
+  vera_mode_home: !secret homemode_url
+  vera_mode_night: !secret nightmode_url
+
+
+#########################################
 # Emulated Hue Bridge
 #########################################
 
@@ -472,6 +489,21 @@ input_select:
     icon: mdi:monitor
 
 script:
+
+# Vera Scenes
+
+  br_lightsoff:
+    sequence:
+      service: shell_command.br_lightsoff
+  vera_mode_home:
+    sequence:
+      service: shell_command.vera_mode_home
+  vera_mode_night:
+    sequence:
+      service: shell_command.vera_mode_night
+
+# Back to Harmony Stuff
+
   watch_kodi:
     sequence:
     - service: remote.turn_on

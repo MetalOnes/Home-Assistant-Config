@@ -92,3 +92,15 @@ sensor.usps_mail:
 
 sensor.usps_packages:
   friendly_name: Incoming Packages
+
+script.br_lightsoff:
+  friendly_name: Bedroom Lights off
+  icon: mdi:flashlight-off
+
+script.vera_mode_home:
+  friendly_name: Switch to Home Mode
+  icon: mdi:home-variant
+
+script.vera_mode_night:
+  friendly_name: Switch to Night Mode
+  icon: mdi:weather-night
