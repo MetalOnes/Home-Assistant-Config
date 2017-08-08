@@ -37,9 +37,13 @@ Man Cave:
 Bedroom:
 - light.bedroom__eric_103
 - light.bedroom__val_104
+#- group.br_lights
 - script.br_lightsoff
 - light.vanity_light_120
 - binary_sensor.master_bath_sensor_121
+BR_Lights:
+- light.bedroom__eric_103
+- light.bedroom__val_104
 Int Lights:
 - light.lamp_107
 - switch.cabinet_lights_123
@@ -174,6 +178,9 @@ Other:
   - group.crypto_currency
   - group.usps
 House Modes:
+  control: hidden
+  icon: mdi:home-alternate
   entities:
+  - sensor.homemode
   - script.vera_mode_home
   - script.vera_mode_night

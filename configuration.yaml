@@ -376,6 +376,26 @@ sensor:
     password: !secret usps_password
 
 
+# Vera Home mode
+  - platform: rest
+    name: "House Mode"
+    resource: !secret hmode_url
+
+  - platform: template
+    sensors:
+      homemode:
+        friendly_name: 'House Mode'
+        value_template:  >-
+            {%- if is_state("sensor.house_mode", "1") %}
+              Home
+            {% elif is_state("sensor.house_mode", "2") %}
+              Away
+            {% elif is_state("sensor.house_mode", "3") %}
+              Night
+            {% elif is_state("sensor.house_mode", "4") %}
+              Vacation
+            {%- endif %}
+
 binary_sensor:
 
 # Detect ISS position
@@ -451,7 +471,12 @@ shell_command:
   br_lightsoff: !secret brlightsoff_url
   vera_mode_home: !secret homemode_url
   vera_mode_night: !secret nightmode_url
-
+#  camera_default: !secret camdef_url
+#  camera_privacy: !secret campri_url
+  bdcam_def: !secret bdcam_def_url
+  fdcam_def: !secret fdcam_def_url
+  bdcam_priv: !secret bdcam_priv_url
+  fdcam_priv: !secret fdcam_priv_url
 
 #########################################
 # Emulated Hue Bridge
@@ -501,6 +526,16 @@ script:
   vera_mode_night:
     sequence:
       service: shell_command.vera_mode_night
+
+  camera_default:
+    sequence:
+      - service: shell_command.bdcam_def
+      - service: shell_command.fdcam_def
+
+  camera_privacy:
+    sequence:
+      - service: shell_command.bdcam_priv
+      - service: shell_command.fdcam_priv
 
 # Back to Harmony Stuff
 

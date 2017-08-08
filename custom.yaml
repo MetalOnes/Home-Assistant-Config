@@ -104,3 +104,7 @@ script.vera_mode_home:
 script.vera_mode_night:
   friendly_name: Switch to Night Mode
   icon: mdi:weather-night
+
+sensor.homemode:
+  friendly_name: House Mode
+  icon: mdi:home-outline
