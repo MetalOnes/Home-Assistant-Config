@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Added some more themes.  Prepping for update as well.
 * Added Vera House mode sensor and associated stuff
 * Added scripts for some Vera scenes
 * Added DAKboard iFrame panel

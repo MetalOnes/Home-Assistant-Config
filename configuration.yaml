@@ -49,6 +49,76 @@ frontend:
       paper-slider-active-color: "#76323F"
       paper-slider-secondary-color: "#FFE0B2"
 
+    solarized:
+      primary-color: "#2aa198"
+      disabled-text-color: "#859900"
+      divider-color: "#586e75" #"rgba(255, 255, 255, 0.12)"
+      paper-card-background-color: "#002b36"
+      paper-grey-200: "#586e75"
+      paper-item-icon-color: "#b58900"
+      paper-listbox-background-color: "#002b36"
+      paper-listbox-color: "#b58900"
+      primary-background-color: "#073642"
+      primary-text-color: "#839496"
+      secondary-background-color: "#073642"
+      secondary-text-color: "#859900"
+      text-primary-color: "#839496"
+      label-badge-background-color: "var(--secondary-background-color)"
+      label-badge-text-color: "var(--text-primary-color)"
+      paper-card-header-color: "#cb4b16"
+      paper-grey-50: "#b58900"
+      paper-item-icon-active-color: "#dc322f"
+      paper-item-icon_-_color: "#FF00FF"   # no clue 
+      paper-slider-active-color: "#dc322f"
+      paper-slider-knob-color: "#dc322f"
+      paper-slider-knob-start-color: "#b58900"
+      paper-slider-pin-color: "#FF00FF"  # no clue
+      paper-slider-secondary-color: "#dc322f"
+      paper-toggle-button-checked-ink-color: "#dc322f"
+      paper-toggle-button-checked-button-color: "#dc322f"
+      paper-toggle-button-checked-bar-color: "#cb4b16"
+      paper-toggle-button-unchecked-bar-color: "#b58900"
+      table-row-background-color: "#002b36"
+      table-row-alternative-background-color: "#073642"
+      google-red: "#dc322f"
+      google-green: "#859900"
+      google-blue: "#268bd2"
+      google-yellow: "#b58900"
+      accent-color: "#cb4b16"
+      paper-green: "#859900"
+      paper-blue: "#268bd2"
+      paper-orange: "#cb4b16"
+  
+    darkcyan:
+    # Main colors that can be changed
+      primary-color: "#00bcd4"
+      disabled-text-color: "#545454"
+      divider-color: "rgba(255, 255, 255, 0.12)"
+      paper-card-background-color: "#4e4e4e"
+      paper-grey-200: "#191919"
+      paper-item-icon-color: "#d3d3d3"
+      paper-listbox-background-color: "#202020"
+      paper-listbox-color: "#FFFFFF"      
+      primary-background-color: "#303030"
+      primary-text-color: "#cfcfcf"      
+      secondary-background-color: "#2b2b2b"
+      secondary-text-color: "#04a7bc"
+    # Colors based on variables, see above
+      label-badge-background-color: "var(--secondary-background-color)"
+      label-badge-text-color: "var(--text-primary-color)"
+      paper-card-header-color: "#var(--paper-item-icon-color)"
+      paper-grey-50: "var(--primary-text-color)"
+      paper-item-icon-active-color: "var(--primary-color)"
+      paper-item-icon_-_color: "var(--primary-text-color)"
+      paper-slider-active-color: "var(--primary-color)"
+      paper-slider-knob-color: "var(--primary-color)"
+      paper-slider-knob-start-color: "var(--primary-color)"
+      paper-slider-pin-color: "var(--primary-color)"
+      paper-slider-secondary-color: "var(--light-primary-color)"     
+      paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+      paper-toggle-button-checked-button-color: "var(--primary-color)"
+      paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
+      paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
 
 config:
 
@@ -522,7 +592,7 @@ script:
       service: shell_command.br_lightsoff
   vera_mode_home:
     sequence:
-      service: shell_command.vera_mode_home
+      - service: shell_command.vera_mode_home
   vera_mode_night:
     sequence:
       service: shell_command.vera_mode_night
@@ -536,6 +606,14 @@ script:
     sequence:
       - service: shell_command.bdcam_priv
       - service: shell_command.fdcam_priv
+
+# Just a morning routine
+  morning_routine:
+    sequence:
+      - service: shell_command.vera_mode_home
+      - service: script.camera_privacy
+      - service: switch.turn_on
+        entity_id: switch.deck_lights_108
 
 # Back to Harmony Stuff
 
