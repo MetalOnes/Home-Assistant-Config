@@ -162,6 +162,7 @@ Crypto Currency:
 USPS:
   entities:
   - sensor.usps_mail
+  - camera.usps_mail
   - sensor.usps_packages
 People:
   view: true

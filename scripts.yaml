@@ -1,0 +1,71 @@
+br_lightsoff:
+  sequence:
+    service: shell_command.br_lightsoff
+
+vera_mode_home:
+  sequence:
+    - service: shell_command.vera_mode_home
+
+vera_mode_night:
+  sequence:
+    service: shell_command.vera_mode_night
+
+camera_default:
+  sequence:
+    - service: shell_command.bdcam_def
+    - service: shell_command.fdcam_def
+
+camera_privacy:
+  sequence:
+    - service: shell_command.bdcam_priv
+    - service: shell_command.fdcam_priv
+
+morning_routine:
+  sequence:
+    - service: shell_command.vera_mode_home
+    - service: script.camera_privacy
+    - service: switch.turn_on
+      entity_id: switch.deck_lights_108
+
+# Harmony Stuff
+
+watch_kodi:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "25502126"
+
+tv:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "25502319"
+
+chromecast:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "25502458"
+
+wiiu:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "25502478"
+
+music:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "25502405"
+
+tv_off:
+  sequence:
+  - service: remote.turn_off
+    entity_id: remote.living_room
+

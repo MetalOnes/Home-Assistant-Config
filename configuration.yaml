@@ -440,12 +440,6 @@ sensor:
     display_options:
       - exchangerate
 
-# USPS
-  - platform: usps
-    username: !secret usps_username
-    password: !secret usps_password
-
-
 # Vera Home mode
   - platform: rest
     name: "House Mode"
@@ -505,6 +499,7 @@ notify:
 #########################################
 # Zones
 #########################################
+
 zone:
   name: !secret e_work_name
   latitude: !secret e_work_lat
@@ -566,6 +561,14 @@ emulated_hue:
 #  track_new_calendar: False
 
 #########################################
+# USPS
+#########################################
+
+usps:
+  username: !secret usps_username
+  password: !secret usps_password
+
+#########################################
 # Harmony Control
 #########################################
 
@@ -583,83 +586,9 @@ input_select:
     initial: Select Activity
     icon: mdi:monitor
 
-script:
-
-# Vera Scenes
-
-  br_lightsoff:
-    sequence:
-      service: shell_command.br_lightsoff
-  vera_mode_home:
-    sequence:
-      - service: shell_command.vera_mode_home
-  vera_mode_night:
-    sequence:
-      service: shell_command.vera_mode_night
-
-  camera_default:
-    sequence:
-      - service: shell_command.bdcam_def
-      - service: shell_command.fdcam_def
-
-  camera_privacy:
-    sequence:
-      - service: shell_command.bdcam_priv
-      - service: shell_command.fdcam_priv
-
-# Just a morning routine
-  morning_routine:
-    sequence:
-      - service: shell_command.vera_mode_home
-      - service: script.camera_privacy
-      - service: switch.turn_on
-        entity_id: switch.deck_lights_108
-
-# Back to Harmony Stuff
-
-  watch_kodi:
-    sequence:
-    - service: remote.turn_on
-      entity_id: remote.living_room
-      data:
-        activity: "25502126"
-
-  tv:
-    sequence:
-    - service: remote.turn_on
-      entity_id: remote.living_room
-      data:
-        activity: "25502319"
-
-  chromecast:
-    sequence:
-    - service: remote.turn_on
-      entity_id: remote.living_room
-      data:
-        activity: "25502458"
-
-  wiiu:
-    sequence:
-    - service: remote.turn_on
-      entity_id: remote.living_room
-      data:
-        activity: "25502478"
-
-  music:
-    sequence:
-    - service: remote.turn_on
-      entity_id: remote.living_room
-      data:
-        activity: "25502405"
-
-  tv_off:
-    sequence:
-    - service: remote.turn_off
-      entity_id: remote.living_room
-
 #########################################
 # Includes
 #########################################
 group: !include groups.yaml
 automation: !include automations.yaml
-
+script: !include scripts.yaml

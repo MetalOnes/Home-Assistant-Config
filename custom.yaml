@@ -108,3 +108,7 @@ script.vera_mode_night:
 sensor.homemode:
   friendly_name: House Mode
   icon: mdi:home-outline
+
+camera.usps_mail:
+  friendly_name: Mail
+  icon: mdi:email-outline
