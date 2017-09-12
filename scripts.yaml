@@ -13,12 +13,12 @@ vera_mode_night:
 camera_default:
   sequence:
     - service: shell_command.bdcam_def
-    - service: shell_command.fdcam_def
+#    - service: shell_command.fdcam_def
 
 camera_privacy:
   sequence:
     - service: shell_command.bdcam_priv
-    - service: shell_command.fdcam_priv
+#    - service: shell_command.fdcam_priv
 
 morning_routine:
   sequence:

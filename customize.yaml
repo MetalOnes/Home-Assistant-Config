@@ -1,0 +1,114 @@
+sensor.temperature_sensor_167:
+  friendly_name: Man Cave Temp
+
+climate.thermostat_147:
+  friendly_name: Living Room Thermostat
+
+binary_sensor.front_door1_1_139:
+  friendly_name: Front Door
+  device_class: opening
+
+binary_sensor.back_door_172:
+  friendly_name: Back Door
+  device_class: opening
+
+binary_sensor.smoke_sensor_122:
+  friendly_name: Smoke Alarm
+  device_class: smoke
+
+binary_sensor.motion_sensor_128:
+  device_class: motion
+
+binary_sensor.master_bath_sensor_121:
+  device_class: motion
+
+sensor.humidity_sensor_169:
+  friendly_name: Man Cave Humidity
+  icon: mdi:water-percent
+
+sensor.light_sensor_168:
+  friendly_name: Man Cave Light
+  icon: mdi:camera-metering-center
+
+switch.back_door_1_138:
+  friendly_name: Back Door Sensor
+
+switch.front_door1_1_139:
+  friendly_name: Front Door Sensor
+ 
+light.mancave_desk:
+  friendly_name: Desk LEDs
+  icon: mdi:white-balance-iridescent
+
+sensor.exchange_rate_1_btc:
+  friendly_name: Bitcoin
+
+sensor.myipopendnscom:
+  friendly_name: Public IP
+  icon: mdi:earth
+
+switch.man_cave_fan_171:
+  icon: mdi:fan
+
+light.dining_room_lamp_160:
+  icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Dining Room Lamp"
+
+switch.man_cave_lights_133:
+  icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Man Cave Lights"
+
+light.lamp_107:
+  friendly_name: Living Room Lamp
+  icon: mdi:lamp
+  emulated_hue: true
+  emulated_hue_name: "Living Room Lamp"
+
+sensor.harmony_living_room:
+  entity_picture: /local/harmony.png
+  friendly_name: "Current Activity"
+
+switch.deck_lights_108:
+  emulated_hue: true
+  emulated_hue_name: "Deck Lights"
+  icon: mdi:white-balance-iridescent
+
+switch.front_porch_115:
+  icon: mdi:white-balance-incandescent
+
+switch.back_spotlight_118:
+  icon: mdi:white-balance-incandescent
+
+switch.front_spotlight_135:
+  icon: mdi:white-balance-incandescent
+
+switch.cabinet_lights_123:
+  icon: mdi:white-balance-iridescent
+
+sensor.usps_mail:
+  friendly_name: Mail Today
+
+sensor.usps_packages:
+  friendly_name: Incoming Packages
+
+script.br_lightsoff:
+  friendly_name: Bedroom Lights off
+  icon: mdi:flashlight-off
+
+script.vera_mode_home:
+  friendly_name: Switch to Home Mode
+  icon: mdi:home-variant
+
+script.vera_mode_night:
+  friendly_name: Switch to Night Mode
+  icon: mdi:weather-night
+
+sensor.homemode:
+  friendly_name: House Mode
+  icon: mdi:home-outline
+
+camera.usps_mail:
+  friendly_name: Mail
+  icon: mdi:email-outline

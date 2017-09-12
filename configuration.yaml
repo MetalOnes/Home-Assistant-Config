@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret elevation
   unit_system: imperial
   time_zone: America/New_York
-  customize: !include custom.yaml
+  customize: !include customize.yaml
 
 frontend:
   themes:
@@ -238,22 +238,22 @@ tts:
 sun:
 
 # Enable MQTT
-mqtt:
-  broker: !secret mqtt_ip
-  port: 8883
-  username: !secret mqtt_user
-  password: !secret mqtt_password
+#mqtt:
+#  broker: !secret mqtt_ip
+#  port: 8883
+#  username: !secret mqtt_user
+#  password: !secret mqtt_password
 #  certificate: /etc/mosquitto/certs/ca.crt
-  certificate: /etc/ssl/certs/ca-certificates.crt
+#  certificate: /etc/ssl/certs/ca-certificates.crt
 #  tls_insecure: true
 #  protocol: 3.1
 
 # Device Tracker
 device_tracker:
-  - platform: tplink
-    host: !secret router_ip
-    username: !secret router_username
-    password: !secret router_password
+  - platform: unifi
+    username: !secret ap_username
+    password: !secret ap_password
+    verify_ssl: false
     track_new_devices: false
 #  - platform: owntracks
 #    max_gps_accuracy: 200
@@ -266,7 +266,7 @@ device_tracker:
 light:
   - platform: flux_led
     devices:
-      192.168.1.103:
+      192.168.1.122:
         name: mancave_desk
         mode: rgb
 
@@ -317,11 +317,11 @@ camera:
     password: !secret bdcam_pass
 
 # Front Door Cam
-  - platform: mjpeg
-    mjpeg_url: !secret fdcam_url
-    name: Front Door
-    username: !secret fdcam_user
-    password: !secret fdcam_pass
+#  - platform: mjpeg
+#    mjpeg_url: !secret fdcam_url
+#    name: Front Door
+#    username: !secret fdcam_user
+#    password: !secret fdcam_pass
 
 # Man Cave Cam
   - platform: mjpeg

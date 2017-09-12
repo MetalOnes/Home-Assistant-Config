@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Prep for update to .53
 * Updated HA to .52.  Moved scripts to scripts.yaml, updated USPS config
 * Added some more themes.  Prepping for update as well.
 * Added Vera House mode sensor and associated stuff
