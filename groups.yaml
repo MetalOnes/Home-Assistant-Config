@@ -23,7 +23,9 @@ Exterior:
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
+- switch.party_lights_173
 - lock.front_door_19
+- script.party_time
 Kitchen:
 - switch.cabinet_lights_123
 - light.dining_room_lamp_160
@@ -155,14 +157,10 @@ SABnzbd:
   - sensor.sabnzbd_left
   - sensor.sabnzbd_disk
   - sensor.sabnzbd_disk_free
-Crypto Currency:
-  entities:
-  - sensor.ethereum
-  - sensor.exchange_rate_1_btc
 USPS:
   entities:
   - sensor.usps_mail
-  - camera.usps_mail
+#  - camera.usps_mail
   - sensor.usps_packages
 People:
   view: true
@@ -176,7 +174,6 @@ tracked_people:
 Other:
   view: true
   entities:
-  - group.crypto_currency
   - group.usps
 House Modes:
   control: hidden

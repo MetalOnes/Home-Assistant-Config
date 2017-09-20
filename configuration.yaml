@@ -31,23 +31,6 @@ frontend:
       paper-slider-knob-start-color: "#cda34f"
       paper-slider-pin-color: "#cda34f"
       paper-slider-active-color: "#cda34f"
-    edark:
-      dark-primary-color: "#131617"
-      primary-color: "#3872a4"
-      primary-background-color: "#131617"
-      primary-text-color: "#d2d2d2"
-      paper-grey-50: "#131617"
-      paper-drawer-panel: "#131617"
-      paper-listbox-background-color: "#131617"
-      light-primary-color: "#3872a4"
-      paper-toggle-button-checked-ink-color: "#76323F"
-      paper-toggle-button-checked-button-color: "#76323F"
-      paper-toggle-button-checked-bar-color: "#76323F"
-      paper-slider-knob-color: "#3872a4"
-      paper-slider-knob-start-color: "#76323F"
-      paper-slider-pin-color: "#76323F"
-      paper-slider-active-color: "#76323F"
-      paper-slider-secondary-color: "#FFE0B2"
 
     solarized:
       primary-color: "#2aa198"
@@ -126,7 +109,6 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
-#    homeassistant.components.device_tracker.tplink: critical
 
 http:
   api_password: !secret http_pass
@@ -237,7 +219,7 @@ tts:
 
 sun:
 
-# Enable MQTT
+# Enable MQTT - not needed right now
 #mqtt:
 #  broker: !secret mqtt_ip
 #  port: 8883
@@ -432,14 +414,6 @@ sensor:
       - 'disk_size'
       - 'disk_free'
 
-# CoinMarketCap
-  - platform: coinmarketcap
-    currency: ethereum
-# Bitcoin
-  - platform: bitcoin
-    display_options:
-      - exchangerate
-
 # Vera Home mode
   - platform: rest
     name: "House Mode"
@@ -462,9 +436,6 @@ sensor:
 
 binary_sensor:
 
-# Detect ISS position
-#  - platform: iss
-#    name: ISS
 
 ##########################################
 # Remote
@@ -523,11 +494,6 @@ panel_iframe:
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
 
-  dakboard:
-    title: Events
-    url: !secret dakboard_url
-    icon: mdi:calendar
-
 #########################################
 # Shell Commands
 #########################################
@@ -542,6 +508,13 @@ shell_command:
   fdcam_def: !secret fdcam_def_url
   bdcam_priv: !secret bdcam_priv_url
   fdcam_priv: !secret fdcam_priv_url
+  party_play: 'curl -g "http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}"'
+
+
+# REST Commands
+rest_command:
+  party_playlist:
+    url: 'http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}'
 
 #########################################
 # Emulated Hue Bridge
@@ -550,15 +523,6 @@ shell_command:
 emulated_hue:
   type: alexa
   expose_by_default: false
-
-#########################################
-# Google Calendar
-#########################################
-
-#google:
-#  client_id: !secret gcal_client
-#  client_secret: !secret gcal_secret
-#  track_new_calendar: False
 
 #########################################
 # USPS

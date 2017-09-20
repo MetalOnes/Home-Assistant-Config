@@ -112,3 +112,11 @@ sensor.homemode:
 camera.usps_mail:
   friendly_name: Mail
   icon: mdi:email-outline
+
+switch.party_lights_173:
+  friendly_name: Party Lights
+  icon: mdi:mushroom
+
+script.party_time:
+  friendly_name: Party Time!
+  icon: mdi:mushroom-outline

@@ -27,6 +27,24 @@ morning_routine:
     - service: switch.turn_on
       entity_id: switch.deck_lights_108
 
+party_time:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_room_lamp_160
+        brightness_pct: 50
+    - service: light.turn_on
+      data:
+        entity_id: light.lamp_107
+        brightness_pct: 50
+    - service: switch.turn_on
+      entity_id: switch.party_lights_173
+    - service: remote.turn_on
+      entity_id: remote.living_room
+      data:
+        activity: "25502126"
+    - service: rest_command.party_playlist
+
 # Harmony Stuff
 
 watch_kodi:
