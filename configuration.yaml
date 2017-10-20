@@ -9,29 +9,6 @@ homeassistant:
 
 frontend:
   themes:
-    minimal:
-      dark-primary-color: "#192231"
-      primary-color: "#98878f"
-      light-primary-color: "#98878f"
-      paper-toggle-button-checked-ink-color: "#494e6b"
-      paper-toggle-button-checked-button-color: "#494e6b"
-      paper-toggle-button-checked-bar-color: "#494e6b"
-      paper-slider-knob-color: "#494e6b"
-      paper-slider-knob-start-color: "#494e6b"
-      paper-slider-pin-color: "#494e6b"
-      paper-slider-active-color: "#494e6b"
-    vintage:
-      dark-primary-color: "#373f27"
-      primary-color: "#636b46"
-      light-primary-color: "#e9e7da"
-      paper-toggle-button-checked-ink-color: "#cda34f"
-      paper-toggle-button-checked-button-color: "#cda34f"
-      paper-toggle-button-checked-bar-color: "#cda34f"
-      paper-slider-knob-color: "#cda34f"
-      paper-slider-knob-start-color: "#cda34f"
-      paper-slider-pin-color: "#cda34f"
-      paper-slider-active-color: "#cda34f"
-
     solarized:
       primary-color: "#2aa198"
       disabled-text-color: "#859900"
@@ -109,6 +86,7 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
+#    homeassistant.components.device_tracker: debug
 
 http:
   api_password: !secret http_pass
@@ -299,11 +277,11 @@ camera:
     password: !secret bdcam_pass
 
 # Front Door Cam
-#  - platform: mjpeg
-#    mjpeg_url: !secret fdcam_url
-#    name: Front Door
-#    username: !secret fdcam_user
-#    password: !secret fdcam_pass
+  - platform: mjpeg
+    mjpeg_url: !secret fdcam_url
+    name: Front Door
+    username: !secret fdcam_user
+    password: !secret fdcam_pass
 
 # Man Cave Cam
   - platform: mjpeg
@@ -505,13 +483,13 @@ shell_command:
 #  camera_default: !secret camdef_url
 #  camera_privacy: !secret campri_url
   bdcam_def: !secret bdcam_def_url
-  fdcam_def: !secret fdcam_def_url
   bdcam_priv: !secret bdcam_priv_url
-  fdcam_priv: !secret fdcam_priv_url
   party_play: 'curl -g "http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}"'
 
-
+#########################################
 # REST Commands
+#########################################
+
 rest_command:
   party_playlist:
     url: 'http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}'

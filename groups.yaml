@@ -50,6 +50,7 @@ Int Lights:
 - light.lamp_107
 - switch.cabinet_lights_123
 - light.dining_room_lamp_160
+- switch.man_cave_lights_133
 - light.mancave_desk
 Security Sensors:
 - switch.front_door1_1_139
@@ -160,7 +161,7 @@ SABnzbd:
 USPS:
   entities:
   - sensor.usps_mail
-#  - camera.usps_mail
+  - camera.usps_mail
   - sensor.usps_packages
 People:
   view: true
