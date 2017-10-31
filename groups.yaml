@@ -20,6 +20,7 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
+- switch.front_holiday_lights_174
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
