@@ -87,6 +87,9 @@ switch.front_spotlight_135:
 switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
 
+switch.front_holiday_lights_174:
+  icon: mdi:pine-tree
+
 sensor.usps_mail:
   friendly_name: Mail Today
 

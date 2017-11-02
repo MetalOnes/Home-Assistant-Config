@@ -4,6 +4,8 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Started working on HAFloorPlan
+* Updated Harmony for new activity.
 * Updated to 0.56.2.  Adding scenes.yaml
 * Updated to 0.55.1.  Cleaning up some  things as well.
 * Prep for update to 0.54

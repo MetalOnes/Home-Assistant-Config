@@ -82,6 +82,13 @@ music:
     data:
       activity: "25502405"
 
+steam_link:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.lving_room
+    data:
+      activity: "29119612"
+
 tv_off:
   sequence:
   - service: remote.turn_off

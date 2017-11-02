@@ -472,6 +472,13 @@ panel_iframe:
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
 
+panel_custom:
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml
+
 #########################################
 # Shell Commands
 #########################################
@@ -506,9 +513,9 @@ emulated_hue:
 # USPS
 #########################################
 
-usps:
-  username: !secret usps_username
-  password: !secret usps_password
+#usps:
+#  username: !secret usps_username
+#  password: !secret usps_password
 
 #########################################
 # Harmony Control
@@ -524,6 +531,7 @@ input_select:
       - Listen to Music
       - Chromecast
       - WiiU
+      - Steam Link
       - Power Off
     initial: Select Activity
     icon: mdi:monitor
