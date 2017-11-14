@@ -137,6 +137,7 @@ sun_times:
   entities:
   - sensor.sunrise_time
   - sensor.sunset_time
+  - sensor.solar_angle
 Network:
   view: true
   entities:

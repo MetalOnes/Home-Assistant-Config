@@ -4,6 +4,8 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Changed interior light automation to use sun elevation instead of sunset and offset
+* Floorplan in progress.  Added Sun elevation sensor
 * Started working on HAFloorPlan
 * Updated Harmony for new activity.
 * Updated to 0.56.2.  Adding scenes.yaml

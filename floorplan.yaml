@@ -5,19 +5,18 @@
       # These options are optional
       # warnings:                  # enable warnings (to find out why things might ot be working correctly)
       # pan_zoom:                  # enable experimental panning / zooming
-      # hide_app_toolbar:          # hide the application toolbar (when used as a custom panel)
+      hide_app_toolbar:          # hide the application toolbar (when used as a custom panel)
       # date_format: DD-MMM-YYYY   # Date format to use in hover-over text
       
       last_motion_entity: sensor.template_last_motion
       last_motion_class: last-motion
 
       groups:
-
         - name: Sensors
           entities:
-             -  sensor.harmony_living_room
-          
-
+             - sensor.homemode
+             - sensor.temperature_sensor_167
+         
         - name: Lights
           entities:
              - light.bedroom__eric_103
@@ -25,6 +24,7 @@
              - light.dining_room_lamp_160
              - light.lamp_107
              - light.vanity_light_120
+             - light.mancave_desk
           states:
             - state: 'on'
               class: 'light-on'
@@ -41,11 +41,18 @@
              - switch.back_spotlight_118
              - switch.cabinet_lights_123
              - switch.deck_lights_108
+             - switch.party_lights_173
+             - switch.man_cave_lights_133
+             - group.int_lights
+             - group.exterior
           states:
             - state: 'on'
               class: 'switch-on'
             - state: 'off'
               class: 'switch-off'
+          action:
+            domain: homeassistant
+            service: toggle
 
         - name: Alarm Panel
           entities:
@@ -60,10 +67,9 @@
 
         - name: Binary sensors
           entities:
-            - binary_sensor.front_hallway
-            - binary_sensor.kitchen
-            - binary_sensor.master_bedroom
-            - binary_sensor.theatre_room
+            - binary_sensor.front_door1_1_139
+            - binary_sensor.back_door_172
+            - binary_sensor.smoke_sensor_122
           states:
             - state: 'off'
               class: 'info-background'
@@ -75,29 +81,50 @@
               to_state: 'off'
               duration: 10
 
+        - name: Room Motion
+          entities:
+            - binary_sensor.motion_sensor_128
+            - binary_sensor.master_bath_sensor_121
+          states:
+            - state: 'off'
+              class: 'room-motion-off'
+            - state: 'on'
+              class: 'room-motion-on'
+          state_transitions:
+            - name: On to off
+              from_state: 'on'
+              to_state: 'off'
+              duration: 10
+
         - name: Cameras
           entities:
-            - camera.hallway
-            - camera.driveway
+            - camera.back_door
             - camera.front_door
-            - camera.backyard
+            - camera.man_cave_camera
           states:
             - state: 'idle'
               class: 'camera-idle'
-              
-#        - name: thermostat_temp
-#          entities:
-#            - climate.downstairs
-#            - climate.upstairs
-#          text_template: '${entity.attributes.current_temperature ? entity.attributes.current_temperature : "undefined"}'
-#
-# The above text_template uses extended attributes from the climate.* objects to get current temperature.
 
-#        - name: text_states
-#          entities:
-#            - sensor.downstairs_thermostat_humidity
-#            - sensor.dark_sky_temperature
-#            - sensor.last_message
-#          text_template: '${entity.state ? entity.state.replace(/\s{2,}/g,"") : "undefined"}'
-#
-# The above text_template uses jQuery syntax to search and replace any instance of 2 consecutive (or more) spaces in a string of text.
+        - name: TV
+          entities:
+            - sensor.harmony_living_room
+          states:
+             - state: 'PowerOff'
+               class: 'tv-off'
+             - state: 'Watch Kodi'
+               class: 'tv-on'
+             - state: 'Watch TV'
+               class: 'tv-on'
+             - state: 'WiiU'
+               class: 'tv-on'
+             - state: 'Chromecast'
+               class: 'tv-on'
+             - state: 'Play Steam'
+               class: 'tv-on'
+             - state: 'Listen to Music'
+               class: 'tv-on'
+
+        - name: text_temp
+          entities: 
+            - climate.thermostat_147
+          text_template: '${entity.attributes.current_temperature ? entity.attributes.current_temperature + "°F"  : "undefined"}'
