@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Added Chromecast Radio
 * Changed interior light automation to use sun elevation instead of sunset and offset
 * Floorplan in progress.  Added Sun elevation sensor
 * Started working on HAFloorPlan

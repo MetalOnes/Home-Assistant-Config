@@ -128,3 +128,8 @@
           entities: 
             - climate.thermostat_147
           text_template: '${entity.attributes.current_temperature ? entity.attributes.current_temperature + "°F"  : "undefined"}'
+
+        - name: mc_temp
+          entities:
+            - sensor.temperature_sensor_167
+          text_template: '${entity.state}'

@@ -123,3 +123,7 @@ switch.party_lights_173:
 script.party_time:
   friendly_name: Party Time!
   icon: mdi:mushroom-outline
+
+script.JEMP:
+  friendly_name: Start Playing
+  icon: mdi:play

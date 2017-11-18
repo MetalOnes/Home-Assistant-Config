@@ -74,6 +74,7 @@ Media:
   entities:
   - group.harmony
   - group.kodi
+  - group.cc_radio
   - group.chromecast
   - media_player.denon_avrs720w
 Harmony:
@@ -85,8 +86,9 @@ Kodi:
 - media_player.bedroom_kodi
 Chromecast:
   entities:
-  - media_player.cca_group
+  - media_player.cca_living_room
   - media_player.cca_man_cave
+  - media_player.home_group
   - media_player.living_room
   - media_player.man_cave
 Weather:
@@ -185,3 +187,10 @@ House Modes:
   - sensor.homemode
   - script.vera_mode_home
   - script.vera_mode_night
+CC Radio:
+  name: Chromecast Radio
+  entities:
+  - input_select.radio_station
+  - input_select.chromecast_radio
+  - script.jemp
+  - input_number.volume_radio
