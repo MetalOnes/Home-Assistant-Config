@@ -21,19 +21,24 @@ Exterior:
 - switch.front_spotlight_135
 - switch.deck_lights_108
 - switch.front_holiday_lights_174
+- switch.back_holiday_lights_171
+HolidayExterior:
+- switch.front_spotlight_135
+- switch.deck_lights_108
+- switch.front_holiday_lights_174
+- switch.back_holiday_lights_171
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
 - switch.party_lights_173
 - lock.front_door_19
-- script.party_time
+#- script.party_time
 Kitchen:
 - switch.cabinet_lights_123
 - light.dining_room_lamp_160
 Man Cave:
 - switch.man_cave_lights_133
 - light.mancave_desk
-- switch.man_cave_fan_171
 - sensor.temperature_sensor_167
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
@@ -53,6 +58,7 @@ Int Lights:
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
+- switch.party_lights_173
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139

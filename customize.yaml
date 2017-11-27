@@ -47,9 +47,6 @@ sensor.myipopendnscom:
   friendly_name: Public IP
   icon: mdi:earth
 
-switch.man_cave_fan_171:
-  icon: mdi:fan
-
 light.dining_room_lamp_160:
   icon: mdi:lamp
   emulated_hue: true
@@ -90,6 +87,10 @@ switch.cabinet_lights_123:
 switch.front_holiday_lights_174:
   icon: mdi:pine-tree
 
+switch.back_holiday_lights_171:
+  icon: mdi:pine-tree
+
+
 sensor.usps_mail:
   friendly_name: Mail Today
 
@@ -117,8 +118,8 @@ camera.usps_mail:
   icon: mdi:email-outline
 
 switch.party_lights_173:
-  friendly_name: Party Lights
-  icon: mdi:spotlight
+  friendly_name: Xmas Tree
+  icon: mdi:pine-tree
 
 script.party_time:
   friendly_name: Party Time!
