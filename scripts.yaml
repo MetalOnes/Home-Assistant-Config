@@ -116,6 +116,7 @@ jemp:
          media_content_id: >
           {% if is_state("input_select.radio_station", "JEMP") %} http://streaming.radio.co/sd71de59b3/listen
           {% elif is_state("input_select.radio_station", "GD Radio") %} http://216.119.152.213:8019/listen.pls
+          {% elif is_state("input_select.radio_station", "Nugs Radio") %} http://nugs.net/radio/nugs.net_radio.m3u
           {% elif is_state("input_select.radio_station", "Hot 97") %} http://14153.live.streamtheworld.com/WQHTAAC.aac?pname=StandardPlayerV4&pversion=4.18.0-002&csegid=1&tdsdk=js-2.9&banners=none&sbmid=5cb82284-0bcc-42b4-e58e-0b8820e66993
           {% endif %}
          media_content_type: 'audio/mp4'

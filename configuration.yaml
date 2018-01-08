@@ -556,6 +556,7 @@ input_select:
     options:
       - JEMP
       - GD Radio
+      - Nugs Radio
       - Hot 97
   chromecast_radio:
     name: 'Select Speakers:'

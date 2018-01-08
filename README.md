@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Reverted holiday lights.  Prep for update to 0.60.1
 * Changed some stuff for holiday lights
 * Added Chromecast Radio
 * Changed interior light automation to use sun elevation instead of sunset and offset

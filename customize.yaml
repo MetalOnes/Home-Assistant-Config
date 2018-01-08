@@ -84,11 +84,11 @@ switch.front_spotlight_135:
 switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
 
-switch.front_holiday_lights_174:
-  icon: mdi:pine-tree
+#switch.front_holiday_lights_174:
+#  icon: mdi:pine-tree
 
-switch.back_holiday_lights_171:
-  icon: mdi:pine-tree
+#switch.back_holiday_lights_171:
+#  icon: mdi:pine-tree
 
 
 sensor.usps_mail:
@@ -118,8 +118,8 @@ camera.usps_mail:
   icon: mdi:email-outline
 
 switch.party_lights_173:
-  friendly_name: Xmas Tree
-  icon: mdi:pine-tree
+  friendly_name: Party Lights
+  icon: mdi:mushroom
 
 script.party_time:
   friendly_name: Party Time!
