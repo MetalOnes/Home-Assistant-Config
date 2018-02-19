@@ -40,27 +40,24 @@ light.mancave_desk:
   friendly_name: Desk LEDs
   icon: mdi:white-balance-iridescent
 
-sensor.exchange_rate_1_btc:
-  friendly_name: Bitcoin
-
 sensor.myipopendnscom:
   friendly_name: Public IP
   icon: mdi:earth
 
 light.dining_room_lamp_160:
   icon: mdi:lamp
-  emulated_hue: true
+  emulated_hue_hidden: false
   emulated_hue_name: "Dining Room Lamp"
 
 switch.man_cave_lights_133:
   icon: mdi:lamp
-  emulated_hue: true
+  emulated_hue_hidden: false
   emulated_hue_name: "Man Cave Lights"
 
 light.lamp_107:
   friendly_name: Living Room Lamp
   icon: mdi:lamp
-  emulated_hue: true
+  emulated_hue_hidden: false
   emulated_hue_name: "Living Room Lamp"
 
 sensor.harmony_living_room:
@@ -68,7 +65,7 @@ sensor.harmony_living_room:
   friendly_name: "Current Activity"
 
 switch.deck_lights_108:
-  emulated_hue: true
+  emulated_hue_hidden: false
   emulated_hue_name: "Deck Lights"
   icon: mdi:white-balance-iridescent
 
@@ -97,17 +94,20 @@ sensor.usps_mail:
 sensor.usps_packages:
   friendly_name: Incoming Packages
 
-script.br_lightsoff:
+scene.bedroom_lights_off:
   friendly_name: Bedroom Lights off
   icon: mdi:flashlight-off
 
-script.vera_mode_home:
+scene.switch_to_home:
   friendly_name: Switch to Home Mode
   icon: mdi:home-variant
 
-script.vera_mode_night:
+scene.switch_to_night:
   friendly_name: Switch to Night Mode
   icon: mdi:weather-night
+
+scene.switch_to_away:
+  friendly_name: Switch to Away Mode
 
 sensor.homemode:
   friendly_name: House Mode

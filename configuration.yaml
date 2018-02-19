@@ -309,6 +309,7 @@ sensor:
 # Weather Underground
   - platform: wunderground
     api_key: !secret wu_api
+    pwd_id: KNCFUQUA65
     monitored_conditions:
       - weather_1d
       - weather_1n
@@ -496,13 +497,6 @@ panel_custom:
 #########################################
 
 shell_command:
-  br_lightsoff: !secret brlightsoff_url
-  vera_mode_home: !secret homemode_url
-  vera_mode_night: !secret nightmode_url
-#  camera_default: !secret camdef_url
-#  camera_privacy: !secret campri_url
-  bdcam_def: !secret bdcam_def_url
-  bdcam_priv: !secret bdcam_priv_url
   party_play: 'curl -g "http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}"'
 
 #########################################
