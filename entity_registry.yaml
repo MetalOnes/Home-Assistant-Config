@@ -1,0 +1,6 @@
+sensor.erics_ipad_battery_level:
+  platform: ios
+  unique_id: level_erics_ipad
+sensor.erics_ipad_battery_state:
+  platform: ios
+  unique_id: state_erics_ipad
