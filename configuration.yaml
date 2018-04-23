@@ -522,6 +522,7 @@ emulated_hue:
 #usps:
 #  username: !secret usps_username
 #  password: !secret usps_password
+#  driver: 'phantomjs'
 
 #########################################
 # Input Selects

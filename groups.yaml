@@ -11,7 +11,7 @@ default_view:
   - group.security_sensors
   - group.cameras
   - group.weather_overview
-  name: default_view
+  name: Home
 Climate:
 - sensor.temperature_sensor_167
 - climate.thermostat_147
