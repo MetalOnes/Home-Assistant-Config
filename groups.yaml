@@ -32,13 +32,15 @@ Living Room:
 - light.lamp_107
 - switch.party_lights_173
 - lock.front_door_19
-- script.party_time
+#- script.party_time
 Kitchen:
 - switch.cabinet_lights_123
 - light.dining_room_lamp_160
 Man Cave:
 - switch.man_cave_lights_133
 - light.mancave_desk
+- light.mancave
+- light.wifi_box
 - sensor.temperature_sensor_167
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
@@ -58,7 +60,7 @@ Int Lights:
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
-#- switch.party_lights_173
+- switch.party_lights_173
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139
@@ -151,7 +153,7 @@ Network:
   entities:
   - group.public_ip
   - group.pihole
-  - group.sabnzbd
+#  - group.sabnzbd
 Public IP:
   entities:
   - sensor.myipopendnscom
@@ -160,14 +162,14 @@ PiHole:
   - sensor.pihole_dns_queries_today
   - sensor.pihole_ads_blocked_today
   - sensor.pihole_ads_percentage_blocked_today
-SABnzbd:
-  entities:
-  - sensor.sabnzbd_status
-  - sensor.sabnzbd_speed
-  - sensor.sabnzbd_queue
-  - sensor.sabnzbd_left
-  - sensor.sabnzbd_disk
-  - sensor.sabnzbd_disk_free
+#SABnzbd:
+#  entities:
+#  - sensor.sabnzbd_status
+#  - sensor.sabnzbd_speed
+#  - sensor.sabnzbd_queue
+#  - sensor.sabnzbd_left
+#  - sensor.sabnzbd_disk
+#  - sensor.sabnzbd_disk_free
 USPS:
   entities:
   - sensor.usps_mail
@@ -182,10 +184,10 @@ tracked_people:
   entities:
   - device_tracker.eric_s7
   - device_tracker.val_j7
-Other:
-  view: true
-  entities:
-  - group.usps
+#Other:
+#  view: true
+#  entities:
+#  - group.usps
 House Modes:
   control: hidden
   icon: mdi:home-alternate

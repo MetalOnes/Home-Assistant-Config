@@ -1,3 +1,5 @@
 - name: Night
   entities:
     light.mancave_desk: off
+    light.mancave: off
+    light.wifi_box: off
