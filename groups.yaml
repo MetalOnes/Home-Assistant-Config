@@ -60,7 +60,7 @@ Int Lights:
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
-- switch.party_lights_173
+#- switch.party_lights_173
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139
@@ -152,7 +152,7 @@ Network:
   view: true
   entities:
   - group.public_ip
-  - group.pihole
+#  - group.pihole
 #  - group.sabnzbd
 Public IP:
   entities:

@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Always tweaking and fixing
 * Updated to 0.67.1.  Added limitlessled and cleaned some things up
 * Updated to 0.63.3.  Fixed some minor things, switched WU to home weather station
 * Reverted holiday lights.  Prep for update to 0.60.1

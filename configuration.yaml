@@ -378,12 +378,12 @@ sensor:
         value_template: "{{ states.sun.sun.attributes.elevation }}"
 
 # Pi-Hole
-  - platform: pi_hole
-    host: !secret pi_hole_ip
-    monitored_conditions:
-      - dns_queries_today
-      - ads_blocked_today
-      - ads_percentage_today
+#  - platform: pi_hole
+#    host: !secret pi_hole_ip
+#    monitored_conditions:
+#      - dns_queries_today
+#      - ads_blocked_today
+#      - ads_percentage_today
 
 # Gets public IP
   - platform: dnsip
