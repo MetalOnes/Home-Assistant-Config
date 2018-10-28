@@ -23,6 +23,25 @@ party_time:
         activity: "25502126"
     - service: rest_command.party_playlist
 
+# HASS Stuff
+restart_ha:
+  alias: Restart HomeAssistant
+  sequence:
+    - alias: Restart HA
+      service: homeassistant.restart
+
+reload_automations:
+  alias: Reload Automations
+  sequence:
+    - alias: Reload-Automations
+      service: automation.reload
+      
+reload_groups:
+  alias: Reload Groups
+  sequence:
+    - alias: Reload-Groups
+      service: group.reload
+
 # Harmony Stuff
 
 watch_kodi:

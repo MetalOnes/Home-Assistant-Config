@@ -4,6 +4,8 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Updated to 0.81.1, Lovelace work begins
+* Updated some automations
 * Always tweaking and fixing
 * Updated to 0.67.1.  Added limitlessled and cleaned some things up
 * Updated to 0.63.3.  Fixed some minor things, switched WU to home weather station

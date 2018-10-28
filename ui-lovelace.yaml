@@ -1,0 +1,152 @@
+resources:
+  - url: /local/mini-graph-card.js?v=0.0.6
+    type: module
+  - url: /local/tracker-card.js?v=0
+    type: js
+theme: dark_theme
+views:
+  - title: Overview
+    icon: mdi:home-outline
+    cards:
+      - type: entity-filter
+        entities:
+          - entity: light.lamp_107
+            name: Living Room
+            tap_action: toggle
+          - entity: light.dining_room_lamp_160
+            name: Dining Room
+            tap_action: toggle
+          - entity: switch.cabinet_lights_123
+            name: Cabinets
+            tap_action: toggle
+          - entity: switch.man_cave_lights_133
+            name: Man Cave Lights
+            tap_action: toggle
+          - entity: light.mancave_desk
+            name: Desk Lights
+            tap_action: toggle
+          - entity: light.wifi_box
+            name: Desk (Wifi box)
+            tap_action: toggle
+          - entity: light.vanity_light_120
+            name: Vanity Light
+            tap_action: toggle
+          - entity: light.bedroom__eric_103
+            name: Bedroom (Right)
+            tap_action: toggle
+          - entity: light.bedroom__val_104
+            name: Bedroom (Left)
+            tap_action: toggle
+        state_filter:
+          - "on"
+        show_empty: false
+        card:
+          type: glance
+          title: Int. Lights currently on
+          column_width: calc(100% / 3)
+      - type: entity-filter
+        entities:
+          - entity: switch.front_porch_115
+            name: Front Porch
+            tap_action: toggle
+          - entity: switch.front_spotlight_135
+            name: Front Spotlight
+            tap_action: toggle
+          - entity: switch.deck_lights_108
+            name: Deck Lights
+            tap_action: toggle
+          - entity: switch.back_spotlight_118
+            name: Back Spotlight
+            tap_action: toggle
+          - entity: switch.holiday_front_176
+            name: Front Holiday
+            tap_action: toggle
+        state_filter:
+          - "on"
+        show_empty: false
+        card:
+          type: glance
+          title: Ext. Lights currently on
+          column_width: calc(100% / 4)
+      - type: picture-glance
+        title: Living Area
+        entities:
+          - light.lamp_107
+          - switch.party_lights_173
+          - light.dining_room_lamp_160
+          - switch.cabinet_lights_123
+        state_image:
+          "on": /local/living_on.jpg
+          "off": /local/living_bw.jpg
+        entity: light.lamp_107
+      - type: thermostat
+        entity: climate.thermostat_147
+      - type: iframe
+        url: https://embed.windy.com/embed2.html
+        aspect_ratio: 75%
+      - type: weather-forecast
+        entity: weather.weather
+
+  - title: Man Cave
+    icon: mdi:flask
+    cards:
+      - type: picture-glance
+        title: Man Cave
+        entities:
+          - switch.man_cave_lights_133
+          - light.mancave_desk
+          - light.mancave
+          - light.wifi_box
+        camera_image: camera.man_cave_camera
+      - type: sensor
+#      - type: "custom:mini-graph-card"
+        entity: sensor.temperature_sensor_167
+        height: 100
+        line_width: 4
+        font_size: 75
+
+
+  - title: Cameras
+    icon: mdi:video
+    cards:
+      - type: picture-glance
+        title: Front Door
+        entities:
+          - lock.front_door_19
+          - light.lamp_107
+        camera_image: camera.front_door
+      - type: picture-glance
+        title: Back Door
+        entities:
+          - switch.deck_lights_108
+          - switch.back_spotlight_118
+        camera_image: camera.back_door
+      - type: picture-glance
+        title: Man Cave
+        entities:
+          - switch.man_cave_lights_133
+        camera_image: camera.man_cave_camera
+
+  - title: System
+    icon: mdi:home-assistant
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture-entity
+            name: Server
+            image: /local/server.jpg
+            entity: sensor.myip
+          - type: glance
+            title: HASS Commands
+            column_width: calc(100% / 3)
+            entities:
+              - script.restart_ha
+              - script.reload_groups
+              - script.reload_automations
+
+      - type: custom:tracker-card
+        title: Component Updates
+        trackers:
+          - sensor.custom_card_tracker
+          - sensor.custom_component_tracker
+          - sensor.custom_python_script_tracker

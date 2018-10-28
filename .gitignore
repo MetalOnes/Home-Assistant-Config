@@ -25,3 +25,6 @@ ip_bans.yaml
 deps.bkp
 cfg
 *.sqlite
+.HA_VER*
+ip_bans.yaml
+*.token
