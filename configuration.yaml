@@ -27,6 +27,9 @@ http:
   login_attempts_threshold: 5
   use_x_forwarded_for: true
   trusted_proxies: 127.0.0.1
+  trusted_networks:
+    - 127.0.0.1
+    - 192.168.1.0/24
 
 # Updater Stuff
 updater:
@@ -36,6 +39,9 @@ custom_updater:
     - cards
     - components
     - python_scripts
+  card_urls:
+    - https://raw.githubusercontent.com/kuuji/button-card/master/tracker.json
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
 
 discovery:
 
@@ -443,13 +449,6 @@ panel_iframe:
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
 
-#panel_custom:
-#  - name: floorplan
-#    sidebar_title: Floorplan
-#    sidebar_icon: mdi:floor-plan
-#    url_path: floorplan
-#    config: !include floorplan.yaml
-
 #########################################
 # Shell Commands
 #########################################
@@ -528,6 +527,85 @@ input_number:
     min: 0
     max: 1
     step: 0.05
+
+#########################################
+# Harmony Switches
+#########################################
+switch:
+  - platform: template
+    switches:
+      lr_tv:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch TV') }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Watch TV'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_kodi:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Kodi') }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Watch Kodi'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_wiiu:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'WiiU' ) }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'WiiU'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_music:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Listen to Music' ) }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Listen to Music'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_chromecast:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Chromecast' ) }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Chromecast'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_steam:
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Play Steam' ) }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Play Steam'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
 
 #########################################
 # Includes

@@ -3,16 +3,114 @@ resources:
     type: module
   - url: /local/tracker-card.js?v=0
     type: js
-theme: dark_theme
+  - url: /local/button-card.js
+    type: module
+  - url: /local/mini-media-player.js?v=0.8.8
+    type: module
+  - url: /local/dual-gauge-card.js
+    type: module
+  - url: /local/toggle-lock-entity-row.js
+    type: module
+
 views:
+#
+# Overview tab
+#
   - title: Overview
     icon: mdi:home-outline
+    id: overview
     cards:
+
+# House Mode sensor and scenes
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            entity: sensor.homemode
+            color_type: card
+            name: "Home Mode: "
+            show_state: true
+            action: more_info
+            state:
+              - value: 'Away'
+                color: rgb(150, 0, 0)
+              - value: 'Home'
+                color: rgb(0, 99, 31)
+              - value: 'Night'
+                color: rgb(111, 0, 110)
+            style:
+              - text-transform: none
+
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: scene.switch_to_home
+              - type: entity-button
+                entity: scene.switch_to_night
+              - type: entity-button
+                entity: scene.switch_to_away
+              - type: "custom:button-card"
+                entity: lock.front_door_19
+                icon: mdi:lock
+                show_state: true
+                name: "Front Door: "
+                action: more_info
+                style:
+                  - font-weight: bold
+                color-type: card
+                state:
+                  - value: 'locked'
+                    color: rgb(255, 0, 0)
+                  - value: 'unlocked'
+                    color: rgb(0, 255, 0)
+
+# Tripped Sensors
+      - type: entity-filter
+        entities:
+          - entity: binary_sensor.front_door1_1_139
+            name: Front Door
+          - entity: binary_sensor.back_door_172
+            name: Back Door
+          - entity: binary_sensor.smoke_sensor_122
+            name: Smoke Alarm
+          - entity: binary_sensor.motion_sensor_128
+            name: Man cave motion
+          - entity: binary_sensor.master_bath_sensor_121
+            name: Master bath motion
+        show_empty: false
+        state_filter:
+          - "on"
+        card:
+          type: glance
+          title: Tripped Sensors
+
+# Harmony Living Room card
+      - type: picture-glance
+        title: Living Room
+        aspect_ratio: 16:9
+        entities:
+          - switch.lr_tv
+          - switch.lr_kodi
+          - switch.lr_wiiu
+          - switch.lr_music
+          - switch.lr_chromecast
+          - switch.lr_steam
+        state_image:
+          "PowerOff": /local/tv-off.jpg
+          "Watch Kodi": /local/kodi.jpg
+          "Watch TV": /local/tv-on.jpg
+          "Chromecast": /local/cast.jpg
+          "Listen to Music": /local/music.jpg
+          "Play Steam": /local/steam.jpg
+          "WiiU": /local/wiiu.jpg
+        entity: sensor.harmony_living_room
+
+# Int Lights on
       - type: entity-filter
         entities:
           - entity: light.lamp_107
             name: Living Room
             tap_action: toggle
+            icon: mdi:floor-lamp
           - entity: light.dining_room_lamp_160
             name: Dining Room
             tap_action: toggle
@@ -20,13 +118,13 @@ views:
             name: Cabinets
             tap_action: toggle
           - entity: switch.man_cave_lights_133
-            name: Man Cave Lights
+            name: Man Cave
             tap_action: toggle
           - entity: light.mancave_desk
-            name: Desk Lights
+            name: Desk Strip
             tap_action: toggle
           - entity: light.wifi_box
-            name: Desk (Wifi box)
+            name: Desk Puck
             tap_action: toggle
           - entity: light.vanity_light_120
             name: Vanity Light
@@ -42,8 +140,10 @@ views:
         show_empty: false
         card:
           type: glance
-          title: Int. Lights currently on
+          title: Interior
           column_width: calc(100% / 3)
+
+# Ext Lights on
       - type: entity-filter
         entities:
           - entity: switch.front_porch_115
@@ -66,47 +166,113 @@ views:
         show_empty: false
         card:
           type: glance
-          title: Ext. Lights currently on
+          title: Exterior
           column_width: calc(100% / 4)
+
+# Living Room Card
+      - type: picture-glance
+        title: Living Area
+        entities:
+          - entity: light.lamp_107
+            icon: mdi:floor-lamp
+          - light.dining_room_lamp_160
+          - switch.cabinet_lights_123
+          - entity: switch.party_lights_173
+            icon: mdi:mushroom
+        state_image:
+          "on": /local/living-wide.jpg
+          "off": /local/living-wide-bw.jpg
+        entity: light.lamp_107
+
+# Dual gauge card
+      - type: custom:dual-gauge-card
+        title: Temps
+        min: 50
+        max: 100
+        outer:
+          entity: climate.thermostat_147
+          attribute: current_temperature
+          label: "Living"
+          unit: "°F"
+        inner:
+          entity: sensor.temperature_sensor_167
+          label: "Cave"
+          unit: "°F"
+
+# Thermostat and climate Card
+      - type: thermostat
+        entity: climate.thermostat_147
+        title: Thermostat
+#
+# Lights Tab
+#
+  - title: Lights
+    id: lights
+    icon: mdi:lightbulb
+    cards:
+# Living AreaCard
       - type: picture-glance
         title: Living Area
         entities:
           - light.lamp_107
-          - switch.party_lights_173
           - light.dining_room_lamp_160
           - switch.cabinet_lights_123
         state_image:
-          "on": /local/living_on.jpg
-          "off": /local/living_bw.jpg
-        entity: light.lamp_107
-      - type: thermostat
-        entity: climate.thermostat_147
-      - type: iframe
-        url: https://embed.windy.com/embed2.html
-        aspect_ratio: 75%
-      - type: weather-forecast
-        entity: weather.weather
+          "on": /local/living-wide.jpg
+          "off": /local/living-wide-bw.jpg
+        entity: group.int_lights
 
-  - title: Man Cave
-    icon: mdi:flask
-    cards:
+# Bedroom Card
+      - type: picture-glance
+        title: Bedroom
+        entities:
+          - light.bedroom__eric_103
+          - light.bedroom__val_104
+          - light.vanity_light_120
+        state_image:
+          "on": /local/bedroom.jpg
+          "off": /local/bedroom-bw.jpg
+        entity: light.vanity_light_120
+
+# Man cave card
       - type: picture-glance
         title: Man Cave
         entities:
           - switch.man_cave_lights_133
           - light.mancave_desk
-          - light.mancave
-          - light.wifi_box
-        camera_image: camera.man_cave_camera
-      - type: sensor
-#      - type: "custom:mini-graph-card"
-        entity: sensor.temperature_sensor_167
-        height: 100
-        line_width: 4
-        font_size: 75
+        state_image:
+          "on": /local/mancave-left.jpg
+          "off": /local/mancave-left-bw.jpg
+        entity: switch.man_cave_lights_133
 
+# Front Ext Card
+      - type: picture-glance
+        title: Front Exterior
+        entities:
+          - switch.front_porch_115
+          - switch.front_spotlight_135
+          - entity: switch.holiday_front_176
+        state_image:
+          "on": /local/ext-front.jpg
+          "off": /local/ext-front-bw.jpg
+        entity: switch.front_porch_115
 
+# Back Ext Card
+      - type: picture-glance
+        title: Back Exterior
+        entities:
+          - switch.deck_lights_108
+          - switch.back_spotlight_118
+        state_image:
+          "on": /local/ext-back.jpg
+          "off": /local/ext-back-bw.jpg
+        entity: switch.back_spotlight_118
+
+#
+# Camera tab
+#
   - title: Cameras
+    id: cameras
     icon: mdi:video
     cards:
       - type: picture-glance
@@ -127,22 +293,422 @@ views:
           - switch.man_cave_lights_133
         camera_image: camera.man_cave_camera
 
+#
+# Sensors tab
+#
+  - title: Sensors
+    id: sensors
+    icon: mdi:gauge
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Security Sensors
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: binary_sensor.front_door1_1_139
+                icon: mdi:door
+                name: Front Door
+                color_type: card
+                action: more_info
+                color: rgb(155, 0, 0)
+                color_off: rgb(0, 122, 0)
+              - type: "custom:button-card"
+                entity: binary_sensor.back_door_172
+                icon: mdi:door
+                name: Back Door
+                color_type: card
+                action: more_info
+                color: rgb(155, 0, 0)
+                color_off: rgb(0, 122, 0)
+              - type: "custom:button-card"
+                entity: binary_sensor.motion_sensor_128
+                icon: mdi:transition
+                name: Man Cave Motion
+                color_type: card
+                action: more_info
+                color: rgb(155, 0, 0)
+                color_off: rgb(0, 122, 0)
+              - type: "custom:button-card"
+                entity: binary_sensor.master_bath_sensor_121
+                icon: mdi:transition
+                name: Master Bath
+                color_type: card
+                action: more_info
+                color: rgb(155, 0, 0)
+                color_off: rgb(0, 122, 0)
+              - type: "custom:button-card"
+                entity: binary_sensor.smoke_sensor_122
+                icon: mdi:smoke-detector
+                name: Smoke Sensor
+                color_type: card
+                action: more_info
+                color: rgb(155, 0, 0)
+                color_off: rgb(0, 122, 0)
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: switch.front_door1_1_139
+                icon: mdi:door
+                color_type: icon
+                name: "Armed: "
+                show_state: true
+                color: auto
+              - type: "custom:button-card"
+                entity: switch.back_door_172
+                icon: mdi:door
+                color_type: icon
+                name: "Armed: "
+                show_state: true
+              - type: "custom:button-card"
+                entity: switch.motion_sensor_128
+                icon: mdi:transition
+                name: "Armed: "
+                color_type: card
+                show_state: true
+              - type: "custom:button-card"
+                entity: switch.master_bath_sensor_121
+                icon: mdi:transition
+                name: "Armed: "
+                color_type: card
+                show_state: true
+              - type: "custom:button-card"
+                entity: switch.smoke_sensor_122
+                icon: mdi:smoke-detector
+                name: "Armed: "
+                color_type: card
+                show_state: true
+          - type: entities
+            entities:
+                - entity: switch.siren_113
+                  name: Siren
+                  type: custom:toggle-lock-entity-row
+                  icon: mdi:alarm-light
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            name: Man Cave Data
+            color_type: label-card
+          - type: horizontal-stack
+            title: Sensors
+            cards:
+              - type: "custom:mini-graph-card"
+                entity: sensor.temperature_sensor_167
+                name: Temp
+                icon: mdi:thermometer-lines
+              - type: "custom:mini-graph-card"
+                entity: sensor.humidity_sensor_169
+                name: Humidity
+              - type: "custom:mini-graph-card"
+                entity: sensor.light_sensor_168
+                name: Light
+
+
+#
+# Media tab
+#
+  - title: Media
+    id: media
+    icon: mdi:play-circle-outline
+    cards:
+  # Living Room Media
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Living Room
+          - type: "custom:mini-media-player"
+            entity: media_player.denon_avrs720w
+            name: Denon AVR
+            icon: mdi:play-circle
+            artwork: cover
+            power_color: true
+            show_source: true
+          - type: entities
+            icon: mdi:remote
+            entities:
+              - entity: remote.living_room
+                name: Harmony
+          - type: "custom:mini-media-player"
+            entity: media_player.living_room_kodi
+            name: Living Room Kodi
+            icon: mdi:kodi
+            artwork: cover
+            show_progress: true
+            hide_volume: true
+            hide_power: true
+
+          - type: entities
+            entities:
+              - type: "custom:mini-media-player"
+                entity: media_player.living_room
+                name: Living Room Chromecast
+                icon: mdi:cast
+                artwork: cover
+                hide_power: true
+                group: true
+              - type: "custom:mini-media-player"
+                entity: media_player.cca_living_room
+                name: Living Room Chromecast Audio
+                icon: mdi:cast
+                artwork: cover
+                hide_power: true
+                group: true
+
+          - type: horizontal-stack
+            cards:
+            - type: "custom:button-card"
+              entity: script.tv
+              size: 25%
+              icon: mdi:television
+              name: TV
+              action: service
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.tv
+            - type: "custom:button-card"
+              entity: script.watch_kodi
+              size: 25%
+              icon: mdi:kodi
+              name: Kodi
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.watch_kodi
+            - type: "custom:button-card"
+              entity: script.chromecast
+              size: 25%
+              icon: mdi:cast
+              name: Chromecast
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.chromecast
+            - type: "custom:button-card"
+              entity: script.music
+              size: 25%
+              icon: mdi:music-circle
+              name: Music
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.music
+          - type: horizontal-stack
+            cards:
+            - type: "custom:button-card"
+              entity: script.wiiu
+              size: 25%
+              icon: mdi:wiiu
+              name: WiiU
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.wiiu
+            - type: "custom:button-card"
+              entity: script.steam_link
+              size: 25%
+              icon: mdi:steam
+              name: Steam Link
+              service:
+                domain: script
+                action: turn_on
+                data:
+                  entity_id: script.steam_link
+            - type: "custom:button-card"
+              entity: remote.living_room
+              size: 25%
+              icon: mdi:power-plug-off
+              name: Turn Off
+              service:
+                domain: remote
+                action: turn_off
+                data:
+                  entity_id: remote.living_room
+
+  # Bedroom Media
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Bedroom
+          - type: "custom:mini-media-player"
+            entity: media_player.bedroom_kodi
+            name: Bedroom Kodi
+            icon: mdi:kodi
+            artwork: cover
+            show_progress: true
+            hide_volume: true
+            hide_power: true
+          - type: entities
+            entities:
+              - type: "custom:mini-media-player"
+                entity: media_player.bedroom_tv
+                name: Bedroom Chromecast
+                icon: mdi:cast
+                artwork: cover
+                hide_power: true
+                group: true
+              - type: "custom:mini-media-player"
+                entity: media_player.cca_man_cave
+                name: Bedroom Chromecast Audio
+                artwork: cover
+                hide_power: true
+                group: true
+                icon: mdi:cast
+
+  # Mancave media
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Man Cave
+          - type: "custom:mini-media-player"
+            entity: media_player.man_cave
+            name: Man Cave Chromecast
+            icon: mdi:cast
+            artwork: cover
+            hide_power: true
+
+#
+# Weather tab
+#
+  - title: Weather
+    id: weather
+    icon: mdi:weather-cloudy
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Forecast
+            color: rgb(16, 133, 199)
+          - type: iframe
+            url: https://embed.windy.com/embed2.html
+            aspect_ratio: 75%
+          - type: weather-forecast
+            entity: weather.weather
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: label-card
+            name: Sun
+            color: rgb(189, 183, 48)
+          - type: horizontal-stack
+            cards:
+              - type: "custom:mini-graph-card"
+                entity: sensor.sunrise_time
+                name: Sunrise
+                icon: mdi:weather-sunset-up
+              - type: "custom:mini-graph-card"
+                entity: sensor.sunset_time
+                name: Sunset
+                icon: mdi:weather-sunset-down
+              - type: "custom:mini-graph-card"
+                entity: sensor.solar_angle
+                name: Sun Angle
+                icon: mdi:weather-sunny
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                color: rgb(0, 4, 51)
+                name: Space
+              - type: picture-entity
+                camera_image: camera.solar_xrays
+                entity: camera.solar_xrays
+                show_state: false
+              - type: picture-entity
+                camera_image: camera.geomagnetic_field
+                entity: camera.geomagnetic_field
+                show_state: false
+
+#
+# Man cave tab
+#
+  - title: Man Cave
+    id: mancave
+    icon: mdi:flask
+    cards:
+      - type: picture-glance
+        title: Man Cave
+        entities:
+          - switch.man_cave_lights_133
+          - light.mancave_desk
+          - light.mancave
+          - light.wifi_box
+        camera_image: camera.man_cave_camera
+      - type: horizontal-stack
+        title: Sensors
+        cards:
+          - type: "custom:mini-graph-card"
+            entity: sensor.temperature_sensor_167
+            name: Temp
+            icon: mdi:thermometer-lines
+          - type: "custom:mini-graph-card"
+            entity: sensor.humidity_sensor_169
+            name: Humidity
+          - type: "custom:mini-graph-card"
+            entity: sensor.light_sensor_168
+            name: Light
+
+#
+# People tab
+#
+  - title: People
+    id: people
+    icon: mdi:account
+    cards:
+      - type: glance
+        title: People
+        entities:
+          - device_tracker.eric_s7
+          - device_tracker.val_j7
+
+#
+# System tab
+#
   - title: System
+    id: system
     icon: mdi:home-assistant
     cards:
       - type: vertical-stack
         cards:
           - type: picture-entity
-            name: Server
-            image: /local/server.jpg
+            name: Network
+            image: /local/network.jpg
             entity: sensor.myip
           - type: glance
             title: HASS Commands
-            column_width: calc(100% / 3)
+            column_width: calc(100% / 4)
+            icon: mdi:home-assistant
             entities:
-              - script.restart_ha
-              - script.reload_groups
-              - script.reload_automations
+              - entity: script.restart_ha
+                name: Restart HA
+                icon: mdi:restart
+              - entity: script.reload_core
+                name: Reload Core
+                icon: mdi:restart
+              - entity: script.reload_groups
+                name: Reload Groups
+                icon: mdi:restart
+              - entity: script.reload_automations
+                name: Reload Automations
+                icon: mdi:restart
+      - type: picture-glance
+        title: Reboot Vera
+        entities:
+            - entity: scene.reboot_vera
+              name: Reboot Vera
+              icon: mdi:restart
+        image: /local/vera.png
 
       - type: custom:tracker-card
         title: Component Updates

@@ -35,7 +35,7 @@ switch.back_door_1_138:
 
 switch.front_door1_1_139:
   friendly_name: Front Door Sensor
- 
+
 light.mancave_desk:
   friendly_name: Desk LEDs
   icon: mdi:white-balance-iridescent
@@ -50,15 +50,19 @@ light.dining_room_lamp_160:
   emulated_hue_name: "Dining Room Lamp"
 
 switch.man_cave_lights_133:
-  icon: mdi:lamp
+  icon: mdi:light-switch
   emulated_hue_hidden: false
   emulated_hue_name: "Man Cave Lights"
 
 light.lamp_107:
   friendly_name: Living Room Lamp
-  icon: mdi:lamp
+  icon: mdi:floor-lamp
   emulated_hue_hidden: false
   emulated_hue_name: "Living Room Lamp"
+
+light.vanity_light_120:
+  friendly_name: Bathroom Vanity
+  icon: mdi:wall-sconce-flat
 
 sensor.harmony_living_room:
   entity_picture: /local/harmony.png
@@ -73,16 +77,16 @@ switch.front_porch_115:
   icon: mdi:white-balance-incandescent
 
 switch.back_spotlight_118:
-  icon: mdi:white-balance-incandescent
+  icon: mdi:track-light
 
 switch.front_spotlight_135:
-  icon: mdi:white-balance-incandescent
+  icon: mdi:track-light
 
 switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
 
-#switch.front_holiday_lights_174:
-#  icon: mdi:pine-tree
+switch.holiday_front_176:
+  icon: mdi:pumpkin
 
 #switch.back_holiday_lights_171:
 #  icon: mdi:pine-tree
@@ -128,3 +132,21 @@ script.party_time:
 script.JEMP:
   friendly_name: Start Playing
   icon: mdi:play
+
+switch.lr_tv:
+  icon: mdi:television
+
+switch.lr_kodi:
+  icon: mdi:kodi
+
+switch.lr_wiiu:
+  icon: mdi:wiiu
+
+switch.lr_steam:
+  icon: mdi:steam
+
+switch.lr_music:
+  icon: mdi:music-circle-outline
+
+switch.lr_chromecast:
+  icon: mdi:cast

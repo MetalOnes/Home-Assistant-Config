@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Lovelace updates and changes
 * Updated to 0.81.1, Lovelace work begins
 * Updated some automations
 * Always tweaking and fixing

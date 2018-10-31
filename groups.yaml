@@ -2,6 +2,7 @@ default_view:
   view: true
   entities:
   - group.house_modes
+  - group.int_lights
   - group.exterior
   - group.living_room
   - group.kitchen
@@ -22,6 +23,16 @@ Exterior:
 - switch.deck_lights_108
 - switch.holiday_front_176
 #- switch.back_holiday_lights_171
+
+Ext Back:
+- switch.deck_lights_108
+- switch.back_spotlight_118
+
+Ext Front:
+- switch.front_porch_115
+- switch.front_spotlight_135
+- switch.holiday_front_176
+
 HolidayExterior:
 - switch.front_spotlight_135
 - switch.deck_lights_108
@@ -99,6 +110,7 @@ Chromecast:
   - media_player.home_group
   - media_player.living_room
   - media_player.man_cave
+  - media_player.bedroom_tv
 Weather:
   view: true
   entities:
@@ -207,12 +219,6 @@ CC Radio:
 Vera Scenes:
   view: true
   entities:
-    - scene.avall_off
-    - scene.avmusic
-    - scene.avplay_wiiu
-    - scene.avwatch_chromecast
-    - scene.avwatch_kodi
-    - scene.avwatch_tv
     - scene.bedroom_lights_off
     - scene.both_br_lamps_to_20
     - scene.camera_privacy
@@ -230,7 +236,3 @@ Vera Scenes:
     - scene.switch_to_away
     - scene.switch_to_home
     - scene.switch_to_night
-
- 
-    
-    
