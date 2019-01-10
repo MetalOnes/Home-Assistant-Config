@@ -1,16 +1,28 @@
 resources:
   - url: /local/mini-graph-card.js?v=0.0.6
     type: module
-  - url: /local/tracker-card.js?v=0
+  - url: /local/tracker-card.js?v=0.1.5
     type: js
   - url: /local/button-card.js
     type: module
-  - url: /local/mini-media-player.js?v=0.8.8
+  - url: /local/mini-media-player.js?v=0.9.8
     type: module
   - url: /local/dual-gauge-card.js
     type: module
   - url: /local/toggle-lock-entity-row.js
     type: module
+  - url: /local/surveillance-card.js?v=0.0.1
+    type: module
+  - url: /local/simple-thermostat/simple-thermostat.js?v=1
+    type: module
+  - url: https://unpkg.com/moment@2.23.0/moment.js
+    type: js
+  - url: /local/calendar-card/calendar-card.js?v=1.2.2
+    type: module
+  - url: /local/mini-graph-card-bundle.js?v=0.1.0
+    type: module
+
+#background: linear-gradient(gray, rgb(57,82,116))
 
 views:
 #
@@ -18,7 +30,7 @@ views:
 #
   - title: Overview
     icon: mdi:home-outline
-    id: overview
+    path: overview
     cards:
 
 # House Mode sensor and scenes
@@ -62,31 +74,111 @@ views:
                     color: rgb(255, 0, 0)
                   - value: 'unlocked'
                     color: rgb(0, 255, 0)
-
-# Tripped Sensors
+      - type: light
+        entity: light.lamp_107
+# Int Lights on
       - type: entity-filter
         entities:
-          - entity: binary_sensor.front_door1_1_139
-            name: Front Door
-          - entity: binary_sensor.back_door_172
-            name: Back Door
-          - entity: binary_sensor.smoke_sensor_122
-            name: Smoke Alarm
-          - entity: binary_sensor.motion_sensor_128
-            name: Man cave motion
-          - entity: binary_sensor.master_bath_sensor_121
-            name: Master bath motion
-        show_empty: false
+          - entity: switch.party_lights_173
+            icon: mdi:mushroom
+            tap_action:
+              action: toggle
+          - entity: light.lamp_107
+            name: Living Room
+            tap_action:
+              action: toggle
+            icon: mdi:floor-lamp
+          - entity: light.dining_room_lamp_160
+            name: Dining Room
+            tap_action:
+              action: toggle
+          - entity: switch.cabinet_lights_123
+            name: Cabinets
+            tap_action:
+              action: toggle
+          - entity: switch.man_cave_lights_133
+            name: Man Cave
+            tap_action:
+              action: toggle
+          - entity: light.mancave_desk
+            name: Desk Strip
+            tap_action:
+              action: toggle
+          - entity: light.wifi_box
+            name: Desk Puck
+            tap_action:
+              action: toggle
+          - entity: light.pin_board
+            name: Pin Board
+            tap_action:
+              action: toggle
+          - entity: light.vanity_light_120
+            name: Vanity Light
+            tap_action:
+              action: toggle
+          - entity: light.bedroom__eric_103
+            name: Bedroom (Right)
+            tap_action:
+              action: toggle
+          - entity: light.bedroom__val_104
+            name: Bedroom (Left)
+            tap_action:
+              action: toggle
         state_filter:
           - "on"
+        show_empty: false
         card:
           type: glance
-          title: Tripped Sensors
+          title: Interior
+          column_width: calc(100% / 3)
+
+# Ext Lights on
+      - type: entity-filter
+        entities:
+          - entity: switch.front_porch_115
+            name: Front Porch
+            tap_action:
+              action: toggle
+          - entity: switch.front_spotlight_135
+            name: Front Spotlight
+            tap_action:
+              action: toggle
+          - entity: switch.deck_lights_108
+            name: Deck Lights
+            tap_action:
+              action: toggle
+          - entity: switch.back_spotlight_118
+            name: Back Spotlight
+            tap_action:
+              action: toggle
+          - entity: switch.holiday_front_176
+            name: Front Holiday
+            tap_action:
+              action: toggle
+          - entity: switch.back_ext_holiday_177
+            name: Back Holiday
+            tap_action:
+              action: toggle
+        state_filter:
+          - "on"
+        show_empty: false
+        card:
+          type: glance
+          title: Exterior
+          column_width: calc(100% / 4)
+# Calendar card
+      - type: custom:calendar-card
+        title: "Calendar"
+        numberOfDays: 90
+        entities:
+          - calendar.slacktishevents
+
+
 
 # Harmony Living Room card
       - type: picture-glance
         title: Living Room
-        aspect_ratio: 16:9
+        aspect_ratio: 3.2
         entities:
           - switch.lr_tv
           - switch.lr_kodi
@@ -103,71 +195,9 @@ views:
           "Play Steam": /local/steam.jpg
           "WiiU": /local/wiiu.jpg
         entity: sensor.harmony_living_room
+        style:
+          - "height: 250px"
 
-# Int Lights on
-      - type: entity-filter
-        entities:
-          - entity: light.lamp_107
-            name: Living Room
-            tap_action: toggle
-            icon: mdi:floor-lamp
-          - entity: light.dining_room_lamp_160
-            name: Dining Room
-            tap_action: toggle
-          - entity: switch.cabinet_lights_123
-            name: Cabinets
-            tap_action: toggle
-          - entity: switch.man_cave_lights_133
-            name: Man Cave
-            tap_action: toggle
-          - entity: light.mancave_desk
-            name: Desk Strip
-            tap_action: toggle
-          - entity: light.wifi_box
-            name: Desk Puck
-            tap_action: toggle
-          - entity: light.vanity_light_120
-            name: Vanity Light
-            tap_action: toggle
-          - entity: light.bedroom__eric_103
-            name: Bedroom (Right)
-            tap_action: toggle
-          - entity: light.bedroom__val_104
-            name: Bedroom (Left)
-            tap_action: toggle
-        state_filter:
-          - "on"
-        show_empty: false
-        card:
-          type: glance
-          title: Interior
-          column_width: calc(100% / 3)
-
-# Ext Lights on
-      - type: entity-filter
-        entities:
-          - entity: switch.front_porch_115
-            name: Front Porch
-            tap_action: toggle
-          - entity: switch.front_spotlight_135
-            name: Front Spotlight
-            tap_action: toggle
-          - entity: switch.deck_lights_108
-            name: Deck Lights
-            tap_action: toggle
-          - entity: switch.back_spotlight_118
-            name: Back Spotlight
-            tap_action: toggle
-          - entity: switch.holiday_front_176
-            name: Front Holiday
-            tap_action: toggle
-        state_filter:
-          - "on"
-        show_empty: false
-        card:
-          type: glance
-          title: Exterior
-          column_width: calc(100% / 4)
 
 # Living Room Card
       - type: picture-glance
@@ -184,39 +214,41 @@ views:
           "off": /local/living-wide-bw.jpg
         entity: light.lamp_107
 
-# Dual gauge card
-      - type: custom:dual-gauge-card
-        title: Temps
-        min: 50
-        max: 100
-        outer:
-          entity: climate.thermostat_147
-          attribute: current_temperature
-          label: "Living"
-          unit: "°F"
-        inner:
-          entity: sensor.temperature_sensor_167
-          label: "Cave"
-          unit: "°F"
+
 
 # Thermostat and climate Card
-      - type: thermostat
-        entity: climate.thermostat_147
-        title: Thermostat
+      - type: vertical-stack
+        cards:
+          - type: custom:simple-thermostat
+            entity: climate.thermostat_147
+            step_size: 1
+            sensors:
+              - entity: sensor.current_temperature
+# Temps
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entity: sensor.current_temperature
+              - type: custom:mini-graph-card
+                entity: sensor.temperature_sensor_167
+
+
+
 #
 # Lights Tab
 #
   - title: Lights
-    id: lights
+    path: lights
     icon: mdi:lightbulb
     cards:
-# Living AreaCard
+# Living Area Card
       - type: picture-glance
         title: Living Area
         entities:
           - light.lamp_107
           - light.dining_room_lamp_160
           - switch.cabinet_lights_123
+          - switch.party_lights_173
         state_image:
           "on": /local/living-wide.jpg
           "off": /local/living-wide-bw.jpg
@@ -240,6 +272,7 @@ views:
         entities:
           - switch.man_cave_lights_133
           - light.mancave_desk
+          - light.pin_board
         state_image:
           "on": /local/mancave-left.jpg
           "off": /local/mancave-left-bw.jpg
@@ -251,7 +284,7 @@ views:
         entities:
           - switch.front_porch_115
           - switch.front_spotlight_135
-          - entity: switch.holiday_front_176
+        #  - entity: switch.holiday_front_176
         state_image:
           "on": /local/ext-front.jpg
           "off": /local/ext-front-bw.jpg
@@ -263,6 +296,7 @@ views:
         entities:
           - switch.deck_lights_108
           - switch.back_spotlight_118
+        #  - switch.back_ext_holiday_177
         state_image:
           "on": /local/ext-back.jpg
           "off": /local/ext-back-bw.jpg
@@ -272,7 +306,7 @@ views:
 # Camera tab
 #
   - title: Cameras
-    id: cameras
+    path: cameras
     icon: mdi:video
     cards:
       - type: picture-glance
@@ -293,17 +327,31 @@ views:
           - switch.man_cave_lights_133
         camera_image: camera.man_cave_camera
 
+  - title: Surveillance
+    icon: mdi:cctv
+    panel: true
+    cards:
+      - type: custom:surveillance-card
+        thumb_interval: 15
+        update_interval: 2
+        cameras:
+          - entity: camera.front_door
+          - entity: camera.back_door
+          - entity: camera.man_cave_camera
+            motion_entity: binary_sensor.motion_sensor_128
+
 #
 # Sensors tab
 #
   - title: Sensors
-    id: sensors
+    path: sensors
     icon: mdi:gauge
     cards:
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
             color_type: label-card
+            color: rgb(41, 41, 41)
             name: Security Sensors
           - type: horizontal-stack
             cards:
@@ -391,6 +439,7 @@ views:
           - type: "custom:button-card"
             name: Man Cave Data
             color_type: label-card
+            color: rgb(41, 41, 41)
           - type: horizontal-stack
             title: Sensors
             cards:
@@ -410,7 +459,7 @@ views:
 # Media tab
 #
   - title: Media
-    id: media
+    path: media
     icon: mdi:play-circle-outline
     cards:
   # Living Room Media
@@ -419,6 +468,7 @@ views:
           - type: "custom:button-card"
             color_type: label-card
             name: Living Room
+            color: rgb(41, 41, 41)
           - type: "custom:mini-media-player"
             entity: media_player.denon_avrs720w
             name: Denon AVR
@@ -449,13 +499,16 @@ views:
                 artwork: cover
                 hide_power: true
                 group: true
+                hide_controls: true
               - type: "custom:mini-media-player"
-                entity: media_player.cca_living_room
-                name: Living Room Chromecast Audio
+                entity: media_player.all_3_rooms
+                name: All 3 Rooms
                 icon: mdi:cast
                 artwork: cover
                 hide_power: true
                 group: true
+                hide_controls: true
+
 
           - type: horizontal-stack
             cards:
@@ -538,6 +591,7 @@ views:
         cards:
           - type: "custom:button-card"
             color_type: label-card
+            color: rgb(41, 41, 41)
             name: Bedroom
           - type: "custom:mini-media-player"
             entity: media_player.bedroom_kodi
@@ -556,19 +610,13 @@ views:
                 artwork: cover
                 hide_power: true
                 group: true
-              - type: "custom:mini-media-player"
-                entity: media_player.cca_man_cave
-                name: Bedroom Chromecast Audio
-                artwork: cover
-                hide_power: true
-                group: true
-                icon: mdi:cast
 
   # Mancave media
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
             color_type: label-card
+            color: rgb(41, 41, 41)
             name: Man Cave
           - type: "custom:mini-media-player"
             entity: media_player.man_cave
@@ -576,12 +624,20 @@ views:
             icon: mdi:cast
             artwork: cover
             hide_power: true
+            # group: true
+          - type: "custom:mini-media-player"
+            entity: media_player.cca_man_cave
+            name: Man Cave Chromecast Audio
+            artwork: cover
+            hide_power: true
+            # group: true
+            icon: mdi:cast
 
 #
 # Weather tab
 #
   - title: Weather
-    id: weather
+    path: weather
     icon: mdi:weather-cloudy
     cards:
       - type: vertical-stack
@@ -634,7 +690,7 @@ views:
 # Man cave tab
 #
   - title: Man Cave
-    id: mancave
+    path: mancave
     icon: mdi:flask
     cards:
       - type: picture-glance
@@ -644,6 +700,7 @@ views:
           - light.mancave_desk
           - light.mancave
           - light.wifi_box
+          - light.pin_board
         camera_image: camera.man_cave_camera
       - type: horizontal-stack
         title: Sensors
@@ -663,7 +720,7 @@ views:
 # People tab
 #
   - title: People
-    id: people
+    path: people
     icon: mdi:account
     cards:
       - type: glance
@@ -672,11 +729,164 @@ views:
           - device_tracker.eric_s7
           - device_tracker.val_j7
 
+      - type: picture-elements
+        id: untappd-card
+        image: /local/untappd-bg.jpg
+        elements:
+          - type: state-icon
+            entity: sensor.untappd_last_checkin_robotsfearme
+            style:
+              top: 18px
+              left: 8px
+              transform: none
+          - type: state-label
+            entity: sensor.untappd_beer
+            style:
+              top: 8%
+              left: 52px
+              transform: none
+              color: rgb(255, 255, 255)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-left-style: solid
+              border-color: Yellow
+              background-color: rgb(4, 4, 4, 0.6)
+              pointer-events: none
+              width: 325px
+              padding: 5px
+              border-top-right-radius: 5px
+          - type: state-icon
+            entity: sensor.untappd_last_badge_robotsfearme
+            style:
+              top: 74px
+              left: 8px
+              transform: none
+          - type: state-label
+            entity: sensor.untappd_badge
+            style:
+              top: 73px
+              left: 52px
+              transform: none
+              color: rgb(255, 255, 255)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-left-style: solid
+              border-color: Orange
+              background-color: rgb(4, 4, 4, 0.6)
+              pointer-events: none
+              width: 325px
+              padding: 5px
+              border-bottom-right-radius: 5px
+          - type: state-icon
+            entity: sensor.untappd_checked
+            style:
+              bottom: 0px
+              left: 3px
+              transform: none
+              z-index: 2
+              "--paper-item-icon-color": white
+          - type: state-label
+            entity: sensor.untappd_checked
+            style:
+              bottom: 0px
+              left: 0px
+              transform: none
+              color: rgb(255, 255, 255)
+              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-bottom-style: solid
+              border-color: LightSalmon
+              padding-left: 36px
+              padding-bottom: 1px
+              #text-shadow: 2px 2px 2px black
+          - type: state-icon
+            entity: sensor.untappd_followings
+            style:
+              bottom: 0px
+              left: 78px
+              transform: none
+              z-index: 2
+              "--paper-item-icon-color": white
+          - type: state-label
+            entity: sensor.untappd_followings
+            style:
+              bottom: 0px
+              left: 74px
+              transform: none
+              color: rgb(255, 255, 255)
+              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-bottom-style: solid
+              border-color: OrangeRed
+              padding-left: 36px
+              padding-bottom: 1px
+              #text-shadow: 2px 2px 2px black
+          - type: state-icon
+            entity: sensor.untappd_total_badges
+            style:
+              bottom: 0px
+              left: 148px
+              transform: none
+              z-index: 2
+              "--paper-item-icon-color": white
+          - type: state-label
+            entity: sensor.untappd_total_badges
+            style:
+              bottom: 0px
+              left: 141px
+              transform: none
+              color: rgb(255, 255, 255)
+              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-bottom-style: solid
+              border-color: FireBrick
+              padding-left: 36px
+              padding-bottom: 1px
+              #text-shadow: 2px 2px 2px black
+          - type: state-icon
+            entity: sensor.untappd_total_beers
+            style:
+              bottom: 0px
+              left: 228px
+              transform: none
+              z-index: 2
+              "--paper-item-icon-color": white
+
+          - type: state-label
+            entity: sensor.untappd_total_beers
+            style:
+              bottom: 0px
+              left: 215px
+              transform: none
+              color: rgb(255, 255, 255)
+              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+              font-family: Trebuchet MS
+              font-size: 90%
+              font-weight: bold
+              border-bottom-style: solid
+              border-color: Maroon
+              padding-left: 36px
+              padding-bottom: 1px
+              #text-shadow: 2px 2px 2px black
+
+
 #
 # System tab
 #
   - title: System
-    id: system
+    path: system
     icon: mdi:home-assistant
     cards:
       - type: vertical-stack
@@ -715,4 +925,4 @@ views:
         trackers:
           - sensor.custom_card_tracker
           - sensor.custom_component_tracker
-          - sensor.custom_python_script_tracker
+#          - sensor.custom_python_script_tracker

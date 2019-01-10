@@ -21,8 +21,8 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
-- switch.holiday_front_176
-#- switch.back_holiday_lights_171
+#- switch.holiday_front_176
+#- switch.back_ext_holiday_177
 
 Ext Back:
 - switch.deck_lights_108
@@ -35,9 +35,9 @@ Ext Front:
 
 HolidayExterior:
 - switch.front_spotlight_135
-- switch.deck_lights_108
+# - switch.deck_lights_108
 - switch.holiday_front_176
-#- switch.back_holiday_lights_171
+- switch.back_ext_holiday_177
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
@@ -52,6 +52,7 @@ Man Cave:
 - light.mancave_desk
 - light.mancave
 - light.wifi_box
+- light.pin_board
 - sensor.temperature_sensor_167
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
@@ -71,6 +72,7 @@ Int Lights:
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
+- light.pin_board
 #- switch.party_lights_173
 Security Sensors:
 - switch.front_door1_1_139
@@ -160,12 +162,18 @@ sun_times:
   - sensor.sunrise_time
   - sensor.sunset_time
   - sensor.solar_angle
+untappd:
+  entities:
+  - sensor.untappd_last_badge_robotsfearme
+  - sensor.untappd_last_checkin_robotsfearme
+  - sensor.untappd_on_the_wishlist_robotsfearme
 Network:
   view: true
   entities:
-  - group.public_ip
+  - sensor.myipopendnscom
 #  - group.pihole
 #  - group.sabnzbd
+  - sensor.ha_version_venv_stable
 Public IP:
   entities:
   - sensor.myipopendnscom

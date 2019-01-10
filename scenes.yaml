@@ -1,16 +1,19 @@
 - name: Night
   entities:
-    light.mancave_desk: off
-    light.mancave: off
-    light.wifi_box: off
+    light.mancave_desk: false
+    light.mancave: false
+    light.wifi_box: false
+    light.pin_board: false
 
 - name: Away
   entities:
-    light.mancave_desk: off
-    light.mancave: off
-    light.wifi_box: off
+    light.mancave_desk: false
+    light.mancave: false
+    light.wifi_box: false
+    light.pin_board: false
 
 - name: mcdesk
   entities:
-    light.wifi_box: on
-    light.mancave_desk: on
+    light.wifi_box: true
+    light.mancave_desk: true
+    light.pin_board: true

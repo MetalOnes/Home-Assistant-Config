@@ -11,6 +11,9 @@ frontend:
   themes: !include_dir_merge_named themes/
   javascript_version: latest
 
+lovelace:
+  mode: yaml
+
 config:
 
 logger:
@@ -42,6 +45,11 @@ custom_updater:
   card_urls:
     - https://raw.githubusercontent.com/kuuji/button-card/master/tracker.json
     - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+    - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
+    - https://raw.githubusercontent.com/ljmerza/calendar-card/master/custom_updater.json
+    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+  component_urls:
+    - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
 
 discovery:
 
@@ -171,6 +179,9 @@ light:
       192.168.1.122:
         name: mancave_desk
         mode: rgb
+      192.168.1.149:
+        name: pin_board
+        mode: rgbw
 
   - platform: limitlessled
     bridges:
@@ -262,6 +273,14 @@ camera:
 ##########################################
 
 sensor:
+
+# LR Temp
+  - platform: template
+    sensors:
+      current_temperature:
+        friendly_name: Living Room Temp
+        value_template: "{{ state_attr('climate.thermostat_147', 'current_temperature') }}"
+        unit_of_measurement: '°'
 
 # Weather Underground
   - platform: wunderground
@@ -374,6 +393,53 @@ sensor:
               Vacation
             {%- endif %}
 
+# Versions sensor
+  - platform: version
+
+# - platform: versions
+#    installation: venv
+#    branch: stable
+
+# Untappd sensor and templating
+  - platform: untappd
+    username: !secret untappd_user
+    id: !secret untappd_id
+    secret: !secret untappd_secret
+
+  - platform: template
+    sensors:
+      untappd_badge:
+        value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }} (Level {{ states.sensor.untappd_last_badge_robotsfearme.attributes.level }})"
+  - platform: template
+    sensors:
+      untappd_beer:
+        value_template: "Last Beer: {{ states.sensor.untappd_last_checkin_robotsfearme.attributes.beer }} ({{ states.sensor.untappd_last_checkin_robotsfearme.attributes.abv }})"
+
+  - platform: template
+    sensors:
+      untappd_followings:
+#        unit_of_measurement: followers
+        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.followings }}"
+
+  - platform: template
+    sensors:
+      untappd_checked:
+#        unit_of_measurement: checkins
+        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.checkins }}"
+
+  - platform: template
+    sensors:
+      untappd_total_beers:
+#        unit_of_measurement: beers
+        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.total_beers }}"
+
+  - platform: template
+    sensors:
+      untappd_total_badges:
+#        unit_of_measurement: badges
+        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.total_badges }}"
+
+
 binary_sensor:
 
 ##########################################
@@ -480,6 +546,14 @@ emulated_hue:
 #  username: !secret usps_username
 #  password: !secret usps_password
 #  driver: 'phantomjs'
+
+#########################################
+# Google calendar - not working?
+#########################################
+google:
+  client_id: !secret gcal_client
+  client_secret: !secret gcal_secret
+
 
 #########################################
 # Input Selects

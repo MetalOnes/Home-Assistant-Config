@@ -38,7 +38,11 @@ switch.front_door1_1_139:
 
 light.mancave_desk:
   friendly_name: Desk LEDs
-  icon: mdi:white-balance-iridescent
+  icon: mdi:led-strip
+
+light.pin_board:
+  friendly_name: Pin Board
+  icon: mdi:led-strip
 
 sensor.myipopendnscom:
   friendly_name: Public IP
@@ -86,10 +90,10 @@ switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
 
 switch.holiday_front_176:
-  icon: mdi:pumpkin
+  icon: mdi:pine-tree
 
-#switch.back_holiday_lights_171:
-#  icon: mdi:pine-tree
+switch.back_ext_holiday_177:
+  icon: mdi:pine-tree
 
 
 sensor.usps_mail:
@@ -123,7 +127,7 @@ camera.usps_mail:
 
 switch.party_lights_173:
   friendly_name: Party Lights
-  icon: mdi:track-light
+  icon: mdi:mushroom
 
 script.party_time:
   friendly_name: Party Time!
@@ -150,3 +154,21 @@ switch.lr_music:
 
 switch.lr_chromecast:
   icon: mdi:cast
+
+sensor.untappd_badge:
+  icon: mdi:seal
+
+sensor.untappd_beer:
+  icon: mdi:beer
+
+sensor.untappd_checked:
+  icon: mdi:check
+
+sensor.untappd_followings:
+  icon: mdi:account-group
+
+sensor.untappd_total_badges:
+  icon: mdi:seal
+
+sensor.untappd_total_beers:
+  icon: mdi:beer
