@@ -48,6 +48,8 @@ custom_updater:
     - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
     - https://raw.githubusercontent.com/ljmerza/calendar-card/master/custom_updater.json
     - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+    - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
+
   component_urls:
     - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
 
@@ -57,14 +59,16 @@ discovery:
 #conversation:
 
 recorder:
+  db_url: !secret mysql_url
+  purge_keep_days: 5
   exclude:
     domains:
       - camera
+      - zone
     entities:
       - sensor.pws_alerts
       - sensor.pws_precip_1d
       - sensor.pws_precip_1d_in
-      - sensor.pws_temp_f
       - sensor.pws_temp_high_1d_f
       - sensor.pws_temp_high_record_f
       - sensor.pws_temp_low_1d_f
@@ -78,12 +82,24 @@ recorder:
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
       - sensor.pws_wind_1d_mph
-      - sensor.pws_wind_mph
       - sensor.sunrise_time
       - sensor.sunset_time
-      - sensor.exchange_rate_1_btc
-      - sensor.ethereum
       - sensor.myipopendnscom
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_wind_speed
+      - sensor.untappd_badge
+      - sensor.untappd_beer
+      - sensor.untappd_followings
+      - sensor.untappd_last_badge_robotsfearme
+      - sensor.untappd_last_check_in_robotsfearme
+      - sensor.untappd_wishlist_robotsfearme
 
 history:
   exclude:
@@ -94,11 +110,11 @@ history:
       - script
       - group
       - camera
+      - zone
     entities:
       - sensor.pws_alerts
       - sensor.pws_precip_1d
       - sensor.pws_precip_1d_in
-      - sensor.pws_temp_f
       - sensor.pws_temp_high_1d_f
       - sensor.pws_temp_high_record_f
       - sensor.pws_temp_low_1d_f
@@ -112,19 +128,33 @@ history:
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
       - sensor.pws_wind_1d_mph
-      - sensor.pws_wind_mph
       - sensor.sunrise_time
       - sensor.sunset_time
-      - sensor.exchange_rate_1_btc
-      - sensor.ethereum
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_wind_speed
+      - sensor.untappd_badge
+      - sensor.untappd_beer
+      - sensor.untappd_followings
+      - sensor.untappd_last_badge_robotsfearme
+      - sensor.untappd_last_check_in_robotsfearme
+      - sensor.untappd_wishlist_robotsfearme
 
 logbook:
   exclude:
+    domains:
+      - zone
+      - updater
     entities:
       - sensor.pws_alerts
       - sensor.pws_precip_1d
       - sensor.pws_precip_1d_in
-      - sensor.pws_temp_f
       - sensor.pws_temp_high_1d_f
       - sensor.pws_temp_high_record_f
       - sensor.pws_temp_low_1d_f
@@ -138,12 +168,26 @@ logbook:
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
       - sensor.pws_wind_1d_mph
-      - sensor.pws_wind_mph
       - sensor.sunrise_time
       - sensor.sunset_time
       - binary_sensor.master_bath_sensor_121
       - binary_sensor.motion_sensor_128
       - sensor.dark_sky_icon
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_wind_speed
+      - sensor.untappd_badge
+      - sensor.untappd_beer
+      - sensor.untappd_followings
+      - sensor.untappd_last_badge_robotsfearme
+      - sensor.untappd_last_check_in_robotsfearme
+      - sensor.untappd_wishlist_robotsfearme
 tts:
   platform: google
 
@@ -409,35 +453,36 @@ sensor:
   - platform: template
     sensors:
       untappd_badge:
-        value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }} (Level {{ states.sensor.untappd_last_badge_robotsfearme.attributes.level }})"
+#        value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }} (Level {{ states.sensor.untappd_last_badge_robotsfearme.attributes.level }})"
+        value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }}"
   - platform: template
     sensors:
       untappd_beer:
-        value_template: "Last Beer: {{ states.sensor.untappd_last_checkin_robotsfearme.attributes.beer }} ({{ states.sensor.untappd_last_checkin_robotsfearme.attributes.abv }})"
+        value_template: "Last Beer: {{ states.sensor.untappd_last_check_in_robotsfearme.attributes.beer }} ({{ states.sensor.untappd_last_check_in_robotsfearme.attributes.abv }})"
 
   - platform: template
     sensors:
       untappd_followings:
 #        unit_of_measurement: followers
-        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.followings }}"
+        value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.followings }}"
 
   - platform: template
     sensors:
       untappd_checked:
 #        unit_of_measurement: checkins
-        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.checkins }}"
+        value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.checkins }}"
 
   - platform: template
     sensors:
       untappd_total_beers:
 #        unit_of_measurement: beers
-        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.total_beers }}"
+        value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_beers }}"
 
   - platform: template
     sensors:
       untappd_total_badges:
 #        unit_of_measurement: badges
-        value_template: "{{ states.sensor.untappd_last_checkin_robotsfearme.attributes.total_badges }}"
+        value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
 
 binary_sensor:

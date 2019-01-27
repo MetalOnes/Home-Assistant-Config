@@ -13,11 +13,11 @@ resources:
     type: module
   - url: /local/surveillance-card.js?v=0.0.1
     type: module
-  - url: /local/simple-thermostat/simple-thermostat.js?v=1
+  - url: /local/simple-thermostat/simple-thermostat.js?v=0.14.0
     type: module
   - url: https://unpkg.com/moment@2.23.0/moment.js
     type: js
-  - url: /local/calendar-card/calendar-card.js?v=1.2.2
+  - url: /local/calendar-card/calendar-card.js?v=1.3.1
     type: module
   - url: /local/mini-graph-card-bundle.js?v=0.1.0
     type: module
@@ -31,6 +31,7 @@ views:
   - title: Overview
     icon: mdi:home-outline
     path: overview
+    theme: slate
     cards:
 
 # House Mode sensor and scenes
@@ -240,6 +241,7 @@ views:
   - title: Lights
     path: lights
     icon: mdi:lightbulb
+    theme: slate
     cards:
 # Living Area Card
       - type: picture-glance
@@ -308,6 +310,7 @@ views:
   - title: Cameras
     path: cameras
     icon: mdi:video
+    theme: slate
     cards:
       - type: picture-glance
         title: Front Door
@@ -346,6 +349,7 @@ views:
   - title: Sensors
     path: sensors
     icon: mdi:gauge
+    theme: slate
     cards:
       - type: vertical-stack
         cards:
@@ -416,6 +420,7 @@ views:
                 name: "Armed: "
                 color_type: card
                 show_state: true
+                color: auto
               - type: "custom:button-card"
                 entity: switch.master_bath_sensor_121
                 icon: mdi:transition
@@ -461,6 +466,7 @@ views:
   - title: Media
     path: media
     icon: mdi:play-circle-outline
+    theme: slate
     cards:
   # Living Room Media
       - type: vertical-stack
@@ -479,8 +485,9 @@ views:
           - type: entities
             icon: mdi:remote
             entities:
-              - entity: remote.living_room
+              - entity: sensor.harmony_living_room
                 name: Harmony
+
           - type: "custom:mini-media-player"
             entity: media_player.living_room_kodi
             name: Living Room Kodi
@@ -678,8 +685,8 @@ views:
                 color: rgb(0, 4, 51)
                 name: Space
               - type: picture-entity
-                camera_image: camera.solar_xrays
-                entity: camera.solar_xrays
+                camera_image: camera.solar_x_rays
+                entity: camera.solar_x_rays
                 show_state: false
               - type: picture-entity
                 camera_image: camera.geomagnetic_field
@@ -692,6 +699,7 @@ views:
   - title: Man Cave
     path: mancave
     icon: mdi:flask
+    theme: slate
     cards:
       - type: picture-glance
         title: Man Cave
@@ -722,6 +730,7 @@ views:
   - title: People
     path: people
     icon: mdi:account
+    theme: slate
     cards:
       - type: glance
         title: People
@@ -888,6 +897,7 @@ views:
   - title: System
     path: system
     icon: mdi:home-assistant
+    theme: slate
     cards:
       - type: vertical-stack
         cards:
