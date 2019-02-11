@@ -28,3 +28,4 @@ cfg
 .HA_VER*
 ip_bans.yaml
 *.token
+*.bak

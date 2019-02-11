@@ -1,7 +1,7 @@
 resources:
   - url: /local/mini-graph-card.js?v=0.0.6
     type: module
-  - url: /local/tracker-card.js?v=0.1.5
+  - url: /local/tracker-card.js?v=0.2.0
     type: js
   - url: /local/button-card.js
     type: module
@@ -17,10 +17,12 @@ resources:
     type: module
   - url: https://unpkg.com/moment@2.23.0/moment.js
     type: js
-  - url: /local/calendar-card/calendar-card.js?v=1.3.1
+  - url: /local/calendar-card/calendar-card.js?v=1.0.1
     type: module
-  - url: /local/mini-graph-card-bundle.js?v=0.1.0
+  - url: /local/mini-graph-card-bundle.js?v=0.2.0
     type: module
+  - url: /local/vertical-style-card.js?v=0.1
+    type: js
 
 #background: linear-gradient(gray, rgb(57,82,116))
 
@@ -117,11 +119,11 @@ views:
             name: Vanity Light
             tap_action:
               action: toggle
-          - entity: light.bedroom__eric_103
+          - entity: light.bedroom_eric_103
             name: Bedroom (Right)
             tap_action:
               action: toggle
-          - entity: light.bedroom__val_104
+          - entity: light.bedroom_val_104
             name: Bedroom (Left)
             tap_action:
               action: toggle
@@ -167,38 +169,65 @@ views:
           type: glance
           title: Exterior
           column_width: calc(100% / 4)
+
+# Harmony Living Room card
+      - type: custom:vertical-style-card
+        title: Living Room TV
+        style:
+          border: true
+          background_color: var(--secondary-background-color)
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: switch.lr_tv
+                icon: mdi:television
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_kodi
+                icon: mdi:kodi
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_chromecast
+                icon: mdi:cast
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_wiiu
+                icon: mdi:nintendo-switch
+                color_type: card
+                color: "rgb(0, 156, 6)"
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: switch.lr_music
+                icon: mdi:music
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_steam
+                icon: mdi:steam
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: "custom:button-card"
+                entity: remote.living_room
+                icon: mdi:power
+                color_type: card
+                color: "rgb(255, 0, 0)"
+                service:
+                  domain: remote
+                  action: turn_off
+                  data:
+                    entity_id: remote.living_room
+
 # Calendar card
       - type: custom:calendar-card
         title: "Calendar"
         numberOfDays: 90
         entities:
           - calendar.slacktishevents
-
-
-
-# Harmony Living Room card
-      - type: picture-glance
-        title: Living Room
-        aspect_ratio: 3.2
-        entities:
-          - switch.lr_tv
-          - switch.lr_kodi
-          - switch.lr_wiiu
-          - switch.lr_music
-          - switch.lr_chromecast
-          - switch.lr_steam
-        state_image:
-          "PowerOff": /local/tv-off.jpg
-          "Watch Kodi": /local/kodi.jpg
-          "Watch TV": /local/tv-on.jpg
-          "Chromecast": /local/cast.jpg
-          "Listen to Music": /local/music.jpg
-          "Play Steam": /local/steam.jpg
-          "WiiU": /local/wiiu.jpg
-        entity: sensor.harmony_living_room
-        style:
-          - "height: 250px"
-
 
 # Living Room Card
       - type: picture-glance
@@ -215,8 +244,6 @@ views:
           "off": /local/living-wide-bw.jpg
         entity: light.lamp_107
 
-
-
 # Thermostat and climate Card
       - type: vertical-stack
         cards:
@@ -232,8 +259,6 @@ views:
                 entity: sensor.current_temperature
               - type: custom:mini-graph-card
                 entity: sensor.temperature_sensor_167
-
-
 
 #
 # Lights Tab
@@ -260,8 +285,8 @@ views:
       - type: picture-glance
         title: Bedroom
         entities:
-          - light.bedroom__eric_103
-          - light.bedroom__val_104
+          - light.bedroom_eric_103
+          - light.bedroom_val_104
           - light.vanity_light_120
         state_image:
           "on": /local/bedroom.jpg
@@ -913,15 +938,36 @@ views:
               - entity: script.restart_ha
                 name: Restart HA
                 icon: mdi:restart
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.restart_ha
               - entity: script.reload_core
                 name: Reload Core
                 icon: mdi:restart
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.reload_core
               - entity: script.reload_groups
                 name: Reload Groups
                 icon: mdi:restart
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.reload_groups
               - entity: script.reload_automations
                 name: Reload Automations
                 icon: mdi:restart
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.reload_automations
+
       - type: picture-glance
         title: Reboot Vera
         entities:

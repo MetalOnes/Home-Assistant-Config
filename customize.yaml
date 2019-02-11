@@ -42,7 +42,7 @@ light.mancave_desk:
 
 light.pin_board:
   friendly_name: Pin Board
-  icon: mdi:led-strip
+  icon: mdi:microwave
 
 sensor.myipopendnscom:
   friendly_name: Public IP

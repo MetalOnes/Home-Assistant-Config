@@ -49,6 +49,8 @@ custom_updater:
     - https://raw.githubusercontent.com/ljmerza/calendar-card/master/custom_updater.json
     - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
     - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
+    - https://raw.githubusercontent.com/rdehuyss/homeassistant-lovelace-google-calendar-card/master/custom_updater.json
+    - https://raw.githubusercontent.com/matisaul/vertical-style-card/master/tracker.json
 
   component_urls:
     - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
@@ -404,6 +406,12 @@ sensor:
         value_template: '{{states.remote.living_room.attributes.current_activity }}'
         friendly_name: 'Living Room'
 
+# Denon AVR Volume
+  - platform: template
+    sensors:
+      lr_avr_vol:
+        value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
+
 # SABnzbd
 #  - platform: sabnzbd
 #    host: !secret sabnzbd_ip
@@ -483,7 +491,6 @@ sensor:
       untappd_total_badges:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
-
 
 binary_sensor:
 
@@ -634,6 +641,7 @@ input_select:
     options:
       - Living Room
       - Man Cave
+      - Living and Bed
       - All
     initial: All
     icon: mdi:speaker-wireless

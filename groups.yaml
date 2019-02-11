@@ -57,15 +57,15 @@ Man Cave:
 - sensor.light_sensor_168
 - sensor.humidity_sensor_169
 Bedroom:
-- light.bedroom__eric_103
-- light.bedroom__val_104
+- light.bedroom_eric_103
+- light.bedroom_val_104
 #- group.br_lights
 - scene.bedroom_lights_off
 - light.vanity_light_120
 - binary_sensor.master_bath_sensor_121
 BR_Lights:
-- light.bedroom__eric_103
-- light.bedroom__val_104
+- light.bedroom_eric_103
+- light.bedroom_val_104
 Int Lights:
 - light.lamp_107
 - switch.cabinet_lights_123
@@ -233,7 +233,7 @@ Vera Scenes:
     - scene.cameras_default_position
     - scene.door_open_awaynightvac
     - scene.evening_kodi
-    - scene.lights_out__vacation_mode
+    - scene.lights_out_vacation_mode
     - scene.lr_lamp_on
     - scene.man_cave_light_off
     - scene.man_cave_light_on

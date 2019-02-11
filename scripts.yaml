@@ -114,6 +114,7 @@ jemp:
          entity_id: >
           {% if is_state("input_select.chromecast_radio", "Living Room") %} media_player.living_room
           {% elif is_state("input_select.chromecast_radio", "Man Cave") %} media_player.cca_man_cave
+          {% elif is_state("input_select.chromecast_radio", "Living and Bed") %} media_player.living_and_bed
           {% elif is_state("input_select.chromecast_radio", "All") %} media_player.all_3_rooms
           {% endif %}
          media_content_id: >
