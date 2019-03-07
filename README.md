@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Lovelace updates, prep for upgrade to 0.89
 * Prep for upgrade to 0.87.1
 * Switched to MySQL db. Updated to 0.85.1
 * Lots of lovelace work

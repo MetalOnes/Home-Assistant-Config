@@ -22,6 +22,8 @@ logger:
     DenonAVR: fatal
 #    homeassistant.components.device_tracker: debug
 
+system_health:
+
 http:
   api_password: !secret http_pass
   base_url: !secret base_url

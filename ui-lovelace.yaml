@@ -1,27 +1,25 @@
 resources:
-  - url: /local/mini-graph-card.js?v=0.0.6
-    type: module
-  - url: /local/tracker-card.js?v=0.2.0
+  - url: /customcards/tracker-card.js
     type: js
-  - url: /local/button-card.js
+  - url: /customcards/button-card.js
     type: module
-  - url: /local/mini-media-player.js?v=0.9.8
+  - url: /customcards/mini-media-player-bundle.js
     type: module
-  - url: /local/dual-gauge-card.js
+  - url: /customcards/dual-gauge-card.js
     type: module
-  - url: /local/toggle-lock-entity-row.js
+  - url: /customcards/toggle-lock-entity-row.js
     type: module
-  - url: /local/surveillance-card.js?v=0.0.1
+  - url: /customcards/surveillance-card.js
     type: module
-  - url: /local/simple-thermostat/simple-thermostat.js?v=0.14.0
+  - url: /customcards/simple-thermostat/simple-thermostat.js
     type: module
   - url: https://unpkg.com/moment@2.23.0/moment.js
     type: js
-  - url: /local/calendar-card/calendar-card.js?v=1.0.1
+  - url: /customcards/calendar-card/calendar-card.js
     type: module
-  - url: /local/mini-graph-card-bundle.js?v=0.2.0
+  - url: /customcards/mini-graph-card-bundle.js
     type: module
-  - url: /local/vertical-style-card.js?v=0.1
+  - url: /customcards/vertical-style-card.js
     type: js
 
 #background: linear-gradient(gray, rgb(57,82,116))
@@ -77,8 +75,13 @@ views:
                     color: rgb(255, 0, 0)
                   - value: 'unlocked'
                     color: rgb(0, 255, 0)
-      - type: light
-        entity: light.lamp_107
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.lamp_107
+          - type: light
+            entity: light.dining_room_lamp_160
+
 # Int Lights on
       - type: entity-filter
         entities:
@@ -201,6 +204,9 @@ views:
                 color: "rgb(0, 156, 6)"
           - type: horizontal-stack
             cards:
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
               - type: custom:button-card
                 entity: switch.lr_music
                 icon: mdi:music
@@ -221,6 +227,7 @@ views:
                   action: turn_off
                   data:
                     entity_id: remote.living_room
+
 
 # Calendar card
       - type: custom:calendar-card
@@ -256,9 +263,18 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mini-graph-card
-                entity: sensor.current_temperature
+                entities:
+                  - sensor.current_temperature
+                show:
+                  points: hover
+                line_color: "rgb(204, 141, 1)"
+                group: true
               - type: custom:mini-graph-card
-                entity: sensor.temperature_sensor_167
+                entities:
+                  - sensor.temperature_sensor_167
+                group: true
+                show:
+                  points: hover
 
 #
 # Lights Tab
@@ -268,66 +284,193 @@ views:
     icon: mdi:lightbulb
     theme: slate
     cards:
+      - type: vertical-stack
+        cards:
 # Living Area Card
-      - type: picture-glance
-        title: Living Area
-        entities:
-          - light.lamp_107
-          - light.dining_room_lamp_160
-          - switch.cabinet_lights_123
-          - switch.party_lights_173
-        state_image:
-          "on": /local/living-wide.jpg
-          "off": /local/living-wide-bw.jpg
-        entity: group.int_lights
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Living Area
+                color: "rgb(204, 141, 1)"
+                entity: group.living_area
+                color_off: var(--disabled-text-color)
+                action: more_info
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: light.lamp_107
+                    icon: attribute
+                    name: Living Lamp
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
 
-# Bedroom Card
-      - type: picture-glance
-        title: Bedroom
-        entities:
-          - light.bedroom_eric_103
-          - light.bedroom_val_104
-          - light.vanity_light_120
-        state_image:
-          "on": /local/bedroom.jpg
-          "off": /local/bedroom-bw.jpg
-        entity: light.vanity_light_120
+                  - type: "custom:button-card"
+                    entity: light.dining_room_lamp_160
+                    icon: attribute
+                    name: Dining Lamp
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
 
-# Man cave card
-      - type: picture-glance
-        title: Man Cave
-        entities:
-          - switch.man_cave_lights_133
-          - light.mancave_desk
-          - light.pin_board
-        state_image:
-          "on": /local/mancave-left.jpg
-          "off": /local/mancave-left-bw.jpg
-        entity: switch.man_cave_lights_133
+                  - type: "custom:button-card"
+                    entity: switch.cabinet_lights_123
+                    icon: attribute
+                    name: Cabinets
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
 
-# Front Ext Card
-      - type: picture-glance
-        title: Front Exterior
-        entities:
-          - switch.front_porch_115
-          - switch.front_spotlight_135
-        #  - entity: switch.holiday_front_176
-        state_image:
-          "on": /local/ext-front.jpg
-          "off": /local/ext-front-bw.jpg
-        entity: switch.front_porch_115
+                  - type: "custom:button-card"
+                    entity: switch.party_lights_173
+                    icon: attribute
+                    name: Party Lights
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
 
-# Back Ext Card
-      - type: picture-glance
-        title: Back Exterior
-        entities:
-          - switch.deck_lights_108
-          - switch.back_spotlight_118
-        #  - switch.back_ext_holiday_177
-        state_image:
-          "on": /local/ext-back.jpg
-          "off": /local/ext-back-bw.jpg
-        entity: switch.back_spotlight_118
+    # Man cave card
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Man Cave
+                entity: group.man_cave
+                action: more_info
+                color: "rgb(204, 141, 1)"
+                color_off: var(--disabled-text-color)
+
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.man_cave_lights_133
+                    icon: attribute
+                    name: Lights
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: light.mancave_desk
+                    icon: attribute
+                    name: Desk
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: light.pin_board
+                    icon: attribute
+                    name: Pin Board
+                    color: "rgb(204, 141, 1)"
+
+                  - type: "custom:button-card"
+                    entity: light.wifi_box
+                    icon: mdi:lighthouse
+                    name: Puck
+                    color: "rgb(204, 141, 1)"
+
+    # Bedroom Card
+
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Bedroom
+                entity: group.bedroom
+                action: more_info
+                color: "rgb(204, 141, 1)"
+                color_off: var(--disabled-text-color)
+
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: light.bedroom_eric_103
+                    icon: attribute
+                    name: Right
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: light.bedroom_val_104
+                    icon: attribute
+                    name: Left
+                    color: "rgb(204, 141, 1)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: light.vanity_light_120
+                    icon: attribute
+                    name: Vanity
+                    color: "rgb(204, 141, 1)"
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
+
+    # Front Ext Card
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Front Ext
+                entity: group.ext_front
+                action: more_info
+                color: "rgb(0, 133, 25)"
+                color_off: var(--disabled-text-color)
+
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.front_porch_115
+                    icon: attribute
+                    name: Porch
+                    color: "rgb(0, 133, 25)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: switch.front_spotlight_135
+                    icon: attribute
+                    name: Spotlight
+                    color: "rgb(0, 133, 25)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
+
+    # Back Ext Card
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Back Ext
+                entity: group.ext_back
+                action: more_info
+                color: "rgb(0, 133, 25)"
+                color_off: var(--disabled-text-color)
+
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.deck_lights_108
+                    icon: attribute
+                    name: Deck
+                    color: "rgb(0, 133, 25)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    entity: switch.back_spotlight_118
+                    icon: attribute
+                    name: Spotlight
+                    color: "rgb(0, 133, 25)"
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
 
 #
 # Camera tab
@@ -474,14 +617,17 @@ views:
             title: Sensors
             cards:
               - type: "custom:mini-graph-card"
-                entity: sensor.temperature_sensor_167
+                entities:
+                  - sensor.temperature_sensor_167
                 name: Temp
                 icon: mdi:thermometer-lines
               - type: "custom:mini-graph-card"
-                entity: sensor.humidity_sensor_169
+                entities:
+                  - sensor.humidity_sensor_169
                 name: Humidity
               - type: "custom:mini-graph-card"
-                entity: sensor.light_sensor_168
+                entities:
+                  - sensor.light_sensor_168
                 name: Light
 
 
@@ -494,12 +640,64 @@ views:
     theme: slate
     cards:
   # Living Room Media
-      - type: vertical-stack
+      - type: custom:vertical-style-card
+        title: Living Room
         cards:
           - type: "custom:button-card"
-            color_type: label-card
-            name: Living Room
-            color: rgb(41, 41, 41)
+            entity: sensor.harmony_living_room
+            show_state: true
+            color: var(--primary-background-color)
+            action: more_info
+            style:
+              - font-size: 20px
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: switch.lr_tv
+                icon: mdi:television
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_kodi
+                icon: mdi:kodi
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_chromecast
+                icon: mdi:cast
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_wiiu
+                icon: mdi:nintendo-switch
+                color_type: card
+                color: "rgb(0, 156, 6)"
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: custom:button-card
+                entity: switch.lr_music
+                icon: mdi:music
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: custom:button-card
+                entity: switch.lr_steam
+                icon: mdi:steam
+                color_type: card
+                color: "rgb(0, 156, 6)"
+              - type: "custom:button-card"
+                entity: remote.living_room
+                icon: mdi:power
+                color_type: card
+                color: "rgb(255, 0, 0)"
+                service:
+                  domain: remote
+                  action: turn_off
+                  data:
+                    entity_id: remote.living_room
+
           - type: "custom:mini-media-player"
             entity: media_player.denon_avrs720w
             name: Denon AVR
@@ -507,20 +705,15 @@ views:
             artwork: cover
             power_color: true
             show_source: true
-          - type: entities
-            icon: mdi:remote
-            entities:
-              - entity: sensor.harmony_living_room
-                name: Harmony
 
           - type: "custom:mini-media-player"
             entity: media_player.living_room_kodi
             name: Living Room Kodi
             icon: mdi:kodi
             artwork: cover
-            show_progress: true
-            hide_volume: true
-            hide_power: true
+            hide:
+              volume: true
+              power: true
 
           - type: entities
             entities:
@@ -529,94 +722,19 @@ views:
                 name: Living Room Chromecast
                 icon: mdi:cast
                 artwork: cover
-                hide_power: true
                 group: true
-                hide_controls: true
+                hide:
+                  power: true
+                  controls: true
               - type: "custom:mini-media-player"
                 entity: media_player.all_3_rooms
                 name: All 3 Rooms
                 icon: mdi:cast
                 artwork: cover
-                hide_power: true
                 group: true
-                hide_controls: true
-
-
-          - type: horizontal-stack
-            cards:
-            - type: "custom:button-card"
-              entity: script.tv
-              size: 25%
-              icon: mdi:television
-              name: TV
-              action: service
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.tv
-            - type: "custom:button-card"
-              entity: script.watch_kodi
-              size: 25%
-              icon: mdi:kodi
-              name: Kodi
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.watch_kodi
-            - type: "custom:button-card"
-              entity: script.chromecast
-              size: 25%
-              icon: mdi:cast
-              name: Chromecast
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.chromecast
-            - type: "custom:button-card"
-              entity: script.music
-              size: 25%
-              icon: mdi:music-circle
-              name: Music
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.music
-          - type: horizontal-stack
-            cards:
-            - type: "custom:button-card"
-              entity: script.wiiu
-              size: 25%
-              icon: mdi:wiiu
-              name: WiiU
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.wiiu
-            - type: "custom:button-card"
-              entity: script.steam_link
-              size: 25%
-              icon: mdi:steam
-              name: Steam Link
-              service:
-                domain: script
-                action: turn_on
-                data:
-                  entity_id: script.steam_link
-            - type: "custom:button-card"
-              entity: remote.living_room
-              size: 25%
-              icon: mdi:power-plug-off
-              name: Turn Off
-              service:
-                domain: remote
-                action: turn_off
-                data:
-                  entity_id: remote.living_room
+                hide:
+                  power: true
+                  controls: true
 
   # Bedroom Media
       - type: vertical-stack
@@ -630,9 +748,9 @@ views:
             name: Bedroom Kodi
             icon: mdi:kodi
             artwork: cover
-            show_progress: true
-            hide_volume: true
-            hide_power: true
+            hide:
+              volume: true
+              power: true
           - type: entities
             entities:
               - type: "custom:mini-media-player"
@@ -640,8 +758,9 @@ views:
                 name: Bedroom Chromecast
                 icon: mdi:cast
                 artwork: cover
-                hide_power: true
                 group: true
+                hide:
+                  power: true
 
   # Mancave media
       - type: vertical-stack
@@ -655,15 +774,17 @@ views:
             name: Man Cave Chromecast
             icon: mdi:cast
             artwork: cover
-            hide_power: true
+            hide:
+              power: true
             # group: true
           - type: "custom:mini-media-player"
             entity: media_player.cca_man_cave
             name: Man Cave Chromecast Audio
             artwork: cover
-            hide_power: true
             # group: true
             icon: mdi:cast
+            hide:
+              power: true
 
 #
 # Weather tab
@@ -692,15 +813,18 @@ views:
           - type: horizontal-stack
             cards:
               - type: "custom:mini-graph-card"
-                entity: sensor.sunrise_time
+                entities:
+                  - sensor.sunrise_time
                 name: Sunrise
                 icon: mdi:weather-sunset-up
               - type: "custom:mini-graph-card"
-                entity: sensor.sunset_time
+                entities:
+                  - sensor.sunset_time
                 name: Sunset
                 icon: mdi:weather-sunset-down
               - type: "custom:mini-graph-card"
-                entity: sensor.solar_angle
+                entities:
+                  - sensor.solar_angle
                 name: Sun Angle
                 icon: mdi:weather-sunny
           - type: vertical-stack
@@ -739,14 +863,17 @@ views:
         title: Sensors
         cards:
           - type: "custom:mini-graph-card"
-            entity: sensor.temperature_sensor_167
+            entities:
+              - sensor.temperature_sensor_167
             name: Temp
             icon: mdi:thermometer-lines
           - type: "custom:mini-graph-card"
-            entity: sensor.humidity_sensor_169
+            entities:
+              - sensor.humidity_sensor_169
             name: Humidity
           - type: "custom:mini-graph-card"
-            entity: sensor.light_sensor_168
+            entities:
+              - sensor.light_sensor_168
             name: Light
 
 #

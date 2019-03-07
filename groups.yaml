@@ -66,6 +66,11 @@ Bedroom:
 BR_Lights:
 - light.bedroom_eric_103
 - light.bedroom_val_104
+Living_Area:
+- light.lamp_107
+- switch.cabinet_lights_123
+- light.dining_room_lamp_160
+- switch.party_lights_173
 Int Lights:
 - light.lamp_107
 - switch.cabinet_lights_123

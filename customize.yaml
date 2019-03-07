@@ -68,6 +68,14 @@ light.vanity_light_120:
   friendly_name: Bathroom Vanity
   icon: mdi:wall-sconce-flat
 
+light.bedroom_eric_103:
+  friendly_name: Bedroom Right
+  icon: mdi:lightbulb-outline
+
+light.bedroom_val_104:
+  friendly_name: Bedroom Left
+  icon: mdi:lightbulb-outline
+
 sensor.harmony_living_room:
   entity_picture: /local/harmony.png
   friendly_name: "Current Activity"
