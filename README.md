@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Upgrading to 0.92.1
 * Upgrading to 0.89.2
 * Lovelace updates, prep for upgrade to 0.89
 * Prep for upgrade to 0.87.1

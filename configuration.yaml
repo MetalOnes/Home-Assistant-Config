@@ -331,28 +331,28 @@ sensor:
         unit_of_measurement: '°'
 
 # Weather Underground
-  - platform: wunderground
-    api_key: !secret wu_api
-    pwd_id: KNCFUQUA65
-    monitored_conditions:
-      - weather_1d
-      - weather_1n
-      - weather_2d
-      - weather_2n
-      - weather_3d
-      - weather_3n
-      - weather_4d
-      - weather_4n
-      - temp_high_record_f
-      - temp_high_1d_f
-      - temp_f
-      - temp_low_1d_f
-      - temp_low_record_f
-      - precip_1d
-      - precip_1d_in
-      - wind_mph
-      - wind_1d_mph
-      - alerts
+#  - platform: wunderground
+#    api_key: !secret wu_api
+#    pwd_id: KNCFUQUA65
+#    monitored_conditions:
+#      - weather_1d
+#      - weather_1n
+#      - weather_2d
+#      - weather_2n
+#      - weather_3d
+#      - weather_3n
+#      - weather_4d
+#      - weather_4n
+#      - temp_high_record_f
+#      - temp_high_1d_f
+#      - temp_f
+#      - temp_low_1d_f
+#      - temp_low_record_f
+#      - precip_1d
+#      - precip_1d_in
+#      - wind_mph
+#      - wind_1d_mph
+#      - alerts
 
 # Dark Sky
   - platform: darksky

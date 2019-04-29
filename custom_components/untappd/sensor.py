@@ -13,23 +13,27 @@ from datetime import datetime
 from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.switch import (PLATFORM_SCHEMA)
+from homeassistant.const import ATTR_ATTRIBUTION
 
 REQUIREMENTS = ['pyuntappd==0.0.5']
 
-__version__ = '0.1.1'
+__version__ = '0.1.4'
 
 _LOGGER = logging.getLogger(__name__)
+
+ATTRIBUTION = 'Information provided by Untappd'
 
 CONF_USERNAME = 'username'
 CONF_ID = 'id'
 CONF_SECRET = 'secret'
 
-COMPONENT_REPO = 'https://github.com/custom-components/sensor.untapped/'
+COMPONENT_REPO = 'https://github.com/custom-components/sensor.untappd/'
 
 WISHLIST_DATA = 'untappd_wishlist'
 
 ATTR_ABV = 'abv'
 ATTR_BEER = 'beer'
+ATTR_BREWERY = 'brewery'
 ATTR_SCORE = 'score'
 ATTR_TOTAL_BADGES = 'total_badges'
 ATTR_TOTAL_BEERS = 'total_beers'
@@ -54,7 +58,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 })
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
-    _LOGGER.warning('Data provided by Untappd, report any issues to %s', COMPONENT_REPO)
     username = config.get(CONF_USERNAME)
     api_id = config.get(CONF_ID)
     api_secret = config.get(CONF_SECRET)
@@ -98,6 +101,7 @@ class UntappdCheckinSensor(Entity):
 
             self._state = relative_checkin_date
             self._beer = result['beer']['beer_name']
+            self._brewery = result['brewery']['brewery_name']
             self._score = str(result['rating_score'])
             self._picture = result['beer']['beer_label']
             self._abv = str(result['beer']['beer_abv']) + '%'
@@ -135,6 +139,7 @@ class UntappdCheckinSensor(Entity):
         return {
             ATTR_ABV: self._abv,
             ATTR_BEER: self._beer,
+            ATTR_BREWERY: self._brewery,
             ATTR_SCORE: self._score,
             ATTR_TOTAL_BADGES: self._total_badges,
             ATTR_TOTAL_BEERS: self._total_beers,
@@ -143,6 +148,7 @@ class UntappdCheckinSensor(Entity):
             ATTR_TOTAL_FRIENDS: self._total_friends,
             ATTR_TOTAL_FOLLOWINGS: self._total_followings,
             ATTR_TOTAL_PHOTOS: self._total_photos,
+            ATTR_ATTRIBUTION: ATTRIBUTION,
         }
 
 class UntappdWishlistSensor(Entity):
@@ -254,4 +260,5 @@ class UntappdLastBadgeSensor(Entity):
             ATTR_BADGE: self._badge,
             ATTR_LEVEL: self._level,
             ATTR_DESCRIPTION: self._description,
+            ATTR_ATTRIBUTION: ATTRIBUTION,
         }
