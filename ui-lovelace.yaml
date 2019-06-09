@@ -21,6 +21,8 @@ resources:
     type: module
   - url: /customcards/vertical-style-card.js
     type: js
+  - url: /customcards/github/nervetattoo/banner-card.js?track=true
+    type: module
 
 #background: linear-gradient(gray, rgb(57,82,116))
 
@@ -43,6 +45,7 @@ views:
             name: "Home Mode: "
             show_state: true
             action: more_info
+            size: 64px
             state:
               - value: 'Away'
                 color: rgb(150, 0, 0)
@@ -222,6 +225,7 @@ views:
                 icon: mdi:power
                 color_type: card
                 color: "rgb(255, 0, 0)"
+                name: "Turn Off"
                 service:
                   domain: remote
                   action: turn_off
@@ -233,23 +237,63 @@ views:
       - type: custom:calendar-card
         title: "Calendar"
         numberOfDays: 90
+        timeFormat: h:mma
+        dateTopFormat: MMM DD
+        dateBottomFormat: ddd
         entities:
           - calendar.slacktishevents
 
 # Living Room Card
-      - type: picture-glance
-        title: Living Area
+#      - type: picture-glance
+#        title: Living Area
+#        entities:
+#          - entity: light.lamp_107
+#            icon: mdi:floor-lamp
+#          - light.dining_room_lamp_160
+#          - switch.cabinet_lights_123
+#          - entity: switch.party_lights_173
+#            icon: mdi:mushroom
+#        state_image:
+#          "on": /local/living-wide.jpg
+#          "off": /local/living-wide-bw.jpg
+#        entity: light.lamp_107
+
+# Living Room Banner-card
+      - type: custom:banner-card
+        heading: "\U0001F6CB Living room"
+        background: "rgb(204, 141, 1)"
         entities:
-          - entity: light.lamp_107
-            icon: mdi:floor-lamp
+          - light.lamp_107
           - light.dining_room_lamp_160
           - switch.cabinet_lights_123
-          - entity: switch.party_lights_173
-            icon: mdi:mushroom
-        state_image:
-          "on": /local/living-wide.jpg
-          "off": /local/living-wide-bw.jpg
-        entity: light.lamp_107
+          - entity: lock.front_door_19
+            map_state:
+              "locked": mdi:lock
+              "unlocked": mdi:lock-open
+          - sensor.current_temperature
+          - switch.party_lights_173
+          - entity: media_player.living_room_kodi
+            name: Kodi
+            size: 3
+          - entity: media_player.living_room
+            name: Chromecast
+            size: 3
+
+# Bedroom banner card
+      - type: custom:banner-card
+        heading: "\U0001F6CC Bedroom"
+        background: "rgb(150, 0, 203)"
+        entities:
+
+          - entity: light.bedroom_val_104
+            name: Left
+          - entity: light.bedroom_eric_103
+            name: Right
+          - entity: light.vanity_light_120
+            name: Vanity
+          - entity: media_player.bedroom_tv
+            name: Chromecast
+            size: 3
 
 # Thermostat and climate Card
       - type: vertical-stack
@@ -292,6 +336,7 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Living Area
+                show_icon: false
                 color: "rgb(204, 141, 1)"
                 entity: group.living_area
                 color_off: var(--disabled-text-color)
@@ -300,28 +345,24 @@ views:
                 cards:
                   - type: "custom:button-card"
                     entity: light.lamp_107
-                    icon: attribute
                     name: Living Lamp
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: light.dining_room_lamp_160
-                    icon: attribute
                     name: Dining Lamp
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: switch.cabinet_lights_123
-                    icon: attribute
                     name: Cabinets
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: switch.party_lights_173
-                    icon: attribute
                     name: Party Lights
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
@@ -332,6 +373,7 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Man Cave
+                show_icon: false
                 entity: group.man_cave
                 action: more_info
                 color: "rgb(204, 141, 1)"
@@ -341,21 +383,18 @@ views:
                 cards:
                   - type: "custom:button-card"
                     entity: switch.man_cave_lights_133
-                    icon: attribute
                     name: Lights
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: light.mancave_desk
-                    icon: attribute
                     name: Desk
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: light.pin_board
-                    icon: attribute
                     name: Pin Board
                     color: "rgb(204, 141, 1)"
 
@@ -372,6 +411,7 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Bedroom
+                show_icon: false
                 entity: group.bedroom
                 action: more_info
                 color: "rgb(204, 141, 1)"
@@ -381,21 +421,18 @@ views:
                 cards:
                   - type: "custom:button-card"
                     entity: light.bedroom_eric_103
-                    icon: attribute
                     name: Right
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: light.bedroom_val_104
-                    icon: attribute
                     name: Left
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: light.vanity_light_120
-                    icon: attribute
                     name: Vanity
                     color: "rgb(204, 141, 1)"
                   - type: "custom:button-card"
@@ -408,6 +445,7 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Front Ext
+                show_icon: false
                 entity: group.ext_front
                 action: more_info
                 color: "rgb(0, 133, 25)"
@@ -417,14 +455,12 @@ views:
                 cards:
                   - type: "custom:button-card"
                     entity: switch.front_porch_115
-                    icon: attribute
                     name: Porch
                     color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: switch.front_spotlight_135
-                    icon: attribute
                     name: Spotlight
                     color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
@@ -443,6 +479,7 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Back Ext
+                show_icon: false
                 entity: group.ext_back
                 action: more_info
                 color: "rgb(0, 133, 25)"
@@ -452,14 +489,12 @@ views:
                 cards:
                   - type: "custom:button-card"
                     entity: switch.deck_lights_108
-                    icon: attribute
                     name: Deck
                     color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     entity: switch.back_spotlight_118
-                    icon: attribute
                     name: Spotlight
                     color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
@@ -646,7 +681,9 @@ views:
           - type: "custom:button-card"
             entity: sensor.harmony_living_room
             show_state: true
-            color: var(--primary-background-color)
+            color_type: card
+            color: rgb(138, 13, 133)
+            show_icon: false
             action: more_info
             style:
               - font-size: 20px

@@ -192,8 +192,8 @@ logbook:
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
-tts:
-  platform: google
+#tts:
+#  platform: google
 
 sun:
 
@@ -664,6 +664,7 @@ switch:
   - platform: template
     switches:
       lr_tv:
+        friendly_name: TV
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch TV') }}"
         turn_on:
           service: remote.turn_on
@@ -676,6 +677,7 @@ switch:
             entity_id: remote.living_room
             activity: 'PowerOff'
       lr_kodi:
+        friendly_name: Kodi
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Kodi') }}"
         turn_on:
           service: remote.turn_on
@@ -688,6 +690,7 @@ switch:
             entity_id: remote.living_room
             activity: 'PowerOff'
       lr_wiiu:
+        friendly_name: Switch
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'WiiU' ) }}"
         turn_on:
           service: remote.turn_on
@@ -700,6 +703,7 @@ switch:
             entity_id: remote.living_room
             activity: 'PowerOff'
       lr_music:
+        friendly_name: Music
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Listen to Music' ) }}"
         turn_on:
           service: remote.turn_on
@@ -712,6 +716,7 @@ switch:
             entity_id: remote.living_room
             activity: 'PowerOff'
       lr_chromecast:
+        friendly_name: Chromecast
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Chromecast' ) }}"
         turn_on:
           service: remote.turn_on
@@ -724,6 +729,7 @@ switch:
             entity_id: remote.living_room
             activity: 'PowerOff'
       lr_steam:
+        friendly_name: Steam
         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Play Steam' ) }}"
         turn_on:
           service: remote.turn_on
