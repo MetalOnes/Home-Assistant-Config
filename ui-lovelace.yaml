@@ -1,28 +1,29 @@
 resources:
-  - url: /customcards/tracker-card.js
-    type: js
-  - url: /customcards/button-card.js
+  - url: /community_plugin/button-card/button-card.js
     type: module
-  - url: /customcards/mini-media-player-bundle.js
+  - url: /community_plugin/mini-media-player/mini-media-player.js
     type: module
-  - url: /customcards/dual-gauge-card.js
+  - url: /community_plugin/dual-gauge-card/dual-gauge-card.js
     type: module
-  - url: /customcards/toggle-lock-entity-row.js
+  - url: /community_plugin/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
     type: module
-  - url: /customcards/surveillance-card.js
+  - url: /community_plugin/surveillance-card/surveillance-card.js
     type: module
-  - url: /customcards/simple-thermostat/simple-thermostat.js
+  - url:  /community_plugin/simple-thermostat/simple-thermostat.js
     type: module
   - url: https://unpkg.com/moment@2.23.0/moment.js
     type: js
-  - url: /customcards/calendar-card/calendar-card.js
+  - url: /community_plugin/calendar-card/calendar-card.js
     type: module
-  - url: /customcards/mini-graph-card-bundle.js
+  - url: /community_plugin/mini-graph-card/mini-graph-card.js
     type: module
-  - url: /customcards/vertical-style-card.js
+  - url: /community_plugin/vertical-style-card/vertical-style-card.js
     type: js
-  - url: /customcards/github/nervetattoo/banner-card.js?track=true
+  - url: /community_plugin/banner-card/banner-card.js
     type: module
+  - url: /community_plugin/untappd-card/untappd-card.js
+    type: module
+
 
 #background: linear-gradient(gray, rgb(57,82,116))
 
@@ -243,25 +244,11 @@ views:
         entities:
           - calendar.slacktishevents
 
-# Living Room Card
-#      - type: picture-glance
-#        title: Living Area
-#        entities:
-#          - entity: light.lamp_107
-#            icon: mdi:floor-lamp
-#          - light.dining_room_lamp_160
-#          - switch.cabinet_lights_123
-#          - entity: switch.party_lights_173
-#            icon: mdi:mushroom
-#        state_image:
-#          "on": /local/living-wide.jpg
-#          "off": /local/living-wide-bw.jpg
-#        entity: light.lamp_107
-
 # Living Room Banner-card
       - type: custom:banner-card
         heading: "\U0001F6CB Living room"
         background: "rgb(204, 141, 1)"
+        link: /lovelace/lights
         entities:
           - light.lamp_107
           - light.dining_room_lamp_160
@@ -275,14 +262,17 @@ views:
           - entity: media_player.living_room_kodi
             name: Kodi
             size: 3
+            when: playing
           - entity: media_player.living_room
             name: Chromecast
             size: 3
+            when: playing
 
 # Bedroom banner card
       - type: custom:banner-card
         heading: "\U0001F6CC Bedroom"
         background: "rgb(150, 0, 203)"
+        link: /lovelace/lights
         entities:
 
           - entity: light.bedroom_val_104
@@ -294,6 +284,7 @@ views:
           - entity: media_player.bedroom_tv
             name: Chromecast
             size: 3
+            when: playing
 
 # Thermostat and climate Card
       - type: vertical-stack
@@ -414,7 +405,7 @@ views:
                 show_icon: false
                 entity: group.bedroom
                 action: more_info
-                color: "rgb(204, 141, 1)"
+                color: "rgb(150, 0, 203)"
                 color_off: var(--disabled-text-color)
 
               - type: horizontal-stack
@@ -508,31 +499,8 @@ views:
                     color_off: var(--disabled-text-color)
 
 #
-# Camera tab
+# Surveillance tab
 #
-  - title: Cameras
-    path: cameras
-    icon: mdi:video
-    theme: slate
-    cards:
-      - type: picture-glance
-        title: Front Door
-        entities:
-          - lock.front_door_19
-          - light.lamp_107
-        camera_image: camera.front_door
-      - type: picture-glance
-        title: Back Door
-        entities:
-          - switch.deck_lights_108
-          - switch.back_spotlight_118
-        camera_image: camera.back_door
-      - type: picture-glance
-        title: Man Cave
-        entities:
-          - switch.man_cave_lights_133
-        camera_image: camera.man_cave_camera
-
   - title: Surveillance
     icon: mdi:cctv
     panel: true
@@ -664,6 +632,28 @@ views:
                 entities:
                   - sensor.light_sensor_168
                 name: Light
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            name: Power
+            color_type: label-card
+            color: rgb(41, 41, 41)
+          - type: horizontal-stack
+            title: Sensors
+            cards:
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.power_avg_use
+                icon: mdi:power-socket-us
+                show:
+                  graph: bar
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.power_lastbill_use
+                icon: mdi:power-socket-us
+                show:
+                  graph: bar
+
 
 
 #
@@ -849,14 +839,12 @@ views:
             color: rgb(189, 183, 48)
           - type: horizontal-stack
             cards:
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.sunrise_time
+              - type: sensor
+                entity: sensor.sunrise_time
                 name: Sunrise
                 icon: mdi:weather-sunset-up
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.sunset_time
+              - type: sensor
+                entity: sensor.sunset_time
                 name: Sunset
                 icon: mdi:weather-sunset-down
               - type: "custom:mini-graph-card"
@@ -880,40 +868,6 @@ views:
                 show_state: false
 
 #
-# Man cave tab
-#
-  - title: Man Cave
-    path: mancave
-    icon: mdi:flask
-    theme: slate
-    cards:
-      - type: picture-glance
-        title: Man Cave
-        entities:
-          - switch.man_cave_lights_133
-          - light.mancave_desk
-          - light.mancave
-          - light.wifi_box
-          - light.pin_board
-        camera_image: camera.man_cave_camera
-      - type: horizontal-stack
-        title: Sensors
-        cards:
-          - type: "custom:mini-graph-card"
-            entities:
-              - sensor.temperature_sensor_167
-            name: Temp
-            icon: mdi:thermometer-lines
-          - type: "custom:mini-graph-card"
-            entities:
-              - sensor.humidity_sensor_169
-            name: Humidity
-          - type: "custom:mini-graph-card"
-            entities:
-              - sensor.light_sensor_168
-            name: Light
-
-#
 # People tab
 #
   - title: People
@@ -926,6 +880,8 @@ views:
         entities:
           - device_tracker.eric_s7
           - device_tracker.val_j7
+      - type: 'custom:untappd-card'
+        entity: sensor.untappd_badge
 
       - type: picture-elements
         id: untappd-card
@@ -1094,55 +1050,41 @@ views:
             name: Network
             image: /local/network.jpg
             entity: sensor.myip
-          - type: glance
-            title: HASS Commands
-            column_width: calc(100% / 4)
-            icon: mdi:home-assistant
-            entities:
-              - entity: script.restart_ha
-                name: Restart HA
-                icon: mdi:restart
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.restart_ha
-              - entity: script.reload_core
-                name: Reload Core
-                icon: mdi:restart
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.reload_core
-              - entity: script.reload_groups
-                name: Reload Groups
-                icon: mdi:restart
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.reload_groups
-              - entity: script.reload_automations
-                name: Reload Automations
-                icon: mdi:restart
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.reload_automations
+      - type: sensor
+        entity: sensor.hacs
+        name: HACS Updates
+        icon: mdi:update
 
-      - type: picture-glance
-        title: Reboot Vera
+# Device commands Banner-card
+      - type: custom:banner-card
+        heading: "Device Commands"
+        background: "rgb(15, 106, 0)"
+        row_size: 4
         entities:
-            - entity: scene.reboot_vera
-              name: Reboot Vera
-              icon: mdi:restart
-        image: /local/vera.png
-
-      - type: custom:tracker-card
-        title: Component Updates
-        trackers:
-          - sensor.custom_card_tracker
-          - sensor.custom_component_tracker
-#          - sensor.custom_python_script_tracker
+          - entity: script.restart_ha
+            name: HASS
+            value: mdi:reload
+            action:
+              service: script.turn_on
+              entity_id: script.restart_ha
+          - entity: script.restart_ha
+            name: Core
+            value: mdi:reload
+            action:
+              service: script.turn_on
+              entity_id: script.reload_core
+          - entity: script.restart_ha
+            name: Groups
+            value: mdi:reload
+            action:
+              service: script.turn_on
+              entity_id: script.reload_groups
+          - entity: script.restart_ha
+            name: Automations
+            value: mdi:reload
+            action:
+              service: script.turn_on
+              entity_id: script.script.reload_automations
+          - entity: scene.reboot_vera
+            name: Vera
+            value: mdi:reload

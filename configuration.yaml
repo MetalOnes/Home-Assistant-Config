@@ -39,23 +39,9 @@ http:
 # Updater Stuff
 updater:
 
-custom_updater:
-  track:
-    - cards
-    - components
-    - python_scripts
-  card_urls:
-    - https://raw.githubusercontent.com/kuuji/button-card/master/tracker.json
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
-    - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
-    - https://raw.githubusercontent.com/ljmerza/calendar-card/master/custom_updater.json
-    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
-    - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
-    - https://raw.githubusercontent.com/rdehuyss/homeassistant-lovelace-google-calendar-card/master/custom_updater.json
-    - https://raw.githubusercontent.com/matisaul/vertical-style-card/master/tracker.json
-
-  component_urls:
-    - https://raw.githubusercontent.com/custom-components/sensor.untapped/master/custom_updater.json
+# HACS
+hacs:
+  token: !secret hacs_token
 
 discovery:
 
@@ -192,8 +178,6 @@ logbook:
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
-#tts:
-#  platform: google
 
 sun:
 
@@ -450,10 +434,6 @@ sensor:
 # Versions sensor
   - platform: version
 
-# - platform: versions
-#    installation: venv
-#    branch: stable
-
 # Untappd sensor and templating
   - platform: untappd
     username: !secret untappd_user
@@ -493,6 +473,23 @@ sensor:
       untappd_total_badges:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
+
+  - platform: duke_energy
+    username: !secret duke_user
+    password: !secret duke_pass
+
+  - platform: template
+    sensors:
+      power_avg_use:
+        friendly_name: Average Usage
+        value_template: "{{ state_attr('sensor.duke_energy_43413318', 'last_bills_average_usage') }}"
+        unit_of_measurement: 'kW-h'
+  - platform: template
+    sensors:
+      power_lastbill_use:
+        friendly_name: Last Bill Usage
+        value_template: "{{ state_attr('sensor.duke_energy_43413318', 'last_bills_usage') }}"
+        unit_of_measurement: 'kW-h'
 
 binary_sensor:
 
@@ -593,7 +590,7 @@ emulated_hue:
   expose_by_default: false
 
 #########################################
-# USPS
+# USPS - Not working
 #########################################
 
 #usps:
@@ -602,7 +599,7 @@ emulated_hue:
 #  driver: 'phantomjs'
 
 #########################################
-# Google calendar - not working?
+# Google calendar
 #########################################
 google:
   client_id: !secret gcal_client
