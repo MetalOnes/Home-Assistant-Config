@@ -23,9 +23,25 @@ resources:
     type: module
   - url: /community_plugin/untappd-card/untappd-card.js
     type: module
-
+  - url: /community_plugin/love-lock-card/love-lock-card.js
+    type: js
+  - url: /community_plugin/compact-custom-header/compact-custom-header.js
+    type: module
+  - url: /community_plugin/bar-card/bar-card.js
+    type: js
+  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+    type: module
+  - url: /community_plugin/lovelace-card-tools/card-tools.js
+    type: js
+  - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+    type: js
 
 #background: linear-gradient(gray, rgb(57,82,116))
+
+# Compact Custom Header Options
+cch:
+  header: show
+  menu: show
 
 views:
 #
@@ -575,14 +591,14 @@ views:
               - type: "custom:button-card"
                 entity: switch.front_door1_1_139
                 icon: mdi:door
-                color_type: icon
+                color_type: card
                 name: "Armed: "
                 show_state: true
                 color: auto
               - type: "custom:button-card"
                 entity: switch.back_door_172
                 icon: mdi:door
-                color_type: icon
+                color_type: card
                 name: "Armed: "
                 show_state: true
               - type: "custom:button-card"
@@ -1088,3 +1104,31 @@ views:
           - entity: scene.reboot_vera
             name: Vera
             value: mdi:reload
+
+ # Battery Levels
+      - type: custom:vertical-stack-in-card
+        title: Batteries
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: custom:bar-card
+              attribute: battery_level
+              severity:
+                - value: 50
+                  color: '#bf4040'
+                - value: 75
+                  color: '#bf9540'
+                - value: 100
+                  color: '#40bf40'
+              title_position: inside
+              columns: 2
+              padding: 2px
+              align: left
+              title_style:
+                font-size: 16px
+                value_style:
+                  font-size: 8px
+            filter:
+              include:
+                - attributes:
+                    battery_level: <=100
