@@ -64,6 +64,10 @@ light.lamp_107:
   emulated_hue_hidden: false
   emulated_hue_name: "Living Room Lamp"
 
+light.tv:
+  friendly_name: TV Backlight
+  icon: mdi:television
+
 light.vanity_light_120:
   friendly_name: Bathroom Vanity
   icon: mdi:wall-sconce-flat

@@ -41,6 +41,7 @@ HolidayExterior:
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
+- light.tv
 - switch.party_lights_173
 - lock.front_door_19
 #- script.party_time

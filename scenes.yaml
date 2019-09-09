@@ -4,6 +4,7 @@
     light.mancave: false
     light.wifi_box: false
     light.pin_board: false
+    light.tv: false
 
 - name: Away
   entities:
@@ -11,6 +12,7 @@
     light.mancave: false
     light.wifi_box: false
     light.pin_board: false
+    light.tv: false
 
 - name: mcdesk
   entities:

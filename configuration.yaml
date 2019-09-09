@@ -192,13 +192,25 @@ sun:
 #  tls_insecure: true
 #  protocol: 3.1
 
-# Device Tracker
+##########################################
+# Device Tracker & Presence
+##########################################
 device_tracker:
   - platform: unifi
     username: !secret ap_username
     password: !secret ap_password
     verify_ssl: false
-    track_new_devices: false
+    dont_track_wired_clients: true
+
+person:
+  - name: Eric
+    id: eric
+    device_trackers:
+      - device_tracker.galaxy_s7
+  - name: Val
+    id: val
+    device_trackers:
+      - device_tracker.galaxy_j7
 
 ##########################################
 # Lights
@@ -214,6 +226,9 @@ light:
       192.168.1.149:
         name: pin_board
         mode: rgbw
+      192.168.1.169:
+        name: tv
+        mode: rgbw
 
   - platform: limitlessled
     bridges:
@@ -225,7 +240,6 @@ light:
         - number: 1
           name: Wifi Box
           type: bridge-led
-
 
 ##########################################
 # Vera
@@ -590,21 +604,11 @@ emulated_hue:
   expose_by_default: false
 
 #########################################
-# USPS - Not working
-#########################################
-
-#usps:
-#  username: !secret usps_username
-#  password: !secret usps_password
-#  driver: 'phantomjs'
-
-#########################################
 # Google calendar
 #########################################
 google:
   client_id: !secret gcal_client
   client_secret: !secret gcal_secret
-
 
 #########################################
 # Input Selects

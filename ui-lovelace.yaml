@@ -35,6 +35,8 @@ resources:
     type: js
   - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
     type: js
+  - url: /community_plugin/light-entity-card/light-entity-card.js
+    type: js
 
 #background: linear-gradient(gray, rgb(57,82,116))
 
@@ -113,7 +115,11 @@ views:
             name: Living Room
             tap_action:
               action: toggle
-            icon: mdi:floor-lamp
+          - entity: light.tv
+            name: TV
+            tap_action:
+              action: toggle
+            icon: mdi:television
           - entity: light.dining_room_lamp_160
             name: Dining Room
             tap_action:
@@ -273,7 +279,7 @@ views:
             map_state:
               "locked": mdi:lock
               "unlocked": mdi:lock-open
-          - sensor.current_temperature
+          - light.tv
           - switch.party_lights_173
           - entity: media_player.living_room_kodi
             name: Kodi
@@ -355,7 +361,13 @@ views:
                     name: Living Lamp
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
-
+                  - type: "custom:button-card"
+                    entity: light.tv
+                    name: TV
+                    tap_action:
+                      action: more-info
+                    color: auto
+                    color_off: var(--disabled-text-color)
                   - type: "custom:button-card"
                     entity: light.dining_room_lamp_160
                     name: Dining Lamp
@@ -373,6 +385,7 @@ views:
                     name: Party Lights
                     color: "rgb(204, 141, 1)"
                     color_off: var(--disabled-text-color)
+
 
     # Man cave card
           - type: vertical-stack
@@ -894,10 +907,11 @@ views:
       - type: glance
         title: People
         entities:
-          - device_tracker.eric_s7
-          - device_tracker.val_j7
+          - person.eric
+          - person.val
+
       - type: 'custom:untappd-card'
-        entity: sensor.untappd_badge
+        entity: sensor.untappd_beer
 
       - type: picture-elements
         id: untappd-card
