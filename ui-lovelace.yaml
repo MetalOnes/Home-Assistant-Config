@@ -230,9 +230,6 @@ views:
                 color: "rgb(0, 156, 6)"
           - type: horizontal-stack
             cards:
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
               - type: custom:button-card
                 entity: switch.lr_music
                 icon: mdi:music
@@ -243,6 +240,9 @@ views:
                 icon: mdi:steam
                 color_type: card
                 color: "rgb(0, 156, 6)"
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
@@ -484,9 +484,10 @@ views:
                     name: Spotlight
                     color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
-
                   - type: "custom:button-card"
-                    color_type: blank-card
+                    entity: switch.front_ext_holida_178
+                    name: Front Holiday
+                    color: "rgb(0, 133, 25)"
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
@@ -904,14 +905,59 @@ views:
     icon: mdi:account
     theme: slate
     cards:
-      - type: glance
-        title: People
-        entities:
-          - person.eric
-          - person.val
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                color_type: label-card
+                label: People
+                color: lightseagreen
+                show_label: true
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: person.eric
+                tap_action:
+                  action: more-info
+                icon: mdi:home-account
+                color_type: card
+                color: auto
+                show_state: true
+                show_label: true
+                state:
+                  - value: "home"
+                    color: lightseagreen
+                    icon: mdi:home-account
+                  - value: "not_home"
+                    color: dimgrey
+                    icon: mdi:walk
+              - type: custom:button-card
+                entity: person.val
+                tap_action:
+                  action: more-info
+                icon: mdi:home-account
+                color_type: card
+                color: auto
+                show_state: true
+                show_label: true
+                state:
+                  - value: "home"
+                    color: lightseagreen
+                    icon: mdi:home-account
+                  - value: "not_home"
+                    color: dimgrey
+                    icon: mdi:walk
 
-      - type: 'custom:untappd-card'
-        entity: sensor.untappd_beer
+
+  #    - type: glance
+  #      title: People
+  #      entities:
+  #        - person.eric
+  #        - person.val
+
+  #    - type: 'custom:untappd-card'
+  #      entity: sensor.untappd_beer
 
       - type: picture-elements
         id: untappd-card

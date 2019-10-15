@@ -21,7 +21,7 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
-#- switch.holiday_front_176
+- switch.front_ext_holida_178
 #- switch.back_ext_holiday_177
 
 Ext Back:
@@ -35,8 +35,9 @@ Ext Front:
 
 HolidayExterior:
 - switch.front_spotlight_135
-# - switch.deck_lights_108
-- switch.holiday_front_176
+- switch.back_spotlight_118
+- switch.deck_lights_108
+- switch.front_ext_holida_178
 - switch.back_ext_holiday_177
 Living Room:
 - sensor.harmony_living_room

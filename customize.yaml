@@ -1,3 +1,9 @@
+person.eric:
+  entity_picture: /local/eric.png
+
+person.val:
+  entity_picture: /local/val.png
+
 sensor.temperature_sensor_167:
   friendly_name: Man Cave Temp
 
@@ -101,18 +107,11 @@ switch.front_spotlight_135:
 switch.cabinet_lights_123:
   icon: mdi:white-balance-iridescent
 
-switch.holiday_front_176:
-  icon: mdi:pine-tree
+switch.front_ext_holida_178:
+  icon: mdi:halloween
 
 switch.back_ext_holiday_177:
   icon: mdi:pine-tree
-
-
-sensor.usps_mail:
-  friendly_name: Mail Today
-
-sensor.usps_packages:
-  friendly_name: Incoming Packages
 
 scene.bedroom_lights_off:
   friendly_name: Bedroom Lights off

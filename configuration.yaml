@@ -195,12 +195,18 @@ sun:
 ##########################################
 # Device Tracker & Presence
 ##########################################
-device_tracker:
-  - platform: unifi
-    username: !secret ap_username
-    password: !secret ap_password
-    verify_ssl: false
-    dont_track_wired_clients: true
+#device_tracker:
+#  - platform: unifi
+#    username: !secret ap_username
+#    password: !secret ap_password
+#    verify_ssl: false
+#    dont_track_wired_clients: true
+
+# Prepping for update
+
+#unifi:
+#  controllers:
+#    - host: unifi
 
 person:
   - name: Eric
@@ -229,6 +235,26 @@ light:
       192.168.1.169:
         name: tv
         mode: rgbw
+        custom_effect:
+          speed_pct: 7
+          transition: gradual
+          colors:
+            - [178,34,34]
+            - [255,0,0]
+            - [255,69,0]
+            - [255,165,0]
+            - [255,255,0]
+            - [54,205,50]
+            - [07,142,35]
+            - [0,128,0]
+            - [0,255,0]
+            - [0,250,154]
+            - [0,128,128]
+            - [0,255,255]
+            - [0,0,255]
+            - [138,43,226]
+            - [139,0,139]
+            - [255,0,255]
 
   - platform: limitlessled
     bridges:

@@ -4,7 +4,8 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
-* Uprgraing to 0.98.5. Bias light automations
+* Upgrading to 0.100.X
+* Upgrading to 0.98.5. Bias light automations
 * Upgrading to 0.97.1
 * Upgrading to 0.95.4
 * Always updating Lovelace
