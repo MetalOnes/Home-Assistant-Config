@@ -37,6 +37,14 @@ resources:
     type: js
   - url: /community_plugin/light-entity-card/light-entity-card.js
     type: js
+  - url: /community_plugin/upcoming-media-card/upcoming-media-card.js
+    type: js
+  - url: /community_plugin/weather-card/weather-card.js
+    type: module
+  - url: /community_plugin/text-divider-row/text-divider-row.js
+    type: module
+  - url: /community_plugin/list-card/list-card.js
+    type: js
 
 #background: linear-gradient(gray, rgb(57,82,116))
 
@@ -55,16 +63,19 @@ views:
     theme: slate
     cards:
 
+
+
 # House Mode sensor and scenes
       - type: vertical-stack
         cards:
+
           - type: "custom:button-card"
             entity: sensor.homemode
             color_type: card
-            name: "Home Mode: "
+            name: 'Home Mode'
+            show_label: false
+            show_name: false
             show_state: true
-            action: more_info
-            size: 64px
             state:
               - value: 'Away'
                 color: rgb(150, 0, 0)
@@ -72,31 +83,66 @@ views:
                 color: rgb(0, 99, 31)
               - value: 'Night'
                 color: rgb(111, 0, 110)
-            style:
-              - text-transform: none
+            layout: icon_state
+            styles:
+              card:
+                - height: 75px
+              state:
+                - font-size: 38px
+
 
           - type: horizontal-stack
             cards:
-              - type: entity-button
+              - type: "custom:button-card"
                 entity: scene.switch_to_home
-              - type: entity-button
+                name: Home Mode
+                styles:
+                  card:
+                    - height: 96px
+                  name:
+                    - font-size: 16px
+                color_type: card
+                color: rgb(0, 99, 31)
+
+              - type: custom:button-card
                 entity: scene.switch_to_night
-              - type: entity-button
+                name: Night Mode
+                styles:
+                  card:
+                    - height: 96px
+                  name:
+                    - font-size: 16px
+                color_type: card
+                color: rgb(111, 0, 110)
+
+              - type: "custom:button-card"
                 entity: scene.switch_to_away
+                name: Away Mode
+                styles:
+                  card:
+                    - height: 96px
+                  name:
+                    - font-size: 16px
+                color_type: card
+                color: rgb(150, 0, 0)
+
               - type: "custom:button-card"
                 entity: lock.front_door_19
                 icon: mdi:lock
                 show_state: true
                 name: "Front Door: "
-                action: more_info
-                style:
-                  - font-weight: bold
-                color-type: card
-                state:
+                tap_action:
+                  action: more-info
+                styles:
+                  label:
+                    - font-weight: bold
+                color_type: card
+                states:
                   - value: 'locked'
-                    color: rgb(255, 0, 0)
+                    color: darkred
                   - value: 'unlocked'
-                    color: rgb(0, 255, 0)
+                    color: rgb(0, 99, 31)
+
       - type: horizontal-stack
         cards:
           - type: light
@@ -247,7 +293,7 @@ views:
                 entity: remote.living_room
                 icon: mdi:power
                 color_type: card
-                color: "rgb(255, 0, 0)"
+                color: darkred
                 name: "Turn Off"
                 service:
                   domain: remote
@@ -353,7 +399,8 @@ views:
                 color: "rgb(204, 141, 1)"
                 entity: group.living_area
                 color_off: var(--disabled-text-color)
-                action: more_info
+                tap_action:
+                  - action: more-info
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
@@ -395,7 +442,8 @@ views:
                 name: Man Cave
                 show_icon: false
                 entity: group.man_cave
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: "rgb(204, 141, 1)"
                 color_off: var(--disabled-text-color)
 
@@ -433,7 +481,8 @@ views:
                 name: Bedroom
                 show_icon: false
                 entity: group.bedroom
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: "rgb(150, 0, 203)"
                 color_off: var(--disabled-text-color)
 
@@ -467,7 +516,8 @@ views:
                 name: Front Ext
                 show_icon: false
                 entity: group.ext_front
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: "rgb(0, 133, 25)"
                 color_off: var(--disabled-text-color)
 
@@ -502,7 +552,8 @@ views:
                 name: Back Ext
                 show_icon: false
                 entity: group.ext_back
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: "rgb(0, 133, 25)"
                 color_off: var(--disabled-text-color)
 
@@ -527,6 +578,290 @@ views:
                   - type: "custom:button-card"
                     color_type: blank-card
                     color_off: var(--disabled-text-color)
+
+#
+# Media tab
+#
+  - title: Media
+    path: media
+    icon: mdi:play-circle-outline
+    theme: slate
+    cards:
+  # Living Room Media
+      - type: custom:vertical-stack-in-card
+        #title: Living Room
+        cards:
+
+          - type: 'custom:text-divider-row'
+            text: "Living Room"
+
+          - type: "custom:button-card"
+            entity: sensor.harmony_living_room
+            name: 'Current Activity:'
+            show_state: true
+            color_type: card
+            color: var(--paper-card-background-color)
+            show_icon: false
+            tap_action:
+              action: more-info
+            styles:
+              card:
+                - font-size: 18px
+                - padding-top: 0
+
+          - type: picture
+            image: /local/dividergreyshadow400x4.png
+
+          - type: horizontal-stack
+
+            cards:
+              - type: custom:button-card
+                entity: switch.lr_tv
+                icon: mdi:television
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-top: 10px
+              - type: custom:button-card
+                entity: switch.lr_kodi
+                icon: mdi:kodi
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-top: 10px
+              - type: custom:button-card
+                entity: switch.lr_chromecast
+                icon: mdi:cast
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-top: 10px
+              - type: custom:button-card
+                entity: switch.lr_wiiu
+                icon: mdi:nintendo-switch
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-top: 10px
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+                styles:
+                  card:
+                    - margin-bottom: 10px
+              - type: custom:button-card
+                entity: switch.lr_music
+                icon: mdi:music
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-bottom: 10px
+              - type: custom:button-card
+                entity: switch.lr_steam
+                icon: mdi:steam
+                color_type: card
+                color: "rgb(0, 156, 6)"
+                styles:
+                  card:
+                    - margin-bottom: 10px
+              - type: "custom:button-card"
+                entity: remote.living_room
+                icon: mdi:power
+                color_type: card
+                color: darkred
+                styles:
+                  card:
+                    - margin-bottom: 10px
+                service:
+                  domain: remote
+                  action: turn_off
+                  data:
+                    entity_id: remote.living_room
+
+          - type: picture
+            image: /local/dividergreyshadow400x4.png
+
+          - type: "custom:mini-media-player"
+            entity: media_player.denon_avrs720w
+            name: Denon AVR
+            icon: mdi:play-circle
+            artwork: cover
+            power_color: true
+            show_source: true
+
+          - type: "custom:mini-media-player"
+            entity: media_player.living_room_kodi
+            name: Living Room Kodi
+            icon: mdi:kodi
+            artwork: full-cover
+            hide:
+              volume: true
+              power: true
+
+          - type: "custom:mini-media-player"
+            entity: media_player.living_room
+            name: Living Room Chromecast
+            icon: mdi:cast
+            artwork: cover
+
+            #group: true
+            hide:
+              power: true
+              controls: true
+          - type: "custom:mini-media-player"
+            entity: media_player.all_3_rooms
+            name: All 3 Rooms
+            icon: mdi:cast
+            artwork: cover
+            #group: true
+            hide:
+              power: true
+              controls: true
+
+          - type: picture
+            image: /local/dividergreyshadow400x4.png
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                name: HA to LR
+                icon: mdi:cast
+                size: 32px
+                color_type: card
+                color: var(--primary-color)
+                tap_action:
+                  action: call-service
+                  service: cast.show_lovelace_view
+                  service_data:
+                    entity_id: media_player.living_room
+                    view_path: cast
+
+              - type: "custom:button-card"
+                name: Stop Casting
+                icon: mdi:power
+                size: 32px
+                color_type: card
+                color: darkred
+                tap_action:
+                  action: call-service
+                  service: cast.media_player.turn_off
+                  service_data:
+                    entity_id: media_player.living_room
+
+
+
+  # Bedroom Media
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: 'custom:text-divider-row'
+            text: "Bedroom"
+          - type: "custom:mini-media-player"
+            entity: media_player.bedroom_kodi
+            name: Bedroom Kodi
+            icon: mdi:kodi
+            artwork: cover
+            hide:
+              volume: true
+              power: true
+          - type: "custom:mini-media-player"
+            entity: media_player.bedroom_tv
+            name: Bedroom Chromecast
+            icon: mdi:cast
+            artwork: cover
+            group: true
+            hide:
+              power: true
+
+          - type: picture
+            image: /local/dividergreyshadow400x4.png
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                name: HA to BR
+                icon: mdi:cast
+                size: 32px
+                color_type: card
+                color: var(--primary-color)
+                tap_action:
+                  action: call-service
+                  service: cast.show_lovelace_view
+                  service_data:
+                    entity_id: media_player.bedroom_tv
+                    view_path: cast
+
+              - type: "custom:button-card"
+                icon: mdi:power
+                name: Stop Casting
+                color_type: card
+                color: darkred
+                size: 32px
+                tap_action:
+                  action: call-service
+                  service: cast.media_player.turn_off
+                  service_data:
+                    entity_id: media_player.bedroom_tv
+
+  # Mancave media
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: 'custom:text-divider-row'
+            text: "Man Cave"
+          - type: "custom:mini-media-player"
+            entity: media_player.man_cave
+            name: Man Cave Chromecast
+            icon: mdi:cast
+            artwork: cover
+            hide:
+              power: true
+            # group: true
+          - type: "custom:mini-media-player"
+            entity: media_player.cca_man_cave
+            name: Man Cave Chromecast Audio
+            artwork: cover
+            # group: true
+            icon: mdi:cast
+            hide:
+              power: true
+
+          - type: picture
+            image: /local/dividergreyshadow400x4.png
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                name: HA to MC
+                icon: mdi:cast
+                size: 32px
+                color: var(--primary-color)
+                color_type: card
+                tap_action:
+                  action: call-service
+                  service: cast.show_lovelace_view
+                  service_data:
+                    entity_id: media_player.man_cave
+                    view_path: cast
+
+              - type: "custom:button-card"
+                icon: mdi:power
+                name: Stop Casting
+                size: 32px
+                color: darkred
+                color_type: card
+                tap_action:
+                  action: call-service
+                  service: cast.media_player.turn_off
+                  service_data:
+                    entity_id: media_player.man_cave
+
 
 #
 # Surveillance tab
@@ -565,7 +900,8 @@ views:
                 icon: mdi:door
                 name: Front Door
                 color_type: card
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: rgb(155, 0, 0)
                 color_off: rgb(0, 122, 0)
               - type: "custom:button-card"
@@ -573,7 +909,8 @@ views:
                 icon: mdi:door
                 name: Back Door
                 color_type: card
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: rgb(155, 0, 0)
                 color_off: rgb(0, 122, 0)
               - type: "custom:button-card"
@@ -581,7 +918,8 @@ views:
                 icon: mdi:transition
                 name: Man Cave Motion
                 color_type: card
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: rgb(155, 0, 0)
                 color_off: rgb(0, 122, 0)
               - type: "custom:button-card"
@@ -589,7 +927,8 @@ views:
                 icon: mdi:transition
                 name: Master Bath
                 color_type: card
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: rgb(155, 0, 0)
                 color_off: rgb(0, 122, 0)
               - type: "custom:button-card"
@@ -597,7 +936,8 @@ views:
                 icon: mdi:smoke-detector
                 name: Smoke Sensor
                 color_type: card
-                action: more_info
+                tap_action:
+                  - action: more-info
                 color: rgb(155, 0, 0)
                 color_off: rgb(0, 122, 0)
           - type: horizontal-stack
@@ -662,186 +1002,30 @@ views:
                 entities:
                   - sensor.light_sensor_168
                 name: Light
-      - type: vertical-stack
-        cards:
-          - type: "custom:button-card"
-            name: Power
-            color_type: label-card
-            color: rgb(41, 41, 41)
-          - type: horizontal-stack
-            title: Sensors
-            cards:
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.power_avg_use
-                icon: mdi:power-socket-us
-                show:
-                  graph: bar
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.power_lastbill_use
-                icon: mdi:power-socket-us
-                show:
-                  graph: bar
+#      - type: vertical-stack
+#        cards:
+#          - type: "custom:button-card"
+#            name: Power
+#            color_type: label-card
+#            color: rgb(41, 41, 41)
+#          - type: horizontal-stack
+#            title: Sensors
+#            cards:
+#              - type: "custom:mini-graph-card"
+#                entities:
+#                  - sensor.power_avg_use
+#                icon: mdi:power-socket-us
+#                show:
+#                  graph: bar
+#              - type: "custom:mini-graph-card"
+#                entities:
+#                  - sensor.power_lastbill_use
+#                icon: mdi:power-socket-us
+#                show:
+#                  graph: bar
 
 
 
-#
-# Media tab
-#
-  - title: Media
-    path: media
-    icon: mdi:play-circle-outline
-    theme: slate
-    cards:
-  # Living Room Media
-      - type: custom:vertical-style-card
-        title: Living Room
-        cards:
-          - type: "custom:button-card"
-            entity: sensor.harmony_living_room
-            show_state: true
-            color_type: card
-            color: rgb(138, 13, 133)
-            show_icon: false
-            action: more_info
-            style:
-              - font-size: 20px
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                entity: switch.lr_tv
-                icon: mdi:television
-                color_type: card
-                color: "rgb(0, 156, 6)"
-              - type: custom:button-card
-                entity: switch.lr_kodi
-                icon: mdi:kodi
-                color_type: card
-                color: "rgb(0, 156, 6)"
-              - type: custom:button-card
-                entity: switch.lr_chromecast
-                icon: mdi:cast
-                color_type: card
-                color: "rgb(0, 156, 6)"
-              - type: custom:button-card
-                entity: switch.lr_wiiu
-                icon: mdi:nintendo-switch
-                color_type: card
-                color: "rgb(0, 156, 6)"
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-              - type: custom:button-card
-                entity: switch.lr_music
-                icon: mdi:music
-                color_type: card
-                color: "rgb(0, 156, 6)"
-              - type: custom:button-card
-                entity: switch.lr_steam
-                icon: mdi:steam
-                color_type: card
-                color: "rgb(0, 156, 6)"
-              - type: "custom:button-card"
-                entity: remote.living_room
-                icon: mdi:power
-                color_type: card
-                color: "rgb(255, 0, 0)"
-                service:
-                  domain: remote
-                  action: turn_off
-                  data:
-                    entity_id: remote.living_room
-
-          - type: "custom:mini-media-player"
-            entity: media_player.denon_avrs720w
-            name: Denon AVR
-            icon: mdi:play-circle
-            artwork: cover
-            power_color: true
-            show_source: true
-
-          - type: "custom:mini-media-player"
-            entity: media_player.living_room_kodi
-            name: Living Room Kodi
-            icon: mdi:kodi
-            artwork: cover
-            hide:
-              volume: true
-              power: true
-
-          - type: entities
-            entities:
-              - type: "custom:mini-media-player"
-                entity: media_player.living_room
-                name: Living Room Chromecast
-                icon: mdi:cast
-                artwork: cover
-                group: true
-                hide:
-                  power: true
-                  controls: true
-              - type: "custom:mini-media-player"
-                entity: media_player.all_3_rooms
-                name: All 3 Rooms
-                icon: mdi:cast
-                artwork: cover
-                group: true
-                hide:
-                  power: true
-                  controls: true
-
-  # Bedroom Media
-      - type: vertical-stack
-        cards:
-          - type: "custom:button-card"
-            color_type: label-card
-            color: rgb(41, 41, 41)
-            name: Bedroom
-          - type: "custom:mini-media-player"
-            entity: media_player.bedroom_kodi
-            name: Bedroom Kodi
-            icon: mdi:kodi
-            artwork: cover
-            hide:
-              volume: true
-              power: true
-          - type: entities
-            entities:
-              - type: "custom:mini-media-player"
-                entity: media_player.bedroom_tv
-                name: Bedroom Chromecast
-                icon: mdi:cast
-                artwork: cover
-                group: true
-                hide:
-                  power: true
-
-  # Mancave media
-      - type: vertical-stack
-        cards:
-          - type: "custom:button-card"
-            color_type: label-card
-            color: rgb(41, 41, 41)
-            name: Man Cave
-          - type: "custom:mini-media-player"
-            entity: media_player.man_cave
-            name: Man Cave Chromecast
-            icon: mdi:cast
-            artwork: cover
-            hide:
-              power: true
-            # group: true
-          - type: "custom:mini-media-player"
-            entity: media_player.cca_man_cave
-            name: Man Cave Chromecast Audio
-            artwork: cover
-            # group: true
-            icon: mdi:cast
-            hide:
-              power: true
 
 #
 # Weather tab
@@ -857,7 +1041,7 @@ views:
             name: Forecast
             color: rgb(16, 133, 199)
           - type: iframe
-            url: https://embed.windy.com/embed2.html
+            url: https://embed.windy.com/embed2.html?lat=35.583&lon=-78.788&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.583&detailLon=-78.788&metricWind=default&metricTemp=default&radarRange=-1
             aspect_ratio: 75%
           - type: weather-forecast
             entity: weather.weather
@@ -1192,3 +1376,85 @@ views:
               include:
                 - attributes:
                     battery_level: <=100
+
+  - title: Cast
+    path: cast
+    icon: mdi:cast
+    theme: slate
+    cards:
+        - type: custom:vertical-stack-in-card
+
+          cards:
+            - type: 'custom:text-divider-row'
+              text: "Today"
+            - type: horizontal-stack
+              cards:
+                - type: custom:button-card
+                  entity: sensor.simple_time
+                  show_state: true
+                  show_icon: false
+                  show_name: false
+                - type: custom:button-card
+                  entity: sensor.simple_date
+                  show_state: true
+                  show_icon: false
+                  show_name: false
+
+
+
+            - type: 'custom:text-divider-row'
+              text: "Upcoming"
+
+            - type: custom:calendar-card
+              #title: "Upcoming Events"
+              hideHeader: true
+              numberOfDays: 90
+              timeFormat: h:mma
+              dateTopFormat: MMM DD
+              dateBottomFormat: ddd
+              entities:
+                - calendar.slacktishevents
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.flyers
+                - entity: sensor.away_team
+                - entity: sensor.home_team
+
+        - type: custom:vertical-stack-in-card
+          cards:
+            - type: 'custom:text-divider-row'
+              text: "Weather"
+            - type: custom:weather-card
+              entity: weather.weather
+              current: true
+              details: true
+              forecast: true
+            - type: picture-entity
+              entity: camera.rax
+              show_name: false
+              show_state: false
+
+        - type: custom:list-card
+          entity: sensor.wral
+          title: WRAL News
+          feed_attribute: entries
+          columns:
+            - title: Title
+              field: title
+              style:
+                - white-space: nowrap
+            - title: Description
+              field: description
+
+
+          #  - type: iframe
+          #    url: https://embed.windy.com/embed2.html?lat=35.583&lon=-78.788&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.583&detailLon=-78.788&metricWind=default&metricTemp=default&radarRange=-1
+          #    aspect_ratio: 75%
+
+        - type: custom:upcoming-media-card
+          entity: sensor.sonarr_upcoming_media
+          title: Upcoming TV
+          all_shadows: off
+          image_style: fanart

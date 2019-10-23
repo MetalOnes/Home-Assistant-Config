@@ -6,6 +6,12 @@ homeassistant:
   unit_system: imperial
   time_zone: America/New_York
   customize: !include customize.yaml
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - 192.168.1.0/24
 
 frontend:
   themes: !include_dir_merge_named themes/
@@ -25,16 +31,15 @@ logger:
 system_health:
 
 http:
-  api_password: !secret http_pass
+#  api_password: !secret http_pass
   base_url: !secret base_url
   server_port: 8254
   ip_ban_enabled: true
   login_attempts_threshold: 5
   use_x_forwarded_for: true
   trusted_proxies: 127.0.0.1
-  trusted_networks:
-    - 127.0.0.1
-    - 192.168.1.0/24
+
+
 
 # Updater Stuff
 updater:
@@ -42,6 +47,8 @@ updater:
 # HACS
 hacs:
   token: !secret hacs_token
+  theme: true
+  python_script: true
 
 discovery:
 
@@ -197,16 +204,15 @@ sun:
 ##########################################
 #device_tracker:
 #  - platform: unifi
-#    username: !secret ap_username
-#    password: !secret ap_password
+#    username: !secret unifi_user
+#    password: !secret unifi_pass
 #    verify_ssl: false
-#    dont_track_wired_clients: true
 
-# Prepping for update
-
-#unifi:
-#  controllers:
-#    - host: unifi
+unifi:
+  controllers:
+    - host: !secret unifi_ip
+      site: Default
+      dont_track_wired_clients: true
 
 person:
   - name: Eric
@@ -339,6 +345,11 @@ camera:
     still_image_url: http://www.n3kl.org/sun/images/kpstatus.gif
     name: Geomagnetic Field
 
+# NWS Radar
+  - platform: nwsradar
+    station: RAX
+    style: Enhanced
+    frames: 10
 
 ##########################################
 # Sensors
@@ -421,6 +432,35 @@ sensor:
 #      - ads_blocked_today
 #      - ads_percentage_today
 
+# RSS Feed
+  - platform: feedparser
+    feed_url: 'http://www.wral.com/news/rss/48/'
+    name: WRAL
+    show_topn: 10
+    inclusions:
+      - title
+      - description
+      - category
+      #- media:thumbnail
+      - pubDate
+
+# NHL
+  - platform: nhl_api
+    team_id: 4
+    name: Flyers
+    scan_interval: 60
+
+  - platform: template
+    sensors:
+      away_team:
+        friendly_name_template: '{{ states.sensor.flyers.attributes.away_name }}'
+        value_template: '{{ states.sensor.flyers.attributes.away_score }}'
+        entity_picture_template: '{{ states.sensor.flyers.attributes.away_logo }}'
+      home_team:
+        friendly_name_template: '{{ states.sensor.flyers.attributes.home_name }}'
+        value_template: '{{ states.sensor.flyers.attributes.home_score }}'
+        entity_picture_template: '{{ states.sensor.flyers.attributes.home_logo }}'
+
 # Gets public IP
   - platform: dnsip
     scan_interval: 1800
@@ -437,6 +477,11 @@ sensor:
     sensors:
       lr_avr_vol:
         value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
+
+# Sonarr Upcoming Media
+  - platform: sonarr_upcoming_media
+    urlbase: sonarr
+    api_key: !secret sonarr_api
 
 # SABnzbd
 #  - platform: sabnzbd
@@ -473,6 +518,25 @@ sensor:
 
 # Versions sensor
   - platform: version
+
+# Date and Time
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'time_date'
+  - platform: template
+    sensors:
+      simple_time:
+        entity_id: sensor.time
+        friendly_name: "Time"
+        value_template: "{{ now().strftime('%I:%M %P') }}"
+  - platform: template
+    sensors:
+      simple_date:
+        entity_id: sensor.time
+        friendly_name: "Date"
+        value_template: "{{ now().strftime('%A %b %d, %Y') }}"
 
 # Untappd sensor and templating
   - platform: untappd
@@ -514,9 +578,9 @@ sensor:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
-  - platform: duke_energy
-    username: !secret duke_user
-    password: !secret duke_pass
+#  - platform: duke_energy
+#    username: !secret duke_user
+#    password: !secret duke_pass
 
   - platform: template
     sensors:
