@@ -1,0 +1,58 @@
+sensor.temperature_sensor_167:
+  friendly_name: Man Cave Temp
+
+sensor.humidity_sensor_169:
+  friendly_name: Man Cave Humidity
+  icon: mdi:water-percent
+
+sensor.light_sensor_168:
+  friendly_name: Man Cave Light
+  icon: mdi:camera-metering-center
+
+binary_sensor.front_door1_1_139:
+  friendly_name: Front Door
+  device_class: opening
+
+binary_sensor.back_door_172:
+  friendly_name: Back Door
+  device_class: opening
+
+binary_sensor.smoke_sensor_122:
+  friendly_name: Smoke Alarm
+  device_class: smoke
+
+binary_sensor.motion_sensor_128:
+  device_class: motion
+
+binary_sensor.master_bath_sensor_121:
+  device_class: motion
+
+sensor.myipopendnscom:
+  friendly_name: Public IP
+  icon: mdi:earth
+
+sensor.harmony_living_room:
+  entity_picture: /local/harmony.png
+  friendly_name: "Current Activity"
+
+sensor.homemode:
+  friendly_name: House Mode
+  icon: mdi:home-outline
+
+sensor.untappd_badge:
+  icon: mdi:seal
+
+sensor.untappd_beer:
+  icon: mdi:beer
+
+sensor.untappd_checked:
+  icon: mdi:check
+
+sensor.untappd_followings:
+  icon: mdi:account-group
+
+sensor.untappd_total_badges:
+  icon: mdi:seal
+
+sensor.untappd_total_beers:
+  icon: mdi:beer

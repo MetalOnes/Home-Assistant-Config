@@ -21,7 +21,7 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
-- switch.front_ext_holida_178
+#- switch.front_ext_holida_178
 #- switch.back_ext_holiday_177
 
 Ext Back:

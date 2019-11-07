@@ -79,10 +79,13 @@ views:
             state:
               - value: 'Away'
                 color: rgb(150, 0, 0)
+                icon: mdi:home-minus
               - value: 'Home'
                 color: rgb(0, 99, 31)
+                icon: mdi:home-variant
               - value: 'Night'
                 color: rgb(111, 0, 110)
+                icon: mdi:weather-night
             layout: icon_state
             styles:
               card:
@@ -128,20 +131,24 @@ views:
 
               - type: "custom:button-card"
                 entity: lock.front_door_19
-                icon: mdi:lock
                 show_state: true
                 name: "Front Door: "
                 tap_action:
                   action: more-info
+                state:
+                  - value: "locked"
+                    color: rgb(150, 0, 0)
+                    icon: mdi:lock
+                  - value: "Unlocked"
+                    color: rgb(0, 99, 31)
+                    icon: mdi:lock-open
                 styles:
+                  card:
+                    - height: 96px
                   label:
                     - font-weight: bold
                 color_type: card
-                states:
-                  - value: 'locked'
-                    color: darkred
-                  - value: 'unlocked'
-                    color: rgb(0, 99, 31)
+
 
       - type: horizontal-stack
         cards:
@@ -248,58 +255,55 @@ views:
 # Harmony Living Room card
       - type: custom:vertical-style-card
         title: Living Room TV
-        style:
-          border: true
-          background_color: var(--secondary-background-color)
         cards:
           - type: horizontal-stack
             cards:
               - type: custom:button-card
                 entity: switch.lr_tv
                 icon: mdi:television
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_kodi
                 icon: mdi:kodi
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_chromecast
                 icon: mdi:cast
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_wiiu
                 icon: mdi:nintendo-switch
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
           - type: horizontal-stack
             cards:
               - type: custom:button-card
                 entity: switch.lr_music
                 icon: mdi:music
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_steam
                 icon: mdi:steam
-                color_type: card
-                color: "rgb(0, 156, 6)"
+                template: harmony_button
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
+
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
                 color_type: card
                 color: darkred
+                size: 32px
                 name: "Turn Off"
                 service:
                   domain: remote
                   action: turn_off
                   data:
                     entity_id: remote.living_room
+                styles:
+                  card:
+                    - margin: 10px 5px
+                    - height: 70px
 
 
 # Calendar card
@@ -394,83 +398,83 @@ views:
             cards:
               - type: "custom:button-card"
                 color_type: label-card
-                name: Living Area
-                show_icon: false
-                color: "rgb(204, 141, 1)"
+                name: Living Room
+                template: int_light_label
                 entity: group.living_area
-                color_off: var(--disabled-text-color)
-                tap_action:
-                  - action: more-info
+
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
                     entity: light.lamp_107
                     name: Living Lamp
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_button_brightness
+
                   - type: "custom:button-card"
                     entity: light.tv
                     name: TV
-                    tap_action:
-                      action: more-info
-                    color: auto
-                    color_off: var(--disabled-text-color)
+                    template: rgb_light_button
+
                   - type: "custom:button-card"
                     entity: light.dining_room_lamp_160
                     name: Dining Lamp
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
-
-                  - type: "custom:button-card"
-                    entity: switch.cabinet_lights_123
-                    name: Cabinets
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_button_brightness
 
                   - type: "custom:button-card"
                     entity: switch.party_lights_173
                     name: Party Lights
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_switch_button
 
+# Kitchen Card
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: label-card
+                name: Kitchen
+                template: int_light_label
+                entity: switch.cabinet_lights_123
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.cabinet_lights_123
+                    name: Cabinets
+                    template: light_switch_button
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
 
     # Man cave card
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Man Cave
-                show_icon: false
                 entity: group.man_cave
-                tap_action:
-                  - action: more-info
-                color: "rgb(204, 141, 1)"
-                color_off: var(--disabled-text-color)
+                template: int_light_label
 
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
                     entity: switch.man_cave_lights_133
                     name: Lights
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_switch_button
 
                   - type: "custom:button-card"
                     entity: light.mancave_desk
                     name: Desk
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: rgb_light_button
 
                   - type: "custom:button-card"
                     entity: light.pin_board
                     name: Pin Board
-                    color: "rgb(204, 141, 1)"
+                    template: rgb_light_button
 
                   - type: "custom:button-card"
                     entity: light.wifi_box
-                    icon: mdi:lighthouse
                     name: Puck
-                    color: "rgb(204, 141, 1)"
+                    template: rgb_light_button
 
     # Bedroom Card
 
@@ -479,34 +483,30 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Bedroom
-                show_icon: false
                 entity: group.bedroom
-                tap_action:
-                  - action: more-info
-                color: "rgb(150, 0, 203)"
-                color_off: var(--disabled-text-color)
+                template: int_light_label
 
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
                     entity: light.bedroom_eric_103
                     name: Right
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_button_brightness
 
                   - type: "custom:button-card"
                     entity: light.bedroom_val_104
                     name: Left
-                    color: "rgb(204, 141, 1)"
-                    color_off: var(--disabled-text-color)
+                    template: light_button_brightness
 
                   - type: "custom:button-card"
                     entity: light.vanity_light_120
                     name: Vanity
-                    color: "rgb(204, 141, 1)"
+                    template: light_button_brightness
+                    icon: mdi:vanity-light
+
                   - type: "custom:button-card"
                     color_type: blank-card
-                    color_off: var(--disabled-text-color)
+
 
     # Front Ext Card
           - type: vertical-stack
@@ -514,30 +514,28 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Front Ext
-                show_icon: false
                 entity: group.ext_front
-                tap_action:
-                  - action: more-info
-                color: "rgb(0, 133, 25)"
-                color_off: var(--disabled-text-color)
+                template: ext_light_label
 
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
                     entity: switch.front_porch_115
                     name: Porch
-                    color: "rgb(0, 133, 25)"
-                    color_off: var(--disabled-text-color)
+                    template: ext_light_switch_button
 
                   - type: "custom:button-card"
                     entity: switch.front_spotlight_135
                     name: Spotlight
-                    color: "rgb(0, 133, 25)"
-                    color_off: var(--disabled-text-color)
+                    template: ext_light_switch_button
+
+                  #- type: "custom:button-card"
+                  #  entity: switch.front_ext_holida_178
+                  #  name: Front Holiday
+                  #  template: ext_light_switch_button
+
                   - type: "custom:button-card"
-                    entity: switch.front_ext_holida_178
-                    name: Front Holiday
-                    color: "rgb(0, 133, 25)"
+                    color_type: blank-card
                     color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
@@ -550,26 +548,20 @@ views:
               - type: "custom:button-card"
                 color_type: label-card
                 name: Back Ext
-                show_icon: false
                 entity: group.ext_back
-                tap_action:
-                  - action: more-info
-                color: "rgb(0, 133, 25)"
-                color_off: var(--disabled-text-color)
+                template: ext_light_label
 
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
                     entity: switch.deck_lights_108
                     name: Deck
-                    color: "rgb(0, 133, 25)"
-                    color_off: var(--disabled-text-color)
+                    template: ext_light_switch_button
 
                   - type: "custom:button-card"
                     entity: switch.back_spotlight_118
                     name: Spotlight
-                    color: "rgb(0, 133, 25)"
-                    color_off: var(--disabled-text-color)
+                    template: ext_light_switch_button
 
                   - type: "custom:button-card"
                     color_type: blank-card
@@ -591,103 +583,93 @@ views:
       - type: custom:vertical-stack-in-card
         #title: Living Room
         cards:
+          - type: custom:button-card
+            color_type: label_card
+            name: Living Room
+            styles:
+              card:
+                - border-bottom: 3px solid rgba(0, 0, 0, .2)
 
-          - type: 'custom:text-divider-row'
-            text: "Living Room"
 
           - type: "custom:button-card"
             entity: sensor.harmony_living_room
-            name: 'Current Activity:'
+            name: 'Current Activity'
             show_state: true
             color_type: card
             color: var(--paper-card-background-color)
-            show_icon: false
+            show_icon: true
+            layout: icon_name_state
             tap_action:
               action: more-info
             styles:
               card:
-                - font-size: 18px
-                - padding-top: 0
-
-          - type: picture
-            image: /local/dividergreyshadow400x4.png
+                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+                - padding: 10px 0
+            state:
+              - value: 'Watch Kodi'
+                icon: mdi:kodi
+              - value: 'Watch TV'
+                icon: mdi:television
+              - value: 'Listen to Music'
+                icon: mdi:music
+              - value: 'Chromecast'
+                icon: mdi:cast
+              - value: 'WiiU'
+                icon: mdi:nintendo-switch
+              - value: 'Play Steam'
+                icon: mdi:steam
+              - value: 'PowerOff'
+                icon: mdi:power-off
 
           - type: horizontal-stack
-
             cards:
               - type: custom:button-card
                 entity: switch.lr_tv
                 icon: mdi:television
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-top: 10px
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_kodi
                 icon: mdi:kodi
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-top: 10px
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_chromecast
                 icon: mdi:cast
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-top: 10px
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_wiiu
                 icon: mdi:nintendo-switch
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-top: 10px
-
+                template: harmony_button
           - type: horizontal-stack
             cards:
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-                styles:
-                  card:
-                    - margin-bottom: 10px
               - type: custom:button-card
                 entity: switch.lr_music
                 icon: mdi:music
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-bottom: 10px
+                template: harmony_button
               - type: custom:button-card
                 entity: switch.lr_steam
                 icon: mdi:steam
-                color_type: card
-                color: "rgb(0, 156, 6)"
-                styles:
-                  card:
-                    - margin-bottom: 10px
+                template: harmony_button
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
                 color_type: card
                 color: darkred
-                styles:
-                  card:
-                    - margin-bottom: 10px
+                size: 32px
+                name: "Turn Off"
                 service:
                   domain: remote
                   action: turn_off
                   data:
                     entity_id: remote.living_room
+                styles:
+                  card:
+                    - margin: 10px 5px
+                    - height: 70px
 
-          - type: picture
-            image: /local/dividergreyshadow400x4.png
 
           - type: "custom:mini-media-player"
             entity: media_player.denon_avrs720w
@@ -726,17 +708,13 @@ views:
               power: true
               controls: true
 
-          - type: picture
-            image: /local/dividergreyshadow400x4.png
-
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
                 name: HA to LR
                 icon: mdi:cast
-                size: 32px
-                color_type: card
                 color: var(--primary-color)
+                template: cast_button
                 tap_action:
                   action: call-service
                   service: cast.show_lovelace_view
@@ -747,12 +725,11 @@ views:
               - type: "custom:button-card"
                 name: Stop Casting
                 icon: mdi:power
-                size: 32px
-                color_type: card
                 color: darkred
+                template: cast_button
                 tap_action:
                   action: call-service
-                  service: cast.media_player.turn_off
+                  service: media_player.turn_off
                   service_data:
                     entity_id: media_player.living_room
 
@@ -761,8 +738,13 @@ views:
   # Bedroom Media
       - type: custom:vertical-stack-in-card
         cards:
-          - type: 'custom:text-divider-row'
-            text: "Bedroom"
+          - type: custom:button-card
+            color_type: label_card
+            name: Bedroom
+            styles:
+              card:
+                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+
           - type: "custom:mini-media-player"
             entity: media_player.bedroom_kodi
             name: Bedroom Kodi
@@ -780,17 +762,13 @@ views:
             hide:
               power: true
 
-          - type: picture
-            image: /local/dividergreyshadow400x4.png
-
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
                 name: HA to BR
                 icon: mdi:cast
-                size: 32px
-                color_type: card
                 color: var(--primary-color)
+                template: cast_button
                 tap_action:
                   action: call-service
                   service: cast.show_lovelace_view
@@ -801,20 +779,24 @@ views:
               - type: "custom:button-card"
                 icon: mdi:power
                 name: Stop Casting
-                color_type: card
                 color: darkred
-                size: 32px
+                template: cast_button
                 tap_action:
                   action: call-service
-                  service: cast.media_player.turn_off
+                  service: media_player.turn_off
                   service_data:
                     entity_id: media_player.bedroom_tv
 
   # Mancave media
       - type: custom:vertical-stack-in-card
         cards:
-          - type: 'custom:text-divider-row'
-            text: "Man Cave"
+          - type: custom:button-card
+            color_type: label_card
+            name: Man Cave
+            styles:
+              card:
+                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+
           - type: "custom:mini-media-player"
             entity: media_player.man_cave
             name: Man Cave Chromecast
@@ -832,17 +814,13 @@ views:
             hide:
               power: true
 
-          - type: picture
-            image: /local/dividergreyshadow400x4.png
-
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
                 name: HA to MC
                 icon: mdi:cast
-                size: 32px
                 color: var(--primary-color)
-                color_type: card
+                template: cast_button
                 tap_action:
                   action: call-service
                   service: cast.show_lovelace_view
@@ -853,12 +831,11 @@ views:
               - type: "custom:button-card"
                 icon: mdi:power
                 name: Stop Casting
-                size: 32px
                 color: darkred
-                color_type: card
+                template: cast_button
                 tap_action:
                   action: call-service
-                  service: cast.media_player.turn_off
+                  service: media_player.turn_off
                   service_data:
                     entity_id: media_player.man_cave
 
@@ -974,12 +951,17 @@ views:
                 name: "Armed: "
                 color_type: card
                 show_state: true
-          - type: entities
-            entities:
-                - entity: switch.siren_113
-                  name: Siren
-                  type: custom:toggle-lock-entity-row
-                  icon: mdi:alarm-light
+
+          - type: custom:button-card
+            entity: switch.siren_113
+            show_state: true
+            icon: mdi:alarm-light
+            lock:
+              enabled: true
+            styles:
+              card:
+                - height: 75px
+
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
@@ -1109,13 +1091,19 @@ views:
                 color: auto
                 show_state: true
                 show_label: true
+                show_icon: false
+                show_entity_picture: true
+                entity_picture: /local/people/eric.png
                 state:
                   - value: "home"
                     color: lightseagreen
-                    icon: mdi:home-account
+                    #icon: mdi:home-account
+                    entity_picture: /local/people/eric.png
                   - value: "not_home"
                     color: dimgrey
-                    icon: mdi:walk
+                    #icon: mdi:walk
+                    entity_picture: /local/people/eric-walk.png
+
               - type: custom:button-card
                 entity: person.val
                 tap_action:
@@ -1148,9 +1136,9 @@ views:
         image: /local/untappd-bg.jpg
         elements:
           - type: state-icon
-            entity: sensor.untappd_last_checkin_robotsfearme
+            entity: sensor.untappd_last_check_in_robotsfearme
             style:
-              top: 18px
+              top: 22px
               left: 8px
               transform: none
           - type: state-label
@@ -1304,78 +1292,154 @@ views:
     icon: mdi:home-assistant
     theme: slate
     cards:
+
+# Network Info
+
       - type: vertical-stack
         cards:
-          - type: picture-entity
+          - type: custom:button-card
+            color_type: label-card
             name: Network
-            image: /local/network.jpg
-            entity: sensor.myip
-      - type: sensor
-        entity: sensor.hacs
-        name: HACS Updates
-        icon: mdi:update
+            color: var(--primary-color)
 
-# Device commands Banner-card
-      - type: custom:banner-card
-        heading: "Device Commands"
-        background: "rgb(15, 106, 0)"
-        row_size: 4
-        entities:
-          - entity: script.restart_ha
-            name: HASS
-            value: mdi:reload
-            action:
-              service: script.turn_on
-              entity_id: script.restart_ha
-          - entity: script.restart_ha
-            name: Core
-            value: mdi:reload
-            action:
-              service: script.turn_on
-              entity_id: script.reload_core
-          - entity: script.restart_ha
-            name: Groups
-            value: mdi:reload
-            action:
-              service: script.turn_on
-              entity_id: script.reload_groups
-          - entity: script.restart_ha
-            name: Automations
-            value: mdi:reload
-            action:
-              service: script.turn_on
-              entity_id: script.script.reload_automations
-          - entity: scene.reboot_vera
-            name: Vera
-            value: mdi:reload
+          - type: custom:button-card
+            name: Public IP
+            entity_picture: /local/network.jpg
+            entity: sensor.myip
+            icon: mdi:network-router
+            show_state: true
+            show_icon: true
+            show_entity_picture: false
+            show_last_changed: true
+            size: 64px
+            layout: icon_name_state2nd
+
+
+
+# Device commands button-card grouping
+      - type: vertical-stack
+        cards:
+          - type: custom:button-card
+            color_type: label-card
+            name: HASS System
+            color: var(--primary-color)
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Restart Hass
+                entity: script.restart_ha
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  entity: script.restart_ha
+
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Reload Core
+                entity: script.reload_core
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  entity: script.reload_core
+
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Reload Groups
+                entity: script.reload_groups
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  entity: script.reload_groups
+
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Reload Automations
+                entity: script.reload_automations
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  entity: script.reload_automations
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Restart Vera
+                entity: scene.reboot_vera
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  entity: scene.reboot_vera
+
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.current_version
+                name: HASS Version
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /developer-tools/info
+
+              - type: custom:button-card
+                entity: sensor.hacs
+                name: HACS Updates
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /hacs
 
  # Battery Levels
-      - type: custom:vertical-stack-in-card
-        title: Batteries
-        cards:
-          - type: custom:auto-entities
-            card:
-              type: custom:bar-card
-              attribute: battery_level
-              severity:
-                - value: 50
-                  color: '#bf4040'
-                - value: 75
-                  color: '#bf9540'
-                - value: 100
-                  color: '#40bf40'
-              title_position: inside
-              columns: 2
-              padding: 2px
-              align: left
-              title_style:
-                font-size: 16px
-                value_style:
-                  font-size: 8px
-            filter:
-              include:
-                - attributes:
-                    battery_level: <=100
+          - type: custom:vertical-stack-in-card
+            #title: Batteries
+            cards:
+              - type: custom:button-card
+                color_type: label-card
+                name: Batteries
+                color: var(--primary-color)
+
+              - type: custom:auto-entities
+                card:
+                  type: custom:bar-card
+                  attribute: battery_level
+                  severity:
+                    - value: 50
+                      color: '#bf4040'
+                    - value: 75
+                      color: '#bf9540'
+                    - value: 100
+                      color: '#40bf40'
+                  title_position: inside
+                  columns: 2
+                  padding: 2px
+                  align: left
+                  title_style:
+                    font-size: 16px
+                    value_style:
+                      font-size: 8px
+                filter:
+                  include:
+                    - attributes:
+                        battery_level: <=100
 
   - title: Cast
     path: cast
@@ -1438,15 +1502,15 @@ views:
 
         - type: custom:list-card
           entity: sensor.wral
-          title: WRAL News
+          #title: WRAL News
           feed_attribute: entries
           columns:
-            - title: Title
+            - title: WRAL News
               field: title
               style:
                 - white-space: nowrap
-            - title: Description
-              field: description
+            #- title: Description
+            #  field: description
 
 
           #  - type: iframe
@@ -1458,3 +1522,7 @@ views:
           title: Upcoming TV
           all_shadows: off
           image_style: fanart
+
+# Templates for button-card
+button_card_templates:
+  !include button-card-templates.yaml

@@ -4,6 +4,8 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Lots or lovelace changes/updates. Prepping to upgrade to 0.101.3
+* Got rid of customize.yaml, moved to individual files
 * Lots of Lovelace updates, some new integrations
 * Upgrading to 0.100.X
 * Upgrading to 0.98.5. Bias light automations

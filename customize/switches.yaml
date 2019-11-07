@@ -1,0 +1,55 @@
+switch.back_door_1_138:
+  friendly_name: Back Door Sensor
+
+switch.front_door1_1_139:
+  friendly_name: Front Door Sensor
+
+switch.man_cave_lights_133:
+  icon: mdi:light-switch
+  emulated_hue_hidden: false
+  emulated_hue_name: "Man Cave Lights"
+
+switch.deck_lights_108:
+  emulated_hue_hidden: false
+  emulated_hue_name: "Deck Lights"
+  icon: mdi:white-balance-iridescent
+
+switch.front_porch_115:
+  icon: mdi:coach-lamp
+
+switch.back_spotlight_118:
+  icon: mdi:track-light
+
+switch.front_spotlight_135:
+  icon: mdi:track-light
+
+switch.cabinet_lights_123:
+  icon: mdi:white-balance-iridescent
+
+switch.front_ext_holida_178:
+  icon: mdi:halloween
+
+switch.back_ext_holiday_177:
+  icon: mdi:pine-tree
+
+switch.party_lights_173:
+  friendly_name: Party Lights
+  icon: mdi:mushroom
+
+switch.lr_tv:
+  icon: mdi:television
+
+switch.lr_kodi:
+  icon: mdi:kodi
+
+switch.lr_wiiu:
+  icon: mdi:wiiu
+
+switch.lr_steam:
+  icon: mdi:steam
+
+switch.lr_music:
+  icon: mdi:music-circle-outline
+
+switch.lr_chromecast:
+  icon: mdi:cast

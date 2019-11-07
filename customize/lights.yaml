@@ -1,0 +1,42 @@
+light.mancave_desk:
+  friendly_name: Desk LEDs
+  icon: mdi:led-strip-variant
+
+light.pin_board:
+  friendly_name: Pin Board
+  icon: mdi:microwave
+
+light.dining_room_lamp_160:
+  icon: mdi:lamp
+  emulated_hue_hidden: false
+  emulated_hue_name: "Dining Room Lamp"
+
+light.lamp_107:
+  friendly_name: Living Room Lamp
+  icon: mdi:floor-lamp
+  emulated_hue_hidden: false
+  emulated_hue_name: "Living Room Lamp"
+
+light.tv:
+  friendly_name: TV Backlight
+  icon: mdi:television
+
+light.vanity_light_120:
+  friendly_name: Bathroom Vanity
+  icon: mdi:vanity-light
+
+light.bedroom_eric_103:
+  friendly_name: Bedroom Right
+  icon: mdi:lightbulb-outline
+
+light.bedroom_val_104:
+  friendly_name: Bedroom Left
+  icon: mdi:lightbulb-outline
+
+light.vanity_light_120:
+  friendly_name: Vanity
+  icon: mdi:vanity-light
+
+light.wifi_box:
+  icon: mdi:lighthouse
+  friendly_name: Puck

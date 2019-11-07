@@ -1,0 +1,5 @@
+person.eric:
+  entity_picture: /local/eric.png
+
+person.val:
+  entity_picture: /local/val.png

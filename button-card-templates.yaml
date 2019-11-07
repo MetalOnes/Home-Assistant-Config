@@ -1,0 +1,255 @@
+  light_button_brightness:
+    hold_action:
+      action: more-info
+    label: >
+      [[[ var bri = Math.round(entity.attributes.brightness / 2.55);  if
+      (entity.state === 'on') return (bri ? (bri+"%") : '') ]]]
+    layout: icon_label
+    show_label: true
+    show_state: true
+    styles:
+      grid:
+        - grid-template-areas: '"l s" "i i" "n n"'
+        - grid-template-rows: 1fr 3fr 1fr
+        - grid-template-columns: 1fr 1fr
+      label:
+        - justify-self: start
+        - padding-left: 10%
+        - font-size: 80%
+      name:
+        - font-size: 80%
+      state:
+        - justify-self: end
+        - padding-right: 10%
+        - font-size: 80%
+        - color: '#F9C536'
+      card:
+        - margin: 5px 5px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            #- box-shadow: '0px 0px 3px 3px #F9C536'
+          icon:
+            - color: '#F9C536'
+          name:
+            - color: '#F9C536'
+          label:
+            - color: '#F9C536'
+      - value: 'off'
+        styles:
+          state:
+            - color: 'var(--disabled-text-color)'
+          name:
+            - color: 'var(--disabled-text-color)'
+          icon:
+            - color: 'var(--disabled-text-color)'
+
+  rgb_light_button:
+    hold_action:
+      action: more-info
+    label: >
+      [[[ var bri = Math.round(entity.attributes.brighteness / 2.55);  if
+      (entity.state === 'on') return (bri ? (bri+"%") : '') ]]]
+    layout: icon_label
+    show_label: true
+    show_state: true
+    color: auto
+    color_off: var(--disabled-text-color)
+    styles:
+      grid:
+        - grid-template-areas: '"l s" "i i" "n n"'
+        - grid-template-rows: 1fr 3fr 1fr
+        - grid-template-columns: 1fr 1fr
+      label:
+        - justify-self: start
+        - padding-left: 10%
+        - font-size: 80%
+      name:
+        - font-size: 80%
+        - color: '#F9C536'
+      state:
+        - justify-self: end
+        - padding-right: 10%
+        - font-size: 80%
+        - color: '#F9C536'
+      card:
+        - margin: 5px 5px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'off'
+        styles:
+          state:
+            - color: 'var(--disabled-text-color)'
+          name:
+            - color: 'var(--disabled-text-color)'
+          icon:
+            - color: 'var(--disabled-text-color)'
+
+
+  light_switch_button:
+    hold_action:
+      action: more-info
+    layout: icon_label
+    show_label: true
+    show_state: true
+    color_off: var(--disabled-text-color)
+    styles:
+      grid:
+        - grid-template-areas: '"l s" "i i" "n n"'
+        - grid-template-rows: 1fr 3fr 1fr
+        - grid-template-columns: 1fr 1fr
+      label:
+        - justify-self: start
+        - padding-left: 10%
+        - font-size: 80%
+      name:
+        - font-size: 80%
+      state:
+        - justify-self: end
+        - padding-right: 10%
+        - font-size: 80%
+      card:
+        - margin: 5px 5px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            #- box-shadow: '0px 0px 3px 3px #F9C536'
+          icon:
+            - color: '#F9C536'
+          state:
+            - color: '#F9C536'
+          name:
+            - color: '#F9C536'
+          label:
+            - color: '#F9C536'
+      - value: 'off'
+        styles:
+          state:
+            - color: 'var(--disabled-text-color)'
+          name:
+            - color: 'var(--disabled-text-color)'
+          icon:
+            - color: 'var(--disabled-text-color)'
+
+
+  ext_light_switch_button:
+    hold_action:
+      action: more-info
+    layout: icon_label
+    show_label: true
+    show_state: true
+    color: auto
+    color_off: var(--disabled-text-color)
+    styles:
+      grid:
+        - grid-template-areas: '"l s" "i i" "n n"'
+        - grid-template-rows: 1fr 3fr 1fr
+        - grid-template-columns: 1fr 1fr
+      label:
+        - justify-self: start
+        - padding-left: 10%
+        - font-size: 80%
+      name:
+        - font-size: 80%
+      state:
+        - justify-self: end
+        - padding-right: 10%
+        - font-size: 80%
+        - color: "rgb(0, 133, 25)"
+      card:
+        - margin: 5px 5px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            #- box-shadow: '0px 0px 3px 3px rgb(0, 133, 25)'
+          icon:
+            - color: "#008519"
+          name:
+            - color: '#F9C536'
+          label:
+            - color: '#F9C536'
+      - value: 'off'
+        styles:
+          state:
+            - color: 'var(--disabled-text-color)'
+          name:
+            - color: 'var(--disabled-text-color)'
+          icon:
+            - color: 'var(--disabled-text-color)'
+
+  int_light_label:
+    color_type: label-card
+    show_icon: false
+    color: var(--paper-card-background-color)
+    color_off: var(--paper-card-background-color)
+    tap_action:
+      action: more-info
+    styles:
+      card:
+        - margin: 5px 0px 5px 0px
+        - padding: 10px 0px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - box-shadow: '0px 0px 3px 3px #F9C536'
+          name:
+            - color: '#F9C536'
+
+  ext_light_label:
+    color_type: label-card
+    show_icon: false
+    color: var(--paper-card-background-color)
+    color_off: var(--paper-card-background-color)
+    tap_action:
+      action: more-info
+    styles:
+      card:
+        - margin: 5px 0px 5px 0px
+        - padding: 10px 0px
+        - background-color: var(--paper-card-background-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - box-shadow: '0px 0px 3px 3px #008519'
+          name:
+            - color: '#008519'
+
+  harmony_button:
+    color_type: card
+    size: 28px
+    styles:
+      card:
+        - margin: 10px 5px
+        - height: 70px
+      name:
+
+
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - background-color: darkgreen
+
+  cast_button:
+    size: 32px
+    color_type: card
+    styles:
+      card:
+        - border-top: 3px solid rgba(0, 0, 0, .5)
+        - padding: 8px
+
+  system_buttons:
+    confirmation:
+      text: '[[[ return `Are you sure you want to ${entity.attributes.friendly_name}?` ]]]'
+    styles:
+      card:
+        - font-size: 12px

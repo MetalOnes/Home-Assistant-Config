@@ -1,0 +1,15 @@
+scene.bedroom_lights_off:
+  friendly_name: Bedroom Lights off
+  icon: mdi:flashlight-off
+
+scene.switch_to_home:
+  friendly_name: Switch to Home Mode
+  icon: mdi:home-variant
+
+scene.switch_to_night:
+  friendly_name: Switch to Night Mode
+  icon: mdi:weather-night
+
+scene.switch_to_away:
+  friendly_name: Switch to Away Mode
+  icon: mdi:home-minus
