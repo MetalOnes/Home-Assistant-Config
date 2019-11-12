@@ -8,10 +8,6 @@ homeassistant:
   customize: !include_dir_merge_named customize
   auth_providers:
     - type: homeassistant
-    - type: trusted_networks
-      trusted_networks:
-        - 127.0.0.1
-        - 192.168.1.0/24
 
 frontend:
   themes: !include_dir_merge_named themes/
@@ -202,11 +198,6 @@ sun:
 ##########################################
 # Device Tracker & Presence
 ##########################################
-#device_tracker:
-#  - platform: unifi
-#    username: !secret unifi_user
-#    password: !secret unifi_pass
-#    verify_ssl: false
 
 unifi:
   controllers:
@@ -365,6 +356,13 @@ sensor:
         value_template: "{{ state_attr('climate.thermostat_147', 'current_temperature') }}"
         unit_of_measurement: '°'
 
+# Newest Version of HASS Available
+  - platform: template
+    sensors:
+      hass_avail_version:
+        friendly_name: HASS Version Available
+        value_template: "{{ state_attr('binary_sensor.updater', 'newest_version') }}"
+
 # Weather Underground
 #  - platform: wunderground
 #    api_key: !secret wu_api
@@ -465,6 +463,10 @@ sensor:
   - platform: dnsip
     scan_interval: 1800
 
+  - platform: cert_expiry
+    host: evilrobot.space
+
+
 # Harmony Status
   - platform: template
     sensors:
@@ -472,11 +474,10 @@ sensor:
         value_template: '{{states.remote.living_room.attributes.current_activity }}'
         friendly_name: 'Living Room'
 
-# Denon AVR Volume
-  - platform: template
-    sensors:
-      lr_avr_vol:
-        value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
+#  - platform: template
+#    sensors:
+#      lr_avr_vol:
+#        value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
 
 # Sonarr Upcoming Media
   - platform: sonarr_upcoming_media
@@ -662,30 +663,6 @@ zone 2:
   icon: mdi:cart
 
 #########################################
-# iframes
-#########################################
-panel_iframe:
-  mdiindex:
-    title: MDI Icon Index
-    icon: mdi:vector-square
-    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
-
-#########################################
-# Shell Commands
-#########################################
-
-shell_command:
-  party_play: 'curl -g "http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}"'
-
-#########################################
-# REST Commands
-#########################################
-
-rest_command:
-  party_playlist:
-    url: 'http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/music/Party.m3u"}}}'
-
-#########################################
 # Emulated Hue Bridge
 #########################################
 
@@ -699,54 +676,6 @@ emulated_hue:
 google:
   client_id: !secret gcal_client
   client_secret: !secret gcal_secret
-
-#########################################
-# Input Selects
-#########################################
-
-input_select:
-
-# Harmony Control
-  living_room_tv:
-    name: Living Room TV
-    options:
-      - Select Activity
-      - Watch TV
-      - Watch Kodi
-      - Listen to Music
-      - Chromecast
-      - WiiU
-      - Steam Link
-      - Power Off
-    initial: Select Activity
-    icon: mdi:monitor
-
-# Chromecast Radio
-  radio_station:
-    name: 'Select Radio Station:'
-    options:
-      - JEMP
-      - GD Radio
-      - Nugs Radio
-      - Hot 97
-  chromecast_radio:
-    name: 'Select Speakers:'
-    options:
-      - Living Room
-      - Man Cave
-      - Living and Bed
-      - All
-    initial: All
-    icon: mdi:speaker-wireless
-
-
-input_number:
-  volume_radio:
-    name: Volume
-    icon: mdi:volume-high
-    min: 0
-    max: 1
-    step: 0.05
 
 #########################################
 # Harmony Switches

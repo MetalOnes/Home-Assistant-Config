@@ -21,10 +21,6 @@ light.tv:
   friendly_name: TV Backlight
   icon: mdi:television
 
-light.vanity_light_120:
-  friendly_name: Bathroom Vanity
-  icon: mdi:vanity-light
-
 light.bedroom_eric_103:
   friendly_name: Bedroom Right
   icon: mdi:lightbulb-outline
@@ -40,3 +36,7 @@ light.vanity_light_120:
 light.wifi_box:
   icon: mdi:lighthouse
   friendly_name: Puck
+
+switch.kitchen_light_183:
+  icon: mdi:ceiling-light
+  friendly_name: Kitchen Light

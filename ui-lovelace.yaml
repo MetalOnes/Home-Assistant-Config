@@ -435,12 +435,15 @@ views:
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
+                    entity: switch.kitchen_light_183
+                    name: Light
+                    template: light_switch_button
+
+                  - type: "custom:button-card"
                     entity: switch.cabinet_lights_123
                     name: Cabinets
                     template: light_switch_button
 
-                  - type: "custom:button-card"
-                    color_type: blank-card
                   - type: "custom:button-card"
                     color_type: blank-card
                   - type: "custom:button-card"
@@ -672,7 +675,7 @@ views:
 
 
           - type: "custom:mini-media-player"
-            entity: media_player.denon_avrs720w
+            entity: media_player.denon_avr_s720w
             name: Denon AVR
             icon: mdi:play-circle
             artwork: cover
@@ -693,11 +696,17 @@ views:
             name: Living Room Chromecast
             icon: mdi:cast
             artwork: cover
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
 
-            #group: true
-            hide:
-              power: true
-              controls: true
           - type: "custom:mini-media-player"
             entity: media_player.all_3_rooms
             name: All 3 Rooms
@@ -705,8 +714,18 @@ views:
             artwork: cover
             #group: true
             hide:
-              power: true
-              controls: true
+              power: false
+              controls: false
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
 
           - type: horizontal-stack
             cards:
@@ -753,14 +772,23 @@ views:
             hide:
               volume: true
               power: true
+
           - type: "custom:mini-media-player"
             entity: media_player.bedroom_tv
             name: Bedroom Chromecast
             icon: mdi:cast
             artwork: cover
             group: true
-            hide:
-              power: true
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
 
           - type: horizontal-stack
             cards:
@@ -802,9 +830,7 @@ views:
             name: Man Cave Chromecast
             icon: mdi:cast
             artwork: cover
-            hide:
-              power: true
-            # group: true
+
           - type: "custom:mini-media-player"
             entity: media_player.cca_man_cave
             name: Man Cave Chromecast Audio
@@ -812,7 +838,18 @@ views:
             # group: true
             icon: mdi:cast
             hide:
-              power: true
+              power: false
+              controls: false
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
 
           - type: horizontal-stack
             cards:
@@ -968,8 +1005,8 @@ views:
             name: Man Cave Data
             color_type: label-card
             color: rgb(41, 41, 41)
+
           - type: horizontal-stack
-            title: Sensors
             cards:
               - type: "custom:mini-graph-card"
                 entities:
@@ -1301,18 +1338,39 @@ views:
             color_type: label-card
             name: Network
             color: var(--primary-color)
+          - type: horizontal-stack
+            cards:
 
-          - type: custom:button-card
-            name: Public IP
-            entity_picture: /local/network.jpg
-            entity: sensor.myip
-            icon: mdi:network-router
-            show_state: true
-            show_icon: true
-            show_entity_picture: false
-            show_last_changed: true
-            size: 64px
-            layout: icon_name_state2nd
+              - type: custom:button-card
+                name: "Public IP:"
+                entity_picture: /local/network.jpg
+                entity: sensor.myip
+                icon: mdi:network-router
+                show_state: true
+                show_icon: true
+                show_entity_picture: false
+                show_last_changed: true
+                size: 64px
+                layout: icon_name_state2nd
+
+              - type: custom:button-card
+                name: "SSL Cert Expiry:"
+                entity: sensor.ssl_certificate_expiry
+                show_state: true
+                show_icon: true
+                size: 64px
+                layout: icon_name_state2nd
+                tap_action:
+                  action: url
+                  url_path: https://evilrobot.space
+                styles:
+                  icon:
+                    - color: >
+                        [[[
+                          if (entity.state > 60) return 'lime';
+                          if (entity.state <= 60 && entity.state >= 30) return 'orange';
+                          else return 'darkred';
+                        ]]]
 
 
 
@@ -1321,7 +1379,7 @@ views:
         cards:
           - type: custom:button-card
             color_type: label-card
-            name: HASS System
+            name: HASS/System
             color: var(--primary-color)
 
           - type: horizontal-stack
@@ -1392,21 +1450,39 @@ views:
             cards:
               - type: custom:button-card
                 entity: sensor.current_version
-                name: HASS Version
+                name: "Currently Running:"
                 show_state: true
                 show_icon: false
                 tap_action:
                   action: navigate
                   navigation_path: /developer-tools/info
+                styles:
+                  card:
+                    - font-size: 14px
+
+              - type: custom:button-card
+                entity: sensor.hass_avail_version
+                name: "Available:"
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /developer-tools/info
+                styles:
+                  card:
+                    - font-size: 14px
 
               - type: custom:button-card
                 entity: sensor.hacs
-                name: HACS Updates
+                name: "HACS Updates:"
                 show_state: true
                 show_icon: false
                 tap_action:
                   action: navigate
                   navigation_path: /hacs
+                styles:
+                  card:
+                    - font-size: 14px
 
  # Battery Levels
           - type: custom:vertical-stack-in-card
