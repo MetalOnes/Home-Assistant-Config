@@ -6,24 +6,24 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
-#- switch.front_ext_holida_178
-#- switch.back_ext_holiday_177
+- switch.front_ext_holida_178
+- switch.back_ext_holiday_188
 
 Ext Back:
 - switch.deck_lights_108
 - switch.back_spotlight_118
-
+- switch.back_ext_holiday_188
 Ext Front:
 - switch.front_porch_115
 - switch.front_spotlight_135
-- switch.holiday_front_176
+- switch.front_ext_holida_178
 
 HolidayExterior:
 - switch.front_spotlight_135
-- switch.back_spotlight_118
-- switch.deck_lights_108
+#- switch.back_spotlight_118
+#- switch.deck_lights_108
 - switch.front_ext_holida_178
-- switch.back_ext_holiday_177
+- switch.back_ext_holiday_188
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
@@ -65,6 +65,16 @@ Int Lights:
 - light.mancave_desk
 - light.pin_board
 #- switch.party_lights_173
+Living Lights:
+- light.lamp_107
+- switch.cabinet_lights_123
+- light.dining_room_lamp_160
+- switch.man_cave_lights_133
+- light.mancave_desk
+- light.pin_board
+- switch.xmas_tree_both_184
+- switch.zooz_plug_master_179
+
 Security Sensors:
 - switch.front_door1_1_139
 - binary_sensor.front_door1_1_139

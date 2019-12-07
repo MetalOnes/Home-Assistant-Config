@@ -160,10 +160,6 @@ views:
 # Int Lights on
       - type: entity-filter
         entities:
-          - entity: switch.party_lights_173
-            icon: mdi:mushroom
-            tap_action:
-              action: toggle
           - entity: light.lamp_107
             name: Living Room
             tap_action:
@@ -175,6 +171,10 @@ views:
             icon: mdi:television
           - entity: light.dining_room_lamp_160
             name: Dining Room
+            tap_action:
+              action: toggle
+          - entity: switch.kitchen_light_183
+            name: Kitchen
             tap_action:
               action: toggle
           - entity: switch.cabinet_lights_123
@@ -209,6 +209,10 @@ views:
             name: Bedroom (Left)
             tap_action:
               action: toggle
+          - entity: switch.party_lights_173
+            icon: mdi:mushroom
+            tap_action:
+              action: toggle
         state_filter:
           - "on"
         show_empty: false
@@ -236,11 +240,11 @@ views:
             name: Back Spotlight
             tap_action:
               action: toggle
-          - entity: switch.holiday_front_176
+          - entity: switch.front_ext_holida_178
             name: Front Holiday
             tap_action:
               action: toggle
-          - entity: switch.back_ext_holiday_177
+          - entity: switch.back_ext_holiday_188
             name: Back Holiday
             tap_action:
               action: toggle
@@ -316,47 +320,7 @@ views:
         entities:
           - calendar.slacktishevents
 
-# Living Room Banner-card
-      - type: custom:banner-card
-        heading: "\U0001F6CB Living room"
-        background: "rgb(204, 141, 1)"
-        link: /lovelace/lights
-        entities:
-          - light.lamp_107
-          - light.dining_room_lamp_160
-          - switch.cabinet_lights_123
-          - entity: lock.front_door_19
-            map_state:
-              "locked": mdi:lock
-              "unlocked": mdi:lock-open
-          - light.tv
-          - switch.party_lights_173
-          - entity: media_player.living_room_kodi
-            name: Kodi
-            size: 3
-            when: playing
-          - entity: media_player.living_room
-            name: Chromecast
-            size: 3
-            when: playing
 
-# Bedroom banner card
-      - type: custom:banner-card
-        heading: "\U0001F6CC Bedroom"
-        background: "rgb(150, 0, 203)"
-        link: /lovelace/lights
-        entities:
-
-          - entity: light.bedroom_val_104
-            name: Left
-          - entity: light.bedroom_eric_103
-            name: Right
-          - entity: light.vanity_light_120
-            name: Vanity
-          - entity: media_player.bedroom_tv
-            name: Chromecast
-            size: 3
-            when: playing
 
 # Thermostat and climate Card
       - type: vertical-stack
@@ -423,6 +387,23 @@ views:
                     entity: switch.party_lights_173
                     name: Party Lights
                     template: light_switch_button
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: switch.xmas_tree_both_184
+                name: Xmas Tree
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.xmas_tree_left_185
+                name: Xmas Tree (Left)
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.xmas_tree_right_186
+                name: Xmas Tree (Right)
+                template: light_switch_button
+              - type: "custom:button-card"
+                color_type: blank-card
+
 
 # Kitchen Card
           - type: vertical-stack
@@ -446,6 +427,22 @@ views:
 
                   - type: "custom:button-card"
                     color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_master_179
+                    name: Zooz Plug (Both)
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_left_180
+                    name: Zooz Plug (Left)
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_right_181
+                    name: Zooz Plug (Right)
+                    template: light_switch_button
                   - type: "custom:button-card"
                     color_type: blank-card
 
@@ -532,14 +529,10 @@ views:
                     name: Spotlight
                     template: ext_light_switch_button
 
-                  #- type: "custom:button-card"
-                  #  entity: switch.front_ext_holida_178
-                  #  name: Front Holiday
-                  #  template: ext_light_switch_button
-
                   - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
+                    entity: switch.front_ext_holida_178
+                    name: Front Holiday
+                    template: ext_light_switch_button
 
                   - type: "custom:button-card"
                     color_type: blank-card
@@ -567,8 +560,10 @@ views:
                     template: ext_light_switch_button
 
                   - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
+                    entity: switch.back_ext_holiday_188
+                    name: Back Holiday
+                    template: ext_light_switch_button
+
 
                   - type: "custom:button-card"
                     color_type: blank-card
