@@ -22,21 +22,21 @@
         - justify-self: end
         - padding-right: 10%
         - font-size: 80%
-        - color: '#F9C536'
+        - color: '#FFFFFF'
       card:
         - margin: 5px 5px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
     state:
       - value: 'on'
         styles:
           card:
-            #- box-shadow: '0px 0px 3px 3px #F9C536'
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           name:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           label:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
       - value: 'off'
         styles:
           state:
@@ -76,7 +76,8 @@
         - color: '#F9C536'
       card:
         - margin: 5px 5px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
+
     state:
       - value: 'off'
         styles:
@@ -86,6 +87,10 @@
             - color: 'var(--disabled-text-color)'
           icon:
             - color: 'var(--disabled-text-color)'
+      - value: 'on'
+        styles:
+          card:
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
 
 
   light_switch_button:
@@ -112,20 +117,20 @@
         - font-size: 80%
       card:
         - margin: 5px 5px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
     state:
       - value: 'on'
         styles:
           card:
-            #- box-shadow: '0px 0px 3px 3px #F9C536'
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           state:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           name:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           label:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
       - value: 'off'
         styles:
           state:
@@ -159,21 +164,21 @@
         - justify-self: end
         - padding-right: 10%
         - font-size: 80%
-        - color: "rgb(0, 133, 25)"
+        - color: '#FFFFFF'
       card:
         - margin: 5px 5px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
     state:
       - value: 'on'
         styles:
           card:
-            #- box-shadow: '0px 0px 3px 3px rgb(0, 133, 25)'
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: "#008519"
+            - color: "#FFFFFF"
           name:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
           label:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
       - value: 'off'
         styles:
           state:
@@ -186,53 +191,55 @@
   int_light_label:
     color_type: label-card
     show_icon: false
-    color: var(--paper-card-background-color)
-    color_off: var(--paper-card-background-color)
+    color: var(--ha-card-background)
+    color_off: var(--ha-card-background)
     tap_action:
       action: more-info
     styles:
       card:
         - margin: 5px 0px 5px 0px
         - padding: 10px 0px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
     state:
       - value: 'on'
         styles:
           card:
-            - box-shadow: '0px 0px 3px 3px #F9C536'
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           name:
-            - color: '#F9C536'
+            - color: '#FFFFFF'
 
   ext_light_label:
     color_type: label-card
     show_icon: false
-    color: var(--paper-card-background-color)
-    color_off: var(--paper-card-background-color)
+    color: var(--ha-card-background)
+    color_off: var(--ha-card-background)
     tap_action:
       action: more-info
     styles:
       card:
         - margin: 5px 0px 5px 0px
         - padding: 10px 0px
-        - background-color: var(--paper-card-background-color)
+        - background-color: var(--ha-card-background)
     state:
       - value: 'on'
         styles:
           card:
-            - box-shadow: '0px 0px 3px 3px #008519'
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           name:
-            - color: '#008519'
+            - color: '#FFFFFF'
 
   harmony_button:
     color_type: card
     size: 28px
     styles:
       card:
-        - margin: 10px 5px
+        #- margin: 5px
         - height: 70px
+        - background-color: var(--ha-card-background)
+        #- border: 1px solid
+        #- border-color: var(--disabled-text-color)
+        #- border-radius: 5px
       name:
-
-
     state:
       - value: 'on'
         styles:
@@ -253,3 +260,24 @@
     styles:
       card:
         - font-size: 12px
+
+  home-mode_buttons:
+    styles:
+      card:
+        - height: 96px
+      name:
+        - font-size: 16px
+
+  sensor_button:
+    color_type: card
+    color: rgba(130, 0, 0, 0.5)
+    tap_action:
+      action: more-info
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - box-shadow: '0px 0px 2px 2px #c8a6ff'
+    styles:
+      card:
+        - background-color: var(--ha-card-background)

@@ -45,13 +45,17 @@ resources:
     type: module
   - url: /community_plugin/list-card/list-card.js
     type: js
+  - url: /community_plugin/lovelace-card-mod/card-mod.js
+    type: module
 
-#background: linear-gradient(gray, rgb(57,82,116))
 
 # Compact Custom Header Options
 cch:
   header: show
   menu: show
+  background: rgba(40, 40, 70, 0.6)
+
+background: var(--background-image)
 
 views:
 #
@@ -78,13 +82,13 @@ views:
             show_state: true
             state:
               - value: 'Away'
-                color: rgb(150, 0, 0)
+                color: rgba(130, 0, 0, 0.5)
                 icon: mdi:home-minus
               - value: 'Home'
-                color: rgb(0, 99, 31)
+                color: rgba(0, 130, 0, 0.5)
                 icon: mdi:home-variant
               - value: 'Night'
-                color: rgb(111, 0, 110)
+                color: rgba(111, 0, 110, 0.4)
                 icon: mdi:weather-night
             layout: icon_state
             styles:
@@ -99,35 +103,23 @@ views:
               - type: "custom:button-card"
                 entity: scene.switch_to_home
                 name: Home Mode
-                styles:
-                  card:
-                    - height: 96px
-                  name:
-                    - font-size: 16px
+                template: home-mode_buttons
                 color_type: card
-                color: rgb(0, 99, 31)
+                color: rgb(0, 99, 31, 0.4)
 
               - type: custom:button-card
                 entity: scene.switch_to_night
                 name: Night Mode
-                styles:
-                  card:
-                    - height: 96px
-                  name:
-                    - font-size: 16px
+                template: home-mode_buttons
                 color_type: card
-                color: rgb(111, 0, 110)
+                color: rgb(111, 0, 110, 0.4)
 
               - type: "custom:button-card"
                 entity: scene.switch_to_away
                 name: Away Mode
-                styles:
-                  card:
-                    - height: 96px
-                  name:
-                    - font-size: 16px
+                template: home-mode_buttons
                 color_type: card
-                color: rgb(150, 0, 0)
+                color: rgba(130, 0, 0, 0.5)
 
               - type: "custom:button-card"
                 entity: lock.front_door_19
@@ -137,16 +129,12 @@ views:
                   action: more-info
                 state:
                   - value: "locked"
-                    color: rgb(150, 0, 0)
+                    color: rgb(130, 0, 0, 0.5)
                     icon: mdi:lock
                   - value: "Unlocked"
-                    color: rgb(0, 99, 31)
+                    color: rgb(0, 99, 31, 0.5)
                     icon: mdi:lock-open
-                styles:
-                  card:
-                    - height: 96px
-                  label:
-                    - font-weight: bold
+                template: home-mode_buttons
                 color_type: card
 
 
@@ -257,8 +245,12 @@ views:
           column_width: calc(100% / 4)
 
 # Harmony Living Room card
-      - type: custom:vertical-style-card
+      - type: custom:vertical-stack-in-card
         title: Living Room TV
+        style: |
+          ha-card {
+            background: var(--paper-card-background-color)
+          }
         cards:
           - type: horizontal-stack
             cards:
@@ -306,8 +298,9 @@ views:
                     entity_id: remote.living_room
                 styles:
                   card:
-                    - margin: 10px 5px
+                    #- margin: 10px 5px
                     - height: 70px
+                    - background-color: var(--ha-card-background)
 
 
 # Calendar card
@@ -328,8 +321,21 @@ views:
           - type: custom:simple-thermostat
             entity: climate.thermostat_147
             step_size: 1
-            sensors:
-              - entity: sensor.current_temperature
+            #sensors:
+            #  - entity: sensor.current_temperature
+            style: |
+              ha-card .mode-item {
+                background: rgba(10, 10, 10, 0.4);
+              }
+              ha-card .mode-item.active {
+                background: rgba(255, 255, 240, 0.4);
+              }
+              ha-card .mode-item.active:hover {
+                background: rgba(255, 255, 240, 0.6);
+              }
+              ha-card .mode-item:hover {
+                background: rgba(255, 255, 240, 0.6);
+              }
 # Temps
           - type: horizontal-stack
             cards:
@@ -339,11 +345,12 @@ views:
                 show:
                   points: hover
                 line_color: "rgb(204, 141, 1)"
-                group: true
+                #group: true
+
               - type: custom:mini-graph-card
                 entities:
                   - sensor.temperature_sensor_167
-                group: true
+                #group: true
                 show:
                   points: hover
 
@@ -665,7 +672,7 @@ views:
                     entity_id: remote.living_room
                 styles:
                   card:
-                    - margin: 10px 5px
+                    #- margin: 10px 5px
                     - height: 70px
 
 
@@ -900,7 +907,7 @@ views:
         cards:
           - type: "custom:button-card"
             color_type: label-card
-            color: rgb(41, 41, 41)
+            color: rgba(10, 10, 10, 0.4)
             name: Security Sensors
           - type: horizontal-stack
             cards:
@@ -908,81 +915,60 @@ views:
                 entity: binary_sensor.front_door1_1_139
                 icon: mdi:door
                 name: Front Door
-                color_type: card
-                tap_action:
-                  - action: more-info
-                color: rgb(155, 0, 0)
-                color_off: rgb(0, 122, 0)
+                template: sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.back_door_172
                 icon: mdi:door
                 name: Back Door
-                color_type: card
-                tap_action:
-                  - action: more-info
-                color: rgb(155, 0, 0)
-                color_off: rgb(0, 122, 0)
+                template: sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.motion_sensor_128
                 icon: mdi:transition
                 name: Man Cave Motion
-                color_type: card
-                tap_action:
-                  - action: more-info
-                color: rgb(155, 0, 0)
-                color_off: rgb(0, 122, 0)
+                template: sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.master_bath_sensor_121
                 icon: mdi:transition
                 name: Master Bath
-                color_type: card
-                tap_action:
-                  - action: more-info
                 color: rgb(155, 0, 0)
-                color_off: rgb(0, 122, 0)
+                template: sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.smoke_sensor_122
                 icon: mdi:smoke-detector
                 name: Smoke Sensor
-                color_type: card
-                tap_action:
-                  - action: more-info
-                color: rgb(155, 0, 0)
-                color_off: rgb(0, 122, 0)
+                template: sensor_button
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
                 entity: switch.front_door1_1_139
                 icon: mdi:door
-                color_type: card
                 name: "Armed: "
                 show_state: true
-                color: auto
+                template: sensor_button
               - type: "custom:button-card"
                 entity: switch.back_door_172
                 icon: mdi:door
-                color_type: card
                 name: "Armed: "
                 show_state: true
+                template: sensor_button
               - type: "custom:button-card"
                 entity: switch.motion_sensor_128
                 icon: mdi:transition
                 name: "Armed: "
-                color_type: card
                 show_state: true
-                color: auto
+                template: sensor_button
               - type: "custom:button-card"
                 entity: switch.master_bath_sensor_121
                 icon: mdi:transition
                 name: "Armed: "
-                color_type: card
                 show_state: true
+                template: sensor_button
               - type: "custom:button-card"
                 entity: switch.smoke_sensor_122
                 icon: mdi:smoke-detector
                 name: "Armed: "
-                color_type: card
                 show_state: true
+                template: sensor_button
 
           - type: custom:button-card
             entity: switch.siren_113
@@ -999,7 +985,7 @@ views:
           - type: "custom:button-card"
             name: Man Cave Data
             color_type: label-card
-            color: rgb(41, 41, 41)
+            color: rgba(10, 10, 10, 0.4)
 
           - type: horizontal-stack
             cards:
@@ -1053,7 +1039,7 @@ views:
           - type: "custom:button-card"
             color_type: label-card
             name: Forecast
-            color: rgb(16, 133, 199)
+            color: rgb(16, 133, 199, 0.4)
           - type: iframe
             url: https://embed.windy.com/embed2.html?lat=35.583&lon=-78.788&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.583&detailLon=-78.788&metricWind=default&metricTemp=default&radarRange=-1
             aspect_ratio: 75%
@@ -1064,7 +1050,7 @@ views:
           - type: "custom:button-card"
             color_type: label-card
             name: Sun
-            color: rgb(189, 183, 48)
+            color: rgba(189, 183, 48, 0.4)
           - type: horizontal-stack
             cards:
               - type: sensor
@@ -1110,7 +1096,7 @@ views:
               - type: custom:button-card
                 color_type: label-card
                 label: People
-                color: lightseagreen
+                color: rgba(32, 178, 170, 0.4)
                 show_label: true
           - type: horizontal-stack
             cards:
@@ -1128,11 +1114,11 @@ views:
                 entity_picture: /local/people/eric.png
                 state:
                   - value: "home"
-                    color: lightseagreen
+                    color: rgba(32, 178, 170, 0.4)
                     #icon: mdi:home-account
                     entity_picture: /local/people/eric.png
                   - value: "not_home"
-                    color: dimgrey
+                    color: rgba(10, 10, 10, 0.4)
                     #icon: mdi:walk
                     entity_picture: /local/people/eric-walk.png
 
@@ -1147,10 +1133,10 @@ views:
                 show_label: true
                 state:
                   - value: "home"
-                    color: lightseagreen
+                    color: rgba(32, 178, 170, 0.4)
                     icon: mdi:home-account
                   - value: "not_home"
-                    color: dimgrey
+                    color: rgba(10, 10, 10, 0.4)
                     icon: mdi:walk
 
 
@@ -1185,7 +1171,7 @@ views:
               font-weight: bold
               border-left-style: solid
               border-color: Yellow
-              background-color: rgb(4, 4, 4, 0.6)
+              background-color: rgba(10, 10, 10, 0.4)
               pointer-events: none
               width: 325px
               padding: 5px
@@ -1208,7 +1194,7 @@ views:
               font-weight: bold
               border-left-style: solid
               border-color: Orange
-              background-color: rgb(4, 4, 4, 0.6)
+              background-color: rgba(10, 10, 10, 0.4)
               pointer-events: none
               width: 325px
               padding: 5px
@@ -1332,7 +1318,7 @@ views:
           - type: custom:button-card
             color_type: label-card
             name: Network
-            color: var(--primary-color)
+            color: rgba(65, 105, 225, 0.4)
           - type: horizontal-stack
             cards:
 
@@ -1375,7 +1361,7 @@ views:
           - type: custom:button-card
             color_type: label-card
             name: HASS/System
-            color: var(--primary-color)
+            color: rgba(65, 105, 225, 0.4)
 
           - type: horizontal-stack
             cards:
@@ -1494,11 +1480,11 @@ views:
                   attribute: battery_level
                   severity:
                     - value: 50
-                      color: '#bf4040'
+                      color: 'rgba(191, 64, 64, 0.5)'
                     - value: 75
-                      color: '#bf9540'
+                      color: 'rgba(191, 149, 64, 0.5)'
                     - value: 100
-                      color: '#40bf40'
+                      color: 'rgba(64, 191, 64, 0.5)'
                   title_position: inside
                   columns: 2
                   padding: 2px
