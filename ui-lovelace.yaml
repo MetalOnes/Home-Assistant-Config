@@ -25,7 +25,7 @@ resources:
     type: module
   - url: /community_plugin/love-lock-card/love-lock-card.js
     type: js
-  - url: /community_plugin/compact-custom-header/compact-custom-header.js
+  - url: /community_plugin/custom-header/custom-header.js
     type: module
   - url: /community_plugin/bar-card/bar-card.js
     type: js
@@ -48,12 +48,12 @@ resources:
   - url: /community_plugin/lovelace-card-mod/card-mod.js
     type: module
 
-
-# Compact Custom Header Options
-cch:
-  header: show
-  menu: show
-  background: rgba(40, 40, 70, 0.6)
+custom_header:
+  compact_mode: true
+  background: rgba(40, 40, 70, 0.95)
+  #tabs_color:
+  #  overview: green
+  #  lights: yellow
 
 background: var(--background-image)
 
@@ -64,15 +64,11 @@ views:
   - title: Overview
     icon: mdi:home-outline
     path: overview
-    theme: slate
+    theme: ios-dark-mode
     cards:
-
-
-
 # House Mode sensor and scenes
       - type: vertical-stack
         cards:
-
           - type: "custom:button-card"
             entity: sensor.homemode
             color_type: card
@@ -102,21 +98,21 @@ views:
             cards:
               - type: "custom:button-card"
                 entity: scene.switch_to_home
-                name: Home Mode
+                name: Home
                 template: home-mode_buttons
                 color_type: card
                 color: rgb(0, 99, 31, 0.4)
 
               - type: custom:button-card
                 entity: scene.switch_to_night
-                name: Night Mode
+                name: Night
                 template: home-mode_buttons
                 color_type: card
                 color: rgb(111, 0, 110, 0.4)
 
               - type: "custom:button-card"
                 entity: scene.switch_to_away
-                name: Away Mode
+                name: Away
                 template: home-mode_buttons
                 color_type: card
                 color: rgba(130, 0, 0, 0.5)
@@ -207,7 +203,7 @@ views:
         card:
           type: glance
           title: Interior
-          column_width: calc(100% / 3)
+          columns: 4
 
 # Ext Lights on
       - type: entity-filter
@@ -242,7 +238,7 @@ views:
         card:
           type: glance
           title: Exterior
-          column_width: calc(100% / 4)
+          columns: 4
 
 # Harmony Living Room card
       - type: custom:vertical-stack-in-card
@@ -360,7 +356,7 @@ views:
   - title: Lights
     path: lights
     icon: mdi:lightbulb
-    theme: slate
+    theme: ios-dark-mode
     cards:
       - type: vertical-stack
         cards:
@@ -368,7 +364,6 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Living Room
                 template: int_light_label
                 entity: group.living_area
@@ -416,7 +411,6 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Kitchen
                 template: int_light_label
                 entity: switch.cabinet_lights_123
@@ -488,7 +482,6 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Bedroom
                 entity: group.bedroom
                 template: int_light_label
@@ -519,7 +512,6 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Front Ext
                 entity: group.ext_front
                 template: ext_light_label
@@ -549,7 +541,6 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
                 name: Back Ext
                 entity: group.ext_back
                 template: ext_light_label
@@ -582,14 +573,14 @@ views:
   - title: Media
     path: media
     icon: mdi:play-circle-outline
-    theme: slate
+    theme: ios-dark-mode
     cards:
   # Living Room Media
       - type: custom:vertical-stack-in-card
         #title: Living Room
         cards:
           - type: custom:button-card
-            color_type: label_card
+            template: general_label
             name: Living Room
             styles:
               card:
@@ -760,11 +751,11 @@ views:
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:button-card
-            color_type: label_card
             name: Bedroom
+            template: general_label
             styles:
               card:
-                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+                #- border-bottom: 3px solid rgba(0, 0, 0, .2)
 
           - type: "custom:mini-media-player"
             entity: media_player.bedroom_kodi
@@ -821,11 +812,11 @@ views:
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:button-card
-            color_type: label_card
+            template: general_label
             name: Man Cave
             styles:
               card:
-                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+                #- border-bottom: 3px solid rgba(0, 0, 0, .2)
 
           - type: "custom:mini-media-player"
             entity: media_player.man_cave
@@ -901,13 +892,12 @@ views:
   - title: Sensors
     path: sensors
     icon: mdi:gauge
-    theme: slate
+    theme: ios-dark-mode
     cards:
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
-            color_type: label-card
-            color: rgba(10, 10, 10, 0.4)
+            template: general_label
             name: Security Sensors
           - type: horizontal-stack
             cards:
@@ -984,8 +974,7 @@ views:
         cards:
           - type: "custom:button-card"
             name: Man Cave Data
-            color_type: label-card
-            color: rgba(10, 10, 10, 0.4)
+            template: general_label
 
           - type: horizontal-stack
             cards:
@@ -1037,9 +1026,8 @@ views:
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
-            color_type: label-card
             name: Forecast
-            color: rgb(16, 133, 199, 0.4)
+            template: general_label
           - type: iframe
             url: https://embed.windy.com/embed2.html?lat=35.583&lon=-78.788&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.583&detailLon=-78.788&metricWind=default&metricTemp=default&radarRange=-1
             aspect_ratio: 75%
@@ -1048,9 +1036,8 @@ views:
       - type: vertical-stack
         cards:
           - type: "custom:button-card"
-            color_type: label-card
             name: Sun
-            color: rgba(189, 183, 48, 0.4)
+            template: general_label
           - type: horizontal-stack
             cards:
               - type: sensor
@@ -1069,8 +1056,7 @@ views:
           - type: vertical-stack
             cards:
               - type: "custom:button-card"
-                color_type: label-card
-                color: rgb(0, 4, 51)
+                template: general_label
                 name: Space
               - type: picture-entity
                 camera_image: camera.solar_x_rays
@@ -1087,17 +1073,16 @@ views:
   - title: People
     path: people
     icon: mdi:account
-    theme: slate
+    theme: ios-dark-mode
     cards:
+
       - type: vertical-stack
         cards:
           - type: horizontal-stack
             cards:
               - type: custom:button-card
-                color_type: label-card
-                label: People
-                color: rgba(32, 178, 170, 0.4)
-                show_label: true
+                name: People
+                template: general_label
           - type: horizontal-stack
             cards:
               - type: custom:button-card
@@ -1149,157 +1134,160 @@ views:
   #    - type: 'custom:untappd-card'
   #      entity: sensor.untappd_beer
 
-      - type: picture-elements
-        id: untappd-card
-        image: /local/untappd-bg.jpg
-        elements:
-          - type: state-icon
-            entity: sensor.untappd_last_check_in_robotsfearme
-            style:
-              top: 22px
-              left: 8px
-              transform: none
-          - type: state-label
-            entity: sensor.untappd_beer
-            style:
-              top: 8%
-              left: 52px
-              transform: none
-              color: rgb(255, 255, 255)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-left-style: solid
-              border-color: Yellow
-              background-color: rgba(10, 10, 10, 0.4)
-              pointer-events: none
-              width: 325px
-              padding: 5px
-              border-top-right-radius: 5px
-          - type: state-icon
-            entity: sensor.untappd_last_badge_robotsfearme
-            style:
-              top: 74px
-              left: 8px
-              transform: none
-          - type: state-label
-            entity: sensor.untappd_badge
-            style:
-              top: 73px
-              left: 52px
-              transform: none
-              color: rgb(255, 255, 255)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-left-style: solid
-              border-color: Orange
-              background-color: rgba(10, 10, 10, 0.4)
-              pointer-events: none
-              width: 325px
-              padding: 5px
-              border-bottom-right-radius: 5px
-          - type: state-icon
-            entity: sensor.untappd_checked
-            style:
-              bottom: 0px
-              left: 3px
-              transform: none
-              z-index: 2
-              "--paper-item-icon-color": white
-          - type: state-label
-            entity: sensor.untappd_checked
-            style:
-              bottom: 0px
-              left: 0px
-              transform: none
-              color: rgb(255, 255, 255)
-              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
-              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-bottom-style: solid
-              border-color: LightSalmon
-              padding-left: 36px
-              padding-bottom: 1px
-              #text-shadow: 2px 2px 2px black
-          - type: state-icon
-            entity: sensor.untappd_followings
-            style:
-              bottom: 0px
-              left: 78px
-              transform: none
-              z-index: 2
-              "--paper-item-icon-color": white
-          - type: state-label
-            entity: sensor.untappd_followings
-            style:
-              bottom: 0px
-              left: 74px
-              transform: none
-              color: rgb(255, 255, 255)
-              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
-              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-bottom-style: solid
-              border-color: OrangeRed
-              padding-left: 36px
-              padding-bottom: 1px
-              #text-shadow: 2px 2px 2px black
-          - type: state-icon
-            entity: sensor.untappd_total_badges
-            style:
-              bottom: 0px
-              left: 148px
-              transform: none
-              z-index: 2
-              "--paper-item-icon-color": white
-          - type: state-label
-            entity: sensor.untappd_total_badges
-            style:
-              bottom: 0px
-              left: 141px
-              transform: none
-              color: rgb(255, 255, 255)
-              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
-              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-bottom-style: solid
-              border-color: FireBrick
-              padding-left: 36px
-              padding-bottom: 1px
-              #text-shadow: 2px 2px 2px black
-          - type: state-icon
-            entity: sensor.untappd_total_beers
-            style:
-              bottom: 0px
-              left: 228px
-              transform: none
-              z-index: 2
-              "--paper-item-icon-color": white
+          - type: custom:button-card
+            name: Beer
+            template: general_label
+          - type: picture-elements
+            id: untappd-card
+            image: /local/untappd-bg.jpg
+            elements:
+              - type: state-icon
+                entity: sensor.untappd_last_check_in_robotsfearme
+                style:
+                  top: 22px
+                  left: 8px
+                  transform: none
+              - type: state-label
+                entity: sensor.untappd_beer
+                style:
+                  top: 8%
+                  left: 52px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-left-style: solid
+                  border-color: Yellow
+                  background-color: rgba(10, 10, 10, 0.4)
+                  pointer-events: none
+                  width: 325px
+                  padding: 5px
+                  border-top-right-radius: 5px
+              - type: state-icon
+                entity: sensor.untappd_last_badge_robotsfearme
+                style:
+                  top: 74px
+                  left: 8px
+                  transform: none
+              - type: state-label
+                entity: sensor.untappd_badge
+                style:
+                  top: 73px
+                  left: 52px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-left-style: solid
+                  border-color: Orange
+                  background-color: rgba(10, 10, 10, 0.4)
+                  pointer-events: none
+                  width: 325px
+                  padding: 5px
+                  border-bottom-right-radius: 5px
+              - type: state-icon
+                entity: sensor.untappd_checked
+                style:
+                  bottom: 0px
+                  left: 3px
+                  transform: none
+                  z-index: 2
+                  "--paper-item-icon-color": white
+              - type: state-label
+                entity: sensor.untappd_checked
+                style:
+                  bottom: 0px
+                  left: 0px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+                  text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-bottom-style: solid
+                  border-color: LightSalmon
+                  padding-left: 36px
+                  padding-bottom: 1px
+                  #text-shadow: 2px 2px 2px black
+              - type: state-icon
+                entity: sensor.untappd_followings
+                style:
+                  bottom: 0px
+                  left: 78px
+                  transform: none
+                  z-index: 2
+                  "--paper-item-icon-color": white
+              - type: state-label
+                entity: sensor.untappd_followings
+                style:
+                  bottom: 0px
+                  left: 74px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+                  text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-bottom-style: solid
+                  border-color: OrangeRed
+                  padding-left: 36px
+                  padding-bottom: 1px
+                  #text-shadow: 2px 2px 2px black
+              - type: state-icon
+                entity: sensor.untappd_total_badges
+                style:
+                  bottom: 0px
+                  left: 148px
+                  transform: none
+                  z-index: 2
+                  "--paper-item-icon-color": white
+              - type: state-label
+                entity: sensor.untappd_total_badges
+                style:
+                  bottom: 0px
+                  left: 141px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+                  text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-bottom-style: solid
+                  border-color: FireBrick
+                  padding-left: 36px
+                  padding-bottom: 1px
+                  #text-shadow: 2px 2px 2px black
+              - type: state-icon
+                entity: sensor.untappd_total_beers
+                style:
+                  bottom: 0px
+                  left: 228px
+                  transform: none
+                  z-index: 2
+                  "--paper-item-icon-color": white
 
-          - type: state-label
-            entity: sensor.untappd_total_beers
-            style:
-              bottom: 0px
-              left: 215px
-              transform: none
-              color: rgb(255, 255, 255)
-              -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
-              text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              border-bottom-style: solid
-              border-color: Maroon
-              padding-left: 36px
-              padding-bottom: 1px
-              #text-shadow: 2px 2px 2px black
+              - type: state-label
+                entity: sensor.untappd_total_beers
+                style:
+                  bottom: 0px
+                  left: 215px
+                  transform: none
+                  color: rgb(255, 255, 255)
+                  -webkit-text-stroke: 0.2px rgb(0, 0, 0, 0.6)
+                  text-shadow: 0.1px 0.1px rgb(0, 0, 0, 0.6)
+                  font-family: Trebuchet MS
+                  font-size: 90%
+                  font-weight: bold
+                  border-bottom-style: solid
+                  border-color: Maroon
+                  padding-left: 36px
+                  padding-bottom: 1px
+                  #text-shadow: 2px 2px 2px black
 
 
 #
@@ -1308,7 +1296,7 @@ views:
   - title: System
     path: system
     icon: mdi:home-assistant
-    theme: slate
+    theme: ios-dark-mode
     cards:
 
 # Network Info
@@ -1316,9 +1304,8 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:button-card
-            color_type: label-card
             name: Network
-            color: rgba(65, 105, 225, 0.4)
+            template: general_label
           - type: horizontal-stack
             cards:
 
@@ -1359,9 +1346,8 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:button-card
-            color_type: label-card
             name: HASS/System
-            color: rgba(65, 105, 225, 0.4)
+            template: general_label
 
           - type: horizontal-stack
             cards:
@@ -1466,13 +1452,12 @@ views:
                     - font-size: 14px
 
  # Battery Levels
-          - type: custom:vertical-stack-in-card
+          - type: vertical-stack
             #title: Batteries
             cards:
               - type: custom:button-card
-                color_type: label-card
                 name: Batteries
-                color: var(--primary-color)
+                template: general_label
 
               - type: custom:auto-entities
                 card:
@@ -1501,7 +1486,7 @@ views:
   - title: Cast
     path: cast
     icon: mdi:cast
-    theme: slate
+    theme: ios-dark-mode
     cards:
         - type: custom:vertical-stack-in-card
 
