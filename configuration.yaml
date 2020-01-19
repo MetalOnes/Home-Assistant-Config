@@ -211,7 +211,7 @@ person:
 # Lights
 ##########################################
 
-# Desk LEDs
+# LED Wifi Controllers
 light:
   - platform: flux_led
     devices:
@@ -244,6 +244,9 @@ light:
             - [138,43,226]
             - [139,0,139]
             - [255,0,255]
+      192.168.1.176:
+        name: Cabinets
+        mode: rgbw
 
   - platform: limitlessled
     bridges:

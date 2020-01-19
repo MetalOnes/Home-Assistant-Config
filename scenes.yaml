@@ -5,6 +5,7 @@
     light.wifi_box: false
     light.pin_board: false
     light.tv: false
+    light.cabinets: false
 
 - name: Away
   entities:

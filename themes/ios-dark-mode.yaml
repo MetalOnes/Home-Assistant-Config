@@ -5,7 +5,7 @@
 ios-dark-mode:
   # Global
   background-image: "center / cover no-repeat fixed url('/local/backgrounds/homekit-bg-4.jpeg')"
-  primary-color: rgba(40, 40, 70, 1)
+  primary-color: rgba(255, 214, 10, 1) #rgba(40, 40, 70, 1)
   light-primary-color: "#B6B6C1"  # light gray
   primary-background-color: "#2e2e2e"  # dark gray
   secondary-background-color: rgba(25, 25, 25, 0.7)

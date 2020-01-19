@@ -15,16 +15,16 @@
       label:
         - justify-self: start
         - padding-left: 10%
-        - font-size: 80%
+        - font-size: 70%
       name:
-        - font-size: 80%
+        - font-size: 70%
       state:
         - justify-self: end
         - padding-right: 10%
-        - font-size: 80%
+        - font-size: 70%
         - color: '#FFFFFF'
       card:
-        - margin: 5px 5px
+        - margin: 0 3px
         - background-color: var(--ha-card-background)
     state:
       - value: 'on'
@@ -34,9 +34,11 @@
           icon:
             - color: '#FFFFFF'
           name:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
           label:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
+          state:
+            - color: rgba(255, 214, 10, 1)
       - value: 'off'
         styles:
           state:
@@ -73,17 +75,17 @@
       label:
         - justify-self: start
         - padding-left: 10%
-        - font-size: 80%
+        - font-size: 70%
       name:
-        - font-size: 80%
-        - color: '#F9C536'
+        - font-size: 70%
+        - color: rgba(255, 214, 10, 1)
       state:
         - justify-self: end
         - padding-right: 10%
-        - font-size: 80%
-        - color: '#F9C536'
+        - font-size: 70%
+        - color: rgba(255, 214, 10, 1)
       card:
-        - margin: 5px 5px
+        - margin: 0 3px
         - background-color: var(--ha-card-background)
 
     state:
@@ -124,15 +126,15 @@
       label:
         - justify-self: start
         - padding-left: 10%
-        - font-size: 80%
+        - font-size: 70%
       name:
-        - font-size: 80%
+        - font-size: 70%
       state:
         - justify-self: end
         - padding-right: 10%
-        - font-size: 80%
+        - font-size: 70%
       card:
-        - margin: 5px 5px
+        - margin: 0 3px
         - background-color: var(--ha-card-background)
     state:
       - value: 'on'
@@ -142,11 +144,11 @@
           icon:
             - color: '#FFFFFF'
           state:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
           name:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
           label:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
       - value: 'off'
         styles:
           state:
@@ -181,16 +183,16 @@
       label:
         - justify-self: start
         - padding-left: 10%
-        - font-size: 80%
+        - font-size: 70%
       name:
-        - font-size: 80%
+        - font-size: 70%
       state:
         - justify-self: end
         - padding-right: 10%
-        - font-size: 80%
+        - font-size: 70%
         - color: '#FFFFFF'
       card:
-        - margin: 5px 5px
+        - margin: 0 3px
         - background-color: var(--ha-card-background)
     state:
       - value: 'on'
@@ -200,9 +202,11 @@
           icon:
             - color: "#FFFFFF"
           name:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
           label:
-            - color: '#FFFFFF'
+            - color: rgba(255, 214, 10, 1)
+          state:
+            - color: rgba(255, 214, 10, 1)
       - value: 'off'
         styles:
           state:
@@ -278,17 +282,16 @@
 
   harmony_button:
     color_type: card
-    #size: 28px
     styles:
       card:
         - height: 70px
-        - background-color: var(--ha-card-background)
+        #- background-color: var(--ha-card-background)
         - border-radius: 5px
     state:
       - value: 'on'
         styles:
           card:
-            - background-color: darkgreen
+            - background-color: rgba(0, 130, 0, 0.7)
           icon:
             - color: white
           name:
@@ -341,3 +344,7 @@
     styles:
       card:
         - background-color: var(--ha-card-background)
+      name:
+        - font-size: 70%
+      state:
+        - font-size: 70%

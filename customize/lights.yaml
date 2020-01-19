@@ -40,3 +40,7 @@ light.wifi_box:
 switch.kitchen_light_183:
   icon: mdi:ceiling-light
   friendly_name: Kitchen Light
+
+light.cabinets:
+  icon: mdi:white-balance-iridescent
+  friendly_name: Cabinets

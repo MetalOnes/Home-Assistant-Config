@@ -23,30 +23,15 @@ switch.back_spotlight_118:
 switch.front_spotlight_135:
   icon: mdi:track-light
 
-switch.cabinet_lights_123:
-  icon: mdi:white-balance-iridescent
-
 switch.front_ext_holida_178:
   icon: mdi:pine-tree
 
 switch.back_ext_holiday_188:
   icon: mdi:pine-tree
 
-switch.xmas_tree_both_184:
-  icon: mdi:pine-tree
-  friendly_name: Xmas Tree
-
-switch.xmas_tree_left_185:
-  icon: mdi:pine-tree
-  friendly_name: Xmas Tree Left
-
-switch.xmas_tree_right_186:
-  icon: mdi:pine-tree
-  friendly_name: Xmas Tree Right
-
-switch.xmas_tree_usb_187:
-  icon: mdi:usb
-  friendly_name: Xmas Tree USB Port
+switch.cabinet_lights_123:
+  friendly_name: Air Purifier
+  icon: mdi:air-filter
 
 switch.party_lights_173:
   friendly_name: Party Lights

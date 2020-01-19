@@ -47,6 +47,11 @@ resources:
     type: js
   - url: /community_plugin/lovelace-card-mod/card-mod.js
     type: module
+  - url: /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
+    type: module
+  - url: /community_plugin/lovelace-fold-entity-row/fold-entity-row.js
+    type: module
+
 
 custom_header:
   compact_mode: true
@@ -64,7 +69,7 @@ views:
   - title: Overview
     icon: mdi:home-outline
     path: overview
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
 # House Mode sensor and scenes
       - type: vertical-stack
@@ -136,10 +141,31 @@ views:
 
       - type: horizontal-stack
         cards:
-          - type: light
-            entity: light.lamp_107
-          - type: light
-            entity: light.dining_room_lamp_160
+    #      - type: light
+    #        entity: light.lamp_107
+    #      - type: light
+    #        entity: light.dining_room_lamp_160
+          - type: entities
+            entities:
+              - type: custom:slider-entity-row
+                entity: light.lamp_107
+                toggle: true
+              - type: custom:slider-entity-row
+                entity: light.dining_room_lamp_160
+                toggle: true
+              - type: custom:fold-entity-row
+                head: light.vanity_light_120
+                entities:
+                  - type: custom:slider-entity-row
+                    entity: light.vanity_light_120
+                    toggle: true
+                  - type: custom:slider-entity-row
+                    entity: light.bedroom_val_104
+                    toggle: true
+                  - type: custom:slider-entity-row
+                    entity: light.bedroom_eric_103
+                    toggle: true
+
 
 # Int Lights on
       - type: entity-filter
@@ -161,7 +187,7 @@ views:
             name: Kitchen
             tap_action:
               action: toggle
-          - entity: switch.cabinet_lights_123
+          - entity: light.cabinets
             name: Cabinets
             tap_action:
               action: toggle
@@ -248,6 +274,36 @@ views:
             background: var(--paper-card-background-color)
           }
         cards:
+          - type: "custom:button-card"
+            entity: sensor.harmony_living_room
+            name: 'Current Activity'
+            show_state: true
+            color_type: card
+            color: var(--paper-card-background-color)
+            show_icon: true
+            layout: icon_name_state
+            tap_action:
+              action: more-info
+            styles:
+              card:
+                - border-bottom: 3px solid rgba(0, 0, 0, .2)
+                - border-top: 3px solid rgba(0, 0, 0, .2)
+                - padding: 10px 0
+            state:
+              - value: 'Watch Kodi'
+                icon: mdi:kodi
+              - value: 'Watch TV'
+                icon: mdi:television
+              - value: 'Listen to Music'
+                icon: mdi:music
+              - value: 'Chromecast'
+                icon: mdi:cast
+              - value: 'WiiU'
+                icon: mdi:nintendo-switch
+              - value: 'Play Steam'
+                icon: mdi:steam
+              - value: 'PowerOff'
+                icon: mdi:power-off
           - type: horizontal-stack
             cards:
               - type: custom:button-card
@@ -347,6 +403,7 @@ views:
                 entities:
                   - sensor.temperature_sensor_167
                 #group: true
+                line_color: rgb(0, 148, 10)
                 show:
                   points: hover
 
@@ -356,7 +413,7 @@ views:
   - title: Lights
     path: lights
     icon: mdi:lightbulb
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
       - type: vertical-stack
         cards:
@@ -389,22 +446,6 @@ views:
                     entity: switch.party_lights_173
                     name: Party Lights
                     template: light_switch_button
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                entity: switch.xmas_tree_both_184
-                name: Xmas Tree
-                template: light_switch_button
-              - type: "custom:button-card"
-                entity: switch.xmas_tree_left_185
-                name: Xmas Tree (Left)
-                template: light_switch_button
-              - type: "custom:button-card"
-                entity: switch.xmas_tree_right_186
-                name: Xmas Tree (Right)
-                template: light_switch_button
-              - type: "custom:button-card"
-                color_type: blank-card
 
 
 # Kitchen Card
@@ -413,7 +454,7 @@ views:
               - type: "custom:button-card"
                 name: Kitchen
                 template: int_light_label
-                entity: switch.cabinet_lights_123
+                entity: light.cabinets
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
@@ -422,30 +463,15 @@ views:
                     template: light_switch_button
 
                   - type: "custom:button-card"
-                    entity: switch.cabinet_lights_123
+                    entity: light.cabinets
                     name: Cabinets
-                    template: light_switch_button
+                    template: rgb_light_button
 
                   - type: "custom:button-card"
                     color_type: blank-card
                   - type: "custom:button-card"
                     color_type: blank-card
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_master_179
-                    name: Zooz Plug (Both)
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_left_180
-                    name: Zooz Plug (Left)
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_right_181
-                    name: Zooz Plug (Right)
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
+
 
     # Man cave card
           - type: vertical-stack
@@ -476,6 +502,18 @@ views:
                     entity: light.wifi_box
                     name: Puck
                     template: rgb_light_button
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.cabinet_lights_123
+                    name: Air Purifier
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
 
     # Bedroom Card
 
@@ -566,6 +604,45 @@ views:
                   - type: "custom:button-card"
                     color_type: blank-card
                     color_off: var(--disabled-text-color)
+      # Other card
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                name: Other
+                template: ext_light_label
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.xmas_tree_both_184
+                    name: Zooz 1
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.xmas_tree_left_185
+                    name: Zooz 1 Left
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.xmas_tree_right_186
+                    name: Zooz 1 Right
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_master_179
+                    name: Zooz 2
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_left_180
+                    name: Zooz 2 Left
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.zooz_plug_right_181
+                    name: Zooz 2 Right
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
+
 
 #
 # Media tab
@@ -573,7 +650,7 @@ views:
   - title: Media
     path: media
     icon: mdi:play-circle-outline
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
   # Living Room Media
       - type: custom:vertical-stack-in-card
@@ -892,7 +969,7 @@ views:
   - title: Sensors
     path: sensors
     icon: mdi:gauge
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
       - type: vertical-stack
         cards:
@@ -1073,7 +1150,7 @@ views:
   - title: People
     path: people
     icon: mdi:account
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
 
       - type: vertical-stack
@@ -1296,7 +1373,7 @@ views:
   - title: System
     path: system
     icon: mdi:home-assistant
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
 
 # Network Info
@@ -1486,7 +1563,7 @@ views:
   - title: Cast
     path: cast
     icon: mdi:cast
-    theme: ios-dark-mode
+    theme: e-dark-mode
     cards:
         - type: custom:vertical-stack-in-card
 

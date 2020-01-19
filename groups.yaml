@@ -6,8 +6,6 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
-- switch.front_ext_holida_178
-- switch.back_ext_holiday_188
 
 Ext Back:
 - switch.deck_lights_108
@@ -33,7 +31,7 @@ Living Room:
 #- script.party_time
 Kitchen:
 - switch.kitchen_light_183
-- switch.cabinet_lights_123
+- light.cabinets
 - light.dining_room_lamp_160
 Man Cave:
 - switch.man_cave_lights_133
@@ -60,7 +58,7 @@ Living_Area:
 Int Lights:
 - light.lamp_107
 - switch.kitchen_light_183
-- switch.cabinet_lights_123
+- light.cabinets
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
@@ -68,13 +66,13 @@ Int Lights:
 #- switch.party_lights_173
 Living Lights:
 - light.lamp_107
-- switch.cabinet_lights_123
+- light.cabinets
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
 - light.mancave_desk
 - light.pin_board
-- switch.xmas_tree_both_184
-- switch.zooz_plug_master_179
+#- switch.xmas_tree_both_184
+#- switch.zooz_plug_master_179
 
 Security Sensors:
 - switch.front_door1_1_139
