@@ -45,8 +45,8 @@ updater:
 # HACS
 hacs:
   token: !secret hacs_token
-  theme: true
-  python_script: true
+#  theme: true
+#  python_script: true
 
 discovery:
 
@@ -54,7 +54,7 @@ discovery:
 #conversation:
 
 recorder:
-  #db_url: !secret mysql_url
+  db_url: !secret mysql_url
   purge_keep_days: 5
   exclude:
     domains:
@@ -382,6 +382,21 @@ sensor:
 #      - wind_1d_mph
 #      - alerts
 
+# Moon phases and stuff
+
+  - platform: moon
+
+# Enhanced sun conditions
+
+  - platform: sun2
+    monitored_conditions:
+      - sunrise
+      - sunset
+      - solar_noon
+      - max_elevation
+      - daylight
+
+
 # Dark Sky
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -515,12 +530,25 @@ sensor:
 # Versions sensor
   - platform: version
 
+#Display current HA uptime
+  - platform: uptime
+    name: Uptime
+    unit_of_measurement: days
+#Display various system information
+  - platform: systemmonitor
+    resources:
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+      
+
 # Date and Time
   - platform: time_date
     display_options:
       - 'time'
       - 'date'
       - 'time_date'
+      - 'time_utc'
   - platform: template
     sensors:
       simple_time:
@@ -662,7 +690,7 @@ zone 2:
 #########################################
 
 emulated_hue:
-  type: alexa
+  #type: alexa
   expose_by_default: false
 
 #########################################
@@ -699,6 +727,19 @@ switch:
           data:
             entity_id: remote.living_room
             activity: 'Watch Kodi'
+        turn_off:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'PowerOff'
+      lr_xbox:
+        friendly_name: Xbox
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Xbox' ) }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: 'Xbox'
         turn_off:
           service: remote.turn_on
           data:

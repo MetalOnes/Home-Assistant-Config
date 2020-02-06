@@ -56,3 +56,9 @@ sensor.untappd_total_badges:
 
 sensor.untappd_total_beers:
   icon: mdi:beer
+
+sensor.memory_use_percent:
+  icon: mdi:chip
+
+sensor.processor_use:
+  icon: mdi:memory

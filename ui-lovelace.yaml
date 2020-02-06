@@ -51,6 +51,10 @@ resources:
     type: module
   - url: /community_plugin/lovelace-fold-entity-row/fold-entity-row.js
     type: module
+  - url: /community_plugin/sun-card/sun-card.js
+    type: module
+  - url: /community_plugin/rgb-light-card/card.js
+    type: module
 
 
 custom_header:
@@ -69,7 +73,7 @@ views:
   - title: Overview
     icon: mdi:home-outline
     path: overview
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
 # House Mode sensor and scenes
       - type: vertical-stack
@@ -139,7 +143,7 @@ views:
                 color_type: card
 
 
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
     #      - type: light
     #        entity: light.lamp_107
@@ -154,7 +158,36 @@ views:
                 entity: light.dining_room_lamp_160
                 toggle: true
               - type: custom:fold-entity-row
-                head: light.vanity_light_120
+                head: light.tv
+                entities:
+                  - type: custom:rgb-light-card
+                    entity: light.tv
+                    justify: around
+                    colors:
+                      - rgb_color: [0,0,0]
+                        brightness: 15
+                        white_value: 30
+                        icon_color: white
+                      - rgb_color: [0,0,255]
+                        brightness: 45
+                        white_value: 0
+                        icon_color: blue
+                      - rgb_color: [255,0,0]
+                        brightness: 45
+                        white_value: 0
+                        icon_color: red
+                      - rgb_color: [0,255,00]
+                        brightness: 45
+                        white_value: 0
+                        icon_color: green
+                      - icon_color: 'linear-gradient(to right, orange , yellow, green, cyan, blue, violet)'
+                        effect: custom
+                      - icon_color: 'linear-gradient(to right, red, green, blue)'
+                        effect: colorloop
+
+              - type: custom:fold-entity-row
+                head: group.bedroom
+                icon: mdi:bed-empty
                 entities:
                   - type: custom:slider-entity-row
                     entity: light.vanity_light_120
@@ -332,10 +365,10 @@ views:
                 entity: switch.lr_steam
                 icon: mdi:steam
                 template: harmony_button
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-
+              - type: custom:button-card
+                entity: switch.lr_xbox
+                icon: mdi:xbox
+                template: harmony_button
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
@@ -392,20 +425,17 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mini-graph-card
+                name: Temperature
+                hours_to_show: 24
                 entities:
-                  - sensor.current_temperature
+                  - entity: sensor.current_temperature
+                    color: rgba(207, 130, 0, 0.8)
+                  - entity: sensor.temperature_sensor_167
+                    color: rgb(0, 133, 255, 0.8)
                 show:
                   points: hover
-                line_color: "rgb(204, 141, 1)"
-                #group: true
+                  fill: false
 
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.temperature_sensor_167
-                #group: true
-                line_color: rgb(0, 148, 10)
-                show:
-                  points: hover
 
 #
 # Lights Tab
@@ -413,7 +443,7 @@ views:
   - title: Lights
     path: lights
     icon: mdi:lightbulb
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
       - type: vertical-stack
         cards:
@@ -566,10 +596,14 @@ views:
                     name: Spotlight
                     template: ext_light_switch_button
 
+                #  - type: "custom:button-card"
+                #    entity: switch.front_ext_holida_178
+                #    name: Front Holiday
+                #    template: ext_light_switch_button
+
                   - type: "custom:button-card"
-                    entity: switch.front_ext_holida_178
-                    name: Front Holiday
-                    template: ext_light_switch_button
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     color_type: blank-card
@@ -595,11 +629,14 @@ views:
                     name: Spotlight
                     template: ext_light_switch_button
 
-                  - type: "custom:button-card"
-                    entity: switch.back_ext_holiday_188
-                    name: Back Holiday
-                    template: ext_light_switch_button
+                #  - type: "custom:button-card"
+                #    entity: switch.back_ext_holiday_188
+                #    name: Back Holiday
+                #    template: ext_light_switch_button
 
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
 
                   - type: "custom:button-card"
                     color_type: blank-card
@@ -650,7 +687,7 @@ views:
   - title: Media
     path: media
     icon: mdi:play-circle-outline
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
   # Living Room Media
       - type: custom:vertical-stack-in-card
@@ -722,9 +759,10 @@ views:
                 entity: switch.lr_steam
                 icon: mdi:steam
                 template: harmony_button
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
+              - type: custom:button-card
+                entity: switch.lr_xbox
+                icon: mdi:xbox
+                template: harmony_button
 
               - type: "custom:button-card"
                 entity: remote.living_room
@@ -969,7 +1007,7 @@ views:
   - title: Sensors
     path: sensors
     icon: mdi:gauge
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
       - type: vertical-stack
         cards:
@@ -1000,9 +1038,14 @@ views:
                 color: rgb(155, 0, 0)
                 template: sensor_button
               - type: "custom:button-card"
-                entity: binary_sensor.smoke_sensor_122
+                entity: binary_sensor.smoke_sensor_197
                 icon: mdi:smoke-detector
-                name: Smoke Sensor
+                name: Smoke
+                template: sensor_button
+              - type: "custom:button-card"
+                entity: binary_sensor.co_sensor_198
+                icon: mdi:smoke-detector
+                name: CO
                 template: sensor_button
           - type: horizontal-stack
             cards:
@@ -1031,7 +1074,13 @@ views:
                 show_state: true
                 template: sensor_button
               - type: "custom:button-card"
-                entity: switch.smoke_sensor_122
+                entity: switch.smoke_sensor_197
+                icon: mdi:smoke-detector
+                name: "Armed: "
+                show_state: true
+                template: sensor_button
+              - type: "custom:button-card"
+                entity: switch.co_sensor_198
                 icon: mdi:smoke-detector
                 name: "Armed: "
                 show_state: true
@@ -1060,14 +1109,30 @@ views:
                   - sensor.temperature_sensor_167
                 name: Temp
                 icon: mdi:thermometer-lines
+                #line_color: rgb(0, 148, 10)
+                show:
+                  points: hover
+                color_thresholds:
+                  - value: 65
+                    color: blue
+                  - value: 70
+                    color: yellow
+                  - value: 78
+                    color: red
               - type: "custom:mini-graph-card"
                 entities:
                   - sensor.humidity_sensor_169
                 name: Humidity
+                line_color: blue
+                show:
+                  points: hover
               - type: "custom:mini-graph-card"
                 entities:
                   - sensor.light_sensor_168
                 name: Light
+                line_color: '#e74c3c'
+                show:
+                  points: hover
 #      - type: vertical-stack
 #        cards:
 #          - type: "custom:button-card"
@@ -1110,39 +1175,41 @@ views:
             aspect_ratio: 75%
           - type: weather-forecast
             entity: weather.weather
-      - type: vertical-stack
+
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: "custom:sun-card"
+            name: Sun
+
+          - type: "custom:button-card"
+            entity: sensor.solar_angle
+            name: "Current Angle"
+            icon: mdi:weather-sunny
+            show_state: true
+            show_name: true
+            show_icon: false
+            layout: name_state
+            styles:
+              name:
+                - justify-self: left
+                - padding-left: 20px
+              state:
+                - justify-self: left
+                - padding-left: 20px
+
+      - type: custom:vertical-stack-in-card
         cards:
           - type: "custom:button-card"
-            name: Sun
             template: general_label
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.sunrise_time
-                name: Sunrise
-                icon: mdi:weather-sunset-up
-              - type: sensor
-                entity: sensor.sunset_time
-                name: Sunset
-                icon: mdi:weather-sunset-down
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.solar_angle
-                name: Sun Angle
-                icon: mdi:weather-sunny
-          - type: vertical-stack
-            cards:
-              - type: "custom:button-card"
-                template: general_label
-                name: Space
-              - type: picture-entity
-                camera_image: camera.solar_x_rays
-                entity: camera.solar_x_rays
-                show_state: false
-              - type: picture-entity
-                camera_image: camera.geomagnetic_field
-                entity: camera.geomagnetic_field
-                show_state: false
+            name: Space Weather
+          - type: picture-entity
+            camera_image: camera.solar_x_rays
+            entity: camera.solar_x_rays
+            show_state: false
+          - type: picture-entity
+            camera_image: camera.geomagnetic_field
+            entity: camera.geomagnetic_field
+            show_state: false
 
 #
 # People tab
@@ -1150,7 +1217,7 @@ views:
   - title: People
     path: people
     icon: mdi:account
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
 
       - type: vertical-stack
@@ -1373,7 +1440,7 @@ views:
   - title: System
     path: system
     icon: mdi:home-assistant
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
 
 # Network Info
@@ -1385,7 +1452,6 @@ views:
             template: general_label
           - type: horizontal-stack
             cards:
-
               - type: custom:button-card
                 name: "Public IP:"
                 entity_picture: /local/network.jpg
@@ -1426,69 +1492,6 @@ views:
             name: HASS/System
             template: general_label
 
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Restart Hass
-                entity: script.restart_ha
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  entity: script.restart_ha
-
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Reload Core
-                entity: script.reload_core
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  entity: script.reload_core
-
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Reload Groups
-                entity: script.reload_groups
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  entity: script.reload_groups
-
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Reload Automations
-                entity: script.reload_automations
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  entity: script.reload_automations
-
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Restart Vera
-                entity: scene.reboot_vera
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: scene.turn_on
-                  entity: scene.reboot_vera
-
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
 
           - type: horizontal-stack
             cards:
@@ -1527,6 +1530,71 @@ views:
                 styles:
                   card:
                     - font-size: 14px
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.uptime
+                name: "Uptime:"
+                show_state: true
+                show_icon: false
+              - type: custom:button-card
+                entity: sensor.last_boot
+                name: "Last Boot:"
+                show_state: true
+                show_icon: false
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.processor_use
+                name: "Procesor"
+                line_color: rgb(28, 132, 255)
+                show:
+                  labels: hover
+                  points: false
+                  state: false
+                line_width: 3
+                points_per_hour: 30
+                hours_to_show: 1
+              - type: "custom:mini-graph-card"
+                name: "System:"
+                entities:
+                  - sensor.memory_use_percent
+                name: "Memory"
+                line_color: green
+                show:
+                  labels: hover
+                  points: false
+                  state: false
+                line_width: 3
+                points_per_hour: 60
+                hours_to_show: 1
+
+
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Restart Vera
+                entity: scene.reboot_vera
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  entity: scene.reboot_vera
+
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+
 
  # Battery Levels
           - type: vertical-stack
@@ -1563,7 +1631,7 @@ views:
   - title: Cast
     path: cast
     icon: mdi:cast
-    theme: e-dark-mode
+    # theme: e-dark-mode
     cards:
         - type: custom:vertical-stack-in-card
 

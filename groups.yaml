@@ -1,6 +1,3 @@
-Climate:
-- sensor.temperature_sensor_167
-- climate.thermostat_147
 Exterior:
 - switch.back_spotlight_118
 - switch.front_porch_115
@@ -22,17 +19,19 @@ HolidayExterior:
 #- switch.deck_lights_108
 - switch.front_ext_holida_178
 - switch.back_ext_holiday_188
+
 Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
 - light.tv
 - switch.party_lights_173
 - lock.front_door_19
-#- script.party_time
+
 Kitchen:
 - switch.kitchen_light_183
 - light.cabinets
 - light.dining_room_lamp_160
+
 Man Cave:
 - switch.man_cave_lights_133
 - light.mancave_desk
@@ -79,42 +78,23 @@ Security Sensors:
 - binary_sensor.front_door1_1_139
 - switch.back_door_172
 - binary_sensor.back_door_172
-- switch.smoke_sensor_122
-- binary_sensor.smoke_sensor_122
 - binary_sensor.motion_sensor_128
 - binary_sensor.master_bath_sensor_121
 - switch.siren_113
+- binary_sensor.smoke_sensor_197
+- binary_sensor.co_sensor_198
+- switch.smoke_sensor_197
+- switch.co_sensor_198
+
 Harmony:
   entities:
   - sensor.harmony_living_room
   - input_select.living_room_tv
-Kodi:
-- media_player.living_room_kodi
-- media_player.bedroom_kodi
-Space Weather:
-  name: Space Weather
-  entities:
-  - camera.solar_xrays
-  - camera.geomagnetic_field
-sun_times:
-  name: Next Sunrise and Sunset
-  entities:
-  - sensor.sunrise_time
-  - sensor.sunset_time
-  - sensor.solar_angle
 untappd:
   entities:
   - sensor.untappd_last_badge_robotsfearme
   - sensor.untappd_last_checkin_robotsfearme
   - sensor.untappd_on_the_wishlist_robotsfearme
-House Modes:
-  control: hidden
-  icon: mdi:home-alternate
-  entities:
-  - sensor.homemode
-  - scene.switch_to_home
-  - scene.switch_to_away
-  - scene.switch_to_night
 CC Radio:
   name: Chromecast Radio
   entities:

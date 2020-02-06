@@ -39,6 +39,13 @@ watch_kodi:
     data:
       activity: "25502126"
 
+xbox:
+  sequence:
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: "43078030"
+
 tv:
   sequence:
   - service: remote.turn_on
