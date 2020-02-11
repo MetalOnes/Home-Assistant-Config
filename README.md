@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Upgrading to 0.105.3. Also added new notifications/actions for the HASS Android App
 * Upgrading to 0.105.1
 * Upgrading to 0.104.2
 * Upgrading to 0.103.3

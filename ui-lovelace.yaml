@@ -55,14 +55,13 @@ resources:
     type: module
   - url: /community_plugin/rgb-light-card/card.js
     type: module
+  - url: /community_plugin/roku-card/roku-card.js
+    type: module
 
 
 custom_header:
   compact_mode: true
   background: rgba(40, 40, 70, 0.95)
-  #tabs_color:
-  #  overview: green
-  #  lights: yellow
 
 background: var(--background-image)
 
@@ -101,8 +100,6 @@ views:
                 - height: 75px
               state:
                 - font-size: 38px
-
-
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
@@ -145,10 +142,6 @@ views:
 
       - type: vertical-stack
         cards:
-    #      - type: light
-    #        entity: light.lamp_107
-    #      - type: light
-    #        entity: light.dining_room_lamp_160
           - type: entities
             entities:
               - type: custom:slider-entity-row
@@ -201,103 +194,33 @@ views:
 
 
 # Int Lights on
-      - type: entity-filter
-        entities:
-          - entity: light.lamp_107
-            name: Living Room
-            tap_action:
-              action: toggle
-          - entity: light.tv
-            name: TV
-            tap_action:
-              action: toggle
-            icon: mdi:television
-          - entity: light.dining_room_lamp_160
-            name: Dining Room
-            tap_action:
-              action: toggle
-          - entity: switch.kitchen_light_183
-            name: Kitchen
-            tap_action:
-              action: toggle
-          - entity: light.cabinets
-            name: Cabinets
-            tap_action:
-              action: toggle
-          - entity: switch.man_cave_lights_133
-            name: Man Cave
-            tap_action:
-              action: toggle
-          - entity: light.mancave_desk
-            name: Desk Strip
-            tap_action:
-              action: toggle
-          - entity: light.wifi_box
-            name: Desk Puck
-            tap_action:
-              action: toggle
-          - entity: light.pin_board
-            name: Pin Board
-            tap_action:
-              action: toggle
-          - entity: light.vanity_light_120
-            name: Vanity Light
-            tap_action:
-              action: toggle
-          - entity: light.bedroom_eric_103
-            name: Bedroom (Right)
-            tap_action:
-              action: toggle
-          - entity: light.bedroom_val_104
-            name: Bedroom (Left)
-            tap_action:
-              action: toggle
-          - entity: switch.party_lights_173
-            icon: mdi:mushroom
-            tap_action:
-              action: toggle
-        state_filter:
-          - "on"
-        show_empty: false
+      - type: custom:auto-entities
         card:
           type: glance
           title: Interior
-          columns: 4
+
+        filter:
+          include:
+            - group: group.int_lights
+              state: "on"
+              options:
+                tap_action:
+                  action: toggle
+        show_empty: false
 
 # Ext Lights on
-      - type: entity-filter
-        entities:
-          - entity: switch.front_porch_115
-            name: Front Porch
-            tap_action:
-              action: toggle
-          - entity: switch.front_spotlight_135
-            name: Front Spotlight
-            tap_action:
-              action: toggle
-          - entity: switch.deck_lights_108
-            name: Deck Lights
-            tap_action:
-              action: toggle
-          - entity: switch.back_spotlight_118
-            name: Back Spotlight
-            tap_action:
-              action: toggle
-          - entity: switch.front_ext_holida_178
-            name: Front Holiday
-            tap_action:
-              action: toggle
-          - entity: switch.back_ext_holiday_188
-            name: Back Holiday
-            tap_action:
-              action: toggle
-        state_filter:
-          - "on"
-        show_empty: false
+      - type: custom:auto-entities
         card:
           type: glance
           title: Exterior
-          columns: 4
+        filter:
+          include:
+            - group: group.exterior
+              state: "on"
+              options:
+                tap_action:
+                  action: toggle
+        show_empty: false
 
 # Harmony Living Room card
       - type: custom:vertical-stack-in-card
@@ -369,6 +292,20 @@ views:
                 entity: switch.lr_xbox
                 icon: mdi:xbox
                 template: harmony_button
+              - type: custom:button-card
+                entity: script.tv_youtube
+                icon: mdi:youtube
+                name: YouTube
+
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
@@ -386,6 +323,14 @@ views:
                     #- margin: 10px 5px
                     - height: 70px
                     - background-color: var(--ha-card-background)
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Roku Remote
+            padding: 0
+            entities:
+              - type: custom:roku-card
+                entity: media_player.55_tcl_roku_tv
 
 
 # Calendar card
@@ -397,6 +342,7 @@ views:
         dateBottomFormat: ddd
         entities:
           - calendar.slacktishevents
+          - calendar.holidays_in_united_states
 
 
 
@@ -466,6 +412,9 @@ views:
                     entity: light.tv
                     name: TV
                     template: rgb_light_button
+                    state:
+                      - value: 'on'
+                        icon: mdi:flash
 
                   - type: "custom:button-card"
                     entity: light.dining_room_lamp_160
@@ -791,6 +740,32 @@ views:
             show_source: true
 
           - type: "custom:mini-media-player"
+            entity: media_player.55_tcl_roku_tv
+            name: TCL TV
+            icon: mdi:television-clean
+            artwork: cover
+            hide:
+              volume: true
+              controls: true
+            shortcuts:
+              columns: 2
+              buttons:
+                - type: script
+                  id: script.yoga_beg
+                  icon: mdi:meditation
+                - type: script
+                  id: script.yoga_stretch
+                  icon: mdi:yoga
+                - type: script
+                  id: script.vic_workout
+                  icon: mdi:human-handsup
+                - type: script
+                  id: script.15m_workout
+                  icon: mdi:karate
+
+
+
+          - type: "custom:mini-media-player"
             entity: media_player.living_room_kodi
             name: Living Room Kodi
             icon: mdi:kodi
@@ -990,6 +965,7 @@ views:
 #
   - title: Surveillance
     icon: mdi:cctv
+    path: cams
     panel: true
     cards:
       - type: custom:surveillance-card
@@ -1219,7 +1195,7 @@ views:
     icon: mdi:account
     # theme: e-dark-mode
     cards:
-
+# Who's home
       - type: vertical-stack
         cards:
           - type: horizontal-stack
@@ -1250,34 +1226,41 @@ views:
                     color: rgba(10, 10, 10, 0.4)
                     #icon: mdi:walk
                     entity_picture: /local/people/eric-walk.png
+                  - value: "Eisai"
+                    color: rgba(10, 10, 10, 0.4)
+                    #icon: mdi:walk
+                    entity_picture: /local/people/eric-work.png
 
               - type: custom:button-card
                 entity: person.val
                 tap_action:
                   action: more-info
+                entity_picture: /local/people/val.png
                 icon: mdi:home-account
                 color_type: card
                 color: auto
                 show_state: true
                 show_label: true
+                show_entity_picture: true
                 state:
                   - value: "home"
                     color: rgba(32, 178, 170, 0.4)
-                    icon: mdi:home-account
+                    entity_picture: /local/people/val.png
                   - value: "not_home"
                     color: rgba(10, 10, 10, 0.4)
-                    icon: mdi:walk
+                    entity_picture: /local/people/val-walk.png
+                  - value: "Food Lion"
+                    color: rgba(10, 10, 10, 0.4)
+                    entity_picture: /local/people/val-car.png
+          - type: map
+            #default_zoom: 12
+            aspect_ratio: 16x9
+            dark_mode: true
+            entities:
+              - person.eric
+              - person.val
 
-
-  #    - type: glance
-  #      title: People
-  #      entities:
-  #        - person.eric
-  #        - person.val
-
-  #    - type: 'custom:untappd-card'
-  #      entity: sensor.untappd_beer
-
+# Untappd Card
           - type: custom:button-card
             name: Beer
             template: general_label
@@ -1432,8 +1415,6 @@ views:
                   padding-left: 36px
                   padding-bottom: 1px
                   #text-shadow: 2px 2px 2px black
-
-
 #
 # System tab
 #
@@ -1442,9 +1423,7 @@ views:
     icon: mdi:home-assistant
     # theme: e-dark-mode
     cards:
-
 # Network Info
-
       - type: vertical-stack
         cards:
           - type: custom:button-card
@@ -1463,7 +1442,6 @@ views:
                 show_last_changed: true
                 size: 64px
                 layout: icon_name_state2nd
-
               - type: custom:button-card
                 name: "SSL Cert Expiry:"
                 entity: sensor.ssl_certificate_expiry
@@ -1482,17 +1460,12 @@ views:
                           if (entity.state <= 60 && entity.state >= 30) return 'orange';
                           else return 'darkred';
                         ]]]
-
-
-
-# Device commands button-card grouping
+# System info and commands
       - type: vertical-stack
         cards:
           - type: custom:button-card
             name: HASS/System
             template: general_label
-
-
           - type: horizontal-stack
             cards:
               - type: custom:button-card
@@ -1571,8 +1544,6 @@ views:
                 points_per_hour: 60
                 hours_to_show: 1
 
-
-
           - type: horizontal-stack
             cards:
               - type: custom:button-card
@@ -1584,7 +1555,6 @@ views:
                   action: call-service
                   service: scene.turn_on
                   entity: scene.reboot_vera
-
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
@@ -1594,16 +1564,12 @@ views:
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
-
-
  # Battery Levels
-          - type: vertical-stack
-            #title: Batteries
+          - type: custom:vertical-stack-in-card
             cards:
               - type: custom:button-card
                 name: Batteries
                 template: general_label
-
               - type: custom:auto-entities
                 card:
                   type: custom:bar-card
@@ -1616,13 +1582,15 @@ views:
                     - value: 100
                       color: 'rgba(64, 191, 64, 0.5)'
                   title_position: inside
-                  columns: 2
-                  padding: 2px
+                  columns: 3
+                  padding: 4px
                   align: left
                   title_style:
-                    font-size: 16px
-                    value_style:
-                      font-size: 8px
+                    font-size: 14px
+                  value_style:
+                      font-size: 10px
+                  background_style:
+                    border: 2px solid white
                 filter:
                   include:
                     - attributes:
@@ -1687,15 +1655,15 @@ views:
               show_name: false
               show_state: false
 
-        - type: custom:list-card
-          entity: sensor.wral
-          #title: WRAL News
-          feed_attribute: entries
-          columns:
-            - title: WRAL News
-              field: title
-              style:
-                - white-space: nowrap
+#        - type: custom:list-card
+#          entity: sensor.wral
+#          #title: WRAL News
+#          feed_attribute: entries
+#          columns:
+#            - title: WRAL News
+#              field: title
+#              style:
+#                - white-space: nowrap
             #- title: Description
             #  field: description
 

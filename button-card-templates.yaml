@@ -348,3 +348,6 @@
         - font-size: 70%
       state:
         - font-size: 70%
+
+  video_button:
+    color: green

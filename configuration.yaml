@@ -61,6 +61,7 @@ recorder:
       - camera
       - zone
       - weather
+      - time
     entities:
       - sensor.sunrise_time
       - sensor.sunset_time
@@ -78,6 +79,9 @@ recorder:
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
+      - sensor.time
+      - sensor.time_date
+      - sensor.time_utc
       - sensor.solar_angle
       - sensor.ssl_certificate_expiry
       - sensor.flyers
@@ -93,6 +97,7 @@ recorder:
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
 
+
 history:
   exclude:
     domains:
@@ -107,6 +112,9 @@ history:
     entities:
       - sensor.sunrise_time
       - sensor.sunset_time
+      - sensor.time
+      - sensor.time_date
+      - sensor.time_utc
       - sensor.myipopendnscom
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_cloud_coverage
@@ -200,12 +208,16 @@ unifi:
 person:
   - name: Eric
     id: eric
+    user_id: b1c52f6d36b44cc2ad9cf32fbe0121bb
     device_trackers:
       - device_tracker.galaxy_s7
+      - device_tracker.sm_g930v
   - name: Val
     id: val
+    user_id: f2ccf063f8ca4ca39dd9df5c8e6ff022
     device_trackers:
       - device_tracker.galaxy_j7
+      - device_tracker.sm_j700p
 
 ##########################################
 # Lights
@@ -291,6 +303,10 @@ media_player:
 # Denon Receiver
   - platform: denonavr
     host: !secret denonavr_ip
+
+# Roku TV
+roku:
+  - host: 192.168.1.177
 
 ##########################################
 # Cams
@@ -441,16 +457,16 @@ sensor:
 #      - ads_percentage_today
 
 # RSS Feed
-  - platform: feedparser
-    feed_url: 'http://www.wral.com/news/rss/48/'
-    name: WRAL
-    show_topn: 10
-    inclusions:
-      - title
-      - description
-      - category
-      #- media:thumbnail
-      - pubDate
+#  - platform: feedparser
+#    feed_url: 'http://www.wral.com/news/rss/48/'
+#    name: WRAL
+#    show_topn: 10
+#    inclusions:
+#      - title
+#      - description
+#      - category
+#      - media:thumbnail
+#      - pubDate
 
 # NHL
   - platform: nhl_api
@@ -540,7 +556,7 @@ sensor:
       - type: memory_use_percent
       - type: processor_use
       - type: last_boot
-      
+
 
 # Date and Time
   - platform: time_date
@@ -602,23 +618,6 @@ sensor:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
-#  - platform: duke_energy
-#    username: !secret duke_user
-#    password: !secret duke_pass
-
-  - platform: template
-    sensors:
-      power_avg_use:
-        friendly_name: Average Usage
-        value_template: "{{ state_attr('sensor.duke_energy_43413318', 'last_bills_average_usage') }}"
-        unit_of_measurement: 'kW-h'
-  - platform: template
-    sensors:
-      power_lastbill_use:
-        friendly_name: Last Bill Usage
-        value_template: "{{ state_attr('sensor.duke_energy_43413318', 'last_bills_usage') }}"
-        unit_of_measurement: 'kW-h'
-
 binary_sensor:
 
 ##########################################
@@ -662,28 +661,18 @@ notify:
   - name: telegram_v
     platform: telegram
     chat_id: !secret v_chat_id
+  - name: all_devices
+    platform: group
+    services:
+      - service: mobile_app_galaxys7
+      - service: mobile_app_sm_j700p
+      - service: telegram_e
+
 #  - name: notify_chrome
 #    platform: html5
 #    gcm_api_key: !secret gcm_sender_key
 #    gcm_sender_id: !secret gcm_sender_id
 
-#########################################
-# Zones
-#########################################
-
-zone:
-  name: !secret e_work_name
-  latitude: !secret e_work_lat
-  longitude: !secret e_work_long
-  radius: 200
-  icon: mdi:company
-
-zone 2:
-  name: !secret v_work_name
-  latitude: !secret v_work_lat
-  longitude: !secret v_work_long
-  radius: 200
-  icon: mdi:cart
 
 #########################################
 # Emulated Hue Bridge
@@ -797,7 +786,14 @@ switch:
           data:
             entity_id: remote.living_room
             activity: 'PowerOff'
-
+#########################################
+# Shell Commands
+#########################################
+shell_command:
+  yoga_stretch: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=GGJzZx4H2K4&mediaType=live"
+  yoga_beg: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=_2PB4J5h7bI&mediaType=live"
+  vic_workout: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=PWEdJRRndkQ&mediaType=live"
+  15m_workout: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=GS_z6FG_jqE&mediaType=live"
 #########################################
 # Includes
 #########################################

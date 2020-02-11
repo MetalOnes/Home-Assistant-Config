@@ -62,6 +62,8 @@ Int Lights:
 - switch.man_cave_lights_133
 - light.mancave_desk
 - light.pin_board
+- light.tv
+- light.wifi_box
 #- switch.party_lights_173
 Living Lights:
 - light.lamp_107
@@ -104,7 +106,6 @@ CC Radio:
   - input_number.volume_radio
 
 Vera Scenes:
-  view: true
   entities:
     - scene.bedroom_lights_off
     - scene.both_br_lamps_to_20

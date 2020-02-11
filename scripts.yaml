@@ -1,35 +1,3 @@
-morning_routine:
-  sequence:
-    - service: scene.switch_to_home
-    - service: scene.camera_privacy
-    - service: switch.turn_on
-      entity_id: switch.deck_lights_108
-
-# HASS Stuff
-restart_ha:
-  alias: Restart HomeAssistant
-  sequence:
-    - alias: Restart HA
-      service: homeassistant.restart
-
-reload_core:
-  alias: Reload Core config
-  sequence:
-    - alias: Reload Core
-      service: homeassistant.reload_core_config
-
-reload_automations:
-  alias: Reload Automations
-  sequence:
-    - alias: Reload-Automations
-      service: automation.reload
-
-reload_groups:
-  alias: Reload Groups
-  sequence:
-    - alias: Reload-Groups
-      service: group.reload
-
 # Harmony Stuff
 
 watch_kodi:
@@ -85,3 +53,31 @@ tv_off:
   sequence:
   - service: remote.turn_off
     entity_id: remote.living_room
+
+# Roku Stuff
+tv_youtube:
+  alias: "Start YouTube on TV"
+  sequence:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.55_tcl_roku_tv
+        source: 837
+
+
+
+yoga_stretch:
+  alias: "Yoga Stretch"
+  sequence:
+    - service: shell_command.yoga_stretch
+yoga_beg:
+  alias: "Yoga Beginners"
+  sequence:
+    - service: shell_command.yoga_beg
+vic_workout:
+  alias: "VS Model Workout"
+  sequence:
+    - service: shell_command.vic_workout
+15m_workout:
+  alias: "15 Minute Workout"
+  sequence:
+    - service: shell_command.15m_workout

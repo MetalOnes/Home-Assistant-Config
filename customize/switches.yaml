@@ -14,6 +14,10 @@ switch.deck_lights_108:
   emulated_hue_name: "Deck Lights"
   icon: mdi:white-balance-iridescent
 
+switch.kitchen_light_183:
+  icon: mdi:ceiling-light
+  friendly_name: Kitchen Light
+
 switch.front_porch_115:
   icon: mdi:coach-lamp
 
