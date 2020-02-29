@@ -5,11 +5,17 @@ scene.bedroom_lights_off:
 scene.switch_to_home:
   friendly_name: Switch to Home Mode
   icon: mdi:home-variant
+  action_name: Go
 
 scene.switch_to_night:
   friendly_name: Switch to Night Mode
   icon: mdi:weather-night
+  action_name: Go
 
 scene.switch_to_away:
   friendly_name: Switch to Away Mode
   icon: mdi:home-minus
+  action_name: Go
+
+scene.both_br_lamps_to_20:
+  icon: mdi:wall-sconce-round

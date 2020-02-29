@@ -5,7 +5,7 @@ switch.front_door1_1_139:
   friendly_name: Front Door Sensor
 
 switch.man_cave_lights_133:
-  icon: mdi:light-switch
+  icon: mdi:led-strip
   emulated_hue_hidden: false
   emulated_hue_name: "Man Cave Lights"
 
@@ -37,9 +37,17 @@ switch.cabinet_lights_123:
   friendly_name: Air Purifier
   icon: mdi:air-filter
 
-switch.party_lights_173:
+switch.couch_lights_185:
+  friendly_name: Couch Lights
+  icon: mdi:sofa
+
+switch.music_lights_186:
+  friendly_name: Music Lights
+  icon: mdi:floor-lamp-variant
+
+switch.party_lights_184:
   friendly_name: Party Lights
-  icon: mdi:mushroom
+  icon: mdi:lava-lamp
 
 switch.lr_tv:
   icon: mdi:television
@@ -58,3 +66,8 @@ switch.lr_music:
 
 switch.lr_chromecast:
   icon: mdi:cast
+
+switch.camera_position:
+  icon: mdi:cctv
+  friendly_name: Camera Privacy
+  assumed_state: false

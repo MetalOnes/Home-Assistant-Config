@@ -24,7 +24,9 @@ Living Room:
 - sensor.harmony_living_room
 - light.lamp_107
 - light.tv
-- switch.party_lights_173
+- switch.couch_lights_185
+- switch.music_lights_186
+- switch.party_lights_184
 - lock.front_door_19
 
 Kitchen:
@@ -51,7 +53,9 @@ BR_Lights:
 Living_Area:
 - light.lamp_107
 - light.dining_room_lamp_160
-- switch.party_lights_173
+- switch.couch_lights_185
+- switch.music_lights_186
+- switch.party_lights_184
 - light.tv
 - switch.xmas_tree_both_184
 Int Lights:
@@ -64,7 +68,10 @@ Int Lights:
 - light.pin_board
 - light.tv
 - light.wifi_box
-#- switch.party_lights_173
+- switch.couch_lights_185
+- switch.music_lights_186
+- switch.party_lights_184
+- light.vanity_light_120
 Living Lights:
 - light.lamp_107
 - light.cabinets
@@ -85,9 +92,10 @@ Security Sensors:
 - switch.siren_113
 - binary_sensor.smoke_sensor_197
 - binary_sensor.co_sensor_198
-- switch.smoke_sensor_197
-- switch.co_sensor_198
-
+Cameras:
+- camera.back_door
+- camera.front_door
+- camera.man_cave_camera
 Harmony:
   entities:
   - sensor.harmony_living_room

@@ -63,8 +63,6 @@ tv_youtube:
         entity_id: media_player.55_tcl_roku_tv
         source: 837
 
-
-
 yoga_stretch:
   alias: "Yoga Stretch"
   sequence:
@@ -81,3 +79,8 @@ vic_workout:
   alias: "15 Minute Workout"
   sequence:
     - service: shell_command.15m_workout
+
+simpsons:
+  alias: "Random Simpsons"
+  sequence:
+    - service: rest_command.simpsons

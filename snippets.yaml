@@ -1,0 +1,64 @@
+# Lovelace Home Mode grouping
+      - type: vertical-stack
+        cards:
+          - type: "custom:button-card"
+            entity: sensor.homemode
+            color_type: card
+            name: 'Home Mode'
+            show_label: false
+            show_name: false
+            show_state: true
+            state:
+              - value: 'Away'
+                color: rgba(130, 0, 0, 0.5)
+                icon: mdi:home-minus
+              - value: 'Home'
+                color: rgba(0, 130, 0, 0.5)
+                icon: mdi:home-variant
+              - value: 'Night'
+                color: rgba(111, 0, 110, 0.4)
+                icon: mdi:weather-night
+            layout: icon_state
+            styles:
+              card:
+                - height: 75px
+              state:
+                - font-size: 38px
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: scene.switch_to_home
+                name: Home
+                template: home-mode_buttons
+                color_type: card
+                color: rgb(0, 99, 31, 0.4)
+
+              - type: custom:button-card
+                entity: scene.switch_to_night
+                name: Night
+                template: home-mode_buttons
+                color_type: card
+                color: rgb(111, 0, 110, 0.4)
+
+              - type: "custom:button-card"
+                entity: scene.switch_to_away
+                name: Away
+                template: home-mode_buttons
+                color_type: card
+                color: rgba(130, 0, 0, 0.5)
+
+              - type: "custom:button-card"
+                entity: lock.front_door_19
+                show_state: true
+                name: "Front Door: "
+                tap_action:
+                  action: more-info
+                state:
+                  - value: "locked"
+                    color: rgb(130, 0, 0, 0.5)
+                    icon: mdi:lock
+                  - value: "Unlocked"
+                    color: rgb(0, 99, 31, 0.5)
+                    icon: mdi:lock-open
+                template: home-mode_buttons
+                color_type: card

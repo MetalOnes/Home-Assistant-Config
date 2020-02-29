@@ -29,16 +29,14 @@
     state:
       - value: 'on'
         styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: '#FFFFFF'
+            - color: var(--state-icon-active-color)
           name:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           label:
             - color: rgba(255, 214, 10, 1)
           state:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
       - value: 'off'
         styles:
           state:
@@ -99,8 +97,6 @@
             - color: 'var(--disabled-text-color)'
       - value: 'on'
         styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
       - value: 'unavailable'
         styles:
           state:
@@ -139,14 +135,12 @@
     state:
       - value: 'on'
         styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: '#FFFFFF'
+            - color: var(--state-icon-active-color)
           state:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           name:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           label:
             - color: rgba(255, 214, 10, 1)
       - value: 'off'
@@ -197,16 +191,14 @@
     state:
       - value: 'on'
         styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           icon:
-            - color: "#FFFFFF"
+            - color: var(--state-icon-active-color)
           name:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           label:
             - color: rgba(255, 214, 10, 1)
           state:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
       - value: 'off'
         styles:
           state:
@@ -318,6 +310,12 @@
         - height: 96px
       name:
         - font-size: 16px
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      service_data:
+        entity_id: >
+          [[[ return entity.entity_id ]]]
 
   sensor_button:
     color_type: card
@@ -327,8 +325,6 @@
     state:
       - value: 'on'
         styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
           name:
             - color: white
           icon:

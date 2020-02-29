@@ -11,7 +11,6 @@ homeassistant:
 
 frontend:
   themes: !include_dir_merge_named themes/
-  javascript_version: latest
 
 lovelace:
   mode: yaml
@@ -24,6 +23,7 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
+    homeassistant.components.vera: debug
 #    homeassistant.components.device_tracker: debug
 
 system_health:
@@ -281,6 +281,15 @@ vera:
 #  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120]
 
 ##########################################
+# Thermostat
+##########################################
+climate:
+  - platform: honeywell
+    region: us
+    username: !secret tcc_un
+    password: !secret tcc_pw
+
+##########################################
 # Media Players
 ##########################################
 
@@ -305,8 +314,8 @@ media_player:
     host: !secret denonavr_ip
 
 # Roku TV
-roku:
-  - host: 192.168.1.177
+#roku:
+#  - host: 192.168.1.177
 
 ##########################################
 # Cams
@@ -335,6 +344,11 @@ camera:
     username: !secret mccam_user
     password: !secret mccam_pass
 
+# Deck Cam
+  - platform: ffmpeg
+    input: !secret deckcam_url
+    name: Deck Cam
+
 #### Not actual cams, but images to use in HA
 
 # Solar alerts
@@ -347,19 +361,13 @@ camera:
     still_image_url: http://www.n3kl.org/sun/images/kpstatus.gif
     name: Geomagnetic Field
 
-# NWS Radar
-  - platform: nwsradar
-    station: RAX
-    style: Enhanced
-    frames: 10
-
 ##########################################
 # Sensors
 ##########################################
 
 sensor:
 
-# LR Temp
+# Living Room Temp
   - platform: template
     sensors:
       current_temperature:
@@ -412,7 +420,6 @@ sensor:
       - max_elevation
       - daylight
 
-
 # Dark Sky
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -455,18 +462,6 @@ sensor:
 #      - dns_queries_today
 #      - ads_blocked_today
 #      - ads_percentage_today
-
-# RSS Feed
-#  - platform: feedparser
-#    feed_url: 'http://www.wral.com/news/rss/48/'
-#    name: WRAL
-#    show_topn: 10
-#    inclusions:
-#      - title
-#      - description
-#      - category
-#      - media:thumbnail
-#      - pubDate
 
 # NHL
   - platform: nhl_api
@@ -633,7 +628,6 @@ weather:
 ##########################################
 
 remote:
-
 # Harmony Remote
   - platform: harmony
     name: Living Room
@@ -667,12 +661,6 @@ notify:
       - service: mobile_app_galaxys7
       - service: mobile_app_sm_j700p
       - service: telegram_e
-
-#  - name: notify_chrome
-#    platform: html5
-#    gcm_api_key: !secret gcm_sender_key
-#    gcm_sender_id: !secret gcm_sender_id
-
 
 #########################################
 # Emulated Hue Bridge
@@ -786,6 +774,20 @@ switch:
           data:
             entity_id: remote.living_room
             activity: 'PowerOff'
+
+# Camera Privacy Toggle
+  - platform: command_line
+    switches:
+      camera_position:
+        command_on: !secret bdcam_priv
+        command_off: !secret bdcam_def
+rest_command:
+  simpsons:
+    url: 'http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/video/Simpsons.xsp"}}}'
+    method: POST
+    content_type: 'application/json'
+    headers:
+      authorization: 'Basic a29kaTprb2Rp'
 #########################################
 # Shell Commands
 #########################################

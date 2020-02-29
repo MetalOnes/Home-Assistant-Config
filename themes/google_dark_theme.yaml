@@ -49,6 +49,7 @@ Google Dark Theme:
   # Cards
   ha-card-border-radius: "15px"
   ha-card-box-shadow: 1px 1px 5px 0px rgb(12, 12, 14)
+  ha-card-background: "#5f6167"
   paper-card-background-color: "#202124"
   paper-listbox-background-color: "#202124"
   # Switches
@@ -65,3 +66,5 @@ Google Dark Theme:
   table-row-background-color: var(--primary-background-color)
   table-row-alternative-background-color: var(--secondary-background-color)
   data-table-background-color: var(--primary-background-color)
+  # Other, added
+  paper-item-icon-color: var(--state-icon-active-color)
