@@ -23,7 +23,8 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
-    homeassistant.components.vera: debug
+    #homeassistant.components.vera: debug
+    pychromecast.socket_client: fatal
 #    homeassistant.components.device_tracker: debug
 
 system_health:
