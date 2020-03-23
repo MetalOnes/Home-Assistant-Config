@@ -1,64 +1,66 @@
 resources:
-  - url: /community_plugin/button-card/button-card.js
+  - url: /hacsfiles/button-card/button-card.js
     type: module
-  - url: /community_plugin/mini-media-player/mini-media-player.js
+  - url: /hacsfiles/mini-media-player/mini-media-player.js
     type: module
-  - url: /community_plugin/dual-gauge-card/dual-gauge-card.js
+  - url: /hacsfiles/dual-gauge-card/dual-gauge-card.js
     type: module
-  - url: /community_plugin/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
+  - url: /hacsfiles/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
     type: module
-  - url: /community_plugin/surveillance-card/surveillance-card.js
+  - url: /hacsfiles/surveillance-card/surveillance-card.js
     type: module
-  - url:  /community_plugin/simple-thermostat/simple-thermostat.js
+  - url:  /hacsfiles/simple-thermostat/simple-thermostat.js
     type: module
   - url: https://unpkg.com/moment@2.23.0/moment.js
     type: js
-  - url: /community_plugin/calendar-card/calendar-card.js
+  - url: /hacsfiles/calendar-card/calendar-card.js
     type: module
-  - url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
+  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
     type: module
-  - url: /community_plugin/vertical-style-card/vertical-style-card.js
+  - url: /hacsfiles/vertical-style-card/vertical-style-card.js
     type: js
-  - url: /community_plugin/banner-card/banner-card.js
+  - url: /hacsfiles/banner-card/banner-card.js
     type: module
-  - url: /community_plugin/untappd-card/untappd-card.js
+  - url: /hacsfiles/untappd-card/untappd-card.js
     type: module
-  - url: /community_plugin/love-lock-card/love-lock-card.js
+  - url: /hacsfiles/love-lock-card/love-lock-card.js
     type: js
-  - url: /community_plugin/custom-header/custom-header.js
+  - url: /hacsfiles/custom-header/custom-header.js
     type: module
-  - url: /community_plugin/bar-card/bar-card.js
+  - url: /hacsfiles/bar-card/bar-card.js
     type: js
-  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
-  - url: /community_plugin/lovelace-card-tools/card-tools.js
+  - url: /hacsfiles/lovelace-card-tools/card-tools.js
     type: js
-  - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+  - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
     type: js
-  - url: /community_plugin/light-entity-card/light-entity-card.js
+  - url: /hacsfiles/light-entity-card/light-entity-card.js
     type: js
-  - url: /community_plugin/upcoming-media-card/upcoming-media-card.js
+#  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
+#    type: js
+  - url: /hacsfiles/weather-card/weather-card.js
+    type: module
+  - url: /hacsfiles/text-divider-row/text-divider-row.js
+    type: module
+  - url: /hacsfiles/list-card/list-card.js
     type: js
-  - url: /community_plugin/weather-card/weather-card.js
+  - url: /hacsfiles/lovelace-card-mod/card-mod.js
     type: module
-  - url: /community_plugin/text-divider-row/text-divider-row.js
+  - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
     type: module
-  - url: /community_plugin/list-card/list-card.js
+  - url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
+    type: module
+  - url: /hacsfiles/sun-card/sun-card.js
+    type: module
+  - url: /hacsfiles/rgb-light-card/card.js
+    type: module
+  - url: /hacsfiles/roku-card/roku-card.js
+    type: module
+  - url: /hacsfiles/lovelace-swipe-navigation/swipe-navigation.js
     type: js
-  - url: /community_plugin/lovelace-card-mod/card-mod.js
+  - url: /hacsfiles/lovelace-paper-buttons-row/paper-buttons-row.js
     type: module
-  - url: /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
-    type: module
-  - url: /community_plugin/lovelace-fold-entity-row/fold-entity-row.js
-    type: module
-  - url: /community_plugin/sun-card/sun-card.js
-    type: module
-  - url: /community_plugin/rgb-light-card/card.js
-    type: module
-  - url: /community_plugin/roku-card/roku-card.js
-    type: module
-  - url: /community_plugin/lovelace-swipe-navigation/swipe-navigation.js
-    type: js
 
 
 custom_header:
@@ -255,33 +257,25 @@ views:
                 entity: switch.lr_xbox
                 icon: mdi:xbox
                 template: harmony_button
-              - type: custom:button-card
-                entity: script.tv_youtube
-                icon: mdi:youtube
-                name: YouTube
-                template: harmony_button
+              - type: "custom:button-card"
+                color_type: blank-card
 
 
           - type: horizontal-stack
             cards:
               - type: custom:button-card
-                entity: scene.music_lights
-                name: Party
+                entity: script.tv_youtube
+                icon: mdi:youtube
+                name: YouTube
                 template: harmony_button
-                tap_action:
-                  action: call-service
-                  service: scene.turn_on
-                  service_data:
-                    entity_id: scene.music_lights
-                styles:
-                  icon:
-                    - color: white
-                  name:
-                    - color: white
+              - type: custom:button-card
+                entity: script.tv_pluto
+                icon: mdi:television-classic
+                name: PlutoTV
+                template: harmony_button
               - type: "custom:button-card"
                 color_type: blank-card
-              - type: "custom:button-card"
-                color_type: blank-card
+
               - type: "custom:button-card"
                 entity: remote.living_room
                 icon: mdi:power
@@ -299,14 +293,52 @@ views:
                     #- margin: 10px 5px
                     - height: 70px
                     - background-color: var(--ha-card-background)
-        #  - type: custom:fold-entity-row
-        #    head:
-        #      type: section
-        #      label: Roku Remote
-        #    padding: 0
-        #    entities:
-        #      - type: custom:roku-card
-        #        entity: media_player.55_tcl_roku_tv
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: TV Shortcuts
+            padding: 0
+            entities:
+              - type: custom:paper-buttons-row
+                buttons:
+                  - entity: shell_command.tv_pbs
+                    name: "4.1 PBS"
+                    tap_action:
+                      action: call-service
+                      service: shell_command.tv_pbs
+                  - entity: shell_command.tv_wral
+                    name: "5.1 NBC"
+                    tap_action:
+                      action: call-service
+                      service: shell_command.tv_wral
+                  - entity: shell_command.tv_abc
+                    name: "11.1 ABC"
+                    tap_action:
+                      action: call-service
+                      service: shell_command.tv_abc
+                  - entity: shell_command.tv_cbs
+                    name: "17.1 CBS"
+                    tap_action:
+                      action: call-service
+                      service: shell_command.tv_cbs
+                  - entity: shell_command.tv_fox
+                    name: "50.1 Fox"
+                    tap_action:
+                      action: call-service
+                      service: shell_command.tv_fox
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Roku Remote
+            padding: 0
+            entities:
+              - type: custom:roku-card
+                entity: media_player.55_tcl_roku_tv
+
+
+
+
+
 
 
 # Calendar card
@@ -679,37 +711,20 @@ views:
             power_color: true
             show_source: true
 
-        #  - type: "custom:mini-media-player"
-        #    entity: media_player.55_tcl_roku_tv
-        #    name: TCL TV
-        #    icon: mdi:television-clean
-        #    artwork: cover
-        #    hide:
-        #      volume: true
-        #      controls: true
-        #    shortcuts:
-        #      columns: 2
-        #      buttons:
-        #        - type: script
-        #          id: script.yoga_beg
-        #          icon: mdi:meditation
-        #        - type: script
-        #          id: script.yoga_stretch
-        #          icon: mdi:yoga
-        #        - type: script
-        #          id: script.vic_workout
-        #          icon: mdi:human-handsup
-        #        - type: script
-        #          id: script.15m_workout
-        #          icon: mdi:karate
-
-
+          - type: "custom:mini-media-player"
+            entity: media_player.55_tcl_roku_tv
+            name: TCL TV
+            icon: mdi:television-clean
+            artwork: cover
+            hide:
+              volume: true
+              controls: true
 
           - type: "custom:mini-media-player"
             entity: media_player.living_room_kodi
             name: Living Room Kodi
             icon: mdi:kodi
-            artwork: full-cover
+            artwork: cover
             hide:
               volume: true
               power: true
@@ -1065,6 +1080,12 @@ views:
         cards:
           - type: "custom:sun-card"
             name: Sun
+            entities:
+              max_elevation: sun.sun
+              sunrise: sensor.sunrise
+              sunset: sensor.sunset
+              noon: sensor.solar_noon
+              moon: sensor.moon
 
           - type: "custom:button-card"
             entity: sensor.solar_angle
@@ -1484,65 +1505,6 @@ views:
                 - attributes:
                     battery_level: <=100
 
-  - title: Cast
-    path: cast
-    icon: mdi:cast
-    cards:
-        - type: custom:vertical-stack-in-card
-
-          cards:
-            - type: 'custom:text-divider-row'
-              text: "Today"
-            - type: horizontal-stack
-              cards:
-                - type: custom:button-card
-                  entity: sensor.simple_time
-                  show_state: true
-                  show_icon: false
-                  show_name: false
-                - type: custom:button-card
-                  entity: sensor.simple_date
-                  show_state: true
-                  show_icon: false
-                  show_name: false
-
-
-
-            - type: 'custom:text-divider-row'
-              text: "Upcoming"
-
-            - type: custom:calendar-card
-              #title: "Upcoming Events"
-              hideHeader: true
-              numberOfDays: 90
-              timeFormat: h:mma
-              dateTopFormat: MMM DD
-              dateBottomFormat: ddd
-              entities:
-                - calendar.slacktishevents
-
-            - type: entities
-              show_header_toggle: false
-              entities:
-                - entity: sensor.flyers
-                - entity: sensor.away_team
-                - entity: sensor.home_team
-
-        - type: custom:vertical-stack-in-card
-          cards:
-            - type: 'custom:text-divider-row'
-              text: "Weather"
-            - type: custom:weather-card
-              entity: weather.weather
-              current: true
-              details: true
-              forecast: true
-
-        - type: custom:upcoming-media-card
-          entity: sensor.sonarr_upcoming_media
-          title: Upcoming TV
-          all_shadows: off
-          image_style: fanart
 
 # Templates for button-card
 button_card_templates:

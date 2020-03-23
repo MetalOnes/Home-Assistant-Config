@@ -62,3 +62,64 @@
                     icon: mdi:lock-open
                 template: home-mode_buttons
                 color_type: card
+
+# Cast tab (Not really working)
+  - title: Cast
+    path: cast
+    icon: mdi:cast
+    cards:
+        - type: custom:vertical-stack-in-card
+
+          cards:
+            - type: 'custom:text-divider-row'
+              text: "Today"
+            - type: horizontal-stack
+              cards:
+                - type: custom:button-card
+                  entity: sensor.simple_time
+                  show_state: true
+                  show_icon: false
+                  show_name: false
+                - type: custom:button-card
+                  entity: sensor.simple_date
+                  show_state: true
+                  show_icon: false
+                  show_name: false
+
+
+
+            - type: 'custom:text-divider-row'
+              text: "Upcoming"
+
+            - type: custom:calendar-card
+              #title: "Upcoming Events"
+              hideHeader: true
+              numberOfDays: 90
+              timeFormat: h:mma
+              dateTopFormat: MMM DD
+              dateBottomFormat: ddd
+              entities:
+                - calendar.slacktishevents
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.flyers
+                - entity: sensor.away_team
+                - entity: sensor.home_team
+
+        - type: custom:vertical-stack-in-card
+          cards:
+            - type: 'custom:text-divider-row'
+              text: "Weather"
+            - type: custom:weather-card
+              entity: weather.weather
+              current: true
+              details: true
+              forecast: true
+
+        - type: custom:upcoming-media-card
+          entity: sensor.sonarr_upcoming_media
+          title: Upcoming TV
+          all_shadows: off
+          image_style: fanart

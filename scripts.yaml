@@ -63,6 +63,18 @@ tv_youtube:
         entity_id: media_player.55_tcl_roku_tv
         source: 837
 
+tv_pluto:
+  alias: "Start PlutoTV on TV"
+  sequence:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.55_tcl_roku_tv
+        source: 74519
+tv_wral:
+  alias: "Start Antenna TV and go to WRAL"
+  sequence:
+    - service: shell_command.tv_wral
+
 yoga_stretch:
   alias: "Yoga Stretch"
   sequence:

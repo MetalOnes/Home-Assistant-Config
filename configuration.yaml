@@ -315,8 +315,13 @@ media_player:
     host: !secret denonavr_ip
 
 # Roku TV
-#roku:
-#  - host: 192.168.1.177
+roku:
+  - host: 192.168.1.179
+
+emulated_roku:
+  servers:
+    - name: Home Assistant
+      listen_port: 8060
 
 ##########################################
 # Cams
@@ -502,9 +507,9 @@ sensor:
 #        value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
 
 # Sonarr Upcoming Media
-  - platform: sonarr_upcoming_media
-    urlbase: sonarr
-    api_key: !secret sonarr_api
+#  - platform: sonarr_upcoming_media
+#    urlbase: sonarr
+#    api_key: !secret sonarr_api
 
 # SABnzbd
 #  - platform: sabnzbd
@@ -793,10 +798,16 @@ rest_command:
 # Shell Commands
 #########################################
 shell_command:
-  yoga_stretch: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=GGJzZx4H2K4&mediaType=live"
-  yoga_beg: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=_2PB4J5h7bI&mediaType=live"
-  vic_workout: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=PWEdJRRndkQ&mediaType=live"
-  15m_workout: "curl -X POST http://192.168.1.177:8060/launch/837?contentId=GS_z6FG_jqE&mediaType=live"
+  yoga_stretch: "curl -X POST http://192.168.1.179:8060/launch/837?contentId=GGJzZx4H2K4&mediaType=live"
+  yoga_beg: "curl -X POST http://192.168.1.179:8060/launch/837?contentId=_2PB4J5h7bI&mediaType=live"
+  vic_workout: "curl -X POST http://192.168.1.179:8060/launch/837?contentId=PWEdJRRndkQ&mediaType=live"
+  15m_workout: "curl -X POST http://192.168.1.179:8060/launch/837?contentId=GS_z6FG_jqE&mediaType=live"
+  tv_wral: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=5.1'"
+  tv_abc: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=11.1'"
+  tv_cbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=17.1'"
+  tv_fox: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=50.1'"
+  tv_pbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=4.1'"
+
 #########################################
 # Includes
 #########################################
