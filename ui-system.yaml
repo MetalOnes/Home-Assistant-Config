@@ -1,0 +1,173 @@
+custom_header:
+  compact_mode: true
+  background: var(--app-header-background-color)
+title: System
+views:
+  - title: System
+    icon: mdi:home-assistant
+    cards:
+  # Network Info
+      - type: custom:vertical-style-card
+        title: Network
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                name: "Public IP:"
+                entity_picture: /local/network.jpg
+                entity: sensor.myip
+                icon: mdi:network-router
+                show_state: true
+                show_icon: true
+                show_entity_picture: false
+                show_last_changed: true
+                size: 64px
+                layout: icon_name_state2nd
+              - type: custom:button-card
+                name: "SSL Cert Expiry:"
+                entity: sensor.ssl_certificate_expiry
+                show_state: true
+                show_icon: true
+                size: 64px
+                layout: icon_name_state2nd
+                tap_action:
+                  action: url
+                  url_path: https://evilrobot.space
+                styles:
+                  icon:
+                    - color: >
+                        [[[
+                          if (entity.state > 60) return 'lime';
+                          if (entity.state <= 60 && entity.state >= 30) return 'orange';
+                          else return 'darkred';
+                        ]]]
+  # System info and commands
+      - type: custom:vertical-style-card
+        title: "HASS/System"
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.current_version
+                name: "Currently Running:"
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /developer-tools/info
+                styles:
+                  card:
+                    - font-size: 14px
+
+              - type: custom:button-card
+                entity: sensor.hass_avail_version
+                name: "Available:"
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /developer-tools/info
+                styles:
+                  card:
+                    - font-size: 14px
+
+              - type: custom:button-card
+                entity: sensor.hacs
+                name: "HACS Updates:"
+                show_state: true
+                show_icon: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /hacs
+                styles:
+                  card:
+                    - font-size: 14px
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.uptime
+                name: "Uptime:"
+                show_state: true
+                show_icon: false
+              - type: custom:button-card
+                entity: sensor.last_boot
+                name: "Last Boot:"
+                show_state: true
+                show_icon: false
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.processor_use
+                name: "Procesor"
+                line_color: rgb(28, 132, 255)
+                show:
+                  labels: hover
+                  points: false
+                  state: false
+                line_width: 3
+                points_per_hour: 30
+                hours_to_show: 1
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.memory_use_percent
+                name: "Memory"
+                line_color: green
+                show:
+                  labels: hover
+                  points: false
+                  state: false
+                line_width: 3
+                points_per_hour: 60
+                hours_to_show: 1
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                icon: mdi:reload
+                name: Restart Vera
+                entity: scene.reboot_vera
+                template: system_buttons
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  entity: scene.reboot_vera
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+  # Battery Levels
+      - type: custom:vertical-style-card
+        title: Battery Levels
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: custom:bar-card
+              attribute: battery_level
+              severity:
+                - value: 50
+                  color: 'rgba(191, 64, 64, 0.5)'
+                - value: 75
+                  color: 'rgba(191, 149, 64, 0.5)'
+                - value: 100
+                  color: 'rgba(64, 191, 64, 0.5)'
+              title_position: inside
+              columns: 3
+              padding: 4px
+              align: left
+              title_style:
+                font-size: 14px
+              value_style:
+                  font-size: 10px
+              background_style:
+                border: 2px solid white
+            filter:
+              include:
+                - attributes:
+                    battery_level: <=100

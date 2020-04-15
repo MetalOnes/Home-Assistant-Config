@@ -1,78 +1,8 @@
-resources:
-  - url: /hacsfiles/button-card/button-card.js
-    type: module
-  - url: /hacsfiles/mini-media-player/mini-media-player.js
-    type: module
-  - url: /hacsfiles/dual-gauge-card/dual-gauge-card.js
-    type: module
-  - url: /hacsfiles/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
-    type: module
-  - url: /hacsfiles/surveillance-card/surveillance-card.js
-    type: module
-  - url:  /hacsfiles/simple-thermostat/simple-thermostat.js
-    type: module
-  - url: https://unpkg.com/moment@2.23.0/moment.js
-    type: js
-  - url: /hacsfiles/calendar-card/calendar-card.js
-    type: module
-  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
-    type: module
-  - url: /hacsfiles/vertical-style-card/vertical-style-card.js
-    type: js
-  - url: /hacsfiles/banner-card/banner-card.js
-    type: module
-  - url: /hacsfiles/untappd-card/untappd-card.js
-    type: module
-  - url: /hacsfiles/love-lock-card/love-lock-card.js
-    type: js
-  - url: /hacsfiles/custom-header/custom-header.js
-    type: module
-  - url: /hacsfiles/bar-card/bar-card.js
-    type: js
-  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-    type: module
-  - url: /hacsfiles/lovelace-card-tools/card-tools.js
-    type: js
-  - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
-    type: js
-  - url: /hacsfiles/light-entity-card/light-entity-card.js
-    type: js
-#  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-#    type: js
-  - url: /hacsfiles/weather-card/weather-card.js
-    type: module
-  - url: /hacsfiles/text-divider-row/text-divider-row.js
-    type: module
-  - url: /hacsfiles/list-card/list-card.js
-    type: js
-  - url: /hacsfiles/lovelace-card-mod/card-mod.js
-    type: module
-  - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
-    type: module
-  - url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
-    type: module
-  - url: /hacsfiles/sun-card/sun-card.js
-    type: module
-  - url: /hacsfiles/rgb-light-card/card.js
-    type: module
-  - url: /hacsfiles/roku-card/roku-card.js
-    type: module
-  - url: /hacsfiles/lovelace-swipe-navigation/swipe-navigation.js
-    type: js
-  - url: /hacsfiles/lovelace-paper-buttons-row/paper-buttons-row.js
-    type: module
-
-
 custom_header:
   compact_mode: true
   background: var(--app-header-background-color)
 
 #background: var(--background-image)
-
-swipe_nav:
-  wrap: false
-  animate: swipe
-  skip_tabs: 9
 
 views:
 #
@@ -108,6 +38,7 @@ views:
                 action_name: GO
               - lock.front_door_19
           - type: entities
+            show_header_toggle: false
             entities:
               - type: custom:slider-entity-row
                 entity: light.lamp_107
@@ -1067,7 +998,7 @@ views:
     path: weather
     icon: mdi:weather-cloudy
     cards:
-      - type: custom:vertical-style-card
+      - type: custom:vertical-stack-in-card
         title: Weather
         cards:
           - type: iframe
@@ -1178,7 +1109,7 @@ views:
                     color: rgba(10, 10, 10, 0.4)
                     entity_picture: /local/people/val-car.png
 # Untappd Card
-      - type: custom:vertical-style-card
+      - type: custom:vertical-stack-in-card
         title: Beer
         cards:
           - type: picture-elements
@@ -1332,179 +1263,6 @@ views:
                   padding-left: 36px
                   padding-bottom: 1px
                   #text-shadow: 2px 2px 2px black
-#
-# System tab
-#
-  - title: System
-    path: system
-    icon: mdi:home-assistant
-    cards:
-# Network Info
-      - type: custom:vertical-style-card
-        title: Network
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                name: "Public IP:"
-                entity_picture: /local/network.jpg
-                entity: sensor.myip
-                icon: mdi:network-router
-                show_state: true
-                show_icon: true
-                show_entity_picture: false
-                show_last_changed: true
-                size: 64px
-                layout: icon_name_state2nd
-              - type: custom:button-card
-                name: "SSL Cert Expiry:"
-                entity: sensor.ssl_certificate_expiry
-                show_state: true
-                show_icon: true
-                size: 64px
-                layout: icon_name_state2nd
-                tap_action:
-                  action: url
-                  url_path: https://evilrobot.space
-                styles:
-                  icon:
-                    - color: >
-                        [[[
-                          if (entity.state > 60) return 'lime';
-                          if (entity.state <= 60 && entity.state >= 30) return 'orange';
-                          else return 'darkred';
-                        ]]]
-# System info and commands
-      - type: custom:vertical-style-card
-        title: "HASS/System"
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                entity: sensor.current_version
-                name: "Currently Running:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /developer-tools/info
-                styles:
-                  card:
-                    - font-size: 14px
-
-              - type: custom:button-card
-                entity: sensor.hass_avail_version
-                name: "Available:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /developer-tools/info
-                styles:
-                  card:
-                    - font-size: 14px
-
-              - type: custom:button-card
-                entity: sensor.hacs
-                name: "HACS Updates:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /hacs
-                styles:
-                  card:
-                    - font-size: 14px
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                entity: sensor.uptime
-                name: "Uptime:"
-                show_state: true
-                show_icon: false
-              - type: custom:button-card
-                entity: sensor.last_boot
-                name: "Last Boot:"
-                show_state: true
-                show_icon: false
-
-          - type: horizontal-stack
-            cards:
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.processor_use
-                name: "Procesor"
-                line_color: rgb(28, 132, 255)
-                show:
-                  labels: hover
-                  points: false
-                  state: false
-                line_width: 3
-                points_per_hour: 30
-                hours_to_show: 1
-              - type: "custom:mini-graph-card"
-                entities:
-                  - sensor.memory_use_percent
-                name: "Memory"
-                line_color: green
-                show:
-                  labels: hover
-                  points: false
-                  state: false
-                line_width: 3
-                points_per_hour: 60
-                hours_to_show: 1
-
-          - type: horizontal-stack
-            cards:
-              - type: custom:button-card
-                icon: mdi:reload
-                name: Restart Vera
-                entity: scene.reboot_vera
-                template: system_buttons
-                tap_action:
-                  action: call-service
-                  service: scene.turn_on
-                  entity: scene.reboot_vera
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
-              - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
- # Battery Levels
-      - type: custom:vertical-style-card
-        title: Battery Levels
-        cards:
-          - type: custom:auto-entities
-            card:
-              type: custom:bar-card
-              attribute: battery_level
-              severity:
-                - value: 50
-                  color: 'rgba(191, 64, 64, 0.5)'
-                - value: 75
-                  color: 'rgba(191, 149, 64, 0.5)'
-                - value: 100
-                  color: 'rgba(64, 191, 64, 0.5)'
-              title_position: inside
-              columns: 3
-              padding: 4px
-              align: left
-              title_style:
-                font-size: 14px
-              value_style:
-                  font-size: 10px
-              background_style:
-                border: 2px solid white
-            filter:
-              include:
-                - attributes:
-                    battery_level: <=100
-
 
 # Templates for button-card
 button_card_templates:
