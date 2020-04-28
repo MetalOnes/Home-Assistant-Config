@@ -278,13 +278,13 @@ sun:
 person:
   - name: Eric
     id: eric
-    user_id: b1c52f6d36b44cc2ad9cf32fbe0121bb
+    user_id: !secret e_uid
     device_trackers:
       - device_tracker.galaxy_s7
       - device_tracker.sm_g930v
   - name: Val
     id: val
-    user_id: f2ccf063f8ca4ca39dd9df5c8e6ff022
+    user_id: !secret v_uid
     device_trackers:
       - device_tracker.galaxy_j7
       - device_tracker.sm_j700p
