@@ -23,8 +23,13 @@ views:
       #      - scene.switch_to_away
       #      - scene.switch_to_night
 
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
+          - type: custom:button-card
+            name: Home
+            template: general_label
           - type: custom:fold-entity-row
             head:
               entity: sensor.homemode
@@ -89,43 +94,54 @@ views:
                     toggle: true
                   - entity: scene.both_br_lamps_to_20
 
-
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Lights On
+            template: general_label
 # Int Lights on
-      - type: custom:auto-entities
-        card:
-          type: glance
-          title: Interior
-        filter:
-          include:
-            - group: group.int_lights
-              state: "on"
-              options:
-                tap_action:
-                  action: toggle
-        show_empty: false
+          - type: custom:auto-entities
+            card:
+              type: glance
+              title: Interior
+            filter:
+              include:
+                - group: group.int_lights
+                  state: "on"
+                  options:
+                    tap_action:
+                      action: toggle
+            show_empty: false
 
-# Ext Lights on
-      - type: custom:auto-entities
-        card:
-          type: glance
-          title: Exterior
-        filter:
-          include:
-            - group: group.exterior
-              state: "on"
-              options:
-                tap_action:
-                  action: toggle
-        show_empty: false
+    # Ext Lights on
+          - type: custom:auto-entities
+            card:
+              type: glance
+              title: Exterior
+            filter:
+              include:
+                - group: group.exterior
+                  state: "on"
+                  options:
+                    tap_action:
+                      action: toggle
+            show_empty: false
 
 # Harmony Living Room card
-      - type: custom:vertical-stack-in-card
-        title: Living Room TV
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        #title: Living Room TV
         style: |
           ha-card {
             background: var(--paper-card-background-color)
           }
         cards:
+          - type: custom:button-card
+            name: Living Room TV
+            template: general_label
           - type: "custom:button-card"
             entity: sensor.harmony_living_room
             name: 'Current Activity'
@@ -156,7 +172,10 @@ views:
                 icon: mdi:steam
               - value: 'PowerOff'
                 icon: mdi:power-off
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 entity: switch.lr_tv
@@ -174,7 +193,10 @@ views:
                 entity: switch.lr_wiiu
                 icon: mdi:nintendo-switch
                 template: harmony_button
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 entity: switch.lr_music
@@ -192,7 +214,10 @@ views:
                 color_type: blank-card
 
 
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 entity: script.tv_youtube
@@ -273,21 +298,34 @@ views:
 
 
 # Calendar card
-      - type: custom:calendar-card
-        title: "Calendar"
-        numberOfDays: 90
-        timeFormat: h:mma
-        dateTopFormat: MMM DD
-        dateBottomFormat: ddd
-        entities:
-          - calendar.slacktishevents
-          - calendar.holidays_in_united_states
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Calendar
+            template: general_label
+          - type: custom:calendar-card
+            #title: "Calendar"
+            hideHeader: true
+            numberOfDays: 90
+            timeFormat: h:mma
+            dateTopFormat: MMM DD
+            dateBottomFormat: ddd
+            entities:
+              - calendar.slacktishevents
+              - calendar.holidays_in_united_states
 
 
 
 # Thermostat and climate Card
-      - type: vertical-stack
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
+          - type: custom:button-card
+            name: Climate
+            template: general_label
           - type: custom:simple-thermostat
             entity: climate.living_room
             step_size: 1
@@ -312,19 +350,18 @@ views:
                 background: rgba(255, 255, 240, 0.6);
               }
 # Temps
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: Temperature
-                hours_to_show: 24
-                entities:
-                  - entity: sensor.current_temperature
-                    color: rgba(207, 130, 0, 0.8)
-                  - entity: sensor.temperature_sensor_167
-                    color: rgb(0, 133, 255, 0.8)
-                show:
-                  points: hover
-                  fill: false
+
+          - type: custom:mini-graph-card
+            name: Temperature
+            hours_to_show: 24
+            entities:
+              - entity: sensor.current_temperature
+                color: rgba(207, 130, 0, 0.8)
+              - entity: sensor.temperature_sensor_167
+                color: rgb(0, 133, 255, 0.8)
+            show:
+              points: hover
+              fill: false
 
 
 #
@@ -542,7 +579,9 @@ views:
     icon: mdi:play-circle-outline
     cards:
   # Living Room Media
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         #title: Living Room
         cards:
           - type: custom:button-card
@@ -583,7 +622,11 @@ views:
               - value: 'PowerOff'
                 icon: mdi:power-off
 
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
             cards:
               - type: custom:button-card
                 entity: switch.lr_tv
@@ -601,7 +644,11 @@ views:
                 entity: switch.lr_wiiu
                 icon: mdi:nintendo-switch
                 template: harmony_button
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
             cards:
               - type: custom:button-card
                 entity: switch.lr_music
@@ -696,35 +743,40 @@ views:
                   type: music
                   id: http://radio.nugs.net/nugsnet.mp3
 
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                name: HA to LR
-                icon: mdi:cast
-                color: var(--primary-color)
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: cast.show_lovelace_view
-                  service_data:
-                    entity_id: media_player.living_room
-                    view_path: cast
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to LR
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.living_room
+#                    view_path: overview
 
-              - type: "custom:button-card"
-                name: Stop Casting
-                icon: mdi:power
-                color: darkred
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: media_player.turn_off
-                  service_data:
-                    entity_id: media_player.living_room
+#              - type: "custom:button-card"
+#                name: Stop Casting
+#                icon: mdi:power
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.living_room
 
 
 
   # Bedroom Media
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
           - type: custom:button-card
             name: Bedroom
@@ -733,14 +785,14 @@ views:
               card:
                 #- border-bottom: 3px solid rgba(0, 0, 0, .2)
 
-          - type: "custom:mini-media-player"
-            entity: media_player.bedroom_kodi
-            name: Bedroom Kodi
-            icon: mdi:kodi
-            artwork: cover
-            hide:
-              volume: true
-              power: true
+#          - type: "custom:mini-media-player"
+#            entity: media_player.bedroom_kodi
+#            name: Bedroom Kodi
+#            icon: mdi:kodi
+#            artwork: cover
+#            hide:
+#              volume: true
+#              power: true
 
           - type: "custom:mini-media-player"
             entity: media_player.bedroom_tv
@@ -759,33 +811,38 @@ views:
                   type: music
                   id: http://radio.nugs.net/nugsnet.mp3
 
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                name: HA to BR
-                icon: mdi:cast
-                color: var(--primary-color)
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: cast.show_lovelace_view
-                  service_data:
-                    entity_id: media_player.bedroom_tv
-                    view_path: cast
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to BR
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.bedroom_tv
+#                    view_path: cast
 
-              - type: "custom:button-card"
-                icon: mdi:power
-                name: Stop Casting
-                color: darkred
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: media_player.turn_off
-                  service_data:
-                    entity_id: media_player.bedroom_tv
+#              - type: "custom:button-card"
+#                icon: mdi:power
+#                name: Stop Casting
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.bedroom_tv
 
   # Mancave media
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
           - type: custom:button-card
             template: general_label
@@ -820,61 +877,55 @@ views:
                   type: music
                   id: http://radio.nugs.net/nugsnet.mp3
 
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                name: HA to MC
-                icon: mdi:cast
-                color: var(--primary-color)
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: cast.show_lovelace_view
-                  service_data:
-                    entity_id: media_player.man_cave
-                    view_path: cast
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to MC
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.man_cave
+#                    view_path: overview
 
-              - type: "custom:button-card"
-                icon: mdi:power
-                name: Stop Casting
-                color: darkred
-                template: cast_button
-                tap_action:
-                  action: call-service
-                  service: media_player.turn_off
-                  service_data:
-                    entity_id: media_player.man_cave
+#              - type: "custom:button-card"
+#                icon: mdi:power
+#                name: Stop Casting
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.man_cave
 
 
-#
-# Surveillance tab
-#
-  - title: Surveillance
-    icon: mdi:cctv
-    path: cams
-    panel: true
-    cards:
-      - type: custom:surveillance-card
-        thumb_interval: 15
-        update_interval: 2
-        cameras:
-          - entity: camera.front_door
-          - entity: camera.back_door
-          - entity: camera.man_cave_camera
-            motion_entity: binary_sensor.motion_sensor_128
-          - entity: camera.deck_cam
-
-#
 # Sensors tab
 #
   - title: Sensors
     path: sensors
     icon: mdi:gauge
     cards:
-      - type: custom:vertical-style-card
-        title: Security Sensors
+      - type: custom:stack-in-card
+        keep:
+          background: true
+      #  title: Security Sensors
         cards:
-          - type: horizontal-stack
+          - type: custom:button-card
+            name: Sensors Status
+            template: general_label
+
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
             cards:
               - type: "custom:button-card"
                 entity: binary_sensor.front_door1_1_139
@@ -891,6 +942,12 @@ views:
                 icon: mdi:transition
                 name: Man Cave Motion
                 template: sensor_button
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
+            cards:
               - type: "custom:button-card"
                 entity: binary_sensor.master_bath_sensor_121
                 icon: mdi:transition
@@ -907,42 +964,57 @@ views:
                 icon: mdi:smoke-detector
                 name: CO
                 template: sensor_button
-          - type: horizontal-stack
+
+          - type: custom:button-card
+            name: Sensors Armed
+            template: general_label
+
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
             cards:
               - type: "custom:button-card"
                 entity: switch.front_door1_1_139
                 icon: mdi:door
-                name: "Armed: "
+                name: "Front Door: "
                 show_state: true
                 template: sensor_button
               - type: "custom:button-card"
                 entity: switch.back_door_172
                 icon: mdi:door
-                name: "Armed: "
+                name: "Back Door: "
                 show_state: true
                 template: sensor_button
               - type: "custom:button-card"
                 entity: switch.motion_sensor_128
                 icon: mdi:transition
-                name: "Armed: "
+                name: "Man Cave Motion: "
                 show_state: true
                 template: sensor_button
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
+            cards:
               - type: "custom:button-card"
                 entity: switch.master_bath_sensor_121
                 icon: mdi:transition
-                name: "Armed: "
+                name: "Master Bath Motion: "
                 show_state: true
                 template: sensor_button
               - type: "custom:button-card"
                 entity: switch.smoke_sensor_197
                 icon: mdi:smoke-detector
-                name: "Armed: "
+                name: "Smoke: "
                 show_state: true
                 template: sensor_button
               - type: "custom:button-card"
                 entity: switch.co_sensor_198
                 icon: mdi:smoke-detector
-                name: "Armed: "
+                name: "CO: "
                 show_state: true
                 template: sensor_button
 
@@ -957,10 +1029,19 @@ views:
               card:
                 - height: 75px
 
-      - type: custom:vertical-style-card
-        title: Man Cave
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        #title: Man Cave
         cards:
-          - type: horizontal-stack
+          - type: custom:button-card
+            name: Man Cave Sensors
+            template: general_label
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              background: true
+              margin: true
             cards:
               - type: "custom:mini-graph-card"
                 entities:
@@ -998,19 +1079,27 @@ views:
     path: weather
     icon: mdi:weather-cloudy
     cards:
-      - type: custom:vertical-stack-in-card
-        title: Weather
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
+          - type: custom:button-card
+            name: Weather
+            template: general_label
           - type: iframe
             url: https://embed.windy.com/embed2.html?lat=35.583&lon=-78.788&zoom=5&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.583&detailLon=-78.788&metricWind=default&metricTemp=default&radarRange=-1
             aspect_ratio: 75%
           - type: weather-forecast
             entity: weather.weather
 
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
-          - type: "custom:sun-card"
+          - type: custom:button-card
             name: Sun
+            template: general_label
+          - type: "custom:sun-card"
             entities:
               max_elevation: sun.sun
               sunrise: sensor.sunrise
@@ -1034,7 +1123,9 @@ views:
                 - justify-self: left
                 - padding-left: 20px
 
-      - type: custom:vertical-stack-in-card
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
           - type: "custom:button-card"
             template: general_label
@@ -1056,10 +1147,18 @@ views:
     icon: mdi:account
     cards:
 # Who's home
-      - type: custom:vertical-style-card
-        title: People
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
-          - type: horizontal-stack
+          - type: custom:button-card
+            name: People
+            template: general_label
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
+              background: true
             cards:
               - type: custom:button-card
                 entity: person.eric
@@ -1109,9 +1208,13 @@ views:
                     color: rgba(10, 10, 10, 0.4)
                     entity_picture: /local/people/val-car.png
 # Untappd Card
-      - type: custom:vertical-stack-in-card
-        title: Beer
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
+          - type: custom:button-card
+            name: Beer
+            template: general_label
           - type: picture-elements
             id: untappd-card
             image: /local/untappd-bg.jpg

@@ -1,0 +1,23 @@
+custom_header:
+  compact_mode: true
+  background: var(--app-header-background-color)
+title: Cameras
+views:
+  - title: Cameras
+    cards:
+      - type: picture-entity
+        entity: camera.front_door
+        camera_view: live
+        show_state: false
+      - type: picture-entity
+        entity: camera.back_door
+        camera_view: live
+        show_state: false
+      - type: picture-entity
+        entity: camera.man_cave_camera
+        camera_view: live
+        show_state: false
+      - type: picture-entity
+        entity: camera.deck_cam
+        camera_view: live
+        show_state: false

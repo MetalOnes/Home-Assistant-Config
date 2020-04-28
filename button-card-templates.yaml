@@ -34,7 +34,7 @@
           name:
             - color: var(--state-icon-active-color)
           label:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           state:
             - color: var(--state-icon-active-color)
       - value: 'off'
@@ -63,7 +63,7 @@
     layout: icon_label
     show_label: true
     show_state: true
-    color: auto
+    color: auto-no-temperature
     color_off: var(--disabled-text-color)
     styles:
       grid:
@@ -76,12 +76,12 @@
         - font-size: 70%
       name:
         - font-size: 70%
-        - color: rgba(255, 214, 10, 1)
+        - color: var(--state-icon-active-color)
       state:
         - justify-self: end
         - padding-right: 10%
         - font-size: 70%
-        - color: rgba(255, 214, 10, 1)
+        - color: var(--state-icon-active-color)
       card:
         - margin: 0 3px
         - background-color: var(--ha-card-background)
@@ -97,6 +97,8 @@
             - color: 'var(--disabled-text-color)'
       - value: 'on'
         styles:
+          icon:
+            - color: 'var(--button-card-light-color-no-temperature)'
       - value: 'unavailable'
         styles:
           state:
@@ -142,7 +144,7 @@
           name:
             - color: var(--state-icon-active-color)
           label:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
       - value: 'off'
         styles:
           state:
@@ -196,7 +198,7 @@
           name:
             - color: var(--state-icon-active-color)
           label:
-            - color: rgba(255, 214, 10, 1)
+            - color: var(--state-icon-active-color)
           state:
             - color: var(--state-icon-active-color)
       - value: 'off'
@@ -297,7 +299,7 @@
         - border-top: 3px solid rgba(0, 0, 0, .5)
         - padding: 8px
 
-  system_buttons:
+  system_button:
     confirmation:
       text: '[[[ return `Are you sure you want to ${entity.attributes.friendly_name}?` ]]]'
     styles:

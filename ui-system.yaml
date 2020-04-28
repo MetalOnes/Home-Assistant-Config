@@ -7,10 +7,17 @@ views:
     icon: mdi:home-assistant
     cards:
   # Network Info
-      - type: custom:vertical-style-card
-        title: Network
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
-          - type: horizontal-stack
+          - type: custom:button-card
+            name: Network
+            template: general_label
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 name: "Public IP:"
@@ -42,10 +49,17 @@ views:
                           else return 'darkred';
                         ]]]
   # System info and commands
-      - type: custom:vertical-style-card
-        title: "HASS/System"
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
-          - type: horizontal-stack
+          - type: custom:button-card
+            name: "Hass/System"
+            template: general_label
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 entity: sensor.current_version
@@ -82,7 +96,10 @@ views:
                 styles:
                   card:
                     - font-size: 14px
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 entity: sensor.uptime
@@ -95,7 +112,10 @@ views:
                 show_state: true
                 show_icon: false
 
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: "custom:mini-graph-card"
                 entities:
@@ -122,13 +142,16 @@ views:
                 points_per_hour: 60
                 hours_to_show: 1
 
-          - type: horizontal-stack
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
             cards:
               - type: custom:button-card
                 icon: mdi:reload
                 name: Restart Vera
                 entity: scene.reboot_vera
-                template: system_buttons
+                template: system_button
                 tap_action:
                   action: call-service
                   service: scene.turn_on
@@ -143,31 +166,33 @@ views:
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
   # Battery Levels
-      - type: custom:vertical-style-card
-        title: Battery Levels
+      - type: custom:stack-in-card
+        keep:
+          background: true
         cards:
+          - type: custom:button-card
+            name: Batteries
+            template: general_label
           - type: custom:auto-entities
             card:
               type: custom:bar-card
               attribute: battery_level
               severity:
-                - value: 50
+                - from: 0
+                  to: 50
                   color: 'rgba(191, 64, 64, 0.5)'
-                - value: 75
+                - from: 51
+                  to: 75
                   color: 'rgba(191, 149, 64, 0.5)'
-                - value: 100
+                - from: 76
+                  to: 100
                   color: 'rgba(64, 191, 64, 0.5)'
-              title_position: inside
-              columns: 3
-              padding: 4px
-              align: left
-              title_style:
-                font-size: 14px
-              value_style:
-                  font-size: 10px
-              background_style:
-                border: 2px solid white
+              columns: 2
+
             filter:
               include:
                 - attributes:
                     battery_level: <=100
+# Templates for button-card
+button_card_templates:
+  !include button-card-templates.yaml

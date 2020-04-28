@@ -23,8 +23,6 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
       type: module
-    - url: /hacsfiles/surveillance-card/surveillance-card.js
-      type: module
     - url:  /hacsfiles/simple-thermostat/simple-thermostat.js
       type: module
     - url: https://unpkg.com/moment@2.23.0/moment.js
@@ -44,12 +42,10 @@ lovelace:
     - url: /hacsfiles/custom-header/custom-header.js
       type: module
     - url: /hacsfiles/bar-card/bar-card.js
-      type: js
+      type: module
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
     - url: /hacsfiles/lovelace-card-tools/card-tools.js
-      type: js
-    - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
       type: js
     - url: /hacsfiles/light-entity-card/light-entity-card.js
       type: js
@@ -75,6 +71,8 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-paper-buttons-row/paper-buttons-row.js
       type: module
+    - url: /hacsfiles/stack-in-card/stack-in-card.js
+      type: module
   dashboards:
     ui-system:
       mode: yaml
@@ -83,6 +81,13 @@ lovelace:
       filename: ui-system.yaml
       require_admin: true
       show_in_sidebar: true
+    ui-cameras:
+      mode: yaml
+      title: Cameras
+      icon: mdi:cctv
+      show_in_sidebar: true
+      filename: ui-cameras.yaml
+
 
 
 config:
@@ -270,12 +275,6 @@ sun:
 # Device Tracker & Presence
 ##########################################
 
-unifi:
-  controllers:
-    - host: !secret unifi_ip
-      site: Default
-      dont_track_wired_clients: true
-
 person:
   - name: Eric
     id: eric
@@ -396,6 +395,7 @@ emulated_roku:
 ##########################################
 # Cams
 ##########################################
+stream:
 
 camera:
 
@@ -540,21 +540,21 @@ sensor:
 #      - ads_percentage_today
 
 # NHL
-  - platform: nhl_api
-    team_id: 4
-    name: Flyers
-    scan_interval: 60
+#  - platform: nhl_api
+#    team_id: 4
+#    name: Flyers
+#    scan_interval: 60
 
-  - platform: template
-    sensors:
-      away_team:
-        friendly_name_template: '{{ states.sensor.flyers.attributes.away_name }}'
-        value_template: '{{ states.sensor.flyers.attributes.away_score }}'
-        entity_picture_template: '{{ states.sensor.flyers.attributes.away_logo }}'
-      home_team:
-        friendly_name_template: '{{ states.sensor.flyers.attributes.home_name }}'
-        value_template: '{{ states.sensor.flyers.attributes.home_score }}'
-        entity_picture_template: '{{ states.sensor.flyers.attributes.home_logo }}'
+#  - platform: template
+#    sensors:
+#      away_team:
+#        friendly_name_template: '{{ states.sensor.flyers.attributes.away_name }}'
+#        value_template: '{{ states.sensor.flyers.attributes.away_score }}'
+#        entity_picture_template: '{{ states.sensor.flyers.attributes.away_logo }}'
+#      home_team:
+#        friendly_name_template: '{{ states.sensor.flyers.attributes.home_name }}'
+#        value_template: '{{ states.sensor.flyers.attributes.home_score }}'
+#        entity_picture_template: '{{ states.sensor.flyers.attributes.home_logo }}'
 
 # Gets public IP
   - platform: dnsip

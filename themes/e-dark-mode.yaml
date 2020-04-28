@@ -25,8 +25,8 @@ e-dark-mode:
   sidebar-selected-icon-color: "#FFF"
   sidebar-selected-text-color: var(--sidebar-selected-icon-color)
   # States and Badges
-  state-icon-color: "#FFF"
-  state-icon-active-color: "#FFF"  # or make light icons yellow when active: rgba(255, 214, 10, 1)
+  state-icon-color: var(--disabled-text-color)
+  state-icon-active-color: "#FFF" # or make light icons yellow when active: rgba(255, 214, 10, 1)
   state-icon-unavailable-color: var(--disabled-text-color)
   # Sliders
   paper-slider-knob-color: "#FFF"
