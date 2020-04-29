@@ -276,10 +276,12 @@
 
   harmony_button:
     color_type: card
+    aspect_ratio: 2/1
     styles:
+
       card:
-        - height: 70px
-        #- background-color: var(--ha-card-background)
+        #- height: 70px
+        - background-color: var(--ha-card-background)
         - border-radius: 5px
     state:
       - value: 'on'
@@ -307,25 +309,57 @@
         - font-size: 12px
 
   home-mode_buttons:
-    styles:
-      card:
-        - height: 96px
-      name:
-        - font-size: 16px
+    aspect_ratio: 1.5/1
+    confirmation:
+      text: '[[[ return `Are you sure you want to switch to ${entity.attributes.friendly_name}?` ]]]'
     tap_action:
       action: call-service
       service: scene.turn_on
       service_data:
         entity_id: >
           [[[ return entity.entity_id ]]]
+    styles:
+      card:
+        - border-radius: 5px
+        #- border: solid 1px
 
   sensor_button:
+    aspect_ratio: 2/1
     color_type: card
     color: rgba(130, 0, 0, 0.5)
     tap_action:
       action: more-info
     state:
       - value: 'on'
+        styles:
+          name:
+            - color: white
+          icon:
+            - color: white
+      - value: 'off'
+        styles:
+          name:
+            - color: 'var(--disabled-text-color)'
+          icon:
+            - color: 'var(--disabled-text-color)'
+          state:
+            - color: 'var(--disabled-text-color)'
+    styles:
+      card:
+        - background-color: var(--ha-card-background)
+      name:
+        - font-size: 70%
+      state:
+        - font-size: 70%
+  door_sensor_button:
+    aspect_ratio: 2/1
+    color_type: card
+    color: rgba(130, 0, 0, 0.5)
+    tap_action:
+      action: more-info
+    state:
+      - value: 'on'
+        icon: mdi:door-open
         styles:
           name:
             - color: white

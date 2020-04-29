@@ -24,10 +24,13 @@
 - name: "Music Lights"
   icon: mdi:lava-lamp
   entities:
-    switch.party_lights_184: on
+    switch.couch_lights_185: on
     light.tv:
       state: on
       effect: colorloop
     light.dining_room_lamp_160:
       state: on
-      brightness: 120
+      brightness_pct: 50
+    light.lamp_107:
+      state: on
+      brightness_pct: 50

@@ -18,6 +18,8 @@ views:
             mode: horizontal
             keep:
               margin: true
+              border_radius: true
+              background: true
             cards:
               - type: custom:button-card
                 name: "Public IP:"
@@ -60,6 +62,8 @@ views:
             mode: horizontal
             keep:
               margin: true
+              border_radius: true
+              background: true
             cards:
               - type: custom:button-card
                 entity: sensor.current_version
@@ -100,6 +104,8 @@ views:
             mode: horizontal
             keep:
               margin: true
+              border_radius: true
+              background: true
             cards:
               - type: custom:button-card
                 entity: sensor.uptime
@@ -116,6 +122,8 @@ views:
             mode: horizontal
             keep:
               margin: true
+              border_radius: true
+              background: true
             cards:
               - type: "custom:mini-graph-card"
                 entities:
@@ -146,6 +154,8 @@ views:
             mode: horizontal
             keep:
               margin: true
+              border_radius: true
+              background: true
             cards:
               - type: custom:button-card
                 icon: mdi:reload

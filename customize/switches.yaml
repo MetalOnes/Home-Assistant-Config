@@ -46,7 +46,11 @@ switch.music_lights_186:
   icon: mdi:floor-lamp-variant
 
 switch.party_lights_184:
-  friendly_name: Party Lights
+  friendly_name: "Party Lights (Both)"
+  icon: mdi:lava-lamp
+
+switch.party_mode_virtual_204:
+  friendly_name: Party Mode
   icon: mdi:lava-lamp
 
 switch.lr_tv:

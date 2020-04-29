@@ -1,13 +1,17 @@
-sensor.temperature_sensor_167:
-  friendly_name: Man Cave Temp
+sensor.temperature_sensor_207:
+  friendly_name: Master Bath Temp
 
-sensor.humidity_sensor_169:
-  friendly_name: Man Cave Humidity
+sensor.humidity_sensor_209:
+  friendly_name: Master Bath Temp
   icon: mdi:water-percent
 
-sensor.light_sensor_168:
-  friendly_name: Man Cave Light
+sensor.light_sensor_208:
+  friendly_name: Master Bath Temp
   icon: mdi:camera-metering-center
+
+binary_sensor.4_in_1_sensor_206:
+  friendly_name: Master Bath Motion
+  device_class: motion
 
 binary_sensor.front_door1_1_139:
   friendly_name: Front Door
@@ -23,9 +27,11 @@ binary_sensor.smoke_sensor_122:
 
 binary_sensor.motion_sensor_128:
   device_class: motion
+  friendly_name: MC Motion
 
 binary_sensor.master_bath_sensor_121:
   device_class: motion
+  friendly_name: Old MB Sensor
 
 sensor.myipopendnscom:
   friendly_name: Public IP

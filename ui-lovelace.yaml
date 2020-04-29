@@ -27,21 +27,80 @@ views:
         keep:
           background: true
         cards:
-          - type: custom:button-card
-            name: Home
-            template: general_label
-          - type: custom:fold-entity-row
-            head:
-              entity: sensor.homemode
-              secondary_info: last-changed
-            entities:
-              - entity: scene.switch_to_home
-                action_name: GO
-              - entity: scene.switch_to_away
-                action_name: GO
-              - entity: scene.switch_to_night
-                action_name: GO
-              - lock.front_door_19
+          - type: custom:stack-in-card
+            keep:
+              #margin: true
+              background: true
+            cards:
+              - type: "custom:button-card"
+                entity: sensor.homemode
+                name: 'Home Mode'
+                show_label: false
+                show_name: false
+                show_state: true
+                state:
+                  - value: 'Away'
+                    color: rgb(150, 0, 0, 0.7)
+                    icon: mdi:home-minus
+                  - value: 'Home'
+                    color: rgb(0, 99, 31, 0.7)
+                    icon: mdi:home-variant
+                  - value: 'Night'
+                    color: rgb(111, 0, 110, 0.7)
+                    icon: mdi:weather-night
+                layout: icon_state
+                styles:
+                  card:
+                    - height: 75px
+                  state:
+                    - font-size: 32px
+              - type: custom:stack-in-card
+                keep:
+                  margin: true
+                  background: true
+                  border_radius: true
+                mode: horizontal
+                cards:
+                  - type: "custom:button-card"
+                    entity: scene.switch_to_home
+                    name: Home Mode
+                    color_type: card
+                    color: rgb(0, 99, 31, 0.7)
+                    template: home-mode_buttons
+
+                  - type: custom:button-card
+                    entity: scene.switch_to_night
+                    name: Night Mode
+                    template: home-mode_buttons
+                    color_type: card
+                    color: rgb(111, 0, 110, 0.7)
+
+                  - type: "custom:button-card"
+                    entity: scene.switch_to_away
+                    name: Away Mode
+                    template: home-mode_buttons
+                    color_type: card
+                    color: rgb(150, 0, 0, 0.7)
+
+                  - type: "custom:button-card"
+                    entity: lock.front_door_19
+                    show_state: true
+                    show_name: false
+                    name: "Front Door: "
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: toggle
+                    state:
+                      - value: "locked"
+                        color: rgb(150, 0, 0, 0.7)
+                        icon: mdi:lock
+                      - value: "unlocked"
+                        color: rgb(0, 99, 31, 0.7)
+                        icon: mdi:lock-open
+                    aspect_ratio: 1.5/1
+                    color_type: card
+
           - type: entities
             show_header_toggle: false
             entities:
@@ -173,82 +232,86 @@ views:
               - value: 'PowerOff'
                 icon: mdi:power-off
           - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
             cards:
-              - type: custom:button-card
-                entity: switch.lr_tv
-                icon: mdi:television
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_kodi
-                icon: mdi:kodi
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_chromecast
-                icon: mdi:cast
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_wiiu
-                icon: mdi:nintendo-switch
-                template: harmony_button
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
-            cards:
-              - type: custom:button-card
-                entity: switch.lr_music
-                icon: mdi:music
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_steam
-                icon: mdi:steam
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_xbox
-                icon: mdi:xbox
-                template: harmony_button
-              - type: "custom:button-card"
-                color_type: blank-card
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  margin: true
+                  border_radius: true
+                  background: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_tv
+                    icon: mdi:television
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_kodi
+                    icon: mdi:kodi
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_chromecast
+                    icon: mdi:cast
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_wiiu
+                    icon: mdi:nintendo-switch
+                    template: harmony_button
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  margin: true
+                  border_radius: true
+                  background: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_music
+                    icon: mdi:music
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_steam
+                    icon: mdi:steam
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_xbox
+                    icon: mdi:xbox
+                    template: harmony_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
 
 
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
-            cards:
-              - type: custom:button-card
-                entity: script.tv_youtube
-                icon: mdi:youtube
-                name: YouTube
-                template: harmony_button
-              - type: custom:button-card
-                entity: script.tv_pluto
-                icon: mdi:television-classic
-                name: PlutoTV
-                template: harmony_button
-              - type: "custom:button-card"
-                color_type: blank-card
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  margin: true
+                  border_radius: true
+                  background: true
+                cards:
+                  - type: custom:button-card
+                    entity: script.tv_youtube
+                    icon: mdi:youtube
+                    name: YouTube
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: script.tv_pluto
+                    icon: mdi:television-classic
+                    name: PlutoTV
+                    template: harmony_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
 
-              - type: "custom:button-card"
-                entity: remote.living_room
-                icon: mdi:power
-                color_type: card
-                color: darkred
-                size: 32px
-                name: "Turn Off"
-                service:
-                  domain: remote
-                  action: turn_off
-                  data:
-                    entity_id: remote.living_room
-                styles:
-                  card:
-                    #- margin: 10px 5px
-                    - height: 70px
-                    - background-color: var(--ha-card-background)
+                  - type: "custom:button-card"
+                    entity: remote.living_room
+                    icon: mdi:power
+                    color_type: card
+                    color: darkred
+                    size: 32px
+                    name: "Turn Off"
+                    service:
+                      domain: remote
+                      action: turn_off
+                      data:
+                        entity_id: remote.living_room
+                    aspect_ratio: 2/1
           - type: custom:fold-entity-row
             head:
               type: section
@@ -290,13 +353,6 @@ views:
             entities:
               - type: custom:roku-card
                 entity: media_player.55_tcl_roku_tv
-
-
-
-
-
-
-
 # Calendar card
       - type: custom:stack-in-card
         keep:
@@ -315,9 +371,6 @@ views:
             entities:
               - calendar.slacktishevents
               - calendar.holidays_in_united_states
-
-
-
 # Thermostat and climate Card
       - type: custom:stack-in-card
         keep:
@@ -362,8 +415,6 @@ views:
             show:
               points: hover
               fill: false
-
-
 #
 # Switches/Lights Tab
 #
@@ -402,11 +453,11 @@ views:
 
 
               - type: custom:fold-entity-row
-                head: switch.party_lights_184
+                head: switch.party_mode_virtual_204
                 entities:
                   - switch.couch_lights_185
                   - switch.music_lights_186
-
+                  - switch.party_lights_184
 # Kitchen Card
           - type: custom:vertical-style-card
             title: Kitchen
@@ -555,6 +606,9 @@ views:
             cards:
               - type: horizontal-stack
                 cards:
+                  - type: custom:button-card
+                    entity: switch.party_mode_virtual_204
+                    template: light_switch_button
                   - type: "custom:button-card"
                     entity: switch.zooz_plug_master_179
                     name: Zooz 2
@@ -567,10 +621,6 @@ views:
                     entity: switch.zooz_plug_right_181
                     name: Zooz 2 Right
                     template: light_switch_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-
 #
 # Media tab
 #
@@ -623,62 +673,63 @@ views:
                 icon: mdi:power-off
 
           - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              background: true
-              margin: true
             cards:
-              - type: custom:button-card
-                entity: switch.lr_tv
-                icon: mdi:television
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_kodi
-                icon: mdi:kodi
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_chromecast
-                icon: mdi:cast
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_wiiu
-                icon: mdi:nintendo-switch
-                template: harmony_button
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              background: true
-              margin: true
-            cards:
-              - type: custom:button-card
-                entity: switch.lr_music
-                icon: mdi:music
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_steam
-                icon: mdi:steam
-                template: harmony_button
-              - type: custom:button-card
-                entity: switch.lr_xbox
-                icon: mdi:xbox
-                template: harmony_button
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  background: true
+                  margin: true
+                  border_radius: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_tv
+                    icon: mdi:television
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_kodi
+                    icon: mdi:kodi
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_chromecast
+                    icon: mdi:cast
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_wiiu
+                    icon: mdi:nintendo-switch
+                    template: harmony_button
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  background: true
+                  margin: true
+                  border_radius: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_music
+                    icon: mdi:music
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_steam
+                    icon: mdi:steam
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_xbox
+                    icon: mdi:xbox
+                    template: harmony_button
 
-              - type: "custom:button-card"
-                entity: remote.living_room
-                icon: mdi:power
-                color_type: card
-                color: darkred
-                size: 32px
-                name: "Turn Off"
-                service:
-                  domain: remote
-                  action: turn_off
-                  data:
-                    entity_id: remote.living_room
-                styles:
-                  card:
-                    #- margin: 10px 5px
-                    - height: 70px
+                  - type: "custom:button-card"
+                    entity: remote.living_room
+                    icon: mdi:power
+                    color_type: card
+                    color: darkred
+                    size: 32px
+                    name: "Turn Off"
+                    aspect_ratio: 2/1
+                    service:
+                      domain: remote
+                      action: turn_off
+                      data:
+                        entity_id: remote.living_room
 
 
           - type: "custom:mini-media-player"
@@ -915,28 +966,27 @@ views:
       - type: custom:stack-in-card
         keep:
           background: true
-      #  title: Security Sensors
         cards:
           - type: custom:button-card
             name: Sensors Status
             template: general_label
-
           - type: custom:stack-in-card
             mode: horizontal
             keep:
               background: true
               margin: true
+              border_radius: true
             cards:
               - type: "custom:button-card"
                 entity: binary_sensor.front_door1_1_139
                 icon: mdi:door
                 name: Front Door
-                template: sensor_button
+                template: door_sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.back_door_172
                 icon: mdi:door
                 name: Back Door
-                template: sensor_button
+                template: door_sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.motion_sensor_128
                 icon: mdi:transition
@@ -947,9 +997,10 @@ views:
             keep:
               background: true
               margin: true
+              border_radius: true
             cards:
               - type: "custom:button-card"
-                entity: binary_sensor.master_bath_sensor_121
+                entity: binary_sensor.4_in_1_sensor_206
                 icon: mdi:transition
                 name: Master Bath
                 color: rgb(155, 0, 0)
@@ -974,6 +1025,7 @@ views:
             keep:
               background: true
               margin: true
+              border_radius: true
             cards:
               - type: "custom:button-card"
                 entity: switch.front_door1_1_139
@@ -998,6 +1050,7 @@ views:
             keep:
               background: true
               margin: true
+              border_radius: true
             cards:
               - type: "custom:button-card"
                 entity: switch.master_bath_sensor_121
@@ -1035,17 +1088,18 @@ views:
         #title: Man Cave
         cards:
           - type: custom:button-card
-            name: Man Cave Sensors
+            name: Master Bath Sensors
             template: general_label
           - type: custom:stack-in-card
             mode: horizontal
             keep:
               background: true
               margin: true
+              border_radius: true
             cards:
               - type: "custom:mini-graph-card"
                 entities:
-                  - sensor.temperature_sensor_167
+                  - sensor.temperature_sensor_207
                 name: Temp
                 icon: mdi:thermometer-lines
                 #line_color: rgb(0, 148, 10)
@@ -1060,14 +1114,14 @@ views:
                     color: red
               - type: "custom:mini-graph-card"
                 entities:
-                  - sensor.humidity_sensor_169
+                  - sensor.humidity_sensor_209
                 name: Humidity
                 line_color: blue
                 show:
                   points: hover
               - type: "custom:mini-graph-card"
                 entities:
-                  - sensor.light_sensor_168
+                  - sensor.light_sensor_208
                 name: Light
                 line_color: '#e74c3c'
                 show:
@@ -1159,6 +1213,7 @@ views:
             keep:
               margin: true
               background: true
+              border_radius: true
             cards:
               - type: custom:button-card
                 entity: person.eric
