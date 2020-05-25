@@ -25,7 +25,7 @@
         - color: '#FFFFFF'
       card:
         - margin: 0 3px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
     state:
       - value: 'on'
         styles:
@@ -84,7 +84,7 @@
         - color: var(--state-icon-active-color)
       card:
         - margin: 0 3px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
 
     state:
       - value: 'off'
@@ -133,7 +133,7 @@
         - font-size: 70%
       card:
         - margin: 0 3px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
     state:
       - value: 'on'
         styles:
@@ -189,7 +189,7 @@
         - color: '#FFFFFF'
       card:
         - margin: 0 3px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
     state:
       - value: 'on'
         styles:
@@ -229,7 +229,7 @@
       card:
         - margin: 5px 0px 5px 0px
         - padding: 10px 0px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
     state:
       - value: 'on'
         styles:
@@ -249,7 +249,7 @@
       card:
         - margin: 5px 0px 5px 0px
         - padding: 10px 0px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
     state:
       - value: 'on'
         styles:
@@ -281,7 +281,7 @@
 
       card:
         #- height: 70px
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
         - border-radius: 5px
     state:
       - value: 'on'
@@ -308,6 +308,23 @@
       card:
         - font-size: 12px
 
+  scene_buttons:
+    aspect_ratio: 3/1
+    layout: icon_name
+    color: var(--disabled-text-color)
+    show_state: false
+    tap_action:
+      action: call-service
+      service: scene.turn_on
+      service_data:
+        entity_id: >
+          [[[ return entity.entity_id ]]]
+    styles:
+      card:
+        - border-radius: 5px
+        - background-color: var(--primary-background-color)
+        #- border: solid 1px
+
   home-mode_buttons:
     aspect_ratio: 1.5/1
     confirmation:
@@ -318,10 +335,6 @@
       service_data:
         entity_id: >
           [[[ return entity.entity_id ]]]
-    styles:
-      card:
-        - border-radius: 5px
-        #- border: solid 1px
 
   sensor_button:
     aspect_ratio: 2/1
@@ -346,7 +359,7 @@
             - color: 'var(--disabled-text-color)'
     styles:
       card:
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
       name:
         - font-size: 70%
       state:
@@ -355,6 +368,7 @@
     aspect_ratio: 2/1
     color_type: card
     color: rgba(130, 0, 0, 0.5)
+    icon: mdi:door
     tap_action:
       action: more-info
     state:
@@ -375,7 +389,7 @@
             - color: 'var(--disabled-text-color)'
     styles:
       card:
-        - background-color: var(--ha-card-background)
+        - background-color: var(--primary-background-color)
       name:
         - font-size: 70%
       state:

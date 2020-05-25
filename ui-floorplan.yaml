@@ -1,0 +1,189 @@
+custom_header:
+  compact_mode: true
+  background: var(--app-header-background-color)
+  elements_color: var(--app-header-text-color)
+  active_tab_color: var(--state-icon-active-color)
+  tab_indicator_color: var(--state-icon-active-color)
+  header_text: "Casa De Slacktish - Overview"
+
+views:
+  - title: Floorplan
+    icon: mdi:floor-plan
+    path: floorplan
+    panel: true
+    cards:
+      - type: picture-elements
+        image: /local/floorplan-wide.png
+        style: |
+          ha-card {
+            background: none;
+            box-shadow: none;
+            background-color: rgb(9, 9, 9)
+          }
+        elements:
+          # Left Side
+          - type: state-label
+            entity: sensor.homemode
+            prefix: "Home Mode: "
+            style:
+              top: 5%
+              left: 5%
+              font-size: 1.5em
+              color: darkgreen
+              transform: none
+
+          - type: state-label
+            entity: sensor.current_temperature
+            prefix: "Indoor Temp: "
+            suffix: "F"
+            style:
+              top: 8%
+              left: 5%
+              font-size: 1.5em
+              transform: none
+
+# Weather Section
+
+          - type: state-label
+            entity: weather.weather
+            style:
+              top: 8%
+              left: 40%
+              font-size: 1.5em
+              transform: none
+
+          - type: state-label
+            entity: sensor.wupws_temp
+            style:
+              top: 5%
+              left: 40%
+              font-size: 1.5em
+              text-align: left
+              transform: none
+
+          - type: state-label
+            entity: sensor.wupws_heatindex
+            prefix: "Heat Index: "
+            style:
+              top: 11%
+              left: 40%
+              font-size: 1.5em
+              transform: none
+
+          - type: state-label
+            entity: sensor.wupws_humidity
+            prefix: "Humidity: "
+            style:
+              top: 14%
+              left: 40%
+              transform: none
+
+
+          # Icons on the floor plan
+
+# LIVING AREA
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: light.lamp_107
+            style:
+              top: 47%
+              left: 69%
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: light.dining_room_lamp_160
+            style:
+              top: 25%
+              left: 87%
+
+# KITCHEN
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: switch.kitchen_light_183
+            style:
+              top: 50%
+              left: 82.5%
+
+# MASTER
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: light.vanity_light_120
+            style:
+              top: 61%
+              left: 44%
+
+# MAN CAVE
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: switch.man_cave_lights_133
+            style:
+              top: 82%
+              left: 73%
+
+# EXT LIGHTS
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: switch.front_spotlight_135
+            style:
+              top: 67%
+              left: 34%
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: switch.back_spotlight_118
+            style:
+              top: 21%
+              left: 93%
+
+          - type: state-icon
+            tap_action:
+              action: toggle
+            entity: switch.deck_lights_108
+            style:
+              top: 7.5%
+              left: 82%
+
+# CAMS
+          - type: state-icon
+            tap_action:
+              action: more-info
+            entity: camera.back_door
+            style:
+              top: 26%
+              left: 71%
+
+          - type: state-icon
+            tap_action:
+              action: more-info
+            entity: camera.deck_cam
+            style:
+              top: 20%
+              left: 77%
+
+          - type: state-icon
+            tap_action:
+              action: more-info
+            entity: camera.front_door
+            style:
+              top: 54%
+              left: 54%
+
+          - type: state-icon
+            tap_action:
+              action: more-info
+            entity: camera.man_cave_camera
+            style:
+              top: 93%
+              left: 66%

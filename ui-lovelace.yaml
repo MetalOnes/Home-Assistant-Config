@@ -1,9 +1,11 @@
 custom_header:
   compact_mode: true
   background: var(--app-header-background-color)
+  elements_color: var(--app-header-text-color)
+  active_tab_color: var(--state-icon-active-color)
+  tab_indicator_color: var(--state-icon-active-color)
 
-#background: var(--background-image)
-
+#background-color: var(--primary-background-color)
 views:
 #
 # Overview tab
@@ -100,6 +102,9 @@ views:
                         icon: mdi:lock-open
                     aspect_ratio: 1.5/1
                     color_type: card
+                    styles:
+                      name:
+                        - font-size: 90%
 
           - type: entities
             show_header_toggle: false
@@ -325,23 +330,43 @@ views:
                     tap_action:
                       action: call-service
                       service: shell_command.tv_pbs
+                    style:
+                      button:
+                        background-color: var(--primary-background-color)
+                        border-radius: var(--ha-card-border-radius)
                   - entity: shell_command.tv_wral
                     name: "5.1 NBC"
+                    style:
+                      button:
+                        background-color: var(--primary-background-color)
+                        border-radius: var(--ha-card-border-radius)
                     tap_action:
                       action: call-service
                       service: shell_command.tv_wral
                   - entity: shell_command.tv_abc
                     name: "11.1 ABC"
+                    style:
+                      button:
+                        background-color: var(--primary-background-color)
+                        border-radius: var(--ha-card-border-radius)
                     tap_action:
                       action: call-service
                       service: shell_command.tv_abc
                   - entity: shell_command.tv_cbs
                     name: "17.1 CBS"
+                    style:
+                      button:
+                        background-color: var(--primary-background-color)
+                        border-radius: var(--ha-card-border-radius)
                     tap_action:
                       action: call-service
                       service: shell_command.tv_cbs
                   - entity: shell_command.tv_fox
                     name: "50.1 Fox"
+                    style:
+                      button:
+                        background-color: var(--primary-background-color)
+                        border-radius: var(--ha-card-border-radius)
                     tap_action:
                       action: call-service
                       service: shell_command.tv_fox
@@ -370,7 +395,9 @@ views:
             dateBottomFormat: ddd
             entities:
               - calendar.slacktishevents
+              - calendar.flocker_streams
               - calendar.holidays_in_united_states
+
 # Thermostat and climate Card
       - type: custom:stack-in-card
         keep:
@@ -410,7 +437,7 @@ views:
             entities:
               - entity: sensor.current_temperature
                 color: rgba(207, 130, 0, 0.8)
-              - entity: sensor.temperature_sensor_167
+              - entity: sensor.temperature_sensor_207
                 color: rgb(0, 133, 255, 0.8)
             show:
               points: hover
@@ -422,7 +449,9 @@ views:
     path: switches
     icon: mdi:light-switch
     cards:
-      - type: vertical-stack
+      - type: custom:stack-in-card
+        keep:
+          margin: true
         cards:
 # Living Area Card
           - type: custom:vertical-style-card
@@ -450,14 +479,37 @@ views:
                   - type: "custom:button-card"
                     entity: switch.camera_position
                     template: light_switch_button
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: light.fireplace
+                    name: Fireplace
+                    template: rgb_light_button
+                  - type: "custom:button-card"
+                    entity: switch.couch_lights_185
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.music_lights_186
+                    template: light_switch_button
+                  - type: "custom:button-card"
+                    entity: switch.party_lights_184
+                    template: light_switch_button
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: scene.music_lights
+                    name: Music
+                    template: scene_buttons
+                  - type: "custom:button-card"
+                    entity: scene.music_and_projector
+                    name: Projector
+                    template: scene_buttons
+                  - type: "custom:button-card"
+                    entity: scene.music_lights_off
+                    name: "Off"
+                    template: scene_buttons
 
 
-              - type: custom:fold-entity-row
-                head: switch.party_mode_virtual_204
-                entities:
-                  - switch.couch_lights_185
-                  - switch.music_lights_186
-                  - switch.party_lights_184
 # Kitchen Card
           - type: custom:vertical-style-card
             title: Kitchen
@@ -966,6 +1018,7 @@ views:
       - type: custom:stack-in-card
         keep:
           background: true
+          #border_radius: true
         cards:
           - type: custom:button-card
             name: Sensors Status
@@ -979,12 +1032,10 @@ views:
             cards:
               - type: "custom:button-card"
                 entity: binary_sensor.front_door1_1_139
-                icon: mdi:door
                 name: Front Door
                 template: door_sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.back_door_172
-                icon: mdi:door
                 name: Back Door
                 template: door_sensor_button
               - type: "custom:button-card"
@@ -1000,11 +1051,14 @@ views:
               border_radius: true
             cards:
               - type: "custom:button-card"
-                entity: binary_sensor.4_in_1_sensor_206
+                entity: binary_sensor.master_bath_sensor_121
                 icon: mdi:transition
                 name: Master Bath
-                color: rgb(155, 0, 0)
                 template: sensor_button
+              - type: "custom:button-card"
+                entity: binary_sensor.closet_door_210
+                name: Master Closet
+                template: door_sensor_button
               - type: "custom:button-card"
                 entity: binary_sensor.smoke_sensor_197
                 icon: mdi:smoke-detector
@@ -1076,16 +1130,18 @@ views:
             show_state: true
             icon: mdi:alarm-light
             layout: icon_name_state
+            aspect_ratio: 6/1
             lock:
               enabled: true
             styles:
               card:
-                - height: 75px
+                #- height: 75px
+                - background-color: var(--primary-background-color)
+                - margin: 0 3px
 
       - type: custom:stack-in-card
         keep:
           background: true
-        #title: Man Cave
         cards:
           - type: custom:button-card
             name: Master Bath Sensors
@@ -1137,6 +1193,10 @@ views:
         keep:
           background: true
         cards:
+          - type: custom:button-card
+            name: PWS
+            template: general_label
+
           - type: custom:button-card
             name: Weather
             template: general_label
@@ -1421,6 +1481,11 @@ views:
                   padding-left: 36px
                   padding-bottom: 1px
                   #text-shadow: 2px 2px 2px black
+
+
+
+
+
 
 # Templates for button-card
 button_card_templates:

@@ -1,25 +1,32 @@
 - name: Night
+  id: SceneNight
   entities:
-    light.mancave_desk: false
-    light.mancave: false
-    light.wifi_box: false
-    light.pin_board: false
-    light.tv: false
-    light.cabinets: false
+    light.mancave_desk: off
+    light.mancave: off
+    light.wifi_box: off
+    light.pin_board: off
+    light.tv: off
+    light.cabinets: off
+    light.fireplace: off
+    switch.camera_position: off
 
 - name: Away
+  id: SceneAway
   entities:
-    light.mancave_desk: false
-    light.mancave: false
-    light.wifi_box: false
-    light.pin_board: false
-    light.tv: false
+    light.mancave_desk: off
+    light.mancave: off
+    light.wifi_box: off
+    light.pin_board: off
+    light.tv: off
+    light.cabinets: off
+    light.fireplace: off
+    switch.camera_position: off
 
 - name: mcdesk
   entities:
-    light.wifi_box: true
-    light.mancave_desk: true
-    light.pin_board: true
+    light.wifi_box: on
+    light.mancave_desk: on
+    light.pin_board: on
 
 - name: "Music Lights"
   icon: mdi:lava-lamp
@@ -34,3 +41,31 @@
     light.lamp_107:
       state: on
       brightness_pct: 50
+    light.fireplace: on
+    switch.music_lights_186: on
+
+- name: "Music Lights Off"
+  icon: mdi:grid-off
+  entities:
+    switch.party_lights_184: off
+    light.fireplace: off
+    light.tv:
+      state: on
+      white_value: 30
+      brightness: 15
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      effect: none
+
+- name: "Music and Projector"
+  icon: mdi:projector
+  entities:
+    switch.couch_lights_185: on
+    switch.music_lights_186: off
+    light.tv:
+      state: on
+      effect: colorloop
+    light.lamp_107: off
+    light.fireplace: on

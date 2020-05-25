@@ -21,6 +21,10 @@ light.tv:
   friendly_name: TV Backlight
   icon: mdi:television
 
+light.fireplace:
+  friendly_name: Fireplace
+  icon: mdi:fireplace
+
 light.bedroom_eric_103:
   friendly_name: Bedroom Right
   icon: mdi:lightbulb-outline

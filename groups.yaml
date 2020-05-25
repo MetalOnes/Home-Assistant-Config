@@ -40,13 +40,18 @@ Man Cave:
 - light.mancave
 - light.wifi_box
 - light.pin_board
-- sensor.temperature_sensor_167
-- sensor.light_sensor_168
-- sensor.humidity_sensor_169
+- binary_sensor.motion_sensor_128
 Bedroom:
 - light.bedroom_eric_103
 - light.bedroom_val_104
 - light.vanity_light_120
+Master Bath:
+- light.vanity_light_120
+- sensor.temperature_sensor_207
+- binary_sensor.4_in_1_sensor_206
+- sensor.humidity_sensor_209
+- sensor.light_sensor_208
+
 BR_Lights:
 - light.bedroom_eric_103
 - light.bedroom_val_104
@@ -89,6 +94,7 @@ Security Sensors:
 - binary_sensor.back_door_172
 - binary_sensor.motion_sensor_128
 - binary_sensor.master_bath_sensor_121
+- binary_sensor.4_in_1_sensor_206
 - switch.siren_113
 - binary_sensor.smoke_sensor_197
 - binary_sensor.co_sensor_198
@@ -96,6 +102,7 @@ Cameras:
 - camera.back_door
 - camera.front_door
 - camera.man_cave_camera
+- camera.deck_cam
 Vera Scenes:
   entities:
     - scene.bedroom_lights_off

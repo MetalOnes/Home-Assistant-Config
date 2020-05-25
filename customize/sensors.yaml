@@ -9,17 +9,20 @@ sensor.light_sensor_208:
   friendly_name: Master Bath Temp
   icon: mdi:camera-metering-center
 
-binary_sensor.4_in_1_sensor_206:
-  friendly_name: Master Bath Motion
-  device_class: motion
-
 binary_sensor.front_door1_1_139:
   friendly_name: Front Door
   device_class: opening
+  icon: mdi:door
 
 binary_sensor.back_door_172:
   friendly_name: Back Door
   device_class: opening
+  icon: mdi:door
+
+binary_sensor.closet_door_210:
+  friendly_name: Master Closet
+  device_class: opening
+  icon: mdi:door
 
 binary_sensor.smoke_sensor_122:
   friendly_name: Smoke Alarm
@@ -31,7 +34,7 @@ binary_sensor.motion_sensor_128:
 
 binary_sensor.master_bath_sensor_121:
   device_class: motion
-  friendly_name: Old MB Sensor
+  friendly_name: Master Bath Motion
 
 sensor.myipopendnscom:
   friendly_name: Public IP
