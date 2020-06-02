@@ -41,12 +41,16 @@ Man Cave:
 - light.wifi_box
 - light.pin_board
 - binary_sensor.motion_sensor_128
+- switch.air_purifier
 Bedroom:
 - light.bedroom_eric_103
 - light.bedroom_val_104
-- light.vanity_light_120
+- light.master_closet
+- light.vanity_211
+- switch.master_bath_fan_212
 Master Bath:
-- light.vanity_light_120
+- light.vanity_211
+- switch.master_bath_fan_212
 - sensor.temperature_sensor_207
 - binary_sensor.4_in_1_sensor_206
 - sensor.humidity_sensor_209
@@ -55,6 +59,7 @@ Master Bath:
 BR_Lights:
 - light.bedroom_eric_103
 - light.bedroom_val_104
+- light.master_closet
 Living_Area:
 - light.lamp_107
 - light.dining_room_lamp_160
@@ -76,7 +81,8 @@ Int Lights:
 - switch.couch_lights_185
 - switch.music_lights_186
 - switch.party_lights_184
-- light.vanity_light_120
+- light.master_closet
+- light.vanity_211
 Living Lights:
 - light.lamp_107
 - light.cabinets
@@ -95,6 +101,7 @@ Security Sensors:
 - binary_sensor.motion_sensor_128
 - binary_sensor.master_bath_sensor_121
 - binary_sensor.4_in_1_sensor_206
+- binary_sensor.closet_door_210
 - switch.siren_113
 - binary_sensor.smoke_sensor_197
 - binary_sensor.co_sensor_198

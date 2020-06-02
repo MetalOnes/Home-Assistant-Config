@@ -114,7 +114,6 @@ logger:
 system_health:
 
 http:
-#  api_password: !secret http_pass
   base_url: !secret base_url
   server_port: 8254
   ip_ban_enabled: true
@@ -140,17 +139,28 @@ discovery:
 
 recorder:
   db_url: !secret mysql_url
-  purge_keep_days: 5
+  purge_keep_days: 10
   exclude:
     domains:
       - camera
+      - updater
       - zone
       - weather
       - time
+      - calendar
+      - sun
+
     entities:
       - sensor.sunrise_time
+      - sensor.sunrise
       - sensor.sunset_time
-      - sensor.myipopendnscom
+      - sensor.sunset
+      - sensor.solar_noon
+      - sensor.solar_angle
+      - sensor.daylight
+      - sensor.moon
+      - sensor.myip
+      - sensor.max_elevation
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_humidity
@@ -167,7 +177,6 @@ recorder:
       - sensor.time
       - sensor.time_date
       - sensor.time_utc
-      - sensor.solar_angle
       - sensor.ssl_certificate_expiry
       - sensor.flyers
       - sensor.hacs
@@ -181,26 +190,94 @@ recorder:
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
+      - sensor.wupws_dewpt
+      - sensor.wupws_heatindex
+      - sensor.wupws_humidity
+      - sensor.wupws_precip_1d
+      - sensor.wupws_precip_2d
+      - sensor.wupws_precip_3d
+      - sensor.wupws_precip_4d
+      - sensor.wupws_precip_chance_1d
+      - sensor.wupws_precip_chance_2d
+      - sensor.wupws_precip_chance_3d
+      - sensor.wupws_precip_chance_4d
+      - sensor.wupws_preciprate
+      - sensor.wupws_preciptotal
+      - sensor.wupws_pressure
+      - sensor.wupws_temp
+      - sensor.wupws_temp_high_1d
+      - sensor.wupws_temp_high_2d
+      - sensor.wupws_temp_high_3d
+      - sensor.wupws_temp_high_4d
+      - sensor.wupws_temp_low_1d
+      - sensor.wupws_temp_low_2d
+      - sensor.wupws_temp_low_3d
+      - sensor.wupws_temp_low_4d
+      - sensor.wupws_weather_1d
+      - sensor.wupws_weather_1n
+      - sensor.wupws_weather_2d
+      - sensor.wupws_weather_2n
+      - sensor.wupws_weather_3d
+      - sensor.wupws_weather_3n
+      - sensor.wupws_weather_4d
+      - sensor.wupws_weather_4n
+      - sensor.wupws_wind_1d
+      - sensor.wupws_wind_2d
+      - sensor.wupws_wind_3d
+      - sensor.wupws_wind_4d
+      - sensor.wupws_windchill
+      - sensor.wupws_winddir
+      - sensor.wupws_windgust
+      - sensor.wupws_windspeed
+      - sensor.uptime
+      - sensor.wifi_connection
+      - sensor.wifi_connection_2
+      - sensor.nanomote_1_199
+      - sensor.nanomote_quad_202
+      - sensor.hass_avail_version
+      - sensor.hacs
+      - sensor.bssid
+      - sensor.galaxys7_battery_state
+      - sensor.erics_ipad_battery_level
+      - sensor.erics_ipad_battery_state
+      - sensor.sm_j700p_battery_state
+      - sensor.battery_level
+      - sensor.battery_level_2
+      - sensor.battery_level_3
+      - sensor.battery_state
+      - device_tracker.eric_s_ipad_2
+      - device_tracker.lite
+      - device_tracker.living_room_roku
+      - device_tracker.pro
+      - device_tracker.unifi_a4_da_22_2a_d1_df_default
+      - device_tracker.unifi_c8_02_8f_0f_1d_32_default
+      - device_tracker.val_acer
+      - device_tracker.xboxone
+      - sensor.moon
 
 
 history:
   exclude:
     domains:
-      - automation
-      - updater
-      - sun
-      - script
-      - group
       - camera
+      - updater
       - zone
       - weather
+      - time
+      - calendar
+      - sun
+      - automation
+      - script
     entities:
       - sensor.sunrise_time
+      - sensor.sunrise
       - sensor.sunset_time
-      - sensor.time
-      - sensor.time_date
-      - sensor.time_utc
-      - sensor.myipopendnscom
+      - sensor.sunset
+      - sensor.solar_noon
+      - sensor.solar_angle
+      - sensor.daylight
+      - sensor.myip
+      - sensor.max_elevation
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_humidity
@@ -214,7 +291,9 @@ history:
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
-      - sensor.solar_angle
+      - sensor.time
+      - sensor.time_date
+      - sensor.time_utc
       - sensor.ssl_certificate_expiry
       - sensor.flyers
       - sensor.hacs
@@ -228,6 +307,69 @@ history:
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
+      - sensor.wupws_dewpt
+      - sensor.wupws_heatindex
+      - sensor.wupws_humidity
+      - sensor.wupws_precip_1d
+      - sensor.wupws_precip_2d
+      - sensor.wupws_precip_3d
+      - sensor.wupws_precip_4d
+      - sensor.wupws_precip_chance_1d
+      - sensor.wupws_precip_chance_2d
+      - sensor.wupws_precip_chance_3d
+      - sensor.wupws_precip_chance_4d
+      - sensor.wupws_preciprate
+      - sensor.wupws_preciptotal
+      - sensor.wupws_pressure
+      - sensor.wupws_temp
+      - sensor.wupws_temp_high_1d
+      - sensor.wupws_temp_high_2d
+      - sensor.wupws_temp_high_3d
+      - sensor.wupws_temp_high_4d
+      - sensor.wupws_temp_low_1d
+      - sensor.wupws_temp_low_2d
+      - sensor.wupws_temp_low_3d
+      - sensor.wupws_temp_low_4d
+      - sensor.wupws_weather_1d
+      - sensor.wupws_weather_1n
+      - sensor.wupws_weather_2d
+      - sensor.wupws_weather_2n
+      - sensor.wupws_weather_3d
+      - sensor.wupws_weather_3n
+      - sensor.wupws_weather_4d
+      - sensor.wupws_weather_4n
+      - sensor.wupws_wind_1d
+      - sensor.wupws_wind_2d
+      - sensor.wupws_wind_3d
+      - sensor.wupws_wind_4d
+      - sensor.wupws_windchill
+      - sensor.wupws_winddir
+      - sensor.wupws_windgust
+      - sensor.wupws_windspeed
+      - sensor.uptime
+      - sensor.wifi_connection
+      - sensor.wifi_connection_2
+      - sensor.nanomote_1_199
+      - sensor.nanomote_quad_202
+      - sensor.hass_avail_version
+      - sensor.hacs
+      - sensor.bssid
+      - sensor.galaxys7_battery_state
+      - sensor.erics_ipad_battery_level
+      - sensor.erics_ipad_battery_state
+      - sensor.sm_j700p_battery_state
+      - sensor.battery_level
+      - sensor.battery_level_2
+      - sensor.battery_level_3
+      - sensor.battery_state
+      - device_tracker.eric_s_ipad_2
+      - device_tracker.lite
+      - device_tracker.living_room_roku
+      - device_tracker.pro
+      - device_tracker.unifi_a4_da_22_2a_d1_df_default
+      - device_tracker.unifi_c8_02_8f_0f_1d_32_default
+      - device_tracker.val_acer
+      - device_tracker.xboxone
 
 logbook:
   exclude:
@@ -458,7 +600,11 @@ sensor:
       current_temperature:
         friendly_name: Living Room Temp
         value_template: "{{ state_attr('climate.thermostat_147', 'current_temperature') }}"
-        unit_of_measurement: '°'
+        unit_of_measurement: '°F'
+      masterbath_temperature:
+        friendly_name: Master Bath Temp
+        value_template: "{{ states('sensor.temperature_sensor_207')|int }}"
+        unit_of_measurement: '°F'
 
 # Newest Version of HASS Available
   - platform: template

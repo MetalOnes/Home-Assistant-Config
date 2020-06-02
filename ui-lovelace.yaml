@@ -15,16 +15,6 @@ views:
     path: overview
     cards:
 # House Mode sensor and scenes
-      #- type: entities
-      #  entities:
-      #    - sensor.homemode
-      #- footer:
-      #    type: entity-button
-      #    entities:
-      #      - scene.switch_to_home
-      #      - scene.switch_to_away
-      #      - scene.switch_to_night
-
       - type: custom:stack-in-card
         keep:
           background: true
@@ -148,7 +138,7 @@ views:
                 icon: mdi:bed-empty
                 entities:
                   - type: custom:slider-entity-row
-                    entity: light.vanity_light_120
+                    entity: light.vanity_211
                     toggle: true
                   - type: custom:slider-entity-row
                     entity: light.bedroom_val_104
@@ -157,6 +147,7 @@ views:
                     entity: light.bedroom_eric_103
                     toggle: true
                   - entity: scene.both_br_lamps_to_20
+                  - entity: switch.master_bath_fan_212
 
       - type: custom:stack-in-card
         keep:
@@ -559,7 +550,7 @@ views:
               - type: horizontal-stack
                 cards:
                   - type: "custom:button-card"
-                    entity: switch.cabinet_lights_123
+                    entity: switch.air_purifier
                     name: Air Purifier
                     template: light_switch_button
                   - type: "custom:button-card"
@@ -571,7 +562,7 @@ views:
 
     # Bedroom Card
           - type: custom:vertical-style-card
-            title: Bedroom
+            title: Master Suite
             cards:
               - type: horizontal-stack
                 cards:
@@ -586,13 +577,29 @@ views:
                     template: light_button_brightness
 
                   - type: "custom:button-card"
-                    entity: light.vanity_light_120
+                    entity: light.master_closet
+                    name: Closet
+                    template: light_button_brightness
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
+                    entity: light.vanity_211
                     name: Vanity
                     template: light_button_brightness
                     icon: mdi:vanity-light
 
+                  - type: custom:button-card
+                    entity: switch.master_bath_fan_212
+                    template: light_switch_button
                   - type: "custom:button-card"
                     color_type: blank-card
+                  - type: "custom:button-card"
+                    color_type: blank-card
+
 
 
     # Front Ext Card

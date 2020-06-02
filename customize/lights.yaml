@@ -19,7 +19,7 @@ light.lamp_107:
 
 light.tv:
   friendly_name: TV Backlight
-  icon: mdi:television
+  icon: mdi:television-ambient-light
 
 light.fireplace:
   friendly_name: Fireplace
@@ -33,9 +33,9 @@ light.bedroom_val_104:
   friendly_name: Bedroom Left
   icon: mdi:lightbulb-outline
 
-light.vanity_light_120:
-  friendly_name: Vanity
-  icon: mdi:vanity-light
+light.master_closet:
+  friendly_name: Master Closet
+  icon: mdi:lightbulb-outline
 
 light.wifi_box:
   icon: mdi:lighthouse
@@ -44,3 +44,7 @@ light.wifi_box:
 light.cabinets:
   icon: mdi:white-balance-iridescent
   friendly_name: Cabinets
+
+light.vanity_211:
+  icon: mdi:vanity-light
+  friendly_name: Vanity Light

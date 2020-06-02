@@ -33,7 +33,7 @@ switch.front_ext_holida_178:
 switch.back_ext_holiday_188:
   icon: mdi:pine-tree
 
-switch.cabinet_lights_123:
+switch.air_purifier:
   friendly_name: Air Purifier
   icon: mdi:air-filter
 
@@ -75,3 +75,6 @@ switch.camera_position:
   icon: mdi:cctv
   friendly_name: Camera Privacy
   assumed_state: false
+
+switch.master_bath_fan_212:
+  icon: mdi:fan

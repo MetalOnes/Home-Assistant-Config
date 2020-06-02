@@ -1,14 +1,3 @@
-sensor.temperature_sensor_207:
-  friendly_name: Master Bath Temp
-
-sensor.humidity_sensor_209:
-  friendly_name: Master Bath Temp
-  icon: mdi:water-percent
-
-sensor.light_sensor_208:
-  friendly_name: Master Bath Temp
-  icon: mdi:camera-metering-center
-
 binary_sensor.front_door1_1_139:
   friendly_name: Front Door
   device_class: opening
@@ -24,9 +13,15 @@ binary_sensor.closet_door_210:
   device_class: opening
   icon: mdi:door
 
-binary_sensor.smoke_sensor_122:
+binary_sensor.smoke_sensor_197:
   friendly_name: Smoke Alarm
   device_class: smoke
+  icon: mdi:smoke-detector
+
+binary_sensor.co_sensor_198:
+  friendly_name: CO Alarm
+  device_class: smoke
+  icon: mdi:smoke-detector
 
 binary_sensor.motion_sensor_128:
   device_class: motion
@@ -36,7 +31,23 @@ binary_sensor.master_bath_sensor_121:
   device_class: motion
   friendly_name: Master Bath Motion
 
-sensor.myipopendnscom:
+sensor.temperature_sensor_207:
+  friendly_name: Master Bath Temp
+  icon: mdi:thermometer
+  device_class: temperature
+
+sensor.light_sensor_208:
+  friendly_name: Master Bath Light
+  icon: mdi:altimeter
+  device_class: illuminance
+
+sensor.humidity_sensor_209:
+  friendly_name: Master Bath Humidity
+  icon: mdi:water-percent
+  unit_of_measurement: "% hm"
+  device_class: humidity
+
+sensor.myip:
   friendly_name: Public IP
   icon: mdi:earth
 
