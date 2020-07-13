@@ -4,7 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
-
+* To 0.112.4
 * Updates, updates, updates
 * Added Floorplan dashboard, Lovelace updates as always
 * 0.108.9, lots of lovelace changes

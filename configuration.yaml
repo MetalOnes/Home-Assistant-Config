@@ -6,8 +6,8 @@ homeassistant:
   unit_system: imperial
   time_zone: America/New_York
   customize: !include_dir_merge_named customize
-  auth_providers:
-    - type: homeassistant
+  internal_url: !secret internal_url
+  external_url: !secret external_url
 
 frontend:
   themes: !include_dir_merge_named themes/
@@ -18,8 +18,6 @@ lovelace:
     - url: /hacsfiles/button-card/button-card.js
       type: module
     - url: /hacsfiles/mini-media-player/mini-media-player.js
-      type: module
-    - url: /hacsfiles/dual-gauge-card/dual-gauge-card.js
       type: module
     - url: /hacsfiles/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
       type: module
@@ -37,8 +35,6 @@ lovelace:
       type: module
     - url: /hacsfiles/untappd-card/untappd-card.js
       type: module
-    - url: /hacsfiles/love-lock-card/love-lock-card.js
-      type: js
     - url: /hacsfiles/custom-header/custom-header.js
       type: module
     - url: /hacsfiles/bar-card/bar-card.js
@@ -75,6 +71,8 @@ lovelace:
       type: module
     - url: https://fonts.googleapis.com/css?family=Comfortaa&display=swap
       type: css
+    - url: /hacsfiles/garbage-collection-card/garbage-collection-card.js
+      type: js
 
   dashboards:
     ui-system:
@@ -90,6 +88,12 @@ lovelace:
       icon: mdi:cctv
       show_in_sidebar: true
       filename: ui-cameras.yaml
+    ui-leds:
+      mode: yaml
+      title: LED Control
+      icon: mdi:led-strip
+      show_in_sidebar: true
+      filename: ui-leds.yaml
     ui-floorplan:
       mode: yaml
       title: Floorplan
@@ -97,7 +101,11 @@ lovelace:
       show_in_sidebar: true
       filename: ui-floorplan.yaml
 
-
+panel_iframe:
+  ledfx:
+    title: 'LEDfx'
+    url: 'http://192.168.1.10:8888'
+    icon: mdi:led-strip-variant
 
 config:
 
@@ -114,7 +122,6 @@ logger:
 system_health:
 
 http:
-  base_url: !secret base_url
   server_port: 8254
   ip_ban_enabled: true
   login_attempts_threshold: 5
@@ -129,10 +136,8 @@ updater:
 # HACS
 hacs:
   token: !secret hacs_token
-#  theme: true
-#  python_script: true
 
-discovery:
+#discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
@@ -156,7 +161,7 @@ recorder:
       - sensor.sunset_time
       - sensor.sunset
       - sensor.solar_noon
-      - sensor.solar_angle
+      #- sensor.solar_angle
       - sensor.daylight
       - sensor.moon
       - sensor.myip
@@ -274,7 +279,7 @@ history:
       - sensor.sunset_time
       - sensor.sunset
       - sensor.solar_noon
-      - sensor.solar_angle
+      #- sensor.solar_angle
       - sensor.daylight
       - sensor.myip
       - sensor.max_elevation
@@ -394,7 +399,7 @@ logbook:
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
-      - sensor.solar_angle
+      #- sensor.solar_angle
       - sensor.ssl_certificate_expiry
       - sensor.flyers
       - sensor.hacs
@@ -575,6 +580,15 @@ camera:
   - platform: ffmpeg
     input: !secret deckcam_url
     name: Deck Cam
+
+  - platform: ffmpeg
+    input: !secret drivewaycam_url
+    name: Driveway Cam
+
+  - platform: ffmpeg
+    input: !secret cornercam_url
+    name: Corner Cam
+
 
 #### Not actual cams, but images to use in HA
 
@@ -854,8 +868,49 @@ sensor:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
-binary_sensor:
+#
+# LEDfx/WLED Things
+#
+  - platform: rest
+    name: LEDfx Devices
+    resource: http://192.168.1.10:8888/api/devices
+    value_template: '{{ value_json.ledfx_device }}'
+    json_attributes:
+      - devices
 
+  - platform: rest
+    name: LEDfx Effect
+    resource: http://192.168.1.10:8888/api/effects
+    value_template: '{{ value_json[0].name }}'
+
+  - platform: template
+    sensors:
+      wled1_effect:
+        value_template: "{{ states.light.wled1.attributes.effect }}"
+      ledfx_wled1_e:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["effect"]["name"] }}'
+        friendly_name: "Device 1 Current Effect"
+      ledfx_wled1_name:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["name"] }}'
+      ledfx_wled1_ip:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["ip_address"] }}'
+        friendly_name: "Device 1 IP"
+
+
+      #ledfx_effect_t:
+      #  value_template: '{{ states.sensor.ledfx_effect.attributes.["0"] }}'
+
+# See Rest_command around 1100
+
+
+
+binary_sensor:
+  - platform: generic_hygrostat
+    name: Bathroom Hygrostat
+    sensor: sensor.humidity_sensor_209 # Source humidity sensor
+    delta_trigger: 3 # Optional humidity swing to detect
+    target_offset: 3 # Optional dehumidification target offset
+    max_on_time: 3600 # Optional # Optional safety max on time
 ##########################################
 # Weather (New method)
 ##########################################
@@ -1029,6 +1084,21 @@ rest_command:
     content_type: 'application/json'
     headers:
       authorization: 'Basic a29kaTprb2Rp'
+  ledfx_wled1_wave:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"wled1-wavelength","action":"activate"}'
+    content_type: 'application/json'
+  ledfx_wled1_off:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"wled1-off","action":"activate"}'
+    content_type: 'application/json'
+
 #########################################
 # Shell Commands
 #########################################
@@ -1042,6 +1112,11 @@ shell_command:
   tv_cbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=17.1'"
   tv_fox: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=50.1'"
   tv_pbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=4.1'"
+  wled1_startup: "curl -d '' 'http://192.168.1.11/win&FP=50&FX=93&T=1&SX=55&IX=5&A=100&CL=000000&C2=000000'"
+  wled1_shutdown: "curl -d '' 'http://192.168.1.11/win&FP=49&FX=93&T=1&SX=55&IX=5&A=100&CL=000000&C2=000000'"
+  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=46&T=1&A=100&CL=000000&C2=000000'"
+  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=46&T=1&A=100&CL=000000&C2=000000'"
+
 
 #########################################
 # Includes

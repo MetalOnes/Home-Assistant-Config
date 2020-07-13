@@ -21,6 +21,14 @@ views:
         camera_view: live
         show_state: false
       - type: picture-entity
+        entity: camera.driveway_cam
+        camera_view: live
+        show_state: false
+      - type: picture-entity
+        entity: camera.corner_cam
+        camera_view: live
+        show_state: false
+      - type: picture-entity
         entity: camera.deck_cam
         camera_view: live
         show_state: false

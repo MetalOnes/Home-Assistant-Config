@@ -108,6 +108,37 @@
           icon:
             - color: 'var(--disabled-text-color)'
 
+  wled_button:
+    hold_action:
+      action: more-info
+    label: >
+      [[[
+        return entity.attributes.effect;
+      ]]]
+    show_label: true
+    show_state: true
+    color: auto
+    color_off: var(--disabled-text-color)
+    aspect_ratio: 4/1
+    styles:
+      grid:
+        - grid-template-areas: '"n s i" "n l i" "n l i"'
+        - grid-template-rows: 1fr 1fr 1fr
+        - grid-template-columns: 1fr 2fr 1fr
+      label:
+        - justify-self: start
+      name:
+        - color: var(--state-icon-active-color)
+
+      state:
+        - justify-self: start
+        - color: var(--state-icon-active-color)
+
+      card:
+        - margin: 0 3px
+        - background-color: var(--primary-background-color)
+
+
 
   light_switch_button:
     hold_action:

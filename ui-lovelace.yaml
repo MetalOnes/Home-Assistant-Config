@@ -271,29 +271,6 @@ views:
                     entity: switch.lr_xbox
                     icon: mdi:xbox
                     template: harmony_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-
-              - type: custom:stack-in-card
-                mode: horizontal
-                keep:
-                  margin: true
-                  border_radius: true
-                  background: true
-                cards:
-                  - type: custom:button-card
-                    entity: script.tv_youtube
-                    icon: mdi:youtube
-                    name: YouTube
-                    template: harmony_button
-                  - type: custom:button-card
-                    entity: script.tv_pluto
-                    icon: mdi:television-classic
-                    name: PlutoTV
-                    template: harmony_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
 
                   - type: "custom:button-card"
                     entity: remote.living_room
@@ -377,6 +354,14 @@ views:
           - type: custom:button-card
             name: Calendar
             template: general_label
+          - type: custom:garbage-collection-card
+            entity: sensor.trash
+            icon_color: white
+            icon_size: 35px
+          - type: custom:garbage-collection-card
+            entity: sensor.recycling
+            icon_color: white
+            icon_size: 35px
           - type: custom:calendar-card
             #title: "Calendar"
             hideHeader: true
@@ -427,9 +412,15 @@ views:
             hours_to_show: 24
             entities:
               - entity: sensor.current_temperature
-                color: rgba(207, 130, 0, 0.8)
+                color: rgba(0, 142, 10, 0.8)
               - entity: sensor.temperature_sensor_207
-                color: rgb(0, 133, 255, 0.8)
+                color: rgba(0, 133, 255, 0.8)
+              - entity: sensor.solar_angle
+                color: rgba(207, 130, 0, 0.8)
+                line_width: 3
+                show_points: false
+                y_axis: secondary
+            lower_bound_secondary: 0
             show:
               points: hover
               fill: false
@@ -459,9 +450,6 @@ views:
                     entity: light.tv
                     name: TV
                     template: rgb_light_button
-                    state:
-                      - value: 'on'
-                        icon: mdi:flash
 
                   - type: "custom:button-card"
                     entity: light.dining_room_lamp_160
@@ -1189,6 +1177,9 @@ views:
                 line_color: '#e74c3c'
                 show:
                   points: hover
+              - type: entity
+                entity: binary_sensor.bathroom_hygrostat
+
 #
 # Weather tab
 #
@@ -1361,7 +1352,7 @@ views:
                   border-color: Yellow
                   background-color: rgba(10, 10, 10, 0.4)
                   pointer-events: none
-                  width: 325px
+                  #width: 325px
                   padding: 5px
                   border-top-right-radius: 5px
               - type: state-icon
@@ -1384,7 +1375,7 @@ views:
                   border-color: Orange
                   background-color: rgba(10, 10, 10, 0.4)
                   pointer-events: none
-                  width: 325px
+                  #width: 325px
                   padding: 5px
                   border-bottom-right-radius: 5px
               - type: state-icon

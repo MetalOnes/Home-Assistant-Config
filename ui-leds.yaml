@@ -1,0 +1,59 @@
+custom_header:
+  compact_mode: true
+  background: var(--app-header-background-color)
+  elements_color: var(--app-header-text-color)
+  active_tab_color: var(--state-icon-active-color)
+  tab_indicator_color: var(--state-icon-active-color
+title: LED Control
+views:
+  - title: LED Control
+    cards:
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+        cards:
+          - type: entities
+            show_header_toggle: false
+            title: LEDfx Devices
+            entities:
+              - script.ledfx_wled1_wave
+              - script.ledfx_wled1_off
+              - sensor.ledfx_wled1_name
+              - sensor.ledfx_wled1_ip
+              - sensor.ledfx_wled1_e
+
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+        cards:
+          - type: custom:button-card
+            template: wled_button
+            entity: light.wled1
+
+          - type: custom:light-entity-card
+            entity: light.wled1
+            persist_features: true
+            show_slider_percent: true
+            group: true
+          - type: custom:banner-card
+            heading: false
+            row_size: 4
+            style: |
+              ha-card .overlay-strip {
+                background: none;
+              }
+            entities:
+              - entity: sensor.wled1_effect
+                name: Current Effect
+              - entity: sensor.wled1_estimated_current
+                name: Power Usage
+              - entity: switch.wled1_sync_receive
+                name: Sync Receive
+              - entity: switch.wled1_sync_send
+                name: Sync Send
+
+# Templates for button-card
+button_card_templates:
+  !include button-card-templates.yaml

@@ -9,6 +9,8 @@
     light.cabinets: off
     light.fireplace: off
     switch.camera_position: off
+    light.wled1: off
+    remote.living_room: off
 
 - name: Away
   id: SceneAway
@@ -21,6 +23,7 @@
     light.cabinets: off
     light.fireplace: off
     switch.camera_position: off
+    light.wled1: off
 
 - name: mcdesk
   entities:

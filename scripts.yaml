@@ -96,3 +96,56 @@ simpsons:
   alias: "Random Simpsons"
   sequence:
     - service: rest_command.simpsons
+
+wled1_startup_anim:
+  alias: "WLED1 - Startup Animation"
+  sequence:
+    - service: shell_command.wled1_startup
+    - delay: '00:00:03'
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+
+wled1_shutdown_anim:
+  alias: "WLED1 - Shutdown Animation"
+  sequence:
+    - service: shell_command.wled1_shutdown
+    - delay: '00:00:03'
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+
+wled1_cyane_anim:
+  alias: "WLED1 - Cyane Animation"
+  sequence:
+    - service: shell_command.wled1_cyanegrad
+    - delay: '00:00:03'
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+
+wled1_orange_anim:
+  alias: "WLED1 - Red-Orange Animation"
+  sequence:
+    - service: shell_command.wled1_orangegrad
+    - delay: '00:00:03'
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+        
+ledfx_wled1_off:
+  alias: "LEDfx WLED 1 Shutdown Sequence"
+  sequence:
+    - service: rest_command.ledfx_wled1_off
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+
+ledfx_wled1_wave:
+  alias: "LEDfx WLED 1 Wave Preset Sequence"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.wled1
+    - delay: '00:00:10'
+    - service: rest_command.ledfx_wled1_wave

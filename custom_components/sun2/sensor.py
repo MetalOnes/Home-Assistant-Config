@@ -47,7 +47,7 @@ class Sun2Sensor(Entity):
         self._tomorrow = None
         async_init_astral_loc(hass)
         self._unsub_dispatcher = None
-        self._unsub_fixed_update = None
+        self._unsub_update = None
 
     @property
     def should_poll(self):
@@ -90,7 +90,7 @@ class Sun2Sensor(Entity):
         @callback
         def async_update_at_midnight(now):
             self.async_schedule_update_ha_state(True)
-        return async_track_time_change(
+        self._unsub_update = async_track_time_change(
             self.hass, async_update_at_midnight, 0, 0, 0)
 
     async def async_loc_updated(self):
@@ -101,13 +101,13 @@ class Sun2Sensor(Entity):
         """Subscribe to update signal and set up fixed updating."""
         self._unsub_dispatcher = async_dispatcher_connect(
             self.hass, SIG_LOC_UPDATED, self.async_loc_updated)
-        self._unsub_fixed_update = self._setup_fixed_updating()
+        self._setup_fixed_updating()
 
     async def async_will_remove_from_hass(self):
         """Disconnect from update signal and cancel fixed updating."""
         self._unsub_dispatcher()
-        if self._unsub_fixed_update:
-            self._unsub_fixed_update()
+        if self._unsub_update:
+            self._unsub_update()
 
     def _get_astral_event(self, event, date_or_dt):
         try:
@@ -193,8 +193,13 @@ class Sun2PeriodOfTimeSensor(Sun2Sensor):
             self._state = round(self._state, 3)
 
 
-class Sun2MaxElevationSensor(Sun2Sensor):
-    """Sun2 Max Elevation Sensor."""
+class Sun2MinMaxElevationSensor(Sun2Sensor):
+    """Sun2 Min/Max Elevation Sensor."""
+
+    def __init__(self, hass, sensor_type, icon, is_min):
+        """Initialize sensor."""
+        super().__init__(hass, sensor_type, icon)
+        self._event = 'solar_midnight' if is_min else 'solar_noon'
 
     @property
     def unit_of_measurement(self):
@@ -202,13 +207,29 @@ class Sun2MaxElevationSensor(Sun2Sensor):
         return '°'
 
     def _get_data(self, date_or_dt):
-        solar_noon = self._get_astral_event('solar_noon', date_or_dt)
-        return self._get_astral_event('solar_elevation', solar_noon)
+        event_time = self._get_astral_event(self._event, date_or_dt)
+        return self._get_astral_event('solar_elevation', event_time)
 
     def _update(self):
         super()._update()
         if self._state is not None:
             self._state = round(self._state, 3)
+
+
+class Sun2MinElevationSensor(Sun2MinMaxElevationSensor):
+    """Sun2 Min Elevation Sensor."""
+
+    def __init__(self, hass, sensor_type, icon):
+        """Initialize sensor."""
+        super().__init__(hass, sensor_type, icon, is_min=True)
+
+
+class Sun2MaxElevationSensor(Sun2MinMaxElevationSensor):
+    """Sun2 Max Elevation Sensor."""
+
+    def __init__(self, hass, sensor_type, icon):
+        """Initialize sensor."""
+        super().__init__(hass, sensor_type, icon, is_min=False)
 
 
 def _nearest_multiple(value, multiple):
@@ -249,10 +270,13 @@ class Sun2ElevationSensor(Sun2Sensor):
     async def async_loc_updated(self):
         """Location updated."""
         self._reset()
+        if self._unsub_update:
+            self._unsub_update()
+            self._unsub_update = None
         self.async_schedule_update_ha_state(True)
 
     def _setup_fixed_updating(self):
-        return None
+        pass
 
     def _get_nxt_time(self, time1, elev1, trg_elev, max_time):
         time0 = self._prv_time
@@ -351,8 +375,10 @@ class Sun2ElevationSensor(Sun2Sensor):
 
         @callback
         def async_update(now):
+            self._unsub_update = None
             self.async_schedule_update_ha_state(True)
-        async_track_point_in_time(self.hass, async_update, nxt_time)
+
+        self._unsub_update = async_track_point_in_time(self.hass, async_update, nxt_time)
 
 
 _SENSOR_TYPES = {
@@ -376,7 +402,8 @@ _SENSOR_TYPES = {
     'civil_night': (Sun2PeriodOfTimeSensor, 'mdi:weather-night'),
     'nautical_night': (Sun2PeriodOfTimeSensor, 'mdi:weather-night'),
     'astronomical_night': (Sun2PeriodOfTimeSensor, 'mdi:weather-night'),
-    # Max elevation
+    # Min/Max elevation
+    'min_elevation': (Sun2MinElevationSensor, 'mdi:weather-night'),
     'max_elevation': (Sun2MaxElevationSensor, 'mdi:weather-sunny'),
     # Elevation
     'elevation': (Sun2ElevationSensor, 'mdi:weather-sunny'),

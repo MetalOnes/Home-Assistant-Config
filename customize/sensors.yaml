@@ -82,3 +82,20 @@ sensor.memory_use_percent:
 
 sensor.processor_use:
   icon: mdi:memory
+
+sensor.wled1_effect:
+  friendly_name: "WLED1 Effect"
+  icon: mdi:compare
+
+sensor.wled1_estimated_current:
+  icon: mdi:power-plug
+
+sensor.ledfx_wled1_name:
+  friendly_name: "Device 1 Name"
+  icon: mdi:led-strip-variant
+  
+sensor.ledfx_wled1_ip:
+  icon: mdi:ip-network
+
+sensor.ledfx_wled1_e:
+  icon: mdi:compare
