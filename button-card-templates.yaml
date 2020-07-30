@@ -40,19 +40,19 @@
       - value: 'off'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
       - value: 'unavailable'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
 
   rgb_light_button:
     hold_action:
@@ -64,7 +64,7 @@
     show_label: true
     show_state: true
     color: auto-no-temperature
-    color_off: var(--disabled-text-color)
+    color_off: var(--state-icon-color)
     styles:
       grid:
         - grid-template-areas: '"l s" "i i" "n n"'
@@ -90,11 +90,11 @@
       - value: 'off'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
       - value: 'on'
         styles:
           icon:
@@ -102,11 +102,11 @@
       - value: 'unavailable'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
 
   wled_button:
     hold_action:
@@ -118,7 +118,7 @@
     show_label: true
     show_state: true
     color: auto
-    color_off: var(--disabled-text-color)
+    color_off: var(--state-icon-color)
     aspect_ratio: 4/1
     styles:
       grid:
@@ -146,7 +146,7 @@
     layout: icon_label
     show_label: true
     show_state: true
-    color_off: var(--disabled-text-color)
+    color_off: var(--state-icon-color)
     styles:
       grid:
         - grid-template-areas: '"l s" "i i" "n n"'
@@ -179,19 +179,19 @@
       - value: 'off'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
       - value: 'unavailable'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
 
 
   ext_light_switch_button:
@@ -201,7 +201,7 @@
     show_label: true
     show_state: true
     color: auto
-    color_off: var(--disabled-text-color)
+    color_off: var(--state-icon-color)
     styles:
       grid:
         - grid-template-areas: '"l s" "i i" "n n"'
@@ -235,19 +235,19 @@
       - value: 'off'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
       - value: 'unavailable'
         styles:
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
 
   int_light_label:
     color_type: label-card
@@ -309,7 +309,6 @@
     color_type: card
     aspect_ratio: 2/1
     styles:
-
       card:
         #- height: 70px
         - background-color: var(--primary-background-color)
@@ -342,7 +341,7 @@
   scene_buttons:
     aspect_ratio: 3/1
     layout: icon_name
-    color: var(--disabled-text-color)
+    color: var(--state-icon-color)
     show_state: false
     tap_action:
       action: call-service
@@ -377,17 +376,17 @@
       - value: 'on'
         styles:
           name:
-            - color: white
+            - color: 'var(--state-icon-active-color)'
           icon:
-            - color: white
+            - color: 'var(--state-icon-active-color)'
       - value: 'off'
         styles:
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
     styles:
       card:
         - background-color: var(--primary-background-color)
@@ -407,17 +406,17 @@
         icon: mdi:door-open
         styles:
           name:
-            - color: white
+            - color: 'var(--state-icon-active-color)'
           icon:
-            - color: white
+            - color: 'var(--state-icon-active-color)'
       - value: 'off'
         styles:
           name:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           icon:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
           state:
-            - color: 'var(--disabled-text-color)'
+            - color: 'var(--state-icon-color)'
     styles:
       card:
         - background-color: var(--primary-background-color)

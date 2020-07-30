@@ -1,5 +1,5 @@
-person.eric:
-  entity_picture: /local/people/eric.png
+#person.eric:
+#  entity_picture: /local/people/eric.png
 
-person.val:
-  entity_picture: /local/people/val.png
+#person.val:
+#  entity_picture: /local/people/val.png

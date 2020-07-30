@@ -352,8 +352,10 @@ views:
           background: true
         cards:
           - type: custom:button-card
-            name: Calendar
+            name: Upcoming
             template: general_label
+          - type: custom:text-divider-row
+            text: Trash
           - type: custom:garbage-collection-card
             entity: sensor.trash
             icon_color: white
@@ -362,6 +364,8 @@ views:
             entity: sensor.recycling
             icon_color: white
             icon_size: 35px
+          - type: custom:text-divider-row
+            text: Calendar
           - type: custom:calendar-card
             #title: "Calendar"
             hideHeader: true
@@ -409,7 +413,7 @@ views:
 
           - type: custom:mini-graph-card
             name: Temperature
-            hours_to_show: 24
+            hours_to_show: 48
             entities:
               - entity: sensor.current_temperature
                 color: rgba(0, 142, 10, 0.8)
@@ -420,7 +424,8 @@ views:
                 line_width: 3
                 show_points: false
                 y_axis: secondary
-            lower_bound_secondary: 0
+            lower_bound_secondary: ~-50
+            upper_bound_secondary: ~90
             show:
               points: hover
               fill: false
@@ -1192,10 +1197,6 @@ views:
           background: true
         cards:
           - type: custom:button-card
-            name: PWS
-            template: general_label
-
-          - type: custom:button-card
             name: Weather
             template: general_label
           - type: iframe
@@ -1203,6 +1204,52 @@ views:
             aspect_ratio: 75%
           - type: weather-forecast
             entity: weather.weather
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: PWS
+            template: general_label
+          - type: entities
+            entities:
+              - sensor.wupws_temp
+              - sensor.wupws_heatindex
+              - sensor.wupws_dewpt
+              - sensor.wupws_humidity
+              - sensor.wupws_pressure
+              - sensor.wupws_winddir
+              - sensor.wupws_windspeed
+              - sensor.wupws_preciprate
+              - sensor.wupws_preciptotal
+
+          - type: custom:mini-graph-card
+            name: "Temp (24 hours)"
+            entities:
+              - sensor.wupws_temp
+              - sensor.wupws_heatindex
+              - sensor.wupws_dewpt
+            hours_to_show: 24
+            line_width: 3
+            height: 70
+            show:
+              points: hover
+              state: false
+              fill: false
+              labels: true
+          - type: custom:mini-graph-card
+            name: "Precip (24 hours)"
+            entities:
+              - sensor.wupws_preciprate
+              - sensor.wupws_preciptotal
+            hours_to_show: 24
+            line_width: 3
+            height: 70
+            show:
+              points: hover
+              state: false
+              labels: true
+
 
       - type: custom:stack-in-card
         keep:

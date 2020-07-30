@@ -19,8 +19,6 @@ lovelace:
       type: module
     - url: /hacsfiles/mini-media-player/mini-media-player.js
       type: module
-    - url: /hacsfiles/lovelace-toggle-lock-entity-row/toggle-lock-entity-row.js
-      type: module
     - url:  /hacsfiles/simple-thermostat/simple-thermostat.js
       type: module
     - url: https://unpkg.com/moment@2.23.0/moment.js
@@ -45,8 +43,6 @@ lovelace:
       type: js
     - url: /hacsfiles/light-entity-card/light-entity-card.js
       type: js
-  #  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-  #    type: js
     - url: /hacsfiles/weather-card/weather-card.js
       type: module
     - url: /hacsfiles/text-divider-row/text-divider-row.js
@@ -90,22 +86,16 @@ lovelace:
       filename: ui-cameras.yaml
     ui-leds:
       mode: yaml
-      title: LED Control
-      icon: mdi:led-strip
+      title: "Party/LED Control"
+      icon: mdi:led-strip-variant
       show_in_sidebar: true
       filename: ui-leds.yaml
-    ui-floorplan:
-      mode: yaml
-      title: Floorplan
-      icon: mdi:floor-plan
-      show_in_sidebar: true
-      filename: ui-floorplan.yaml
-
-panel_iframe:
-  ledfx:
-    title: 'LEDfx'
-    url: 'http://192.168.1.10:8888'
-    icon: mdi:led-strip-variant
+    #ui-floorplan:
+    #  mode: yaml
+    #  title: Floorplan
+    #  icon: mdi:floor-plan
+    #  show_in_sidebar: true
+    #  filename: ui-floorplan.yaml
 
 config:
 
@@ -137,7 +127,7 @@ updater:
 hacs:
   token: !secret hacs_token
 
-#discovery:
+discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
@@ -190,50 +180,10 @@ recorder:
       - sensor.wral
       - sensor.current_version
       - sensor.untappd_badge
-      - sensor.untappd_beer
       - sensor.untappd_followings
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
-      - sensor.wupws_dewpt
-      - sensor.wupws_heatindex
-      - sensor.wupws_humidity
-      - sensor.wupws_precip_1d
-      - sensor.wupws_precip_2d
-      - sensor.wupws_precip_3d
-      - sensor.wupws_precip_4d
-      - sensor.wupws_precip_chance_1d
-      - sensor.wupws_precip_chance_2d
-      - sensor.wupws_precip_chance_3d
-      - sensor.wupws_precip_chance_4d
-      - sensor.wupws_preciprate
-      - sensor.wupws_preciptotal
-      - sensor.wupws_pressure
-      - sensor.wupws_temp
-      - sensor.wupws_temp_high_1d
-      - sensor.wupws_temp_high_2d
-      - sensor.wupws_temp_high_3d
-      - sensor.wupws_temp_high_4d
-      - sensor.wupws_temp_low_1d
-      - sensor.wupws_temp_low_2d
-      - sensor.wupws_temp_low_3d
-      - sensor.wupws_temp_low_4d
-      - sensor.wupws_weather_1d
-      - sensor.wupws_weather_1n
-      - sensor.wupws_weather_2d
-      - sensor.wupws_weather_2n
-      - sensor.wupws_weather_3d
-      - sensor.wupws_weather_3n
-      - sensor.wupws_weather_4d
-      - sensor.wupws_weather_4n
-      - sensor.wupws_wind_1d
-      - sensor.wupws_wind_2d
-      - sensor.wupws_wind_3d
-      - sensor.wupws_wind_4d
-      - sensor.wupws_windchill
-      - sensor.wupws_winddir
-      - sensor.wupws_windgust
-      - sensor.wupws_windspeed
       - sensor.uptime
       - sensor.wifi_connection
       - sensor.wifi_connection_2
@@ -282,17 +232,6 @@ history:
       #- sensor.solar_angle
       - sensor.daylight
       - sensor.myip
-      - sensor.max_elevation
-      - sensor.dark_sky_apparent_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_icon
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_pressure
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_wind_speed
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
@@ -304,53 +243,12 @@ history:
       - sensor.hacs
       - sensor.home_team
       - sensor.away_team
-      - sensor.wral
       - sensor.current_version
       - sensor.untappd_badge
-      - sensor.untappd_beer
       - sensor.untappd_followings
       - sensor.untappd_last_badge_robotsfearme
       - sensor.untappd_last_check_in_robotsfearme
       - sensor.untappd_wishlist_robotsfearme
-      - sensor.wupws_dewpt
-      - sensor.wupws_heatindex
-      - sensor.wupws_humidity
-      - sensor.wupws_precip_1d
-      - sensor.wupws_precip_2d
-      - sensor.wupws_precip_3d
-      - sensor.wupws_precip_4d
-      - sensor.wupws_precip_chance_1d
-      - sensor.wupws_precip_chance_2d
-      - sensor.wupws_precip_chance_3d
-      - sensor.wupws_precip_chance_4d
-      - sensor.wupws_preciprate
-      - sensor.wupws_preciptotal
-      - sensor.wupws_pressure
-      - sensor.wupws_temp
-      - sensor.wupws_temp_high_1d
-      - sensor.wupws_temp_high_2d
-      - sensor.wupws_temp_high_3d
-      - sensor.wupws_temp_high_4d
-      - sensor.wupws_temp_low_1d
-      - sensor.wupws_temp_low_2d
-      - sensor.wupws_temp_low_3d
-      - sensor.wupws_temp_low_4d
-      - sensor.wupws_weather_1d
-      - sensor.wupws_weather_1n
-      - sensor.wupws_weather_2d
-      - sensor.wupws_weather_2n
-      - sensor.wupws_weather_3d
-      - sensor.wupws_weather_3n
-      - sensor.wupws_weather_4d
-      - sensor.wupws_weather_4n
-      - sensor.wupws_wind_1d
-      - sensor.wupws_wind_2d
-      - sensor.wupws_wind_3d
-      - sensor.wupws_wind_4d
-      - sensor.wupws_windchill
-      - sensor.wupws_winddir
-      - sensor.wupws_windgust
-      - sensor.wupws_windspeed
       - sensor.uptime
       - sensor.wifi_connection
       - sensor.wifi_connection_2
@@ -367,14 +265,6 @@ history:
       - sensor.battery_level_2
       - sensor.battery_level_3
       - sensor.battery_state
-      - device_tracker.eric_s_ipad_2
-      - device_tracker.lite
-      - device_tracker.living_room_roku
-      - device_tracker.pro
-      - device_tracker.unifi_a4_da_22_2a_d1_df_default
-      - device_tracker.unifi_c8_02_8f_0f_1d_32_default
-      - device_tracker.val_acer
-      - device_tracker.xboxone
 
 logbook:
   exclude:
@@ -386,16 +276,6 @@ logbook:
       - sensor.sunrise_time
       - sensor.sunset_time
       - sensor.myipopendnscom
-      - sensor.dark_sky_apparent_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_icon
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_pressure
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_wind_speed
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
@@ -405,7 +285,6 @@ logbook:
       - sensor.hacs
       - sensor.home_team
       - sensor.away_team
-      - sensor.wral
       - sensor.current_version
       - sensor.untappd_badge
       - sensor.untappd_beer
@@ -427,23 +306,7 @@ sun:
 #  tls_insecure: true
 #  protocol: 3.1
 
-##########################################
-# Device Tracker & Presence
-##########################################
 
-person:
-  - name: Eric
-    id: eric
-    user_id: !secret e_uid
-    device_trackers:
-      - device_tracker.galaxy_s7
-      - device_tracker.sm_g930v
-  - name: Val
-    id: val
-    user_id: !secret v_uid
-    device_trackers:
-      - device_tracker.galaxy_j7
-      - device_tracker.sm_j700p
 
 ##########################################
 # Lights
@@ -511,7 +374,6 @@ vera:
 ##########################################
 climate:
   - platform: honeywell
-    region: us
     username: !secret tcc_un
     password: !secret tcc_pw
 
@@ -528,16 +390,6 @@ media_player:
     name: Living Room Kodi
     username: !secret kodi1_user
     password: !secret kodi1_pass
-
-# Bedroom Kodi
-  - platform: kodi
-    host: !secret kodi2_ip
-    port: 8080
-    name: Bedroom Kodi
-
-# Denon Receiver
-  - platform: denonavr
-    host: !secret denonavr_ip
 
 # Roku TV
 roku:
@@ -632,38 +484,6 @@ sensor:
     api_key: !secret wu_api
     pws_id: KNCFUQUA65
     monitored_conditions:
-      - weather_1d
-      - weather_1n
-      - precip_chance_1d
-      - precip_1d
-      - wind_1d
-      - temp_high_1d
-      - temp_low_1d
-
-      - weather_2d
-      - weather_2n
-      - precip_chance_2d
-      - precip_2d
-      - wind_2d
-      - temp_high_2d
-      - temp_low_2d
-
-      - weather_3d
-      - weather_3n
-      - precip_chance_3d
-      - precip_3d
-      - wind_3d
-      - temp_high_3d
-      - temp_low_3d
-
-      - weather_4d
-      - weather_4n
-      - precip_chance_4d
-      - precip_4d
-      - wind_4d
-      - temp_high_4d
-      - temp_low_4d
-
       - temp
       - precipTotal
       - precipRate
@@ -896,6 +716,10 @@ sensor:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["ip_address"] }}'
         friendly_name: "Device 1 IP"
 
+      tv_effect:
+        value_template: '{{ states.light.tv.attributes.effect }}'
+        friendly_name: "TV Light Effect"
+
 
       #ledfx_effect_t:
       #  value_template: '{{ states.sensor.ledfx_effect.attributes.["0"] }}'
@@ -908,8 +732,8 @@ binary_sensor:
   - platform: generic_hygrostat
     name: Bathroom Hygrostat
     sensor: sensor.humidity_sensor_209 # Source humidity sensor
-    delta_trigger: 3 # Optional humidity swing to detect
-    target_offset: 3 # Optional dehumidification target offset
+    delta_trigger: 5 # Optional humidity swing to detect
+    target_offset: 5 # Optional dehumidification target offset
     max_on_time: 3600 # Optional # Optional safety max on time
 ##########################################
 # Weather (New method)

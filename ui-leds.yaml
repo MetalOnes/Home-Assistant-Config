@@ -4,7 +4,7 @@ custom_header:
   elements_color: var(--app-header-text-color)
   active_tab_color: var(--state-icon-active-color)
   tab_indicator_color: var(--state-icon-active-color
-title: LED Control
+title: Party/LED Control
 views:
   - title: LED Control
     cards:
@@ -13,46 +13,131 @@ views:
           background: true
           margin: true
         cards:
-          - type: entities
-            show_header_toggle: false
-            title: LEDfx Devices
+          - type: horizontal-stack
+            title: Switches
+            cards:
+              - type: "custom:button-card"
+                entity: light.fireplace
+                name: Fireplace
+                template: rgb_light_button
+              - type: "custom:button-card"
+                entity: switch.couch_lights_185
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.music_lights_186
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.party_lights_184
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.camera_position
+                template: light_switch_button
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: scene.music_lights
+                name: Music
+                template: scene_buttons
+              - type: "custom:button-card"
+                entity: scene.music_and_projector
+                name: Projector
+                template: scene_buttons
+              - type: "custom:button-card"
+                entity: scene.music_lights_off
+                name: "Off"
+                template: scene_buttons
+          - type: custom:fold-entity-row
+            head: light.tv
             entities:
-              - script.ledfx_wled1_wave
-              - script.ledfx_wled1_off
-              - sensor.ledfx_wled1_name
-              - sensor.ledfx_wled1_ip
-              - sensor.ledfx_wled1_e
+              - type: custom:rgb-light-card
+                entity: light.tv
+                justify: around
+                colors:
+                  - rgb_color: [0,0,0]
+                    brightness: 15
+                    white_value: 30
+                    icon_color: white
+                  - rgb_color: [0,0,255]
+                    brightness: 45
+                    white_value: 0
+                    icon_color: blue
+                  - rgb_color: [255,0,0]
+                    brightness: 45
+                    white_value: 0
+                    icon_color: red
+                  - rgb_color: [0,255,00]
+                    brightness: 45
+                    white_value: 0
+                    icon_color: green
+                  - icon_color: 'linear-gradient(to right, orange , yellow, green, cyan, blue, violet)'
+                    effect: custom
+                  - icon_color: 'linear-gradient(to right, red, green, blue)'
+                    effect: colorloop
+              - sensor.tv_effect
+#
+# LEDfx Section
+#
 
       - type: custom:stack-in-card
         keep:
           background: true
           margin: true
         cards:
-          - type: custom:button-card
-            template: wled_button
-            entity: light.wled1
+          - type: horizontal-stack
+            title: LEDfx
+            cards:
+              - type: "custom:button-card"
+                entity: script.ledfx_wled1_wave
+                name: Wavelength
+                icon: mdi:waveform
+                template: scene_buttons
+              - type: "custom:button-card"
+                entity: script.ledfx_wled1_off
+                name: LEDfx Off
+                icon: mdi:led-variant-off
+                template: scene_buttons
+          - type: entities
+            show_header_toggle: false
+            title: Devices
+            entities:
+              - sensor.ledfx_wled1_name
+              #- sensor.ledfx_wled1_ip
+              - sensor.ledfx_wled1_e
+#
+# WLED Section
+#
+
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+        cards:
+
 
           - type: custom:light-entity-card
             entity: light.wled1
             persist_features: true
             show_slider_percent: true
             group: true
-          - type: custom:banner-card
-            heading: false
-            row_size: 4
-            style: |
-              ha-card .overlay-strip {
-                background: none;
-              }
-            entities:
-              - entity: sensor.wled1_effect
-                name: Current Effect
-              - entity: sensor.wled1_estimated_current
-                name: Power Usage
-              - entity: switch.wled1_sync_receive
-                name: Sync Receive
-              - entity: switch.wled1_sync_send
-                name: Sync Send
+          - type: custom:button-card
+            template: wled_button
+            entity: light.wled1
+          #- type: custom:banner-card
+          #  heading: false
+          #  row_size: 4
+          #  style: |
+          #    ha-card .overlay-strip {
+          #      background: none;
+          #    }
+#            entities:
+#              - entity: sensor.wled1_effect
+#                name: Current Effect
+#              - entity: sensor.wled1_estimated_current
+#                name: Power Usage
+#              - entity: switch.wled1_sync_receive
+#                name: Sync Receive
+#              - entity: switch.wled1_sync_send
+#                name: Sync Send
 
 # Templates for button-card
 button_card_templates:

@@ -132,7 +132,7 @@ wled1_orange_anim:
     - service: light.turn_off
       data:
         entity_id: light.wled1
-        
+
 ledfx_wled1_off:
   alias: "LEDfx WLED 1 Shutdown Sequence"
   sequence:
@@ -147,5 +147,5 @@ ledfx_wled1_wave:
     - service: light.turn_on
       data:
         entity_id: light.wled1
-    - delay: '00:00:10'
+    - delay: '00:00:05'
     - service: rest_command.ledfx_wled1_wave

@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Lots of updates and refinements. Ditched Unifi
 * To 0.112.4
 * Updates, updates, updates
 * Added Floorplan dashboard, Lovelace updates as always
