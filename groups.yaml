@@ -83,6 +83,8 @@ Int Lights:
 - switch.party_lights_184
 - light.master_closet
 - light.vanity_211
+- light.wled1
+- light.mantle
 Living Lights:
 - light.lamp_107
 - light.cabinets

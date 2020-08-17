@@ -715,6 +715,17 @@ sensor:
       ledfx_wled1_ip:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["ip_address"] }}'
         friendly_name: "Device 1 IP"
+        
+      wled2_effect:
+        value_template: "{{ states.light.wled2.attributes.effect }}"
+      ledfx_wled2_e:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["effect"]["name"] }}'
+        friendly_name: "Device 2 Current Effect"
+      ledfx_wled2_name:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["name"] }}'
+      ledfx_wled2_ip:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["ip_address"] }}'
+        friendly_name: "Device 2 IP"
 
       tv_effect:
         value_template: '{{ states.light.tv.attributes.effect }}'
@@ -915,12 +926,26 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"wled1-wavelength","action":"activate"}'
     content_type: 'application/json'
+  ledfx_both_wave:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"both-wavelength","action":"activate"}'
+    content_type: 'application/json'
   ledfx_wled1_off:
     url: "http://192.168.1.10:8888/api/presets"
     method: put
     headers:
       accept: 'application/json'
     payload: '{"id":"wled1-off","action":"activate"}'
+    content_type: 'application/json'
+  ledfx_both_off:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"both-off","action":"activate"}'
     content_type: 'application/json'
 
 #########################################

@@ -149,3 +149,26 @@ ledfx_wled1_wave:
         entity_id: light.wled1
     - delay: '00:00:05'
     - service: rest_command.ledfx_wled1_wave
+
+ledfx_both_off:
+  alias: "LEDfx Both Shutdown Sequence"
+  sequence:
+    - service: rest_command.ledfx_both_off
+    - service: light.turn_off
+      data:
+        entity_id: light.wled1
+    - service: light.turn_off
+      data:
+        entity_id: light.mantle
+
+ledfx_both_wave:
+  alias: "LEDfx Both Wave Preset Sequence"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.wled1
+    - service: light.turn_on
+      data:
+        entity_id: light.mantle
+    - delay: '00:00:05'
+    - service: rest_command.ledfx_both_wave

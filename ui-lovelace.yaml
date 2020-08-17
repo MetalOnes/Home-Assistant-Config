@@ -547,9 +547,13 @@ views:
                     name: Air Purifier
                     template: light_switch_button
                   - type: "custom:button-card"
-                    color_type: blank-card
+                    entity: switch.aoycocr_plug_1
+                    name: Plug 1
+                    template: light_switch_button
                   - type: "custom:button-card"
-                    color_type: blank-card
+                    entity: switch.aoycocr_plug_2
+                    template: light_switch_button
+                    name: Plug 2
                   - type: "custom:button-card"
                     color_type: blank-card
 

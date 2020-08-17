@@ -88,12 +88,24 @@ views:
             cards:
               - type: "custom:button-card"
                 entity: script.ledfx_wled1_wave
-                name: Wavelength
+                name: Wavelength 1
                 icon: mdi:waveform
                 template: scene_buttons
               - type: "custom:button-card"
                 entity: script.ledfx_wled1_off
-                name: LEDfx Off
+                name: LEDfx Off 1
+                icon: mdi:led-variant-off
+                template: scene_buttons
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: script.ledfx_both_wave
+                name: Wavelength Both
+                icon: mdi:waveform
+                template: scene_buttons
+              - type: "custom:button-card"
+                entity: script.ledfx_both_off
+                name: LEDfx Both Off
                 icon: mdi:led-variant-off
                 template: scene_buttons
           - type: entities
@@ -103,6 +115,9 @@ views:
               - sensor.ledfx_wled1_name
               #- sensor.ledfx_wled1_ip
               - sensor.ledfx_wled1_e
+              - sensor.ledfx_wled2_name
+              #- sensor.ledfx_wled2_ip
+              - sensor.ledfx_wled2_e
 #
 # WLED Section
 #
@@ -122,6 +137,14 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.wled1
+          - type: custom:light-entity-card
+            entity: light.mantle
+            persist_features: true
+            show_slider_percent: true
+            group: true
+          - type: custom:button-card
+            template: wled_button
+            entity: light.mantle
           #- type: custom:banner-card
           #  heading: false
           #  row_size: 4

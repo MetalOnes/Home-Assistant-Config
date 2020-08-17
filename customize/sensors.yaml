@@ -93,9 +93,19 @@ sensor.wled1_estimated_current:
 sensor.ledfx_wled1_name:
   friendly_name: "Device 1 Name"
   icon: mdi:led-strip-variant
-  
+
 sensor.ledfx_wled1_ip:
   icon: mdi:ip-network
 
 sensor.ledfx_wled1_e:
+  icon: mdi:compare
+
+sensor.ledfx_wled2_name:
+  friendly_name: "Device 2 Name"
+  icon: mdi:led-strip-variant
+
+sensor.ledfx_wled2_ip:
+  icon: mdi:ip-network
+
+sensor.ledfx_wled2_e:
   icon: mdi:compare
