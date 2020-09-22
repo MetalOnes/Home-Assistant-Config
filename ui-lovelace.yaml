@@ -478,21 +478,6 @@ views:
                   - type: "custom:button-card"
                     entity: switch.party_lights_184
                     template: light_switch_button
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: scene.music_lights
-                    name: Music
-                    template: scene_buttons
-                  - type: "custom:button-card"
-                    entity: scene.music_and_projector
-                    name: Projector
-                    template: scene_buttons
-                  - type: "custom:button-card"
-                    entity: scene.music_lights_off
-                    name: "Off"
-                    template: scene_buttons
-
 
 # Kitchen Card
           - type: custom:vertical-style-card
@@ -1244,7 +1229,8 @@ views:
           - type: custom:mini-graph-card
             name: "Precip (24 hours)"
             entities:
-              - sensor.wupws_preciprate
+              - entity: sensor.wupws_preciprate
+                color: orange
               - sensor.wupws_preciptotal
             hours_to_show: 24
             line_width: 3

@@ -7,9 +7,11 @@
     light.pin_board: off
     light.tv: off
     light.cabinets: off
-    light.fireplace: off
     switch.camera_position: off
     light.wled1: off
+    light.couch: off
+    light.fireplace: off
+    light.mantle: off
     remote.living_room: off
     light.mantle: off
     switch.aoycocr_plug_1: off
@@ -25,6 +27,7 @@
     light.tv: off
     light.cabinets: off
     light.fireplace: off
+    light.couch: off
     switch.camera_position: off
     light.wled1: off
     light.mantle: off
@@ -36,45 +39,3 @@
     light.wifi_box: on
     light.mancave_desk: on
     light.pin_board: on
-
-- name: "Music Lights"
-  icon: mdi:lava-lamp
-  entities:
-    switch.couch_lights_185: on
-    light.tv:
-      state: on
-      effect: colorloop
-    light.dining_room_lamp_160:
-      state: on
-      brightness_pct: 50
-    light.lamp_107:
-      state: on
-      brightness_pct: 50
-    light.fireplace: on
-    switch.music_lights_186: on
-
-- name: "Music Lights Off"
-  icon: mdi:grid-off
-  entities:
-    switch.party_lights_184: off
-    light.fireplace: off
-    light.tv:
-      state: on
-      white_value: 30
-      brightness: 15
-      rgb_color:
-      - 0
-      - 0
-      - 0
-      effect: none
-
-- name: "Music and Projector"
-  icon: mdi:projector
-  entities:
-    switch.couch_lights_185: on
-    switch.music_lights_186: off
-    light.tv:
-      state: on
-      effect: colorloop
-    light.lamp_107: off
-    light.fireplace: on

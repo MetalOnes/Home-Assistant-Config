@@ -109,3 +109,13 @@ sensor.ledfx_wled2_ip:
 
 sensor.ledfx_wled2_e:
   icon: mdi:compare
+
+sensor.ledfx_couch_name:
+  friendly_name: "Device 3 Name"
+  icon: mdi:led-strip-variant
+
+sensor.ledfx_couch_ip:
+  icon: mdi:ip-network
+
+sensor.ledfx_couch_e:
+  icon: mdi:compare

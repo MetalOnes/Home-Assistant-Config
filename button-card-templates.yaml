@@ -354,6 +354,34 @@
         - border-radius: 5px
         - background-color: var(--primary-background-color)
         #- border: solid 1px
+  script_buttons:
+    aspect_ratio: 3/1
+    layout: icon_name
+    color: var(--state-icon-color)
+    show_state: false
+    tap_action:
+      action: call-service
+      service: >
+        [[[ return entity.entity_id ]]]
+    styles:
+      card:
+        - border-radius: 5px
+        - background-color: var(--primary-background-color)
+        #- border: solid 1px
+  link_buttons:
+    layout: icon_name
+    color: var(--state-icon-color)
+    show_state: false
+    styles:
+      card:
+        - max-height: 64px
+        - border-radius: 5px
+        - background-color: var(--secondary-background-color)
+        - border-style: solid
+        - border-width: 5px 
+        - border-color: var(--primary-background-color)
+      icon:
+        - height: 48px
 
   home-mode_buttons:
     aspect_ratio: 1.5/1

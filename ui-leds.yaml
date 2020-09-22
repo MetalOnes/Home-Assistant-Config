@@ -3,8 +3,10 @@ custom_header:
   background: var(--app-header-background-color)
   elements_color: var(--app-header-text-color)
   active_tab_color: var(--state-icon-active-color)
-  tab_indicator_color: var(--state-icon-active-color
+  tab_indicator_color: var(--state-icon-active-color)
+
 title: Party/LED Control
+
 views:
   - title: LED Control
     cards:
@@ -12,9 +14,18 @@ views:
         keep:
           background: true
           margin: true
+          border_radius: true
+          
         cards:
+          - type: custom:button-card
+            template: link_buttons
+            name: "Switches >"
+            icon: mdi:light-switch
+            color: white
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/switches
           - type: horizontal-stack
-            title: Switches
             cards:
               - type: "custom:button-card"
                 entity: light.fireplace
@@ -32,20 +43,8 @@ views:
               - type: "custom:button-card"
                 entity: switch.camera_position
                 template: light_switch_button
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                entity: scene.music_lights
-                name: Music
-                template: scene_buttons
-              - type: "custom:button-card"
-                entity: scene.music_and_projector
-                name: Projector
-                template: scene_buttons
-              - type: "custom:button-card"
-                entity: scene.music_lights_off
-                name: "Off"
-                template: scene_buttons
+
+
           - type: custom:fold-entity-row
             head: light.tv
             entities:
@@ -74,6 +73,9 @@ views:
                   - icon_color: 'linear-gradient(to right, red, green, blue)'
                     effect: colorloop
               - sensor.tv_effect
+          
+
+
 #
 # LEDfx Section
 #
@@ -82,42 +84,43 @@ views:
         keep:
           background: true
           margin: true
+          border_radius: true
         cards:
+          - type: custom:button-card
+            template: link_buttons
+            name: 'LEDfx Dashboard >'
+            entity_picture: /local/ledfx.png
+            show_entity_picture: true
+            tap_action:
+              action: url
+              url_path: "http://192.168.1.10:8888/dashboard"
           - type: horizontal-stack
-            title: LEDfx
+            #title: LEDfx
             cards:
               - type: "custom:button-card"
                 entity: script.ledfx_wled1_wave
-                name: Wavelength 1
-                icon: mdi:waveform
-                template: scene_buttons
+                name: Wave
+                icon: mdi:numeric-1-box-multiple-outline
+                template: script_buttons
               - type: "custom:button-card"
-                entity: script.ledfx_wled1_off
-                name: LEDfx Off 1
-                icon: mdi:led-variant-off
-                template: scene_buttons
+                entity: script.ledfx_waverain
+                name: WaveRain
+                icon: mdi:numeric-2-box-multiple-outline
+                template: script_buttons
+
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
-                entity: script.ledfx_both_wave
-                name: Wavelength Both
-                icon: mdi:waveform
-                template: scene_buttons
+                entity: script.ledfx_waverainbeat
+                name: WaveRainBeat
+                icon: mdi:numeric-3-box-multiple-outline
+                template: script_buttons
               - type: "custom:button-card"
-                entity: script.ledfx_both_off
-                name: LEDfx Both Off
+                entity: script.ledfx_all_off
+                name: LEDfx Off
                 icon: mdi:led-variant-off
-                template: scene_buttons
-          - type: entities
-            show_header_toggle: false
-            title: Devices
-            entities:
-              - sensor.ledfx_wled1_name
-              #- sensor.ledfx_wled1_ip
-              - sensor.ledfx_wled1_e
-              - sensor.ledfx_wled2_name
-              #- sensor.ledfx_wled2_ip
-              - sensor.ledfx_wled2_e
+                template: script_buttons
+          
 #
 # WLED Section
 #
@@ -126,9 +129,8 @@ views:
         keep:
           background: true
           margin: true
+          border_radius: true
         cards:
-
-
           - type: custom:light-entity-card
             entity: light.wled1
             persist_features: true
@@ -145,6 +147,14 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.mantle
+          - type: custom:light-entity-card
+            entity: light.couch
+            persist_features: true
+            show_slider_percent: true
+            group: true
+          - type: custom:button-card
+            template: wled_button
+            entity: light.couch
           #- type: custom:banner-card
           #  heading: false
           #  row_size: 4

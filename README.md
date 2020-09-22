@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Upgrading to 0.115.2
 * More?
 * Lots of updates and refinements. Ditched Unifi
 * To 0.112.4

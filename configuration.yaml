@@ -12,6 +12,9 @@ homeassistant:
 frontend:
   themes: !include_dir_merge_named themes/
 
+# Enable Nabu Casa cloud
+cloud:
+
 lovelace:
   mode: yaml
   resources:
@@ -691,18 +694,6 @@ sensor:
 #
 # LEDfx/WLED Things
 #
-  - platform: rest
-    name: LEDfx Devices
-    resource: http://192.168.1.10:8888/api/devices
-    value_template: '{{ value_json.ledfx_device }}'
-    json_attributes:
-      - devices
-
-  - platform: rest
-    name: LEDfx Effect
-    resource: http://192.168.1.10:8888/api/effects
-    value_template: '{{ value_json[0].name }}'
-
   - platform: template
     sensors:
       wled1_effect:
@@ -715,9 +706,9 @@ sensor:
       ledfx_wled1_ip:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["ip_address"] }}'
         friendly_name: "Device 1 IP"
-        
+
       wled2_effect:
-        value_template: "{{ states.light.wled2.attributes.effect }}"
+        value_template: "{{ states.light.mantle.attributes.effect }}"
       ledfx_wled2_e:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["effect"]["name"] }}'
         friendly_name: "Device 2 Current Effect"
@@ -726,6 +717,17 @@ sensor:
       ledfx_wled2_ip:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["ip_address"] }}'
         friendly_name: "Device 2 IP"
+
+      couch_effect:
+        value_template: "{{ states.light.couch.attributes.effect }}"
+      ledfx_couch_e:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["effect"]["name"] }}'
+        friendly_name: "Device 3 Current Effect"
+      ledfx_couch_name:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["name"] }}'
+      ledfx_couch_ip:
+        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["ip_address"] }}'
+        friendly_name: "Device 3 IP"
 
       tv_effect:
         value_template: '{{ states.light.tv.attributes.effect }}'
@@ -940,12 +942,26 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"wled1-off","action":"activate"}'
     content_type: 'application/json'
-  ledfx_both_off:
+  ledfx_all_off:
     url: "http://192.168.1.10:8888/api/presets"
     method: put
     headers:
       accept: 'application/json'
-    payload: '{"id":"both-off","action":"activate"}'
+    payload: '{"id":"all-off","action":"activate"}'
+    content_type: 'application/json'
+  ledfx_waverain:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"waverain","action":"activate"}'
+    content_type: 'application/json'
+  ledfx_waverainbeat:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"waverainbeat","action":"activate"}'
     content_type: 'application/json'
 
 #########################################
@@ -961,10 +977,10 @@ shell_command:
   tv_cbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=17.1'"
   tv_fox: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=50.1'"
   tv_pbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=4.1'"
-  wled1_startup: "curl -d '' 'http://192.168.1.11/win&FP=50&FX=93&T=1&SX=55&IX=5&A=100&CL=000000&C2=000000'"
-  wled1_shutdown: "curl -d '' 'http://192.168.1.11/win&FP=49&FX=93&T=1&SX=55&IX=5&A=100&CL=000000&C2=000000'"
-  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=46&T=1&A=100&CL=000000&C2=000000'"
-  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=46&T=1&A=100&CL=000000&C2=000000'"
+  wled1_startup: "curl -d '' 'http://192.168.1.11/win&FP=50&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
+  wled1_shutdown: "curl -d '' 'http://192.168.1.11/win&FP=49&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
+  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=11&T=1&A=50'"
+  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=11&T=1&A=50'"
 
 
 #########################################
