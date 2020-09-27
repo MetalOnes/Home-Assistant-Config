@@ -37,9 +37,9 @@ views:
               - type: "custom:button-card"
                 entity: switch.music_lights_186
                 template: light_switch_button
-              - type: "custom:button-card"
-                entity: switch.party_lights_184
-                template: light_switch_button
+              #- type: "custom:button-card"
+              #  entity: switch.party_lights_184
+              #  template: light_switch_button
               - type: "custom:button-card"
                 entity: switch.camera_position
                 template: light_switch_button
@@ -136,6 +136,8 @@ views:
             persist_features: true
             show_slider_percent: true
             group: true
+            shorten_cards: true
+            effects_list: false
           - type: custom:button-card
             template: wled_button
             entity: light.wled1
@@ -144,6 +146,8 @@ views:
             persist_features: true
             show_slider_percent: true
             group: true
+            shorten_cards: true
+            effects_list: false
           - type: custom:button-card
             template: wled_button
             entity: light.mantle
@@ -152,6 +156,8 @@ views:
             persist_features: true
             show_slider_percent: true
             group: true
+            shorten_cards: true
+            effects_list: false
           - type: custom:button-card
             template: wled_button
             entity: light.couch

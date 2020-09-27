@@ -8,6 +8,8 @@ homeassistant:
   customize: !include_dir_merge_named customize
   internal_url: !secret internal_url
   external_url: !secret external_url
+  media_dirs:
+    bender: /media/benderstore
 
 frontend:
   themes: !include_dir_merge_named themes/
@@ -142,7 +144,6 @@ recorder:
     domains:
       - camera
       - updater
-      - zone
       - weather
       - time
       - calendar
@@ -272,7 +273,6 @@ history:
 logbook:
   exclude:
     domains:
-      - zone
       - updater
       - weather
     entities:
@@ -297,19 +297,6 @@ logbook:
       - sensor.untappd_wishlist_robotsfearme
 
 sun:
-
-# Enable MQTT - not needed right now
-#mqtt:
-#  broker: !secret mqtt_ip
-#  port: 8883
-#  username: !secret mqtt_user
-#  password: !secret mqtt_password
-#  certificate: /etc/mosquitto/certs/ca.crt
-#  certificate: /etc/ssl/certs/ca-certificates.crt
-#  tls_insecure: true
-#  protocol: 3.1
-
-
 
 ##########################################
 # Lights
@@ -540,23 +527,6 @@ sensor:
 #      - dns_queries_today
 #      - ads_blocked_today
 #      - ads_percentage_today
-
-# NHL
-#  - platform: nhl_api
-#    team_id: 4
-#    name: Flyers
-#    scan_interval: 60
-
-#  - platform: template
-#    sensors:
-#      away_team:
-#        friendly_name_template: '{{ states.sensor.flyers.attributes.away_name }}'
-#        value_template: '{{ states.sensor.flyers.attributes.away_score }}'
-#        entity_picture_template: '{{ states.sensor.flyers.attributes.away_logo }}'
-#      home_team:
-#        friendly_name_template: '{{ states.sensor.flyers.attributes.home_name }}'
-#        value_template: '{{ states.sensor.flyers.attributes.home_score }}'
-#        entity_picture_template: '{{ states.sensor.flyers.attributes.home_logo }}'
 
 # Gets public IP
   - platform: dnsip
@@ -791,17 +761,9 @@ notify:
   - name: all_devices
     platform: group
     services:
-      - service: mobile_app_galaxys7
-      - service: mobile_app_sm_j700p
+      - service: mobile_app_pixel4a
+      - service: mobile_app_moto_g_power
       - service: telegram_e
-
-#########################################
-# Emulated Hue Bridge
-#########################################
-
-emulated_hue:
-  #type: alexa
-  expose_by_default: false
 
 #########################################
 # Google calendar

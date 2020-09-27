@@ -778,8 +778,11 @@ views:
             name: Denon AVR
             icon: mdi:play-circle
             artwork: cover
-            power_color: true
+            source: full
             show_source: true
+            hide:
+              power_state: false
+              volume_level: false
 
           - type: "custom:mini-media-player"
             entity: media_player.55_tcl_roku_tv
@@ -798,6 +801,7 @@ views:
             hide:
               volume: true
               power: true
+              runtime: false
 
           - type: "custom:mini-media-player"
             entity: media_player.living_room
