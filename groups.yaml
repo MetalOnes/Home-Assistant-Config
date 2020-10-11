@@ -3,22 +3,24 @@ Exterior:
 - switch.front_porch_115
 - switch.front_spotlight_135
 - switch.deck_lights_108
+- switch.front_holiday_213
+- light.front_porch_leds
 
 Ext Back:
 - switch.deck_lights_108
 - switch.back_spotlight_118
-- switch.back_ext_holiday_188
 Ext Front:
 - switch.front_porch_115
 - switch.front_spotlight_135
-- switch.front_ext_holida_178
+- switch.front_holiday_213
+- light.front_porch_leds
 
 HolidayExterior:
 - switch.front_spotlight_135
-#- switch.back_spotlight_118
-#- switch.deck_lights_108
-- switch.front_ext_holida_178
-- switch.back_ext_holiday_188
+- switch.back_spotlight_118
+- switch.deck_lights_108
+- switch.front_holiday_213
+
 
 Living Room:
 - sensor.harmony_living_room
@@ -36,7 +38,7 @@ Kitchen:
 
 Man Cave:
 - switch.man_cave_lights_133
-- light.mancave_desk
+- light.desk
 - light.mancave
 - light.wifi_box
 - light.pin_board
@@ -74,7 +76,7 @@ Int Lights:
 - light.cabinets
 - light.dining_room_lamp_160
 - switch.man_cave_lights_133
-- light.mancave_desk
+- light.desk
 - light.pin_board
 - light.tv
 - light.wifi_box

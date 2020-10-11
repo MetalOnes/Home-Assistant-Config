@@ -161,12 +161,12 @@ ledfx_all_off:
     - service: light.turn_off
       data:
         entity_id: light.mantle
-    - service: light.turn_off
-      data:
-        entity_id: light.couch
-    - service: switch.turn_off
-      data:
-        entity_id: switch.couch_lights_185
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.couch
+    # - service: switch.turn_off
+    #   data:
+    #     entity_id: switch.couch_lights_185
 
 ledfx_both_wave:
   alias: "LEDfx Both Wave Preset Sequence"
@@ -192,21 +192,21 @@ ledfx_waverain:
     - delay: '00:00:05'
     - service: rest_command.ledfx_waverain
 
-ledfx_waverainbeat:
-  alias: "LEDfx WaveRainBeat Preset"
-  sequence:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.couch_lights_185
-    - delay: '00:00:03'
-    - service: light.turn_on
-      data:
-        entity_id: light.wled1
-    - service: light.turn_on
-      data:
-        entity_id: light.mantle
-    - service: light.turn_on
-      data:
-        entity_id: light.couch
-    - delay: '00:00:02'
-    - service: rest_command.ledfx_waverainbeat
+# ledfx_waverainbeat:
+#   alias: "LEDfx WaveRainBeat Preset"
+#   sequence:
+#     - service: switch.turn_on
+#       data:
+#         entity_id: switch.couch_lights_185
+#     - delay: '00:00:03'
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.wled1
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.mantle
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.couch
+#     - delay: '00:00:02'
+#     - service: rest_command.ledfx_waverainbeat

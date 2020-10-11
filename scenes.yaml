@@ -1,7 +1,6 @@
 - name: Night
   id: SceneNight
   entities:
-    light.mancave_desk: off
     light.mancave: off
     light.wifi_box: off
     light.pin_board: off
@@ -9,18 +8,17 @@
     light.cabinets: off
     switch.camera_position: off
     light.wled1: off
-    light.couch: off
+    light.desk: off
     light.fireplace: off
-    light.mantle: off
     remote.living_room: off
     light.mantle: off
     switch.aoycocr_plug_1: off
     switch.aoycocr_plug_2: off
+    light.front_porch_leds: off
 
 - name: Away
   id: SceneAway
   entities:
-    light.mancave_desk: off
     light.mancave: off
     light.wifi_box: off
     light.pin_board: off
@@ -33,9 +31,12 @@
     light.mantle: off
     switch.aoycocr_plug_1: off
     switch.aoycocr_plug_2: off
+    light.front_porch_leds: off
+    light.desk: off
 
 - name: mcdesk
+  id: mcdesk
   entities:
     light.wifi_box: on
-    light.mancave_desk: on
+    light.desk: on
     light.pin_board: on

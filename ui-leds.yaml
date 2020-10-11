@@ -110,16 +110,17 @@ views:
 
           - type: horizontal-stack
             cards:
-              - type: "custom:button-card"
-                entity: script.ledfx_waverainbeat
-                name: WaveRainBeat
-                icon: mdi:numeric-3-box-multiple-outline
-                template: script_buttons
+              # - type: "custom:button-card"
+              #   entity: script.ledfx_waverainbeat
+              #   name: WaveRainBeat
+              #   icon: mdi:numeric-3-box-multiple-outline
+              #   template: script_buttons
               - type: "custom:button-card"
                 entity: script.ledfx_all_off
                 name: LEDfx Off
                 icon: mdi:led-variant-off
                 template: script_buttons
+                aspect_ratio: 6/1
           
 #
 # WLED Section
@@ -152,7 +153,7 @@ views:
             template: wled_button
             entity: light.mantle
           - type: custom:light-entity-card
-            entity: light.couch
+            entity: light.desk
             persist_features: true
             show_slider_percent: true
             group: true
@@ -160,14 +161,14 @@ views:
             effects_list: false
           - type: custom:button-card
             template: wled_button
-            entity: light.couch
-          #- type: custom:banner-card
-          #  heading: false
-          #  row_size: 4
-          #  style: |
-          #    ha-card .overlay-strip {
-          #      background: none;
-          #    }
+            entity: light.desk
+          - type: custom:banner-card
+            heading: false
+            row_size: 4
+            style: |
+             ha-card .overlay-strip {
+               background: none;
+             }
 #            entities:
 #              - entity: sensor.wled1_effect
 #                name: Current Effect

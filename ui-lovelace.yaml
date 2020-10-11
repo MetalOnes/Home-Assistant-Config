@@ -366,13 +366,13 @@ views:
             icon_size: 35px
           - type: custom:text-divider-row
             text: Calendar
-          - type: custom:calendar-card
+          - type: calendar
             #title: "Calendar"
             hideHeader: true
             numberOfDays: 90
-            timeFormat: h:mma
-            dateTopFormat: MMM DD
-            dateBottomFormat: ddd
+            #timeFormat: h:mma
+            #dateTopFormat: MMM DD
+            #dateBottomFormat: ddd
             entities:
               - calendar.slacktishevents
               - calendar.flocker_streams
@@ -512,7 +512,7 @@ views:
                     template: light_switch_button
 
                   - type: "custom:button-card"
-                    entity: light.mancave_desk
+                    entity: light.desk
                     name: Desk
                     template: rgb_light_button
 
@@ -594,17 +594,34 @@ views:
                     entity: switch.front_porch_115
                     name: Porch
                     template: ext_light_switch_button
+                  
+                  - type: "custom:button-card"
+                    entity: light.front_porch_leds
+                    name: Porch LEDs
+                    template: rgb_light_button
+
+                  - type: "custom:button-card"
+                    entity: switch.front_porch_nightlight
+                    name: Porch Nightlight
+                    template: ext_light_switch_button
+
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                    color_off: var(--disabled-text-color)
+
+              - type: horizontal-stack
+                cards:
 
                   - type: "custom:button-card"
                     entity: switch.front_spotlight_135
                     name: Spotlight
                     template: ext_light_switch_button
 
-                #  - type: "custom:button-card"
-                #    entity: switch.front_ext_holida_178
-                #    name: Front Holiday
-                #    template: ext_light_switch_button
-
+                  - type: "custom:button-card"
+                    entity: switch.front_holiday_213
+                    name: Front Holiday
+                    template: ext_light_switch_button
+                  
                   - type: "custom:button-card"
                     color_type: blank-card
                     color_off: var(--disabled-text-color)
@@ -612,6 +629,8 @@ views:
                   - type: "custom:button-card"
                     color_type: blank-card
                     color_off: var(--disabled-text-color)
+
+                
 
     # Back Ext Card
           - type: custom:vertical-style-card

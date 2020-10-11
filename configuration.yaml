@@ -28,8 +28,6 @@ lovelace:
       type: module
     - url: https://unpkg.com/moment@2.23.0/moment.js
       type: js
-    - url: /hacsfiles/calendar-card/calendar-card.js
-      type: module
     - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
       type: module
     - url: /hacsfiles/vertical-style-card/vertical-style-card.js
@@ -306,9 +304,9 @@ sun:
 light:
   - platform: flux_led
     devices:
-      192.168.1.122:
-        name: mancave_desk
-        mode: rgb
+      # 192.168.1.122:
+      #   name: mancave_desk
+      #   mode: rgb
       192.168.1.149:
         name: pin_board
         mode: rgbw
@@ -688,16 +686,16 @@ sensor:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["ip_address"] }}'
         friendly_name: "Device 2 IP"
 
-      couch_effect:
-        value_template: "{{ states.light.couch.attributes.effect }}"
-      ledfx_couch_e:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["effect"]["name"] }}'
-        friendly_name: "Device 3 Current Effect"
-      ledfx_couch_name:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["name"] }}'
-      ledfx_couch_ip:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["ip_address"] }}'
-        friendly_name: "Device 3 IP"
+     # couch_effect:
+     #   value_template: "{{ states.light.couch.attributes.effect }}"
+     # ledfx_couch_e:
+     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["effect"]["name"] }}'
+     #   friendly_name: "Device 3 Current Effect"
+     # ledfx_couch_name:
+     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["name"] }}'
+     # ledfx_couch_ip:
+     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["ip_address"] }}'
+     #   friendly_name: "Device 3 IP"
 
       tv_effect:
         value_template: '{{ states.light.tv.attributes.effect }}'

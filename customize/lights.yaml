@@ -1,7 +1,3 @@
-light.mancave_desk:
-  friendly_name: Desk LEDs
-  icon: mdi:led-strip-variant
-
 light.pin_board:
   friendly_name: Pin Board
   icon: mdi:microwave
