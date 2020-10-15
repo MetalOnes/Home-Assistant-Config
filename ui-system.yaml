@@ -28,7 +28,7 @@ views:
                 name: "Public IP:"
                 entity_picture: /local/network.jpg
                 entity: sensor.myip
-                icon: mdi:network-router
+                icon: mdi:router-network
                 show_state: true
                 show_icon: true
                 show_entity_picture: false

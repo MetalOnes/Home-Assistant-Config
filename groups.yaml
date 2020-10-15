@@ -20,6 +20,7 @@ HolidayExterior:
 - switch.back_spotlight_118
 - switch.deck_lights_108
 - switch.front_holiday_213
+- switch.aoycocr_plug_1
 
 
 Living Room:
@@ -87,6 +88,7 @@ Int Lights:
 - light.vanity_211
 - light.wled1
 - light.mantle
+- switch.aoycocr_plug_1
 Living Lights:
 - light.lamp_107
 - light.cabinets
