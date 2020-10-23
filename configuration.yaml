@@ -36,8 +36,6 @@ lovelace:
       type: module
     - url: /hacsfiles/untappd-card/untappd-card.js
       type: module
-    - url: /hacsfiles/custom-header/custom-header.js
-      type: module
     - url: /hacsfiles/bar-card/bar-card.js
       type: module
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
@@ -108,9 +106,7 @@ logger:
   default: error
   logs:
     DenonAVR: fatal
-    #homeassistant.components.vera: debug
     pychromecast.socket_client: fatal
-#    homeassistant.components.device_tracker: debug
 
 system_health:
 
@@ -153,7 +149,6 @@ recorder:
       - sensor.sunset_time
       - sensor.sunset
       - sensor.solar_noon
-      #- sensor.solar_angle
       - sensor.daylight
       - sensor.moon
       - sensor.myip
@@ -231,7 +226,6 @@ history:
       - sensor.sunset_time
       - sensor.sunset
       - sensor.solar_noon
-      #- sensor.solar_angle
       - sensor.daylight
       - sensor.myip
       - sensor.date
@@ -280,7 +274,6 @@ logbook:
       - sensor.date
       - sensor.simple_date
       - sensor.simple_time
-      #- sensor.solar_angle
       - sensor.ssl_certificate_expiry
       - sensor.flyers
       - sensor.hacs
@@ -304,9 +297,6 @@ sun:
 light:
   - platform: flux_led
     devices:
-      # 192.168.1.122:
-      #   name: mancave_desk
-      #   mode: rgb
       192.168.1.149:
         name: pin_board
         mode: rgbw
@@ -355,7 +345,6 @@ light:
 vera:
   vera_controller_url: !secret vera_ip
   exclude: [ 166, 152, 144, 206]
-#  lights: [ 118, 123, 115, 135, 133, 103, 104, 170, 160, 107, 120]
 
 ##########################################
 # Thermostat
@@ -392,9 +381,7 @@ emulated_roku:
 # Cams
 ##########################################
 stream:
-
 camera:
-
 # Back Door Cam
   - platform: mjpeg
     mjpeg_url: !secret bdcam_url
@@ -541,29 +528,6 @@ sensor:
         value_template: '{{states.remote.living_room.attributes.current_activity }}'
         friendly_name: 'Living Room'
 
-#  - platform: template
-#    sensors:
-#      lr_avr_vol:
-#        value_template: "{{ states.media_player.denon_avr_s720w.attributes.volume_level | float * 100 }}"
-
-# Sonarr Upcoming Media
-#  - platform: sonarr_upcoming_media
-#    urlbase: sonarr
-#    api_key: !secret sonarr_api
-
-# SABnzbd
-#  - platform: sabnzbd
-#    host: !secret sabnzbd_ip
-#    port: !secret sabnzbd_port
-#    api_key: !secret sabnzbd_api
-#    monitored_variables:
-#      - 'current_status'
-#      - 'speed'
-#      - 'queue_size'
-#      - 'queue_remaining'
-#      - 'disk_size'
-#      - 'disk_free'
-
 # Vera Home mode
   - platform: rest
     name: "House Mode"
@@ -659,9 +623,9 @@ sensor:
 #        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
-#
+#########################################
 # LEDfx/WLED Things
-#
+#########################################
   - platform: template
     sensors:
       wled1_effect:
@@ -686,28 +650,11 @@ sensor:
         value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["ip_address"] }}'
         friendly_name: "Device 2 IP"
 
-     # couch_effect:
-     #   value_template: "{{ states.light.couch.attributes.effect }}"
-     # ledfx_couch_e:
-     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["effect"]["name"] }}'
-     #   friendly_name: "Device 3 Current Effect"
-     # ledfx_couch_name:
-     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["name"] }}'
-     # ledfx_couch_ip:
-     #   value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["couch"]["config"]["ip_address"] }}'
-     #   friendly_name: "Device 3 IP"
-
       tv_effect:
         value_template: '{{ states.light.tv.attributes.effect }}'
         friendly_name: "TV Light Effect"
 
-
-      #ledfx_effect_t:
-      #  value_template: '{{ states.sensor.ledfx_effect.attributes.["0"] }}'
-
-# See Rest_command around 1100
-
-
+# See also rest_command around 1100
 
 binary_sensor:
   - platform: generic_hygrostat
@@ -716,6 +663,7 @@ binary_sensor:
     delta_trigger: 5 # Optional humidity swing to detect
     target_offset: 5 # Optional dehumidification target offset
     max_on_time: 3600 # Optional # Optional safety max on time
+
 ##########################################
 # Weather (New method)
 ##########################################
@@ -874,6 +822,10 @@ switch:
       camera_position:
         command_on: !secret bdcam_priv
         command_off: !secret bdcam_def
+
+#########################################
+# REST commands
+#########################################
 rest_command:
   simpsons:
     url: 'http://192.168.1.210:8080/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"Player.Open","params":{"item":{"file":"special://profile/playlists/video/Simpsons.xsp"}}}'
@@ -881,6 +833,7 @@ rest_command:
     content_type: 'application/json'
     headers:
       authorization: 'Basic a29kaTprb2Rp'
+# LEDfx related
   ledfx_wled1_wave:
     url: "http://192.168.1.10:8888/api/presets"
     method: put
@@ -916,13 +869,6 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"waverain","action":"activate"}'
     content_type: 'application/json'
-  ledfx_waverainbeat:
-    url: "http://192.168.1.10:8888/api/presets"
-    method: put
-    headers:
-      accept: 'application/json'
-    payload: '{"id":"waverainbeat","action":"activate"}'
-    content_type: 'application/json'
 
 #########################################
 # Shell Commands
@@ -939,8 +885,8 @@ shell_command:
   tv_pbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=4.1'"
   wled1_startup: "curl -d '' 'http://192.168.1.11/win&FP=50&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
   wled1_shutdown: "curl -d '' 'http://192.168.1.11/win&FP=49&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
-  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=11&T=1&A=50'"
-  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=11&T=1&A=50'"
+  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=11&T=1&A=150'"
+  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=11&T=1&A=150'"
 
 
 #########################################

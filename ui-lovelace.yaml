@@ -1,11 +1,3 @@
-custom_header:
-  compact_mode: true
-  background: var(--app-header-background-color)
-  elements_color: var(--app-header-text-color)
-  active_tab_color: var(--state-icon-active-color)
-  tab_indicator_color: var(--state-icon-active-color)
-
-#background-color: var(--primary-background-color)
 views:
 #
 # Overview tab
@@ -160,7 +152,6 @@ views:
           - type: custom:auto-entities
             card:
               type: glance
-              #title: All On
             filter:
               include:
                 - domain: light
@@ -176,34 +167,8 @@ views:
               exclude:
                 - entity_id: "*sync*"
                 - entity_id: "switch.lr_*"
+                - entity_id: "switch.*sensor*"
             show_empty: false
-# Int Lights on
-          # - type: custom:auto-entities
-          #   card:
-          #     type: glance
-          #     title: Interior
-          #   filter:
-          #     include:
-          #       - group: group.int_lights
-          #         state: "on"
-          #         options:
-          #           tap_action:
-          #             action: toggle
-          #   show_empty: false
-
-    # Ext Lights on
-          # - type: custom:auto-entities
-          #   card:
-          #     type: glance
-          #     title: Exterior
-          #   filter:
-          #     include:
-          #       - group: group.exterior
-          #         state: "on"
-          #         options:
-          #           tap_action:
-          #             action: toggle
-          #   show_empty: false
 
 # Harmony Living Room card
       - type: custom:stack-in-card
@@ -390,13 +355,9 @@ views:
           - type: custom:text-divider-row
             text: Calendar
           - type: calendar
-            #title: "Calendar"
             initial_view: listWeek
             hideHeader: true
             numberOfDays: 90
-            #timeFormat: h:mma
-            #dateTopFormat: MMM DD
-            #dateBottomFormat: ddd
             entities:
               - calendar.slacktishevents
               - calendar.flocker_streams
@@ -418,23 +379,8 @@ views:
                 away: false
                 none: false
               hvac: true
-            #sensors:
-            #  - entity: sensor.current_temperature
-            # style: |
-            #   ha-card .mode-item {
-            #     background: rgba(10, 10, 10, 0.4);
-            #   }
-            #   ha-card .mode-item.active {
-            #     background: rgba(255, 255, 240, 0.4);
-            #   }
-            #   ha-card .mode-item.active:hover {
-            #     background: rgba(255, 255, 240, 0.6);
-            #   }
-            #   ha-card .mode-item:hover {
-            #     background: rgba(255, 255, 240, 0.6);
-            #   }
-# Temps
 
+# Temps
           - type: custom:mini-graph-card
             name: Temperature
             hours_to_show: 48
@@ -491,6 +437,10 @@ views:
                     template: light_switch_button
               - type: horizontal-stack
                 cards:
+                  - type: "custom:button-card"
+                    entity: light.mantle
+                    name: Mantle
+                    template: rgb_light_button
                   - type: "custom:button-card"
                     entity: light.fireplace
                     name: Fireplace
@@ -1200,7 +1150,6 @@ views:
                 line_width: 3
                 smoothing: false
                 points_per_hour: 1
-                #line_color: rgb(0, 148, 10)
                 show:
                   points: hover
                 color_thresholds:
@@ -1386,15 +1335,12 @@ views:
                 state:
                   - value: "home"
                     color: rgba(32, 178, 170, 0.4)
-                    #icon: mdi:home-account
                     entity_picture: /local/people/eric.png
                   - value: "not_home"
                     color: rgba(10, 10, 10, 0.4)
-                    #icon: mdi:walk
                     entity_picture: /local/people/eric-walk.png
                   - value: "Eisai"
                     color: rgba(10, 10, 10, 0.4)
-                    #icon: mdi:walk
                     entity_picture: /local/people/eric-work.png
 
               - type: custom:button-card
@@ -1450,7 +1396,6 @@ views:
                   border-color: Yellow
                   background-color: rgba(10, 10, 10, 0.4)
                   pointer-events: none
-                  #width: 325px
                   padding: 5px
                   border-top-right-radius: 5px
               - type: state-icon
@@ -1473,7 +1418,6 @@ views:
                   border-color: Orange
                   background-color: rgba(10, 10, 10, 0.4)
                   pointer-events: none
-                  #width: 325px
                   padding: 5px
                   border-bottom-right-radius: 5px
               - type: state-icon
@@ -1500,7 +1444,6 @@ views:
                   border-color: LightSalmon
                   padding-left: 36px
                   padding-bottom: 1px
-                  #text-shadow: 2px 2px 2px black
               - type: state-icon
                 entity: sensor.untappd_followings
                 style:
@@ -1525,7 +1468,6 @@ views:
                   border-color: OrangeRed
                   padding-left: 36px
                   padding-bottom: 1px
-                  #text-shadow: 2px 2px 2px black
               - type: state-icon
                 entity: sensor.untappd_total_badges
                 style:
@@ -1550,7 +1492,6 @@ views:
                   border-color: FireBrick
                   padding-left: 36px
                   padding-bottom: 1px
-                  #text-shadow: 2px 2px 2px black
               - type: state-icon
                 entity: sensor.untappd_total_beers
                 style:
@@ -1576,8 +1517,6 @@ views:
                   border-color: Maroon
                   padding-left: 36px
                   padding-bottom: 1px
-                  #text-shadow: 2px 2px 2px black
-
 
 
 

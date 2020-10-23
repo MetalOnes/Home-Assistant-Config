@@ -28,6 +28,10 @@ views:
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
+                entity: light.mantle
+                name: Mantle
+                template: rgb_light_button
+              - type: "custom:button-card"
                 entity: light.fireplace
                 name: Fireplace
                 template: rgb_light_button
@@ -110,11 +114,6 @@ views:
 
           - type: horizontal-stack
             cards:
-              # - type: "custom:button-card"
-              #   entity: script.ledfx_waverainbeat
-              #   name: WaveRainBeat
-              #   icon: mdi:numeric-3-box-multiple-outline
-              #   template: script_buttons
               - type: "custom:button-card"
                 entity: script.ledfx_all_off
                 name: LEDfx Off
@@ -152,6 +151,12 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.mantle
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+          border_radius: true
+        cards:   
           - type: custom:light-entity-card
             entity: light.desk
             persist_features: true
@@ -162,22 +167,16 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.desk
-          - type: custom:banner-card
-            heading: false
-            row_size: 4
-            style: |
-             ha-card .overlay-strip {
-               background: none;
-             }
-#            entities:
-#              - entity: sensor.wled1_effect
-#                name: Current Effect
-#              - entity: sensor.wled1_estimated_current
-#                name: Power Usage
-#              - entity: switch.wled1_sync_receive
-#                name: Sync Receive
-#              - entity: switch.wled1_sync_send
-#                name: Sync Send
+          - type: custom:light-entity-card
+            entity: light.front_porch_leds
+            persist_features: true
+            show_slider_percent: true
+            group: true
+            shorten_cards: true
+            effects_list: false
+          - type: custom:button-card
+            template: wled_button
+            entity: light.front_porch_leds
 
 # Templates for button-card
 button_card_templates:
