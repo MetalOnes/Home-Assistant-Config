@@ -10,12 +10,14 @@ title: Party/LED Control
 views:
   - title: LED Control
     cards:
+##########################################
+# Switches
+##########################################       
       - type: custom:stack-in-card
         keep:
           background: true
           margin: true
           border_radius: true
-          
         cards:
           - type: custom:button-card
             template: link_buttons
@@ -28,6 +30,25 @@ views:
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
+                entity: light.lamp_107
+                name: Living Lamp
+                template: light_button_brightness
+
+              - type: "custom:button-card"
+                entity: light.tv
+                name: TV
+                template: rgb_light_button
+
+              - type: "custom:button-card"
+                entity: light.dining_room_lamp_160
+                name: Dining Lamp
+                template: light_button_brightness
+              - type: "custom:button-card"
+                entity: switch.camera_position
+                template: light_switch_button
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
                 entity: light.mantle
                 name: Mantle
                 template: rgb_light_button
@@ -36,18 +57,25 @@ views:
                 name: Fireplace
                 template: rgb_light_button
               - type: "custom:button-card"
+                entity: switch.aoycocr_plug_2
+                template: light_switch_button
+                name: Black Light
+              - type: "custom:button-card"
+                color_type: blank-card
+              
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
                 entity: switch.couch_lights_185
                 template: light_switch_button
               - type: "custom:button-card"
                 entity: switch.music_lights_186
                 template: light_switch_button
-              #- type: "custom:button-card"
-              #  entity: switch.party_lights_184
-              #  template: light_switch_button
               - type: "custom:button-card"
-                entity: switch.camera_position
+                entity: switch.party_lights_184
                 template: light_switch_button
-
+              - type: "custom:button-card"
+                color_type: blank-card
 
           - type: custom:fold-entity-row
             head: light.tv
@@ -77,12 +105,10 @@ views:
                   - icon_color: 'linear-gradient(to right, red, green, blue)'
                     effect: colorloop
               - sensor.tv_effect
-          
 
-
-#
+##########################################
 # LEDfx Section
-#
+##########################################
 
       - type: custom:stack-in-card
         keep:
@@ -121,10 +147,9 @@ views:
                 template: script_buttons
                 aspect_ratio: 6/1
           
-#
+##########################################
 # WLED Section
-#
-
+##########################################
       - type: custom:stack-in-card
         keep:
           background: true

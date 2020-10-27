@@ -61,97 +61,109 @@ views:
           - type: custom:button-card
             name: "Hass/System"
             template: general_label
+          - type: custom:button-card
+            entity: sensor.current_version
+            name: HASS
+            show_state: false
+            show_name: false
+            show_label: false
+            show_icon: false
+            styles:
+              grid:
+                - grid-template-areas: '"cv av hacs" "up log boot"' 
+                - grid-template-columns: 1fr 1fr 1fr
+                - grid-template-rows: min-content min-content
+              
+              state:
+                - align-self: middle
+                - justify-self: center
+              custom_fields:
+                cv:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+                  - padding-bottom: 10px
+                av:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+                  - padding-bottom: 10px
+                hacs:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+                  - padding-bottom: 10px
+                up:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+                log:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+                boot:
+                  - align-self: middle
+                  - justify-self: center
+                  - font-size: 14px
+            custom_fields:
+              cv: >
+                [[[ return `
+                  <span>Running:<br>${states['sensor.current_version'].state}</span>`
+                ]]]
+              av: >
+                [[[ return `
+                  <span>Available:<br>${states['sensor.hass_avail_version'].state}</span>`
+                ]]]
+              hacs: >
+                [[[ return `
+                  <span>HACS:<br>${states['sensor.hacs'].state} updates</span>`
+                ]]]
+              up: >
+                [[[ return `
+                  <span>HASS Uptime:<br>${states['sensor.uptime'].state} Hours</span>`
+                ]]]
+              log: >
+                [[[ return `
+                  <span>Last Login:<br>${states['sensor.last_successful_authentication'].state}</span>`
+                ]]]
+              boot: >
+                [[[ return `
+                  <span>Server Last Boot:<br>${states['sensor.server_uptime'].state}</span>`
+                ]]]
+
           - type: custom:stack-in-card
             mode: horizontal
             keep:
               margin: true
               border_radius: true
-              background: true
-            cards:
-              - type: custom:button-card
-                entity: sensor.current_version
-                name: "Currently Running:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /developer-tools/info
-                styles:
-                  card:
-                    - font-size: 14px
-
-              - type: custom:button-card
-                entity: sensor.hass_avail_version
-                name: "Available:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /developer-tools/info
-                styles:
-                  card:
-                    - font-size: 14px
-
-              - type: custom:button-card
-                entity: sensor.hacs
-                name: "HACS Updates:"
-                show_state: true
-                show_icon: false
-                tap_action:
-                  action: navigate
-                  navigation_path: /hacs
-                styles:
-                  card:
-                    - font-size: 14px
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
-              border_radius: true
-              background: true
-            cards:
-              - type: custom:button-card
-                entity: sensor.uptime
-                name: "Uptime:"
-                show_state: true
-                show_icon: false
-              - type: custom:button-card
-                entity: sensor.last_boot
-                name: "Last Boot:"
-                show_state: true
-                show_icon: false
-
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
-              border_radius: true
-              background: true
             cards:
               - type: "custom:mini-graph-card"
                 entities:
                   - sensor.processor_use
-                name: "Procesor"
-                line_color: rgb(28, 132, 255)
+                name: "CPU"
+                align_icon: left
+                align_state: center
+                font_size: 75
                 show:
-                  labels: hover
-                  points: false
-                  state: false
-                line_width: 3
-                points_per_hour: 30
-                hours_to_show: 1
+                  fill: false
               - type: "custom:mini-graph-card"
                 entities:
                   - sensor.memory_use_percent
-                name: "Memory"
-                line_color: green
+                name: "RAM"
+                align_icon: left
+                align_state: center
+                font_size: 75
                 show:
-                  labels: hover
-                  points: false
-                  state: false
-                line_width: 3
-                points_per_hour: 60
-                hours_to_show: 1
+                  fill: false
+              - type: "custom:mini-graph-card"
+                entities:
+                  - sensor.disk_use_percent_home
+                name: "Disk"
+                align_icon: left
+                align_state: center
+                font_size: 75
+                show:
+                  fill: false
 
           - type: custom:stack-in-card
             mode: horizontal

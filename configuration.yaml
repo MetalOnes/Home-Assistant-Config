@@ -15,14 +15,14 @@ frontend:
   themes: !include_dir_merge_named themes/
 
 # Enable Nabu Casa cloud
-cloud:
+#cloud:
 
 lovelace:
   mode: yaml
   resources:
     - url: /hacsfiles/button-card/button-card.js
       type: module
-    - url: /hacsfiles/mini-media-player/mini-media-player.js
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
       type: module
     - url:  /hacsfiles/simple-thermostat/simple-thermostat.js
       type: module
@@ -189,10 +189,8 @@ recorder:
       - sensor.hass_avail_version
       - sensor.hacs
       - sensor.bssid
-      - sensor.galaxys7_battery_state
       - sensor.erics_ipad_battery_level
       - sensor.erics_ipad_battery_state
-      - sensor.sm_j700p_battery_state
       - sensor.battery_level
       - sensor.battery_level_2
       - sensor.battery_level_3
@@ -253,10 +251,8 @@ history:
       - sensor.hass_avail_version
       - sensor.hacs
       - sensor.bssid
-      - sensor.galaxys7_battery_state
       - sensor.erics_ipad_battery_level
       - sensor.erics_ipad_battery_state
-      - sensor.sm_j700p_battery_state
       - sensor.battery_level
       - sensor.battery_level_2
       - sensor.battery_level_3
@@ -554,13 +550,27 @@ sensor:
 #Display current HA uptime
   - platform: uptime
     name: Uptime
-    unit_of_measurement: days
+    unit_of_measurement: hours
+
+# Display info about last login
+  - platform: authenticated
+  
 #Display various system information
   - platform: systemmonitor
     resources:
       - type: memory_use_percent
       - type: processor_use
       - type: last_boot
+      - type: disk_use_percent
+        arg: /home
+
+  - platform: template
+    sensors:
+      server_uptime:  
+        friendly_name: Server Uptime
+        device_class: timestamp
+        value_template: >
+          {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%Y-%m-%d %H:%M', False) }}
 
 
 # Date and Time
@@ -628,28 +638,6 @@ sensor:
 #########################################
   - platform: template
     sensors:
-      wled1_effect:
-        value_template: "{{ states.light.wled1.attributes.effect }}"
-      ledfx_wled1_e:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["effect"]["name"] }}'
-        friendly_name: "Device 1 Current Effect"
-      ledfx_wled1_name:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["name"] }}'
-      ledfx_wled1_ip:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled1"]["config"]["ip_address"] }}'
-        friendly_name: "Device 1 IP"
-
-      wled2_effect:
-        value_template: "{{ states.light.mantle.attributes.effect }}"
-      ledfx_wled2_e:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["effect"]["name"] }}'
-        friendly_name: "Device 2 Current Effect"
-      ledfx_wled2_name:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["name"] }}'
-      ledfx_wled2_ip:
-        value_template: '{{ states.sensor.ledfx_devices.attributes["devices"]["wled2"]["config"]["ip_address"] }}'
-        friendly_name: "Device 2 IP"
-
       tv_effect:
         value_template: '{{ states.light.tv.attributes.effect }}'
         friendly_name: "TV Light Effect"
@@ -726,12 +714,12 @@ switch:
     switches:
       lr_tv:
         friendly_name: TV
-        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch TV') }}"
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'TV') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.living_room
-            activity: 'Watch TV'
+            activity: 'TV'
         turn_off:
           service: remote.turn_on
           data:
@@ -739,12 +727,12 @@ switch:
             activity: 'PowerOff'
       lr_kodi:
         friendly_name: Kodi
-        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Kodi') }}"
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Kodi') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.living_room
-            activity: 'Watch Kodi'
+            activity: 'Kodi'
         turn_off:
           service: remote.turn_on
           data:
@@ -765,12 +753,12 @@ switch:
             activity: 'PowerOff'
       lr_wiiu:
         friendly_name: Switch
-        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'WiiU' ) }}"
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Switch' ) }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.living_room
-            activity: 'WiiU'
+            activity: 'Switch'
         turn_off:
           service: remote.turn_on
           data:
@@ -778,12 +766,12 @@ switch:
             activity: 'PowerOff'
       lr_music:
         friendly_name: Music
-        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Listen to Music' ) }}"
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Music' ) }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.living_room
-            activity: 'Listen to Music'
+            activity: 'Music'
         turn_off:
           service: remote.turn_on
           data:
@@ -804,12 +792,12 @@ switch:
             activity: 'PowerOff'
       lr_steam:
         friendly_name: Steam
-        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Play Steam' ) }}"
+        value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Steam' ) }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.living_room
-            activity: 'Play Steam'
+            activity: 'Steam'
         turn_off:
           service: remote.turn_on
           data:

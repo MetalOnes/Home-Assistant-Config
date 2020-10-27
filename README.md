@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Lovelace cleanup, theme fixes
 * 0.116.4 - cleanup
 * Upgrading to 0.116.2
 * Cleaning up old stuff

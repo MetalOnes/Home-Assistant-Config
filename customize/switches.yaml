@@ -62,6 +62,12 @@ switch.lr_kodi:
 switch.lr_wiiu:
   icon: mdi:wiiu
 
+switch.lr_xbox:
+  icon: mdi:microsoft-xbox
+
+switch.aoycocr_plug_2:
+  icon: mdi:wall-sconce-flat-variant
+
 switch.lr_steam:
   icon: mdi:steam
 

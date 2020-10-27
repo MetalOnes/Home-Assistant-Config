@@ -22,7 +22,6 @@
         - justify-self: end
         - padding-right: 10%
         - font-size: 70%
-        - color: '#FFFFFF'
       card:
         - margin: 0 3px
         - background-color: var(--primary-background-color)
@@ -217,7 +216,6 @@
         - justify-self: end
         - padding-right: 10%
         - font-size: 70%
-        - color: '#FFFFFF'
       card:
         - margin: 0 3px
         - background-color: var(--primary-background-color)
@@ -249,51 +247,9 @@
           icon:
             - color: 'var(--state-icon-color)'
 
-  int_light_label:
-    color_type: label-card
-    show_icon: false
-    color: var(--ha-card-background)
-    color_off: var(--ha-card-background)
-    tap_action:
-      action: more-info
-    styles:
-      card:
-        - margin: 5px 0px 5px 0px
-        - padding: 10px 0px
-        - background-color: var(--primary-background-color)
-    state:
-      - value: 'on'
-        styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
-          name:
-            - color: '#FFFFFF'
-
-  ext_light_label:
-    color_type: label-card
-    show_icon: false
-    color: var(--ha-card-background)
-    color_off: var(--ha-card-background)
-    tap_action:
-      action: more-info
-    styles:
-      card:
-        - margin: 5px 0px 5px 0px
-        - padding: 10px 0px
-        - background-color: var(--primary-background-color)
-    state:
-      - value: 'on'
-        styles:
-          card:
-            - box-shadow: '0px 0px 2px 2px #c8a6ff'
-          name:
-            - color: '#FFFFFF'
-
   general_label:
     color_type: label-card
     show_icon: false
-    color: rgba(0, 0, 0, 1)
-    color_off: rgba(0, 0, 0, 1)
     show_label: true
     tap_action:
       action: more-info
@@ -301,27 +257,64 @@
       card:
         - margin: 5px 0px 5px 0px
         - padding: 10px 0px
-        - background-color: rgba(0, 0, 0, 0.6)
+        - background-color: transparent !important
       name:
         - font-size: 24px
+        - color: var(--primary-text-color)
 
   harmony_button:
     color_type: card
-    aspect_ratio: 2/1
+    aspect_ratio: 1.5/1
     styles:
       card:
-        #- height: 70px
         - background-color: var(--primary-background-color)
         - border-radius: 5px
+        - border: 'solid 1.5px var(--state-icon-color)'
+        
+      icon:
+        - color: var(--primary-text-color)
+      name:
+        - color: var(--primary-text-color)
     state:
       - value: 'on'
         styles:
           card:
             - background-color: rgba(0, 130, 0, 0.7)
+            - border: 'solid 1.5px var(--state-icon-active-color)'
           icon:
-            - color: white
+            - color: var(--text-primary-color)
           name:
-            - color: white
+            - color: var(--text-primary-color)
+
+  harmony_off_button:
+    icon: mdi:power
+    color_type: card
+    name: "Turn Off"
+    tap_action:
+      action: call-service
+      service: remote.turn_off
+      service_data:
+        entity_id: remote.living_room
+    aspect_ratio: 1.5/1
+    styles:
+      card:
+        - background-color: var(--primary-background-color)
+        - border-radius: 5px
+        - border: 'solid 1.5px rgb(139, 0, 0, 0.7)'
+      icon:
+        - color: rgb(200, 0, 0)
+      name:
+        - color: rgb(200, 0, 0)
+      
+    state:
+      - value: 'off'
+        styles:
+          card:
+            - background-color: rgb(139, 0, 0)
+          icon:
+            - color: var(--text-primary-color)
+          name:
+            - color: var(--text-primary-color)
 
   cast_button:
     size: 32px
@@ -377,12 +370,8 @@
         - max-height: 64px
         - border-radius: 5px
         - background-color: var(--primary-background-color)
-        #- background-color: var(--secondary-background-color)
-        #- border-style: solid
-        #- border-width: 5px 
-        #- border-color: var(--primary-background-color)
       icon:
-        - height: 44px
+        - height: 50%
 
   home-mode_buttons:
     aspect_ratio: 1.5/1
@@ -398,7 +387,6 @@
   sensor_button:
     aspect_ratio: 2/1
     color_type: card
-    color: rgba(130, 0, 0, 0.5)
     tap_action:
       action: more-info
     state:
@@ -407,9 +395,12 @@
           name:
             - color: 'var(--state-icon-active-color)'
           icon:
+            - color: 'var(--label-badge-red)'
+          state:
             - color: 'var(--state-icon-active-color)'
       - value: 'off'
         styles:
+          
           name:
             - color: 'var(--state-icon-color)'
           icon:
@@ -418,7 +409,7 @@
             - color: 'var(--state-icon-color)'
     styles:
       card:
-        - background-color: var(--primary-background-color)
+        - background-color: transparent !important
       name:
         - font-size: 70%
       state:
@@ -426,7 +417,6 @@
   door_sensor_button:
     aspect_ratio: 2/1
     color_type: card
-    color: rgba(130, 0, 0, 0.5)
     icon: mdi:door
     tap_action:
       action: more-info
@@ -448,7 +438,7 @@
             - color: 'var(--state-icon-color)'
     styles:
       card:
-        - background-color: var(--primary-background-color)
+        - background-color: transparent !important
       name:
         - font-size: 70%
       state:
@@ -456,3 +446,43 @@
 
   video_button:
     color: green
+
+  phone_info:
+    show_entity_picture: true
+    aspect_ratio: 1/1.1
+    styles:
+      card:
+        - background-color: '#2b374e'
+        - border-radius: 5px
+        - padding: 7%
+        - color: ivory
+        - font-size: 10px
+        #- text-shadow: 0px 0px 5px black
+        - text-transform: capitalize
+      grid:
+        - grid-template-areas: '"i temp" "n n" "ring ring" "cpu cpu" "ram ram" "sd sd"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr min-content min-content min-content min-content
+      name:
+        - font-weight: bold
+        - font-size: 15px
+        - color: white
+        - align-self: middle
+        - justify-self: start
+        - padding-bottom: 6px
+      img_cell:
+        - justify-content: start
+        - align-items: start
+        - margin: none
+      icon:
+        - width: 70%
+      custom_fields:
+        temp:
+          - align-self: start
+          - justify-self: end
+          - font-size: 13px
+        ring:
+          - padding-bottom: 2px
+          - align-self: middle
+          - justify-self: start
+          - font-size: 11px

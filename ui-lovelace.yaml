@@ -16,28 +16,93 @@ views:
               #margin: true
               background: true
             cards:
-              - type: "custom:button-card"
-                entity: sensor.homemode
-                name: 'Home Mode'
-                show_label: false
-                show_name: false
-                show_state: true
-                state:
-                  - value: 'Away'
-                    color: rgb(150, 0, 0, 0.7)
-                    icon: mdi:home-minus
-                  - value: 'Home'
-                    color: rgb(0, 99, 31, 0.7)
-                    icon: mdi:home-variant
-                  - value: 'Night'
-                    color: rgb(111, 0, 110, 0.7)
-                    icon: mdi:weather-night
-                layout: icon_state
-                styles:
-                  card:
-                    - height: 75px
-                  state:
-                    - font-size: 32px
+              - type: custom:stack-in-card
+                mode: horizontal
+                cards:
+                  - type: custom:button-card
+                    entity: sensor.homemode
+                    show_name: false
+                    styles:
+                      card:
+                        - border-radius: 5px
+                      grid:
+                        - grid-template-areas: '"i hm s" "i itemp tv" "i otemp beer"'
+                        - grid-template-columns: 1fr 1fr 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      img_cell:
+                        - justify-content: start
+                        - align-items: start
+                      icon:
+                        - width: 50%
+                        - margin-top: 2%
+                      custom_fields:
+                        hm:
+                          - align-self: middle
+                          - justify-self: start
+                          - padding-left: 5%
+                          - font-size: 36px
+                        itemp:
+                          - padding-left: 5%
+                          - align-self: middle
+                          - justify-self: start
+                          - font-size: 16px
+                          - color: '#A9B1BC'
+                          - padding-bottom: 3px
+                        tv:
+                          - align-self: middle
+                          - justify-self: start
+                          - font-size: 16px
+                          - color: '#A9B1BC'
+                          - padding-bottom: 3px
+                        otemp:
+                          - padding-left: 5%
+                          - align-self: middle
+                          - justify-self: start
+                          - font-size: 16px
+                          - color: '#A9B1BC'
+                        beer:
+                          - align-self: middle
+                          - justify-self: start
+                          - font-size: 16px
+                          - color: '#A9B1BC'
+                    custom_fields:
+                      hm: >
+                        [[[ return states['sensor.homemode'].state ]]]
+                      itemp: >
+                        [[[ return `<ha-icon
+                        icon="mdi:thermometer"
+                        style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                        </ha-icon> <span>In: ${states['sensor.current_temperature'].state}°F</span>`
+                        ]]]
+                      tv: >
+                        [[[ return `<ha-icon
+                        icon="mdi:television"
+                        style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                        </ha-icon> <span>TV: ${states['sensor.harmony_living_room'].state}</span>`
+                        ]]]
+                      otemp: >
+                        [[[ return `<ha-icon
+                        icon="mdi:thermometer"
+                        style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                        </ha-icon> <span>Out: ${states['sensor.wupws_temp'].state}°F</span>`
+                        ]]]
+                      beer: >
+                        [[[ return `<ha-icon
+                        icon="mdi:glass-mug-variant"
+                        style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                        </ha-icon> <span>Beers: ${states['sensor.untappd_total_beers'].state}</span>`
+                        ]]]
+                    state:
+                      - value: 'Away'
+                        color: rgb(150, 0, 0, 0.7)
+                        icon: mdi:home-minus
+                      - value: 'Home'
+                        color: rgb(0, 99, 31, 0.7)
+                        icon: mdi:home-variant
+                      - value: 'Night'
+                        color: rgb(111, 0, 110, 0.7)
+                        icon: mdi:weather-night
+
               - type: custom:stack-in-card
                 keep:
                   margin: true
@@ -174,7 +239,6 @@ views:
       - type: custom:stack-in-card
         keep:
           background: true
-        #title: Living Room TV
         style: |
           ha-card {
             background: var(--paper-card-background-color)
@@ -187,32 +251,33 @@ views:
             entity: sensor.harmony_living_room
             name: 'Current Activity'
             show_state: true
-            color_type: card
-            color: var(--paper-card-background-color)
             show_icon: true
             layout: icon_name_state
             tap_action:
               action: more-info
             styles:
-              card:
-                - border-bottom: 3px solid rgba(0, 0, 0, .2)
-                - border-top: 3px solid rgba(0, 0, 0, .2)
-                - padding: 10px 0
+              icon:
+                - color: var(--state-icon-active-color)
+              state:
+                - color: var(--primary-text-color)
             state:
-              - value: 'Watch Kodi'
+              - value: 'Kodi'
                 icon: mdi:kodi
-              - value: 'Watch TV'
+              - value: 'TV'
                 icon: mdi:television
-              - value: 'Listen to Music'
+              - value: 'Music'
                 icon: mdi:music
               - value: 'Chromecast'
                 icon: mdi:cast
-              - value: 'WiiU'
+              - value: 'Switch'
                 icon: mdi:nintendo-switch
-              - value: 'Play Steam'
+              - value: 'Steam'
                 icon: mdi:steam
               - value: 'PowerOff'
                 icon: mdi:power-off
+                styles:
+                  icon:
+                    - color: rgb(200,0,0)
           - type: custom:stack-in-card
             cards:
               - type: custom:stack-in-card
@@ -255,22 +320,13 @@ views:
                     template: harmony_button
                   - type: custom:button-card
                     entity: switch.lr_xbox
-                    icon: mdi:xbox
+                    icon: mdi:microsoft-xbox
                     template: harmony_button
 
                   - type: "custom:button-card"
                     entity: remote.living_room
-                    icon: mdi:power
-                    color_type: card
-                    color: darkred
-                    size: 32px
-                    name: "Turn Off"
-                    service:
-                      domain: remote
-                      action: turn_off
-                      data:
-                        entity_id: remote.living_room
-                    aspect_ratio: 2/1
+                    template: harmony_off_button
+
           - type: custom:fold-entity-row
             head:
               type: section
@@ -446,6 +502,15 @@ views:
                     name: Fireplace
                     template: rgb_light_button
                   - type: "custom:button-card"
+                    entity: switch.aoycocr_plug_2
+                    template: light_switch_button
+                    name: Black Light
+                  - type: "custom:button-card"
+                    color_type: blank-card
+                  
+              - type: horizontal-stack
+                cards:
+                  - type: "custom:button-card"
                     entity: switch.couch_lights_185
                     template: light_switch_button
                   - type: "custom:button-card"
@@ -454,6 +519,9 @@ views:
                   - type: "custom:button-card"
                     entity: switch.party_lights_184
                     template: light_switch_button
+                  - type: "custom:button-card"
+                    color_type: blank-card
+
 
 # Kitchen Card
           - type: custom:vertical-style-card
@@ -511,10 +579,9 @@ views:
                     entity: switch.aoycocr_plug_1
                     name: Plug 1
                     template: light_switch_button
+                  
                   - type: "custom:button-card"
-                    entity: switch.aoycocr_plug_2
-                    template: light_switch_button
-                    name: Plug 2
+                    color_type: blank-card
                   - type: "custom:button-card"
                     color_type: blank-card
 
@@ -668,45 +735,46 @@ views:
       - type: custom:stack-in-card
         keep:
           background: true
-        #title: Living Room
+          border-radius: true
+        style: |
+          ha-card {
+            background: var(--paper-card-background-color)
+          }
         cards:
           - type: custom:button-card
             template: general_label
             name: Living Room
-            styles:
-              card:
-                - border-bottom: 3px solid rgba(0, 0, 0, .2)
-
-
           - type: "custom:button-card"
             entity: sensor.harmony_living_room
             name: 'Current Activity'
             show_state: true
-            color_type: card
-            color: var(--paper-card-background-color)
             show_icon: true
             layout: icon_name_state
             tap_action:
               action: more-info
             styles:
-              card:
-                - border-bottom: 3px solid rgba(0, 0, 0, .2)
-                - padding: 10px 0
+              icon:
+                - color: var(--state-icon-active-color)
+              state:
+                - color: var(--primary-text-color)
             state:
-              - value: 'Watch Kodi'
+              - value: 'Kodi'
                 icon: mdi:kodi
-              - value: 'Watch TV'
+              - value: 'TV'
                 icon: mdi:television
-              - value: 'Listen to Music'
+              - value: 'Music'
                 icon: mdi:music
               - value: 'Chromecast'
                 icon: mdi:cast
-              - value: 'WiiU'
+              - value: 'Switch'
                 icon: mdi:nintendo-switch
-              - value: 'Play Steam'
+              - value: 'Steam'
                 icon: mdi:steam
               - value: 'PowerOff'
                 icon: mdi:power-off
+                styles:
+                  icon:
+                    - color: rgb(235,0,0)
 
           - type: custom:stack-in-card
             cards:
@@ -750,30 +818,23 @@ views:
                     template: harmony_button
                   - type: custom:button-card
                     entity: switch.lr_xbox
-                    icon: mdi:xbox
+                    icon: mdi:microsoft-xbox
                     template: harmony_button
 
                   - type: "custom:button-card"
                     entity: remote.living_room
-                    icon: mdi:power
-                    color_type: card
-                    color: darkred
-                    size: 32px
-                    name: "Turn Off"
-                    aspect_ratio: 2/1
-                    service:
-                      domain: remote
-                      action: turn_off
-                      data:
-                        entity_id: remote.living_room
+                    template: harmony_off_button
 
 
           - type: "custom:mini-media-player"
             entity: media_player.denon_avr_s720w
             name: Denon AVR
             icon: mdi:play-circle
-            artwork: cover
+            artwork: material
+            max_volume: 65
             source: full
+            tap_action:
+              action: more-info
             show_source: true
             hide:
               power_state: false
@@ -783,6 +844,8 @@ views:
             entity: media_player.55_tcl_roku_tv
             name: TCL TV
             icon: mdi:television-clean
+            tap_action:
+              action: more-info
             artwork: cover
             hide:
               volume: true
@@ -793,6 +856,8 @@ views:
             name: Living Room Kodi
             icon: mdi:kodi
             artwork: cover
+            tap_action:
+              action: more-info
             hide:
               volume: true
               power: true
@@ -872,8 +937,6 @@ views:
           - type: custom:button-card
             name: Bedroom
             template: general_label
-            styles:
-              card:
                 #- border-bottom: 3px solid rgba(0, 0, 0, .2)
 
 #          - type: "custom:mini-media-player"
@@ -938,9 +1001,6 @@ views:
           - type: custom:button-card
             template: general_label
             name: Man Cave
-            styles:
-              card:
-                #- border-bottom: 3px solid rgba(0, 0, 0, .2)
 
           - type: "custom:mini-media-player"
             entity: media_player.man_cave
@@ -1027,10 +1087,10 @@ views:
                 name: Back Door
                 template: door_sensor_button
               - type: "custom:button-card"
-                entity: binary_sensor.motion_sensor_128
-                icon: mdi:transition
-                name: Man Cave Motion
-                template: sensor_button
+                entity: binary_sensor.closet_door_210
+                name: Master Closet
+                template: door_sensor_button
+              
           - type: custom:stack-in-card
             mode: horizontal
             keep:
@@ -1039,14 +1099,16 @@ views:
               border_radius: true
             cards:
               - type: "custom:button-card"
+                entity: binary_sensor.motion_sensor_128
+                icon: mdi:transition
+                name: Man Cave Motion
+                template: sensor_button
+              - type: "custom:button-card"
                 entity: binary_sensor.master_bath_sensor_121
                 icon: mdi:transition
                 name: Master Bath
                 template: sensor_button
-              - type: "custom:button-card"
-                entity: binary_sensor.closet_door_210
-                name: Master Closet
-                template: door_sensor_button
+              
               - type: "custom:button-card"
                 entity: binary_sensor.smoke_sensor_197
                 icon: mdi:smoke-detector
@@ -1364,6 +1426,157 @@ views:
                   - value: "Food Lion"
                     color: rgba(10, 10, 10, 0.4)
                     entity_picture: /local/people/val-car.png
+          - type: custom:stack-in-card
+            mode: horizontal
+            keep:
+              margin: true
+              background: true
+              border_radius: true
+            cards:
+            ####################################
+            #### == Left - Android Card  == ####
+            ####################################
+
+              - type: 'custom:button-card'
+                entity: sensor.pixel_4a_battery_level
+                entity_picture: /local/pixel4a.png
+                template: phone_info
+                name: Pixel 4a
+                styles:
+                  custom_fields:
+                    cpu:
+                      - padding-bottom: 2px
+                      - align-self: middle
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states['binary_sensor.pixel_4a_bluetooth_state'].state
+                          !== 'on') return "red"; ]]] 
+                    ram:
+                      - padding-bottom: 2px
+                      - align-self: middle
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states["binary_sensor.pixel_4a_wifi_state"].state !==
+                          'on') return "red"; ]]] 
+                    sd:
+                      - align-self: middle
+                      - padding-bottom: 2px
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states['binary_sensor.pixel_4a_is_charging'].state == 'Not Charging')
+                          return "red"; ]]]          
+                custom_fields:
+                  temp: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:battery-high"
+                        style="width: 22px; height: 22px; color: white;">
+                        </ha-icon><span>${entity.state}%</span>`
+                    ]]]
+                  ring: |
+                    [[[
+                      return `<ha-icon
+                      icon="mdi:cellphone-sound"
+                      style="width: 20px; height: 20px; color: white;">
+                      </ha-icon><span> Ring Mode: ${states['sensor.pixel_4a_ringer_mode'].state}</span>`
+                    ]]]
+                  cpu: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:bluetooth"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  Bluetooth: <span style="color: var(--text-color-sensor);">${states['binary_sensor.pixel_4a_bluetooth_state'].state}</span></span>`
+                    ]]]
+                  ram: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:wifi"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  WiFi: <span style="color: var(--text-color-sensor);">${states['binary_sensor.pixel_4a_wifi_state'].state} ${states['sensor.pixel_4a_wifi_connection'].state}</span></span>`
+                    ]]]
+                  sd: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:battery-charging"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  Charging: <span style="color: var(--text-color-sensor);">${states['binary_sensor.pixel_4a_is_charging'].state}</span></span>`
+                    ]]]
+            ####################################
+            #### == Right - Android Card  == ####
+            ####################################
+
+              - type: 'custom:button-card'
+                entity: sensor.moto_g_power_battery_level
+                entity_picture: /local/moto_g_power.png
+                template: phone_info
+                name: Moto G Power
+                styles:
+                  custom_fields:
+                    cpu:
+                      - padding-bottom: 2px
+                      - align-self: middle
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states['binary_sensor.moto_g_power_bluetooth_state'].state
+                          !== 'on') return "red"; ]]] 
+                    ram:
+                      - padding-bottom: 2px
+                      - align-self: middle
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states["binary_sensor.moto_g_power_wifi_state"].state !==
+                          'on') return "red"; ]]] 
+                    sd:
+                      - align-self: middle
+                      - padding-bottom: 2px
+                      - justify-self: start
+                      - font-size: 11px
+                      - '--text-color-sensor': >-
+                          [[[ if (states['binary_sensor.moto_g_power_is_charging'].state == 'Not Charging')
+                          return "red"; ]]]          
+                custom_fields:
+                  temp: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:battery-high"
+                        style="width: 22px; height: 22px; color: white;">
+                        </ha-icon><span>${entity.state}%</span>`
+                    ]]]
+                  ring: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:cellphone-sound"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span> Ring Mode: ${states['sensor.pixel_4a_ringer_mode'].state}</span>`
+                    ]]]
+                  cpu: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:bluetooth"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  Bluetooth: <span style="color: var(--text-color-sensor);">${states['binary_sensor.moto_g_power_bluetooth_state'].state}</span></span>`
+                    ]]]
+                  ram: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:wifi"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  WiFi: <span style="color: var(--text-color-sensor);">${states['binary_sensor.moto_g_power_wifi_state'].state} ${states['sensor.moto_g_power_wifi_connection'].state}</span></span>`
+                    ]]]
+                  sd: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:battery-charging"
+                        style="width: 20px; height: 20px; color: white;">
+                        </ha-icon><span>  Charging: <span style="color: var(--text-color-sensor);">${states['binary_sensor.moto_g_power_is_charging'].state}</span></span>`
+                    ]]]
+        
+
 # Untappd Card
       - type: custom:stack-in-card
         keep:
