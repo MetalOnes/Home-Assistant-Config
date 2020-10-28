@@ -110,12 +110,19 @@ sensor.ledfx_wled2_ip:
 sensor.ledfx_wled2_e:
   icon: mdi:compare
 
-sensor.ledfx_couch_name:
-  friendly_name: "Device 3 Name"
-  icon: mdi:led-strip-variant
-
 sensor.ledfx_couch_ip:
   icon: mdi:ip-network
 
 sensor.ledfx_couch_e:
   icon: mdi:compare
+
+sensor.network_throughput_in_ens160:
+  friendly_name: Net In
+  icon: mdi:download-network
+
+sensor.network_throughput_out_ens160:
+  friendly_name: Net Out
+  icon: mdi:upload-network
+
+sensor.ipv4_address_ens160:
+  friendly_name: LAN IP

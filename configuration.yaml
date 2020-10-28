@@ -131,158 +131,14 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
 
+# History/Recorder
 recorder:
   db_url: !secret mysql_url
   purge_keep_days: 10
-  exclude:
-    domains:
-      - camera
-      - updater
-      - weather
-      - time
-      - calendar
-      - sun
-
-    entities:
-      - sensor.sunrise_time
-      - sensor.sunrise
-      - sensor.sunset_time
-      - sensor.sunset
-      - sensor.solar_noon
-      - sensor.daylight
-      - sensor.moon
-      - sensor.myip
-      - sensor.max_elevation
-      - sensor.dark_sky_apparent_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_icon
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_pressure
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_wind_speed
-      - sensor.date
-      - sensor.simple_date
-      - sensor.simple_time
-      - sensor.time
-      - sensor.time_date
-      - sensor.time_utc
-      - sensor.ssl_certificate_expiry
-      - sensor.flyers
-      - sensor.hacs
-      - sensor.home_team
-      - sensor.away_team
-      - sensor.wral
-      - sensor.current_version
-      - sensor.untappd_badge
-      - sensor.untappd_followings
-      - sensor.untappd_last_badge_robotsfearme
-      - sensor.untappd_last_check_in_robotsfearme
-      - sensor.untappd_wishlist_robotsfearme
-      - sensor.uptime
-      - sensor.wifi_connection
-      - sensor.wifi_connection_2
-      - sensor.nanomote_1_199
-      - sensor.nanomote_quad_202
-      - sensor.hass_avail_version
-      - sensor.hacs
-      - sensor.bssid
-      - sensor.erics_ipad_battery_level
-      - sensor.erics_ipad_battery_state
-      - sensor.battery_level
-      - sensor.battery_level_2
-      - sensor.battery_level_3
-      - sensor.battery_state
-      - device_tracker.eric_s_ipad_2
-      - device_tracker.lite
-      - device_tracker.living_room_roku
-      - device_tracker.pro
-      - device_tracker.unifi_a4_da_22_2a_d1_df_default
-      - device_tracker.unifi_c8_02_8f_0f_1d_32_default
-      - device_tracker.val_acer
-      - device_tracker.xboxone
-      - sensor.moon
-
-
 history:
-  exclude:
-    domains:
-      - camera
-      - updater
-      - zone
-      - weather
-      - time
-      - calendar
-      - sun
-      - automation
-      - script
-    entities:
-      - sensor.sunrise_time
-      - sensor.sunrise
-      - sensor.sunset_time
-      - sensor.sunset
-      - sensor.solar_noon
-      - sensor.daylight
-      - sensor.myip
-      - sensor.date
-      - sensor.simple_date
-      - sensor.simple_time
-      - sensor.time
-      - sensor.time_date
-      - sensor.time_utc
-      - sensor.ssl_certificate_expiry
-      - sensor.flyers
-      - sensor.hacs
-      - sensor.home_team
-      - sensor.away_team
-      - sensor.current_version
-      - sensor.untappd_badge
-      - sensor.untappd_followings
-      - sensor.untappd_last_badge_robotsfearme
-      - sensor.untappd_last_check_in_robotsfearme
-      - sensor.untappd_wishlist_robotsfearme
-      - sensor.uptime
-      - sensor.wifi_connection
-      - sensor.wifi_connection_2
-      - sensor.nanomote_1_199
-      - sensor.nanomote_quad_202
-      - sensor.hass_avail_version
-      - sensor.hacs
-      - sensor.bssid
-      - sensor.erics_ipad_battery_level
-      - sensor.erics_ipad_battery_state
-      - sensor.battery_level
-      - sensor.battery_level_2
-      - sensor.battery_level_3
-      - sensor.battery_state
-
 logbook:
-  exclude:
-    domains:
-      - updater
-      - weather
-    entities:
-      - sensor.sunrise_time
-      - sensor.sunset_time
-      - sensor.myipopendnscom
-      - sensor.date
-      - sensor.simple_date
-      - sensor.simple_time
-      - sensor.ssl_certificate_expiry
-      - sensor.flyers
-      - sensor.hacs
-      - sensor.home_team
-      - sensor.away_team
-      - sensor.current_version
-      - sensor.untappd_badge
-      - sensor.untappd_beer
-      - sensor.untappd_followings
-      - sensor.untappd_last_badge_robotsfearme
-      - sensor.untappd_last_check_in_robotsfearme
-      - sensor.untappd_wishlist_robotsfearme
 
+# Enable sun sensor 
 sun:
 
 ##########################################
@@ -501,21 +357,13 @@ sensor:
         unit_of_measurement: 'degrees'
         value_template: "{{ states.sun.sun.attributes.elevation }}"
 
-# Pi-Hole
-#  - platform: pi_hole
-#    host: !secret pi_hole_ip
-#    monitored_conditions:
-#      - dns_queries_today
-#      - ads_blocked_today
-#      - ads_percentage_today
-
 # Gets public IP
   - platform: dnsip
     scan_interval: 1800
 
+# SSL Cert Expiration    
   - platform: cert_expiry
     host: evilrobot.space
-
 
 # Harmony Status
   - platform: template
@@ -555,7 +403,7 @@ sensor:
 # Display info about last login
   - platform: authenticated
   
-#Display various system information
+# Display various system information
   - platform: systemmonitor
     resources:
       - type: memory_use_percent
@@ -563,7 +411,14 @@ sensor:
       - type: last_boot
       - type: disk_use_percent
         arg: /home
+      - type: throughput_network_in
+        arg: ens160
+      - type: throughput_network_out
+        arg: ens160
+      - type: ipv4_address
+        arg: ens160
 
+# Reformatting last boot time
   - platform: template
     sensors:
       server_uptime:  
@@ -602,7 +457,6 @@ sensor:
   - platform: template
     sensors:
       untappd_badge:
-#        value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }} (Level {{ states.sensor.untappd_last_badge_robotsfearme.attributes.level }})"
         value_template: "Last Badge: {{ states.sensor.untappd_last_badge_robotsfearme.attributes.badge }}"
   - platform: template
     sensors:
@@ -612,25 +466,21 @@ sensor:
   - platform: template
     sensors:
       untappd_followings:
-#        unit_of_measurement: followers
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.followings }}"
 
   - platform: template
     sensors:
       untappd_checked:
-#        unit_of_measurement: checkins
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.checkins }}"
 
   - platform: template
     sensors:
       untappd_total_beers:
-#        unit_of_measurement: beers
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_beers }}"
 
   - platform: template
     sensors:
       untappd_total_badges:
-#        unit_of_measurement: badges
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
 
 #########################################

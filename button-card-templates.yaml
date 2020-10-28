@@ -280,7 +280,7 @@
         styles:
           card:
             - background-color: rgba(0, 130, 0, 0.7)
-            - border: 'solid 1.5px var(--state-icon-active-color)'
+            - border: 'solid 2px var(--state-icon-active-color)'
           icon:
             - color: var(--text-primary-color)
           name:
@@ -300,7 +300,7 @@
       card:
         - background-color: var(--primary-background-color)
         - border-radius: 5px
-        - border: 'solid 1.5px rgb(139, 0, 0, 0.7)'
+        - border: 'solid 1px rgb(139, 0, 0, 0.7)'
       icon:
         - color: rgb(200, 0, 0)
       name:

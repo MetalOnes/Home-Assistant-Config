@@ -9,50 +9,7 @@ views:
   - title: System
     icon: mdi:home-assistant
     cards:
-  # Network Info
-      - type: custom:stack-in-card
-        keep:
-          background: true
-        cards:
-          - type: custom:button-card
-            name: Network
-            template: general_label
-          - type: custom:stack-in-card
-            mode: horizontal
-            keep:
-              margin: true
-              border_radius: true
-              background: true
-            cards:
-              - type: custom:button-card
-                name: "Public IP:"
-                entity_picture: /local/network.jpg
-                entity: sensor.myip
-                icon: mdi:router-network
-                show_state: true
-                show_icon: true
-                show_entity_picture: false
-                show_last_changed: true
-                size: 64px
-                layout: icon_name_state2nd
-              - type: custom:button-card
-                name: "SSL Cert Expiry:"
-                entity: sensor.ssl_certificate_expiry
-                show_state: true
-                show_icon: true
-                size: 64px
-                layout: icon_name_state2nd
-                tap_action:
-                  action: url
-                  url_path: https://evilrobot.space
-                styles:
-                  icon:
-                    - color: >
-                        [[[
-                          if (entity.state > 60) return 'lime';
-                          if (entity.state <= 60 && entity.state >= 30) return 'orange';
-                          else return 'darkred';
-                        ]]]
+  
   # System info and commands
       - type: custom:stack-in-card
         keep:
@@ -190,6 +147,62 @@ views:
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
+  # Network Info
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Network
+            template: general_label
+          - type: entities
+            entities:
+              - sensor.myip
+              - sensor.ipv4_address_ens160
+              - sensor.ssl_certificate_expiry
+          - type: "custom:mini-graph-card"
+            entities:
+              - entity: sensor.network_throughput_in_ens160
+                name: "Net In (MB/s)"
+              - entity: sensor.network_throughput_out_ens160
+                name: "Net Out (MB/s)"
+                color: green
+            name: "Network"
+            align_icon: left
+            font_size: 75
+            line_width: 2
+            hours_to_show: 24
+            points_per_hour: 15
+            show:
+              fill: false
+              state: false
+          - type: custom:mini-graph-card
+            name: Pi-Hole
+            show:
+              state: false
+              fill: false
+              smoothing: false
+            line_width: 2
+            entities:
+              - entity: sensor.pi_hole_dns_queries_today
+                name: Queries Today
+                
+              - entity: sensor.pi_hole_ads_blocked_today
+                name: Ads Blocked Today
+                color: orange
+            hours_to_show: 168
+            points_per_hour: .0416
+          - type: entities
+            entities:
+              - sensor.pi_hole_ads_percentage_blocked_today
+              - sensor.pi_hole_ads_blocked_today
+              - sensor.pi_hole_dns_queries_today
+              - sensor.pi_hole_dns_queries_cached
+              - sensor.pi_hole_dns_queries_forwarded
+              - sensor.pi_hole_dns_unique_clients
+              - sensor.pi_hole_seen_clients
+              - sensor.pi_hole_dns_unique_domains
+              - sensor.pi_hole_domains_blocked
   # Battery Levels
       - type: custom:stack-in-card
         keep:
