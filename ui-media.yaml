@@ -1,0 +1,445 @@
+title: Media Control
+views:
+  - title: Media Control
+    cards:
+    # Living Room Media
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          border-radius: true
+        style: |
+          ha-card {
+            background: var(--paper-card-background-color)
+          }
+        cards:
+          - type: custom:button-card
+            template: general_label
+            name: Living Room
+          - type: "custom:button-card"
+            entity: sensor.harmony_living_room
+            name: 'Current Activity'
+            show_state: true
+            show_icon: true
+            layout: icon_name_state
+            tap_action:
+              action: more-info
+            styles:
+              icon:
+                - color: var(--state-icon-active-color)
+              state:
+                - color: var(--primary-text-color)
+            state:
+              - value: 'Kodi'
+                icon: mdi:kodi
+              - value: 'TV'
+                icon: mdi:television
+              - value: 'Music'
+                icon: mdi:music
+              - value: 'Chromecast'
+                icon: mdi:cast
+              - value: 'Switch'
+                icon: mdi:nintendo-switch
+              - value: 'Steam'
+                icon: mdi:steam
+              - value: 'Xbox'
+                icon: mdi:microsoft-xbox
+              - value: 'PowerOff'
+                icon: mdi:power-off
+                styles:
+                  icon:
+                    - color: rgb(235,0,0)
+
+          - type: custom:stack-in-card
+            cards:
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  background: true
+                  margin: true
+                  border_radius: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_tv
+                    icon: mdi:television
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_kodi
+                    icon: mdi:kodi
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_chromecast
+                    icon: mdi:cast
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_wiiu
+                    icon: mdi:nintendo-switch
+                    template: harmony_button
+              - type: custom:stack-in-card
+                mode: horizontal
+                keep:
+                  background: true
+                  margin: true
+                  border_radius: true
+                cards:
+                  - type: custom:button-card
+                    entity: switch.lr_music
+                    icon: mdi:music
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_steam
+                    icon: mdi:steam
+                    template: harmony_button
+                  - type: custom:button-card
+                    entity: switch.lr_xbox
+                    icon: mdi:microsoft-xbox
+                    template: harmony_button
+
+                  - type: "custom:button-card"
+                    entity: remote.living_room
+                    template: harmony_off_button
+
+
+          - type: "custom:mini-media-player"
+            entity: media_player.denon_avr_s720w
+            name: Denon AVR
+            icon: mdi:play-circle
+            artwork: material
+            max_volume: 65
+            source: full
+            tap_action:
+              action: more-info
+            show_source: true
+            hide:
+              power_state: false
+              volume_level: false
+
+          - type: "custom:mini-media-player"
+            entity: media_player.55_tcl_roku_tv
+            name: TCL TV
+            icon: mdi:television-clean
+            tap_action:
+              action: more-info
+            artwork: cover
+            hide:
+              volume: true
+              controls: true
+
+          - type: "custom:mini-media-player"
+            entity: media_player.living_room_kodi
+            name: Living Room Kodi
+            icon: mdi:kodi
+            artwork: cover
+            tap_action:
+              action: more-info
+            hide:
+              volume: true
+              power: true
+              runtime: false
+
+          - type: "custom:mini-media-player"
+            entity: media_player.living_room
+            name: Living Room Chromecast
+            icon: mdi:cast
+            artwork: cover
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
+
+          - type: "custom:mini-media-player"
+            entity: media_player.all_3_rooms
+            name: All 3 Rooms
+            icon: mdi:cast
+            artwork: cover
+            #group: true
+            hide:
+              power: false
+              controls: false
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
+
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to LR
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.living_room
+#                    view_path: overview
+
+#              - type: "custom:button-card"
+#                name: Stop Casting
+#                icon: mdi:power
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.living_room
+
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Steam
+            template: general_label
+          - type: custom:kb-steam-card
+            entity: sensor.steam_76561197994506236
+            game_background: true
+
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Xbox
+            template: general_label
+          - type: custom:button-card
+            entity: sensor.robotsfearme_status
+            show_entity_picture: true
+            show_state: true
+            show_name: false
+            styles:
+              card:
+                - border-radius: 5px
+              state:
+                - font-size: 24px
+                - color: var(--secondary-text-color)
+                - justify-self: start
+              grid:
+                - grid-template-areas: '"i s s" "i ig ip" "i im gs"' 
+                - grid-template-columns: 1fr 1fr 1fr
+                - grid-template-rows: min-content min-content min-content
+              entity_picture:
+                - justify-content: start
+                - align-items: center
+                
+              icon:
+                - width: 50%
+              custom_fields:
+                ig:
+                  - align-self: middle
+                  - justify-self: start
+                  - font-size: 14px
+                  - color: var(--secondary-text-color)
+                ip:
+                  - align-self: middle
+                  - justify-self: start
+                  - font-size: 14px
+                  - color: var(--secondary-text-color)
+                im:
+                  - align-self: middle
+                  - justify-self: start
+                  - font-size: 14px
+                  - color: var(--secondary-text-color)
+                gs:
+                  - align-self: middle
+                  - justify-self: start
+                  - font-size: 14px
+                  - color: var(--secondary-text-color)
+                  #- padding-top: 5px
+            custom_fields:
+              ig: >
+                [[[ return `<ha-icon
+                icon="mdi:microsoft-xbox-controller"
+                style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                </ha-icon> <span>In Game: ${states['binary_sensor.robotsfearme_in_game'].state}</span>`
+                ]]]
+              im: >
+                [[[ return `<ha-icon
+                icon="mdi:microsoft-xbox-controller"
+                style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                </ha-icon> <span>In MP: ${states['binary_sensor.robotsfearme_in_multiplayer'].state}</span>`
+                ]]]
+              ip: >
+                [[[ return `<ha-icon
+                icon="mdi:microsoft-xbox-controller"
+                style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                </ha-icon> <span>In Party: ${states['binary_sensor.robotsfearme_in_party'].state}</span>`
+                ]]]
+              gs: >
+                [[[ return `<ha-icon
+                icon="mdi:trophy"
+                style="width: 20px; height: 20px; color: var(--state-icon-color);">
+                </ha-icon> <span>GS: ${states['sensor.robotsfearme_gamer_score'].state}</span>`
+                ]]]
+          - type: custom:mini-media-player
+            entity: media_player.xboxone
+            icon: mdi:microsoft-xbox
+            # shortcuts:
+            #   buttons:
+            #     - name: Chel
+            #       icon: mdi:hockey-sticks
+
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:upcoming-media-card
+            title: "Recently Added TV Episodes"
+            entity: sensor.kodi_recently_added_tv
+            image_style: fanart
+            all_shadows: false
+            flag: false
+          - type: custom:upcoming-media-card
+            title: "Recently Added Movies"
+            entity: sensor.kodi_recently_added_movies
+            image_style: fanart
+            all_shadows: false
+            flag: false
+
+
+  # Bedroom Media
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Bedroom
+            template: general_label
+                #- border-bottom: 3px solid rgba(0, 0, 0, .2)
+
+#          - type: "custom:mini-media-player"
+#            entity: media_player.bedroom_kodi
+#            name: Bedroom Kodi
+#            icon: mdi:kodi
+#            artwork: cover
+#            hide:
+#              volume: true
+#              power: true
+
+          - type: "custom:mini-media-player"
+            entity: media_player.bedroom_tv
+            name: Bedroom Chromecast
+            icon: mdi:cast
+            artwork: cover
+            group: true
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
+
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to BR
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.bedroom_tv
+#                    view_path: cast
+
+#              - type: "custom:button-card"
+#                icon: mdi:power
+#                name: Stop Casting
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.bedroom_tv
+
+  # Mancave media
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            template: general_label
+            name: Man Cave
+
+          - type: "custom:mini-media-player"
+            entity: media_player.man_cave
+            name: Man Cave Chromecast
+            icon: mdi:cast
+            artwork: cover
+
+          - type: "custom:mini-media-player"
+            entity: media_player.cca_man_cave
+            name: Man Cave Chromecast Audio
+            artwork: cover
+            # group: true
+            icon: mdi:cast
+            hide:
+              power: false
+              controls: false
+            shortcuts:
+              buttons:
+                - name: JEMP
+                  icon: mdi:radio
+                  type: music
+                  id: http://streaming.radio.co/sd71de59b3/listen
+                - name: Nugs Radio
+                  icon: mdi:radio
+                  type: music
+                  id: http://radio.nugs.net/nugsnet.mp3
+
+#          - type: custom:stack-in-card
+#            mode: horizontal
+#            keep:
+#              background: true
+#            cards:
+#              - type: "custom:button-card"
+#                name: HA to MC
+#                icon: mdi:cast
+#                color: var(--primary-color)
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: cast.show_lovelace_view
+#                  service_data:
+#                    entity_id: media_player.man_cave
+#                    view_path: overview
+
+#              - type: "custom:button-card"
+#                icon: mdi:power
+#                name: Stop Casting
+#                color: darkred
+#                template: cast_button
+#                tap_action:
+#                  action: call-service
+#                  service: media_player.turn_off
+#                  service_data:
+#                    entity_id: media_player.man_cave
+
+# Templates for button-card
+button_card_templates:
+  !include button-card-templates.yaml

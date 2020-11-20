@@ -1,12 +1,4 @@
-custom_header:
-  compact_mode: true
-  background: var(--app-header-background-color)
-  elements_color: var(--app-header-text-color)
-  active_tab_color: var(--state-icon-active-color)
-  tab_indicator_color: var(--state-icon-active-color)
-
 title: Party/LED Control
-
 views:
   - title: LED Control
     cards:
@@ -43,9 +35,11 @@ views:
                 entity: light.dining_room_lamp_160
                 name: Dining Lamp
                 template: light_button_brightness
+              
               - type: "custom:button-card"
-                entity: switch.camera_position
-                template: light_switch_button
+                entity: light.dining_shelf
+                name: Dining Shelf
+                template: rgb_light_button
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
@@ -61,7 +55,8 @@ views:
                 template: light_switch_button
                 name: Black Light
               - type: "custom:button-card"
-                color_type: blank-card
+                entity: switch.camera_position
+                template: light_switch_button
               
           - type: horizontal-stack
             cards:
@@ -129,13 +124,18 @@ views:
             cards:
               - type: "custom:button-card"
                 entity: script.ledfx_wled1_wave
-                name: Wave
+                name: W
                 icon: mdi:numeric-1-box-multiple-outline
                 template: script_buttons
               - type: "custom:button-card"
                 entity: script.ledfx_waverain
-                name: WaveRain
+                name: WR
                 icon: mdi:numeric-2-box-multiple-outline
+                template: script_buttons
+              - type: "custom:button-card"
+                entity: script.ledfx_waverainenergy
+                name: WRE
+                icon: mdi:numeric-3-box-multiple-outline
                 template: script_buttons
 
           - type: horizontal-stack
@@ -166,6 +166,12 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.wled1
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+          border_radius: true
+        cards:
           - type: custom:light-entity-card
             entity: light.mantle
             persist_features: true
@@ -176,6 +182,22 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.mantle
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+          border_radius: true
+        cards:
+          - type: custom:light-entity-card
+            entity: light.dining_shelf
+            persist_features: true
+            show_slider_percent: true
+            group: true
+            shorten_cards: true
+            effects_list: false
+          - type: custom:button-card
+            template: wled_button
+            entity: light.dining_shelf
       - type: custom:stack-in-card
         keep:
           background: true
@@ -192,6 +214,12 @@ views:
           - type: custom:button-card
             template: wled_button
             entity: light.desk
+      - type: custom:stack-in-card
+        keep:
+          background: true
+          margin: true
+          border_radius: true
+        cards:
           - type: custom:light-entity-card
             entity: light.front_porch_leds
             persist_features: true

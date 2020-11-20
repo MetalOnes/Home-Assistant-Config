@@ -176,12 +176,14 @@ views:
             show:
               fill: false
               state: false
+              extrema: true
           - type: custom:mini-graph-card
             name: Pi-Hole
             show:
               state: false
               fill: false
               smoothing: false
+              graph: bar
             line_width: 2
             entities:
               - entity: sensor.pi_hole_dns_queries_today
@@ -192,6 +194,8 @@ views:
                 color: orange
             hours_to_show: 168
             points_per_hour: .0416
+            group_by: day
+
           - type: entities
             entities:
               - sensor.pi_hole_ads_percentage_blocked_today
@@ -231,6 +235,29 @@ views:
               include:
                 - attributes:
                     battery_level: <=100
+  # HASS Toggles and inputs
+      - type: custom:stack-in-card
+        keep:
+          background: true
+        cards:
+          - type: custom:button-card
+            name: Options
+            template: general_label
+          - type: entities
+            entities: 
+              - type: section
+                label: "System-wide Options"
+              - entity: input_boolean.wfh
+                name: "WFH Mode Enabled"
+              - type: section
+                label: "Lights"
+              - type: custom:numberbox-card
+                entity: input_number.int_sa
+                name: "Solar Angle Int Lights Turn On"
+                speed: 0
+                border: false
+  
+
 # Templates for button-card
 button_card_templates:
   !include button-card-templates.yaml

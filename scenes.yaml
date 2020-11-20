@@ -15,6 +15,7 @@
     switch.aoycocr_plug_1: off
     switch.aoycocr_plug_2: off
     light.front_porch_leds: off
+    light.dining_shelf: off
 
 - name: Away
   id: SceneAway
@@ -33,6 +34,7 @@
     switch.aoycocr_plug_2: off
     light.front_porch_leds: off
     light.desk: off
+    light.dining_shelf: off
 
 - name: mcdesk
   id: mcdesk

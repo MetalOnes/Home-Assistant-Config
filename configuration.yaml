@@ -16,6 +16,8 @@ frontend:
 
 # Enable Nabu Casa cloud
 #cloud:
+#Enable stuff
+default_config:
 
 lovelace:
   mode: yaml
@@ -70,6 +72,14 @@ lovelace:
       type: css
     - url: /hacsfiles/garbage-collection-card/garbage-collection-card.js
       type: js
+    - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
+      type: module
+    - url: /hacsfiles/kb-steam-card/kb-steam-card.js
+      type: module
+    - url: /hacsfiles/numberbox-card/numberbox-card.js
+      type: module
+    # - url: /local/custom_lovelace/google_keep_card/google-keep-card.js
+    #   type: module
 
   dashboards:
     ui-system:
@@ -91,6 +101,12 @@ lovelace:
       icon: mdi:led-strip-variant
       show_in_sidebar: true
       filename: ui-leds.yaml
+    ui-media:
+      mode: yaml
+      title: "Media Control"
+      icon: mdi:play-circle-outline
+      show_in_sidebar: true
+      filename: ui-media.yaml
     #ui-floorplan:
     #  mode: yaml
     #  title: Floorplan
@@ -123,8 +139,8 @@ http:
 updater:
 
 # HACS
-hacs:
-  token: !secret hacs_token
+# hacs:
+#   token: !secret hacs_token
 
 discovery:
 
@@ -134,12 +150,20 @@ discovery:
 # History/Recorder
 recorder:
   db_url: !secret mysql_url
-  purge_keep_days: 10
+  purge_keep_days: 7
+  exclude:
+    entity_globs:
+      - sensor.*untappd*
 history:
 logbook:
 
 # Enable sun sensor 
 sun:
+
+# Xbox
+xbox:
+  client_id: !secret azure_cid
+  client_secret: !secret azure_secret
 
 ##########################################
 # Lights
@@ -323,6 +347,12 @@ sensor:
       - heatIndex
       - windChill
 
+# Google Keep
+  # - platform: google_keep
+  #   username: !secret gkeep_user
+  #   password: !secret gkeep_pass
+  #   pinned: true
+
 # Moon phases and stuff
 
   - platform: moon
@@ -482,6 +512,12 @@ sensor:
     sensors:
       untappd_total_badges:
         value_template: "{{ states.sensor.untappd_last_check_in_robotsfearme.attributes.total_badges }}"
+
+# Steam
+  - platform: steam_online
+    api_key: !secret steam_api
+    accounts:
+      - !secret steam_id64
 
 #########################################
 # LEDfx/WLED Things
@@ -707,6 +743,13 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"waverain","action":"activate"}'
     content_type: 'application/json'
+  ledfx_waverainenergy:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"waverainenergy","action":"activate"}'
+    content_type: 'application/json'
 
 #########################################
 # Shell Commands
@@ -723,8 +766,8 @@ shell_command:
   tv_pbs: "curl -d '' 'http://192.168.1.179:8060/launch/tvinput.dtv?ch=4.1'"
   wled1_startup: "curl -d '' 'http://192.168.1.11/win&FP=50&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
   wled1_shutdown: "curl -d '' 'http://192.168.1.11/win&FP=49&FX=93&T=1&IX=5&A=100&CL=000000&C2=000000'"
-  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=11&T=1&A=150'"
-  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=11&T=1&A=150'"
+  wled1_cyanegrad: "curl -d '' 'http://192.168.1.11/win&FP=37&FX=11&T=1&A=100'"
+  wled1_orangegrad: "curl -d '' 'http://192.168.1.11/win&FP=47&FX=11&T=1&A=100'"
 
 
 #########################################

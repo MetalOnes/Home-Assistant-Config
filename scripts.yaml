@@ -161,6 +161,9 @@ ledfx_all_off:
     - service: light.turn_off
       data:
         entity_id: light.mantle
+    - service: light.turn_off
+      data:
+        entity_id: light.dining_shelf
     # - service: light.turn_off
     #   data:
     #     entity_id: light.couch
@@ -191,6 +194,20 @@ ledfx_waverain:
         entity_id: light.mantle
     - delay: '00:00:05'
     - service: rest_command.ledfx_waverain
+ledfx_waverainenergy:
+  alias: "LEDfx WaveRainEnergy Preset"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.wled1
+    - service: light.turn_on
+      data:
+        entity_id: light.mantle
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_shelf
+    - delay: '00:00:05'
+    - service: rest_command.ledfx_waverainenergy
 
 # ledfx_waverainbeat:
 #   alias: "LEDfx WaveRainBeat Preset"

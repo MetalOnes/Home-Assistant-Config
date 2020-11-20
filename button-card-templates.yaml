@@ -191,6 +191,70 @@
             - color: 'var(--state-icon-color)'
           icon:
             - color: 'var(--state-icon-color)'
+  light_switch_button_power:
+    hold_action:
+      action: more-info
+    layout: icon_label
+    show_label: true
+    show_state: true
+    color_off: var(--state-icon-color)
+    styles:
+      grid:
+        - grid-template-areas: '"p s" "i i" "n n"'
+        - grid-template-rows: 1fr 3fr 1fr
+        - grid-template-columns: 1fr 1fr
+      label:
+        - justify-self: start
+        - padding-left: 10%
+        - font-size: 70%
+      custom_fields:
+        p:
+          - justify-self: start
+          - padding-left: 10%
+          - font-size: 70%
+          - color: var(--state-icon-active-color)
+      name:
+        - font-size: 70%
+      state:
+        - justify-self: end
+        - padding-right: 10%
+        - font-size: 70%
+      card:
+        - margin: 0 3px
+        - background-color: var(--primary-background-color)
+    custom_fields:
+      p: |
+        [[[ 
+          return `
+          <span>${ entity.attributes.current_power_w }w</span>`
+        ]]]
+    state:
+      - value: 'on'
+        styles:
+          icon:
+            - color: var(--state-icon-active-color)
+          state:
+            - color: var(--state-icon-active-color)
+          name:
+            - color: var(--state-icon-active-color)
+          label:
+            - color: var(--state-icon-active-color)
+      - value: 'off'
+        styles:
+          state:
+            - color: 'var(--state-icon-color)'
+          name:
+            - color: 'var(--state-icon-color)'
+          icon:
+            - color: 'var(--state-icon-color)'
+      - value: 'unavailable'
+        styles:
+          state:
+            - color: 'var(--state-icon-color)'
+          name:
+            - color: 'var(--state-icon-color)'
+          icon:
+            - color: 'var(--state-icon-color)'
 
 
   ext_light_switch_button:

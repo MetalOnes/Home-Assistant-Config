@@ -1,26 +1,43 @@
-Exterior:
-- switch.back_spotlight_118
-- switch.front_porch_115
-- switch.front_spotlight_135
-- switch.deck_lights_108
-- switch.front_holiday_213
-- light.front_porch_leds
+ExteriorAll:
+  name: "Exterior All"
+  entities:
+    - switch.back_spotlight_118
+    - switch.front_porch_115
+    - switch.front_spotlight_135
+    - switch.deck_lights_108
+    - switch.front_holiday_213
+    - light.front_porch_leds
 
 Ext Back:
-- switch.deck_lights_108
-- switch.back_spotlight_118
+  name: "Exterior Back"
+  entities:
+    - switch.deck_lights_108
+    - switch.back_spotlight_118
 Ext Front:
-- switch.front_porch_115
-- switch.front_spotlight_135
-- switch.front_holiday_213
-- light.front_porch_leds
+  name: "Exterior Front"
+  entities:
+    - switch.front_porch_115
+    - switch.front_spotlight_135
+    - switch.front_holiday_213
+    - light.front_porch_leds
+
+ExteriorNormal:
+  name: "Exterior Lights"
+  entities:
+    - switch.back_spotlight_118
+    - switch.front_porch_115
+    - switch.front_spotlight_135
+    - switch.deck_lights_108
+    #- light.front_porch_leds
 
 HolidayExterior:
-- switch.front_spotlight_135
-- switch.back_spotlight_118
-- switch.deck_lights_108
-- switch.front_holiday_213
-- switch.aoycocr_plug_1
+  name: "Exterior + Holiday"
+  entities:
+    - switch.front_spotlight_135
+    - switch.back_spotlight_118
+    - switch.deck_lights_108
+    - switch.front_holiday_213
+    - switch.aoycocr_plug_1
 
 
 Living Room:
