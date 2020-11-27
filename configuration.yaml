@@ -750,6 +750,13 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"waverainenergy","action":"activate"}'
     content_type: 'application/json'
+  ledfx_xmas:
+    url: "http://192.168.1.10:8888/api/presets"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"xmas-ish","action":"activate"}'
+    content_type: 'application/json'
 
 #########################################
 # Shell Commands

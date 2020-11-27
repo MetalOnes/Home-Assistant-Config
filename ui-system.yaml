@@ -249,6 +249,10 @@ views:
                 label: "System-wide Options"
               - entity: input_boolean.wfh
                 name: "WFH Mode Enabled"
+              - entity: input_boolean.holiday_exterior
+                name: "Holiday Mode: Exterior"
+              - entity: input_boolean.holiday_interior
+                name: "Holiday Mode: Interior"
               - type: section
                 label: "Lights"
               - type: custom:numberbox-card

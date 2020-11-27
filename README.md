@@ -4,6 +4,7 @@ Just my backup of my config for [Home Assistant](https://home-assistant.io/)
 
 ### Recent Changes worth mentioning:
 
+* Started using some helpers, ie Holiday Mode!
 * Lots of lovelace changes, new button templates and automation cleanup.
 * Lovelace cleanup, theme fixes
 * 0.116.4 - cleanup

@@ -213,6 +213,14 @@ views:
                     toggle: true
                   - entity: scene.both_br_lamps_to_20
                   - entity: switch.master_bath_fan_212
+              - type: custom:fold-entity-row
+                head: group.holidayexterior
+                icon: mdi:pine-tree
+                entities:
+                  - switch.deck_lights_108
+                  - switch.front_holiday_213
+                  - switch.back_holiday_214
+                  - light.2811_1
 
       - type: custom:stack-in-card
         keep:
@@ -408,35 +416,35 @@ views:
               - type: custom:roku-card
                 entity: media_player.55_tcl_roku_tv
 # Calendar card
-      - type: custom:stack-in-card
-        keep:
-          background: true
-        cards:
-          - type: custom:button-card
-            name: Upcoming
-            template: general_label
-          - type: custom:text-divider-row
-            text: Trash
-          - type: custom:garbage-collection-card
-            entity: sensor.trash
-            icon_color: white
-            icon_size: 35px
-            due_txt: true
-          - type: custom:garbage-collection-card
-            entity: sensor.recycling
-            icon_color: white
-            icon_size: 35px
-            due_txt: true
-          - type: custom:text-divider-row
-            text: Calendar
-          - type: calendar
-            initial_view: listWeek
-            hideHeader: true
-            numberOfDays: 90
-            entities:
-              - calendar.slacktishevents
-              - calendar.flocker_streams
-              - calendar.holidays_in_united_states
+      # - type: custom:stack-in-card
+      #   keep:
+      #     background: true
+      #   cards:
+      #     - type: custom:button-card
+      #       name: Upcoming
+      #       template: general_label
+      #     - type: custom:text-divider-row
+      #       text: Trash
+      #     - type: custom:garbage-collection-card
+      #       entity: sensor.trash
+      #       icon_color: white
+      #       icon_size: 35px
+      #       due_txt: true
+      #     - type: custom:garbage-collection-card
+      #       entity: sensor.recycling
+      #       icon_color: white
+      #       icon_size: 35px
+      #       due_txt: true
+      #     - type: custom:text-divider-row
+      #       text: Calendar
+      #     - type: calendar
+      #       initial_view: listWeek
+      #       hideHeader: true
+      #       numberOfDays: 90
+      #       entities:
+      #         - calendar.slacktishevents
+      #         - calendar.flocker_streams
+      #         - calendar.holidays_in_united_states
 
 # Thermostat and climate Card
       - type: custom:stack-in-card
@@ -484,271 +492,305 @@ views:
     path: switches
     icon: mdi:light-switch
     cards:
+####### Living Area Card
+      # Living Room
       - type: custom:stack-in-card
         keep:
           margin: true
+          background: true
+          border_radius: true
         cards:
-# Living Area Card
-          - type: custom:vertical-style-card
-            title: Living Room
+          - type: custom:button-card
+            name: Living Room
+            template: general_label
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: light.lamp_107
-                    name: Living Lamp
-                    template: light_button_brightness
+              - type: "custom:button-card"
+                entity: light.lamp_107
+                name: Living Lamp
+                template: light_button_brightness
 
-                  - type: "custom:button-card"
-                    entity: light.tv
-                    name: TV
-                    template: rgb_light_button
+              - type: "custom:button-card"
+                entity: light.tv
+                name: TV
+                template: rgb_light_button
 
-                  - type: "custom:button-card"
-                    entity: light.dining_room_lamp_160
-                    name: Dining Lamp
-                    template: light_button_brightness
+              - type: "custom:button-card"
+                entity: light.dining_room_lamp_160
+                name: Dining Lamp
+                template: light_button_brightness
 
-                  - type: "custom:button-card"
-                    entity: light.dining_shelf
-                    name: Dining Shelf
-                    template: rgb_light_button
-                  
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: light.mantle
-                    name: Mantle
-                    template: rgb_light_button
-                  - type: "custom:button-card"
-                    entity: light.fireplace
-                    name: Fireplace
-                    template: rgb_light_button
-                  - type: "custom:button-card"
-                    entity: switch.aoycocr_plug_2
-                    template: light_switch_button
-                    name: Black Light
-                  - type: "custom:button-card"
-                    entity: switch.camera_position
-                    template: light_switch_button
-                  
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.couch_lights_185
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.music_lights_186
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.party_lights_184
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-
-# Kitchen Card
-          - type: custom:vertical-style-card
-            title: Kitchen
+              - type: "custom:button-card"
+                entity: light.dining_shelf
+                name: Dining Shelf
+                template: rgb_light_button
+              
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.kitchen_light_183
-                    name: Light
-                    template: light_switch_button
-
-                  - type: "custom:button-card"
-                    entity: light.cabinets
-                    name: Cabinets
-                    template: rgb_light_button
-
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-    # Man cave card
-          - type: custom:vertical-style-card
-            title: Man Cave
+              - type: "custom:button-card"
+                entity: light.mantle
+                name: Mantle
+                template: rgb_light_button
+              - type: "custom:button-card"
+                entity: light.fireplace
+                name: Fireplace
+                template: rgb_light_button
+              - type: "custom:button-card"
+                entity: switch.aoycocr_plug_2
+                template: light_switch_button
+                name: Black Light
+              - type: "custom:button-card"
+                entity: switch.camera_position
+                template: light_switch_button
+              
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.man_cave_lights_133
-                    name: Lights
-                    template: light_switch_button_power
-
-                  - type: "custom:button-card"
-                    entity: light.desk
-                    name: Desk
-                    template: rgb_light_button
-
-                  - type: "custom:button-card"
-                    entity: light.pin_board
-                    name: Pin Board
-                    template: rgb_light_button
-
-                  - type: "custom:button-card"
-                    entity: light.wifi_box
-                    name: Puck
-                    template: rgb_light_button
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.air_purifier
-                    name: Air Purifier
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.aoycocr_plug_1
-                    name: Plug 1
-                    template: light_switch_button
-                  
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-    # Bedroom Card
-          - type: custom:vertical-style-card
-            title: Master Suite
+              - type: "custom:button-card"
+                entity: switch.party_lights_184
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.couch_lights_185
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.music_lights_186
+                template: light_switch_button
+              
+              - type: "custom:button-card"
+                color_type: blank-card
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: light.bedroom_eric_103
-                    name: Right
-                    template: light_button_brightness
-
-                  - type: "custom:button-card"
-                    entity: light.bedroom_val_104
-                    name: Left
-                    template: light_button_brightness
-
-                  - type: "custom:button-card"
-                    entity: light.master_closet
-                    name: Closet
-                    template: light_button_brightness
-
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: light.vanity_211
-                    name: Vanity
-                    template: light_button_brightness
-                    icon: mdi:vanity-light
-
-                  - type: custom:button-card
-                    entity: switch.master_bath_fan_212
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                  - type: "custom:button-card"
-                    color_type: blank-card
-
-
-
-    # Front Ext Card
-          - type: custom:vertical-style-card
-            title: Front Ext
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_master_179
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_left_180
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_right_181
+                template: light_switch_button
+              - type: "custom:button-card"
+                color_type: blank-card
+      # Kitchen 
+          - type: custom:button-card
+            name: Kitchen
+            template: general_label
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.front_porch_115
-                    name: Porch
-                    template: ext_light_switch_button
-                  
-                  - type: "custom:button-card"
-                    entity: light.front_porch_leds
-                    name: Porch LEDs
-                    template: rgb_light_button
+              - type: "custom:button-card"
+                entity: switch.kitchen_light_183
+                name: Light
+                template: light_switch_button
 
-                  - type: "custom:button-card"
-                    entity: switch.front_porch_nightlight
-                    name: Porch Nightlight
-                    template: ext_light_switch_button
+              - type: "custom:button-card"
+                entity: light.cabinets
+                name: Cabinets
+                template: rgb_light_button
 
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
 
-              - type: horizontal-stack
-                cards:
-
-                  - type: "custom:button-card"
-                    entity: switch.front_spotlight_135
-                    name: Spotlight
-                    template: ext_light_switch_button
-
-                  - type: "custom:button-card"
-                    entity: switch.front_holiday_213
-                    name: Front Holiday
-                    template: ext_light_switch_button
-                  
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
-
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
-
-                
-
-    # Back Ext Card
-          - type: custom:vertical-style-card
-            title: Back Ext
+####### Man cave card
+      - type: custom:stack-in-card
+        keep:
+          margin: true
+          background: true
+          border_radius: true
+        cards:
+          - type: custom:button-card
+            name: Man Cave
+            template: general_label
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: "custom:button-card"
-                    entity: switch.deck_lights_108
-                    name: Deck
-                    template: ext_light_switch_button
+              - type: "custom:button-card"
+                entity: switch.man_cave_lights_133
+                name: Lights
+                template: light_switch_button_power
 
-                  - type: "custom:button-card"
-                    entity: switch.back_spotlight_118
-                    name: Spotlight
-                    template: ext_light_switch_button
+              - type: "custom:button-card"
+                entity: light.desk
+                name: Desk
+                template: rgb_light_button
 
-                #  - type: "custom:button-card"
-                #    entity: switch.back_ext_holiday_188
-                #    name: Back Holiday
-                #    template: ext_light_switch_button
+              - type: "custom:button-card"
+                entity: light.pin_board
+                name: Pin Board
+                template: rgb_light_button
 
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
-
-                  - type: "custom:button-card"
-                    color_type: blank-card
-                    color_off: var(--disabled-text-color)
-      # Other card
-          - type: custom:vertical-style-card
-            title: Other
+              - type: "custom:button-card"
+                entity: light.wifi_box
+                name: Puck
+                template: rgb_light_button
+          - type: horizontal-stack
             cards:
-              - type: horizontal-stack
-                cards:
-                  - type: custom:button-card
-                    entity: switch.party_mode_virtual_204
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_master_179
-                    name: Zooz 2
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_left_180
-                    name: Zooz 2 Left
-                    template: light_switch_button
-                  - type: "custom:button-card"
-                    entity: switch.zooz_plug_right_181
-                    name: Zooz 2 Right
-                    template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.air_purifier
+                name: Air Purifier
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.aoycocr_plug_1
+                name: Plug 1
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: light.2811_1
+                name: Wreath
+                template: rgb_light_button
+              - type: "custom:button-card"
+                entity: light.2811_2_master
+                name: Pixel Tree
+                template: rgb_light_button
 
+####### Bedroom Card
+      - type: custom:stack-in-card
+        keep:
+          margin: true
+          background: true
+          border_radius: true
+        cards:
+          - type: custom:button-card
+            name: Bedroom
+            template: general_label
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: light.bedroom_eric_103
+                name: Right
+                template: light_button_brightness
+
+              - type: "custom:button-card"
+                entity: light.bedroom_val_104
+                name: Left
+                template: light_button_brightness
+
+              - type: "custom:button-card"
+                entity: light.master_closet
+                name: Closet
+                template: light_button_brightness
+
+              - type: "custom:button-card"
+                color_type: blank-card
+
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: light.vanity_211
+                name: Vanity
+                template: light_button_brightness
+                icon: mdi:vanity-light
+
+              - type: custom:button-card
+                entity: switch.master_bath_fan_212
+                template: light_switch_button
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
+
+
+
+####### Ext Card
+      # Front Ext
+      - type: custom:stack-in-card
+        keep:
+          margin: true
+          background: true
+          border_radius: true
+        cards:
+          - type: custom:button-card
+            name: Front Ext
+            template: general_label
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: switch.front_porch_115
+                name: Porch
+                template: ext_light_switch_button
+              
+              - type: "custom:button-card"
+                entity: light.front_porch_leds
+                name: Porch LEDs
+                template: rgb_light_button
+
+              - type: "custom:button-card"
+                entity: switch.front_porch_nightlight
+                name: Porch Nightlight
+                template: ext_light_switch_button
+
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+
+          - type: horizontal-stack
+            cards:
+
+              - type: "custom:button-card"
+                entity: switch.front_spotlight_135
+                name: Spotlight
+                template: ext_light_switch_button
+
+              - type: "custom:button-card"
+                entity: switch.front_holiday_213
+                name: Front Holiday
+                template: ext_light_switch_button
+              
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+      # Back Ext
+          - type: custom:button-card
+            name: Back Ext
+            template: general_label 
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: switch.deck_lights_108
+                name: Deck
+                template: ext_light_switch_button
+
+              - type: "custom:button-card"
+                entity: switch.back_spotlight_118
+                name: Spotlight
+                template: ext_light_switch_button
+
+              - type: "custom:button-card"
+                entity: switch.back_holiday_214
+                name: Back Holiday
+                template: ext_light_switch_button
+
+              # - type: "custom:button-card"
+              #   color_type: blank-card
+              #   color_off: var(--disabled-text-color)
+
+              - type: "custom:button-card"
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+####### Other card
+      - type: custom:stack-in-card
+        keep:
+          margin: true
+          background: true
+          border_radius: true
+        cards:
+          - type: custom:button-card
+            name: Other
+            template: general_label          
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: switch.party_mode_virtual_204
+                template: light_switch_button
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: "custom:button-card"
+                color_type: blank-card
+#
 # Sensors tab
 #
   - title: Sensors

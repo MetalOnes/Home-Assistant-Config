@@ -44,3 +44,7 @@ light.cabinets:
 light.vanity_211:
   icon: mdi:vanity-light
   friendly_name: Vanity Light
+
+light.2811_1:
+  icon: mdi:string-lights
+  friendly_name: Wreath

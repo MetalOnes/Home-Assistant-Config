@@ -6,13 +6,17 @@ ExteriorAll:
     - switch.front_spotlight_135
     - switch.deck_lights_108
     - switch.front_holiday_213
+    - switch.back_holiday_214
     - light.front_porch_leds
+    - light.2811_1
+    - light.2811_2_master
 
 Ext Back:
   name: "Exterior Back"
   entities:
     - switch.deck_lights_108
     - switch.back_spotlight_118
+    - switch.back_holiday_214
 Ext Front:
   name: "Exterior Front"
   entities:
@@ -32,12 +36,15 @@ ExteriorNormal:
 
 HolidayExterior:
   name: "Exterior + Holiday"
+  icon: mdi:pine-tree
   entities:
-    - switch.front_spotlight_135
-    - switch.back_spotlight_118
+    #- switch.front_spotlight_135
+    #- switch.back_spotlight_118
     - switch.deck_lights_108
     - switch.front_holiday_213
-    - switch.aoycocr_plug_1
+    - switch.back_holiday_214
+    - light.2811_1
+    - light.2811_2_master
 
 
 Living Room:
@@ -47,6 +54,7 @@ Living Room:
 - switch.couch_lights_185
 - switch.music_lights_186
 - switch.party_lights_184
+- light.mantle
 - lock.front_door_19
 
 Kitchen:
@@ -63,11 +71,13 @@ Man Cave:
 - binary_sensor.motion_sensor_128
 - switch.air_purifier
 Bedroom:
-- light.bedroom_eric_103
-- light.bedroom_val_104
-- light.master_closet
-- light.vanity_211
-- switch.master_bath_fan_212
+  icon: mdi:bed
+  entities:
+    - light.bedroom_eric_103
+    - light.bedroom_val_104
+    - light.master_closet
+    - light.vanity_211
+    - switch.master_bath_fan_212
 Master Bath:
 - light.vanity_211
 - switch.master_bath_fan_212
@@ -89,23 +99,35 @@ Living_Area:
 - light.tv
 - switch.xmas_tree_both_184
 Int Lights:
+# Living/Dining/Kitchen
 - light.lamp_107
 - switch.kitchen_light_183
+- light.tv
 - light.cabinets
 - light.dining_room_lamp_160
-- switch.man_cave_lights_133
-- light.desk
-- light.pin_board
-- light.tv
-- light.wifi_box
+- light.wled1
+- light.mantle
+- light.dining_shelf
+- light.fireplace
 - switch.couch_lights_185
 - switch.music_lights_186
 - switch.party_lights_184
+# Man Cave
+- switch.man_cave_lights_133
+- light.desk
+- light.pin_board
+- light.wifi_box
+# Master Suite
+- light.bedroom_eric_103
+- light.bedroom_val_104
 - light.master_closet
 - light.vanity_211
-- light.wled1
-- light.mantle
+# Other/Holiday
 - switch.aoycocr_plug_1
+- switch.aoycocr_plug_2
+- switch.zooz_plug_master_179
+- switch.zooz_plug_left_180
+- switch.zooz_plug_right_181
 Living Lights:
 - light.lamp_107
 - light.cabinets
@@ -115,6 +137,9 @@ Living Lights:
 - light.pin_board
 #- switch.xmas_tree_both_184
 #- switch.zooz_plug_master_179
+
+Holiday Interior:
+- switch.zooz_plug_master_179
 
 Security Sensors:
 - switch.front_door1_1_139

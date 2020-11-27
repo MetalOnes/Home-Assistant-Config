@@ -5,17 +5,17 @@ switch.front_door1_1_139:
   friendly_name: Front Door Sensor
 
 switch.man_cave_lights_133:
-  icon: mdi:led-strip
+  icon: mdi:lightbulb-multiple-outline
   emulated_hue_hidden: false
   emulated_hue_name: "Man Cave Lights"
 
 switch.deck_lights_108:
   emulated_hue_hidden: false
   emulated_hue_name: "Deck Lights"
-  icon: mdi:white-balance-iridescent
+  icon: mdi:led-strip-variant
 
 switch.kitchen_light_183:
-  icon: mdi:ceiling-light
+  icon: mdi:wall-sconce-round
   friendly_name: Kitchen Light
 
 switch.front_porch_115:
@@ -27,11 +27,11 @@ switch.back_spotlight_118:
 switch.front_spotlight_135:
   icon: mdi:track-light
 
-switch.front_ext_holida_178:
-  icon: mdi:pine-tree
+switch.front_holiday_213:
+  icon: mdi:string-lights
 
-switch.back_ext_holiday_188:
-  icon: mdi:pine-tree
+switch.back_holiday_214:
+  icon: mdi:string-lights
 
 switch.air_purifier:
   friendly_name: Air Purifier
@@ -60,8 +60,8 @@ switch.lr_kodi:
   icon: mdi:kodi
 
 switch.lr_wiiu:
-  icon: mdi:wiiu
-
+  icon: mdi:nintendo-wiiu
+  
 switch.lr_xbox:
   icon: mdi:microsoft-xbox
 

@@ -208,6 +208,20 @@ ledfx_waverainenergy:
         entity_id: light.dining_shelf
     - delay: '00:00:05'
     - service: rest_command.ledfx_waverainenergy
+ledfx_xmas:
+  alias: "LEDfx Xmas-ish Preset"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.wled1
+    - service: light.turn_on
+      data:
+        entity_id: light.mantle
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_shelf
+    - delay: '00:00:05'
+    - service: rest_command.ledfx_xmas
 
 # ledfx_waverainbeat:
 #   alias: "LEDfx WaveRainBeat Preset"

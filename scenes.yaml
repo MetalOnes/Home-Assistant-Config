@@ -1,21 +1,12 @@
 - name: Night
   id: SceneNight
   entities:
-    light.mancave: off
-    light.wifi_box: off
-    light.pin_board: off
-    light.tv: off
-    light.cabinets: off
     switch.camera_position: off
-    light.wled1: off
-    light.desk: off
-    light.fireplace: off
     remote.living_room: off
-    light.mantle: off
-    switch.aoycocr_plug_1: off
-    switch.aoycocr_plug_2: off
     light.front_porch_leds: off
-    light.dining_shelf: off
+    group.int_lights: off
+    group.holidayexterior: off
+    group.holiday_interior: off
 
 - name: Away
   id: SceneAway
@@ -35,6 +26,7 @@
     light.front_porch_leds: off
     light.desk: off
     light.dining_shelf: off
+    switch.zooz_plug_master_179: off
 
 - name: mcdesk
   id: mcdesk
