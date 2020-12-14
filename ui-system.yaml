@@ -257,7 +257,12 @@ views:
                 label: "Lights"
               - type: custom:numberbox-card
                 entity: input_number.int_sa
-                name: "Solar Angle Int Lights Turn On"
+                name: "Int Lights - Solar Angle"
+                speed: 0
+                border: false
+              - type: custom:numberbox-card
+                entity: input_number.ext_sa
+                name: "Ext Lights - Solar Angle"
                 speed: 0
                 border: false
   

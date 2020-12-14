@@ -128,6 +128,7 @@ Int Lights:
 - switch.zooz_plug_master_179
 - switch.zooz_plug_left_180
 - switch.zooz_plug_right_181
+- switch.mantle_xmas_lights_215
 Living Lights:
 - light.lamp_107
 - light.cabinets
@@ -140,6 +141,7 @@ Living Lights:
 
 Holiday Interior:
 - switch.zooz_plug_master_179
+- switch.mantle_xmas_lights_215
 
 Security Sensors:
 - switch.front_door1_1_139

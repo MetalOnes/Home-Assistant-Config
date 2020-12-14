@@ -221,6 +221,7 @@ views:
                   - switch.front_holiday_213
                   - switch.back_holiday_214
                   - light.2811_1
+                  - light.2811_2_master
 
       - type: custom:stack-in-card
         keep:
@@ -540,8 +541,9 @@ views:
                 template: light_switch_button
                 name: Black Light
               - type: "custom:button-card"
-                entity: switch.camera_position
+                entity: switch.aoycocr_plug_1
                 template: light_switch_button
+              
               
           - type: horizontal-stack
             cards:
@@ -556,20 +558,10 @@ views:
                 template: light_switch_button
               
               - type: "custom:button-card"
-                color_type: blank-card
-          - type: horizontal-stack
-            cards:
-              - type: "custom:button-card"
-                entity: switch.zooz_plug_master_179
+                entity: switch.camera_position
                 template: light_switch_button
-              - type: "custom:button-card"
-                entity: switch.zooz_plug_left_180
-                template: light_switch_button
-              - type: "custom:button-card"
-                entity: switch.zooz_plug_right_181
-                template: light_switch_button
-              - type: "custom:button-card"
-                color_type: blank-card
+              
+          
       # Kitchen 
           - type: custom:button-card
             name: Kitchen
@@ -628,18 +620,17 @@ views:
                 entity: switch.air_purifier
                 name: Air Purifier
                 template: light_switch_button
+              
               - type: "custom:button-card"
-                entity: switch.aoycocr_plug_1
-                name: Plug 1
-                template: light_switch_button
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
               - type: "custom:button-card"
-                entity: light.2811_1
-                name: Wreath
-                template: rgb_light_button
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
               - type: "custom:button-card"
-                entity: light.2811_2_master
-                name: Pixel Tree
-                template: rgb_light_button
+                color_type: blank-card
+                color_off: var(--disabled-text-color)
+              
 
 ####### Bedroom Card
       - type: custom:stack-in-card
@@ -769,6 +760,47 @@ views:
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)
+####### Holiday card
+      - type: custom:stack-in-card
+        keep:
+          margin: true
+          background: true
+          border_radius: true
+        cards:
+          - type: custom:button-card
+            name: Holiday
+            template: general_label          
+          - type: horizontal-stack
+            cards:
+            - type: "custom:button-card"
+              entity: light.2811_1
+              name: Wreath
+              template: rgb_light_button
+            - type: "custom:button-card"
+              entity: light.2811_2_master
+              name: Pixel Tree
+              template: rgb_light_button
+            - type: "custom:button-card"
+              entity: switch.mantle_xmas_lights_215
+              template: xmas_power
+            - type: "custom:button-card"
+              color_type: blank-card
+              color_off: var(--disabled-text-color)
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_master_179
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_left_180
+                template: light_switch_button
+              - type: "custom:button-card"
+                entity: switch.zooz_plug_right_181
+                template: light_switch_button
+              - type: "custom:button-card"
+                color_type: blank-card
+      
+
 ####### Other card
       - type: custom:stack-in-card
         keep:

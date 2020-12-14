@@ -97,11 +97,11 @@ simpsons:
   sequence:
     - service: rest_command.simpsons
 
-wled1_startup_anim:
+wled1_startup:
   alias: "WLED1 - Startup Animation"
   sequence:
-    - service: shell_command.wled1_startup
-    - delay: '00:00:03'
+    - service: rest_command.wled1_startup
+    - delay: '00:00:05'
     - service: light.turn_off
       data:
         entity_id: light.wled1
@@ -132,6 +132,22 @@ wled1_orange_anim:
     - service: light.turn_off
       data:
         entity_id: light.wled1
+
+desk_alert:
+  alias: "Desk LEDs Alert preset"
+  sequence:
+    - service: rest_command.desk_alert
+
+desk_normal:
+  alias: "Desk LEDs Normal preset"
+  sequence:
+    - service: rest_command.desk_normal
+
+desk_rainbow:
+  alias: "Desk LEDs Rainbow preset"
+  sequence:
+    - service: rest_command.desk_rainbow
+
 
 ledfx_wled1_off:
   alias: "LEDfx WLED 1 Shutdown Sequence"
@@ -164,6 +180,9 @@ ledfx_all_off:
     - service: light.turn_off
       data:
         entity_id: light.dining_shelf
+    - service: light.turn_off
+      data:
+        entity_id: light.chicken
     # - service: light.turn_off
     #   data:
     #     entity_id: light.couch
@@ -220,6 +239,9 @@ ledfx_xmas:
     - service: light.turn_on
       data:
         entity_id: light.dining_shelf
+    - service: light.turn_on
+      data:
+        entity_id: light.chicken
     - delay: '00:00:05'
     - service: rest_command.ledfx_xmas
 

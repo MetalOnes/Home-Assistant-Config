@@ -152,8 +152,17 @@ recorder:
   db_url: !secret mysql_url
   purge_keep_days: 7
   exclude:
+    entities:
+      - sensor.time
+      - sensor.time_date
+      - sensor.time_utc
+      - sensor.simple_date
+      - sensor.simple_time
+    domains:
+      - weather
     entity_globs:
       - sensor.*untappd*
+      
 history:
 logbook:
 
@@ -757,6 +766,68 @@ rest_command:
       accept: 'application/json'
     payload: '{"id":"xmas-ish","action":"activate"}'
     content_type: 'application/json'
+
+  # WLED Commands
+
+  desk_alert:
+    url: "http://192.168.1.13/json/state"
+    method: post
+    payload: '{"ps":3}'
+    content_type: 'application/json'
+  desk_normal:
+    url: "http://192.168.1.13/json/state"
+    method: post
+    payload: '{"ps":1}'
+    content_type: 'application/json'
+  desk_rainbow:
+    url: "http://192.168.1.13/json/state"
+    method: post
+    payload: '{"ps":2}'
+    content_type: 'application/json'
+  
+  wled1_startup:
+    url: "http://192.168.1.11/json/state"
+    method: post
+    payload: '{"ps":3}'
+    content_type: 'application/json'
+  wled1_xmas:
+    url: "http://192.168.1.11/json/state"
+    method: post
+    payload: '{"ps":4}'
+    content_type: 'application/json'
+
+  mantle_xmas:
+    url: "http://192.168.1.12/json/state"
+    method: post
+    payload: '{"ps":3}'
+    content_type: 'application/json'
+  mantle_solid:
+    url: "http://192.168.1.12/json/state"
+    method: post
+    payload: '{"ps":1}'
+    content_type: 'application/json'
+  mantle_wipe:
+    url: "http://192.168.1.12/json/state"
+    method: post
+    payload: '{"ps":4}'
+    content_type: 'application/json'
+    
+  diningshelf_solid:
+    url: "http://192.168.1.16/json/state"
+    method: post
+    payload: '{"ps":1}'
+    content_type: 'application/json'
+  diningshelf_xmas:
+    url: "http://192.168.1.16/json/state"
+    method: post
+    payload: '{"ps":3}'
+    content_type: 'application/json'
+  diningshelf_glitter:
+    url: "http://192.168.1.16/json/state"
+    method: post
+    payload: '{"ps":2}'
+    content_type: 'application/json'
+
 
 #########################################
 # Shell Commands
