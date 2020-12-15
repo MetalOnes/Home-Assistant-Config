@@ -1,0 +1,755 @@
+- id: d60507a84e834067b0f68ea1b282f621
+  alias: Exterior Sunset
+  trigger:
+  - platform: template
+    value_template: '{{ state_attr(''sun.sun'', ''elevation'') < states(''input_number.ext_sa'')
+      | float | round(2) }}
+
+      '
+  condition:
+  - condition: state
+    entity_id: input_boolean.holiday_exterior
+    state: 'off'
+  action:
+  - entity_id:
+    - group.exteriornormal
+    service: homeassistant.turn_on
+- id: d60507a84e414067b0f68ea1b232f621
+  alias: Exterior Sunset Holiday
+  trigger:
+  - platform: template
+    value_template: '{{ state_attr(''sun.sun'', ''elevation'') < states(''input_number.ext_sa'')
+      | float | round(2) }}
+
+      '
+  condition:
+  - condition: state
+    entity_id: input_boolean.holiday_exterior
+    state: 'on'
+  action:
+  - entity_id: group.holidayexterior
+    service: homeassistant.turn_on
+- alias: Exterior Sunrise
+  trigger:
+  - platform: sun
+    event: sunrise
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.exteriorall
+  id: 65a50dab892b470f945987c56d5fced3
+- alias: Interior Sunset
+  trigger:
+  - platform: template
+    value_template: '{{ state_attr(''sun.sun'', ''elevation'') < states(''input_number.int_sa'')
+      | float | round(2) }}
+
+      '
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.living_lights
+  - condition: state
+    entity_id: input_boolean.holiday_interior
+    state: 'on'
+  - service: homeassistant.turn_on
+    entity_id: group.holiday_interior
+  id: a4fa9414b7774f62bce7fae7648e5bad
+- alias: Evening Kodi
+  trigger:
+  - platform: state
+    entity_id: media_player.living_room_kodi
+    to: playing
+  condition:
+  - condition: time
+    after: '19:30:00'
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+  action:
+    service: homeassistant.turn_off
+    entity_id:
+    - light.dining_room_lamp_160
+    - switch.man_cave_lights_133
+    - light.vanity_211
+  id: 0189628f95734ed2afaf1750079bbfed
+- alias: EricHomeDeskLEDs
+  trigger:
+    platform: state
+    entity_id: sensor.homemode
+    to: Home
+  action:
+    service: scene.turn_on
+    entity_id: scene.mcdesk
+  id: ca8104fb9db24d97824afc6b58b34f1f
+- alias: Night Scene
+  trigger:
+    platform: state
+    entity_id: sensor.homemode
+    to: Night
+  action:
+    service: scene.turn_on
+    entity_id: scene.night
+  id: 83930c0e50bd4c0abec70b625f7d1ab9
+- alias: Away Scene
+  trigger:
+    platform: state
+    entity_id: sensor.homemode
+    to: Away
+  action:
+    service: scene.turn_on
+    entity_id: scene.away
+  id: d09c8c27249146ae9dd54646429980c3
+- id: 6479c8185cd645c4bee9097c127187a2
+  alias: Bias Light On (Kodi)
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''Kodi'') }}'
+  action:
+  - data:
+      brightness: 15
+      effect: none
+      entity_id: light.tv
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      white_value: 30
+    service: light.turn_on
+  - data: {}
+    entity_id: script.wled1_startup
+    service: script.turn_on
+- alias: Bias Light On (Xbox)
+  trigger:
+    platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''Xbox'') }}'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tv
+      white_value: 30
+      brightness: 15
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      effect: none
+  id: 4ef4a0a11ccf44349648d97e07ede3c7
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: colorloop
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: custom
+- id: 24e305de5b8a4b97b09bbd92f1c5d02c
+  alias: Bias Light On (TV)
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''TV'') }}'
+  action:
+  - data:
+      brightness: 15
+      effect: none
+      entity_id: light.tv
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      white_value: 30
+    service: light.turn_on
+  - data: {}
+    entity_id: script.wled1_startup
+    service: script.turn_on
+- alias: Bias Light On (Switch)
+  trigger:
+    platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''Switch'') }}'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tv
+      white_value: 30
+      brightness: 15
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      effect: none
+  id: f5b409e4f43343639b508a5508434ea8
+- id: c5b9e74196c64a5faf3d8637b690ab67
+  alias: Bias Light On (Chromecast)
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''Chromecast'') }}'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: colorloop
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: custom
+  action:
+  - data:
+      brightness: 15
+      effect: none
+      entity_id: light.tv
+      rgb_color:
+      - 0
+      - 0
+      - 0
+      white_value: 30
+    service: light.turn_on
+  mode: single
+- id: 66b9e693b34648998e0ebb39872ef418
+  alias: Bias Light Blue (Music)
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''remote.living_room'', ''current_activity'',
+      ''Music'') }}'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: colorloop
+    - condition: state
+      entity_id: sensor.tv_effect
+      state: custom
+  action:
+  - data:
+      brightness: 45
+      effect: none
+      entity_id: light.tv
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      white_value: 0
+    service: light.turn_on
+  - data: {}
+    entity_id: script.wled1_startup
+    service: script.turn_on
+- id: 5aa2a96e459e4bd78d2f93611a5d8beb
+  alias: Bias Light Off
+  trigger:
+  - entity_id: sensor.harmony_living_room
+    platform: state
+    to: PowerOff
+  action:
+  - data:
+      entity_id: light.tv
+    service: light.turn_off
+  - data: {}
+    entity_id: script.wled1_orange_anim
+    service: script.turn_on
+  initial_state: true
+- id: 758d18a1fc544e20ada8a23c642fcf01
+  alias: Notify - Prompt for Home (Eric)
+  trigger:
+  - platform: state
+    entity_id: person.eric
+    from: not_home
+    to: home
+  condition:
+  - condition: template
+    value_template: '{{ not is_state (''sensor.homemode'', ''Home'') }}'
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      data:
+        ttl: 0
+        priority: high
+        image: https://evilrobot.space/img/hassimg/bot.png
+        actions:
+        - action: switch_home_notif
+          title: Hell yes
+      message: Want to switch to home mode?
+      title: Hello friend
+  mode: single
+- id: 15fef246a1cc49ef8063fb5c7a233507
+  alias: Notify - Prompt for Home (Val)
+  trigger:
+  - platform: state
+    entity_id: person.val
+    from: not_home
+    to: home
+  condition:
+  - condition: template
+    value_template: '{{ not is_state (''sensor.homemode'', ''Home'') }}'
+  action:
+  - service: notify.mobile_app_moto_g_power
+    data:
+      data:
+        ttl: 0
+        priority: high
+        image: https://evilrobot.space/img/hassimg/bot.png
+        actions:
+        - action: switch_home_notif
+          title: Hell yes
+      message: Want to switch to home mode?
+      title: Hello friend
+  mode: single
+- alias: Switch to Home via Notification
+  trigger:
+  - event_data:
+      action: switch_home_notif
+    event_type: mobile_app_notification_action
+    platform: event
+  action:
+  - data:
+      entity_id: scene.switch_to_home
+    service: scene.turn_on
+  id: 89512f8d889c463d99254c1048a131c5
+- id: d111b9bdcd5c406482a1237c3f42fb7e
+  alias: Notify - All test
+  trigger:
+  action:
+  - service: notify.all_devices
+    data:
+      title: Test
+      message: Just a test notification
+  mode: single
+- id: c4bf768a928f4a45ba36ca27bddee411
+  alias: Notify - Eric left work
+  trigger:
+  - platform: state
+    entity_id: person.eric
+    from: Eisai
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      data:
+        image: https://evilrobot.space/img/hassimg/robot3.png
+        ttl: 0
+        priority: high
+      message: Just left work, eh?
+      title: Hello friend
+  mode: single
+- id: 5ff5f5105f734e0cacad6934f0b1b606
+  alias: Notify - Request Location (Eric)
+  trigger:
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      message: request_location_update
+  mode: single
+- id: 84e9620e04b14db68b6cb2a55e03409
+  alias: Notify - Pixel - Vibrate Mode
+  trigger:
+  - platform: state
+    entity_id: input_boolean.pixelringermode
+    to: 'off'
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      message: command_ringer_mode
+      title: vibrate
+  mode: single
+- id: 12384092830i
+  alias: Notify - Pixel - Ringer Mode
+  trigger:
+  - platform: state
+    entity_id: input_boolean.pixelringermode
+    to: 'on'
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      message: command_ringer_mode
+      title: normal
+  mode: single
+- id: 84e9620e04b14db68b6cb2a55e04983
+  alias: Notify - Moto - Vibrate Mode
+  trigger:
+  - platform: state
+    entity_id: input_boolean.motoringermode
+    to: 'off'
+  action:
+  - service: notify.mobile_app_moto_g_power
+    data:
+      message: command_ringer_mode
+      title: vibrate
+  mode: single
+- id: 84e9620e04b36db68b6cb2a55e04983
+  alias: Notify - Moto - Ringer Mode
+  trigger:
+  - platform: state
+    entity_id: input_boolean.motoringermode
+    to: 'on'
+  action:
+  - service: notify.mobile_app_moto_g_power
+    data:
+      message: command_ringer_mode
+      title: normal
+  mode: single
+- id: 84e9620e04b14db68b6cb2a55e5f87f4
+  alias: Notify - Request Location (Val)
+  trigger:
+  action:
+  - service: notify.mobile_app_moto_g_power
+    data:
+      message: request_location_update
+  mode: single
+- id: 918e4b6082104501957fde271918e23f
+  alias: Notify - Persistent Relay
+  trigger:
+  - platform: event
+    event_type: call_service
+  condition:
+  - condition: template
+    value_template: "{{ \n  'persistent_notification' in trigger.event.data.domain\n\
+      \  and\n  'create' in trigger.event.data.service\n}}"
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data_template:
+      title: 'Persistent: {{trigger.event.data.service_data.title}}'
+      message: '{{trigger.event.data.service_data.message}}'
+  initial_state: true
+  mode: single
+- id: 690a98bd95c4445e95482bff678738fa
+  alias: Notify - Update available
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.updater
+    from: 'off'
+    to: 'on'
+  action:
+  - service: notify.telegram_e
+    data:
+      title: '*HA Update*'
+      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
+        }} is available.
+  mode: single
+- id: 793c7c6976f44fad8282de519ef9b2b6
+  alias: Notify -  Front door changed
+  trigger:
+  - platform: state
+    entity_id: lock.front_door_19
+  condition:
+  - condition: template
+    value_template: '{{ states(''person.eric'') != ''home'' }}'
+  action:
+  - service: notify.telegram_e
+    data:
+      message: Front door has been {{states.lock.front_door_19.state }}
+  - service: notify.mobile_app_pixel_4a
+    data:
+      title: Door Alert
+      message: Front door has been {{states.lock.front_door_19.state }}
+      data:
+        image: https://evilrobot.space/img/hassimg/sh/042-handle-1.png
+  mode: single
+- id: 097d75a6587c4281956879be21681e8b
+  alias: NotifyTG - Public IP Changed
+  trigger:
+  - platform: state
+    entity_id: sensor.myipopendnscom
+  action:
+  - service: notify.telegram_e
+    data:
+      message: Your public IP has changed to {{states.sensor.myipopendnscom.state
+        }}
+  mode: single
+- id: 13fc98e0e06a4e15a8d9eda5d9fc1aec
+  alias: Notify - CertExpiring
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ssl_certificate_expiry
+    value_template: '{{states.sensor.ssl_certificate_expiry.state}}'
+    below: '10'
+  action:
+  - service: notify.telegram_e
+    data:
+      message: SSL Certificate expires in {{states.sensor.ssl_certificate_expiry.state}}
+        days
+  - service: notify.mobile_app_Pixel4a
+    data:
+      title: SSL Certificate Expiry
+      message: SSL Certificate expires in {{states.sensor.ssl_certificate_expiry.state}}
+        days
+      data:
+        image: https://evilrobot.space/img/hassimg/sh/007-smart-key.png
+        clickAction: /ui-system/0
+  mode: single
+- id: b41d8697dc4840a289f587c4eebf08a9
+  alias: NotifyTG - TeleBot Start
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: /start
+  action:
+  - service: notify.telegram_e
+    data:
+      message: commands
+      data:
+        keyboard:
+        - /lrlampstat, /lrlamptoggle
+  mode: single
+- id: telebot_lrlampstat
+  alias: NotifyTG -  Lamp Stat
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: /lrlampstat
+  action:
+  - service: notify.telegram_e
+    data:
+      message: The LR Lamp is {{ states.light.lamp_107.state}}
+  mode: single
+- id: telebot_lrlamptoggle
+  alias: NotifyTG -  LR Lamp Toggle
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: /lrlamptoggle
+  action:
+  - service: light.toggle
+    entity_id: light.lamp_107
+  - delay: '[object Object]'
+  - service: notify.telegram_e
+    data:
+      message: The LR Lamp is {{ states.light.lamp_107.state}}
+  mode: single
+
+- id: '1582992426158'
+  alias: Vanity Light 100
+  description: ''
+  trigger:
+  - entity_id: light.vanity_211
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sensor.homemode
+    state: Home
+  - condition: template
+    value_template: '{{ state_attr(''light.vanity_211'', ''brightness'') < 255 }}'
+  action:
+  - data:
+      brightness: 255
+    entity_id: light.vanity_211
+    service: light.turn_on
+- alias: Weekend MC Lights Out
+  trigger:
+    platform: state
+    entity_id: sensor.harmony_living_room
+    to: Listen to Music
+  condition:
+    condition: time
+    after: '20:00:00'
+    weekday:
+    - fri
+    - sat
+  action:
+  - service: light.turn_off
+    data:
+      entity_id:
+      - light.pin_board
+      - light.desk
+      - light.wifi_box
+  id: ee54b3e399124719be67111a7e03413a
+- id: '1584470633225'
+  alias: EmuRoku-YouTube
+  description: ''
+  trigger:
+  - event_data:
+      key: Up
+      source_name: Home Assistant
+      type: keypress
+    event_type: roku_command
+    platform: event
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.tv_youtube
+    service: script.turn_on
+- alias: EmuRoku-Pluto
+  description: ''
+  trigger:
+  - event_data:
+      key: Left
+      source_name: Home Assistant
+      type: keypress
+    event_type: roku_command
+    platform: event
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.tv_pluto
+    service: script.turn_on
+  id: 18ef378da9f84a5e9794054f7f6f38a4
+- alias: EmuRoku-WRAL
+  description: ''
+  trigger:
+  - event_data:
+      key: Right
+      source_name: Home Assistant
+      type: keypress
+    event_type: roku_command
+    platform: event
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.tv_wral
+    service: script.turn_on
+  id: 06904a6a6e754b41a9027ce8e94b9901
+- id: '1588180035189'
+  alias: Party Mode ON
+  description: ''
+  trigger:
+  - entity_id: switch.party_mode_virtual_204
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - scene: scene.music_lights
+- id: '1588180395296'
+  alias: Party Mode OFF
+  description: ''
+  trigger:
+  - entity_id: switch.party_mode_virtual_204
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - scene: scene.music_lights_off
+- alias: Bathroom Hygrostat On
+  id: '54655452'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_hygrostat
+    to: 'on'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.master_bath_fan_212
+- alias: Bathroom Hygrostat Off
+  id: 013902934
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_hygrostat
+    to: 'off'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.master_bath_fan_212
+- id: '20390293'
+  alias: Notify - Hygrometer
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bathroom_hygrostat
+  action:
+  - service: notify.telegram_e
+    data:
+      message: Hygrometer is {{states.binary_sensor.bathroom_hygrostat.state }}
+  - service: notify.mobile_app_pixel_4a
+    data:
+      title: Sensor Alert
+      message: Hygrometer is {{states.binary_sensor.bathroom_hygrostat.state }}
+  mode: single
+- id: '1592941924977'
+  alias: ipad Home Mode
+  description: ''
+  trigger:
+  - event_data:
+      actionName: ios-home-mode
+    event_type: ios.action_fired
+    platform: event
+  condition: []
+  action:
+  - scene: scene.switch_to_home
+- id: ba4aeffd1091467b8144d95225cc99ad
+  alias: Notify - Persistent update
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.updater
+    to: 'on'
+  action:
+  - service: persistent_notification.create
+    data_template:
+      title: New Home Assistant version is available
+      message: 'Version **{{ trigger.to_state.attributes.newest_version }}**:
+
+
+        - [GitHub](https://github.com/home-assistant/core/releases/tag/{{ trigger.to_state.attributes.newest_version
+        }})
+
+        - [home-assistant.io]({{ trigger.to_state.attributes.release_notes }})
+
+        '
+  mode: single
+- id: '1600716527325'
+  alias: Notify - Val left work
+  description: ''
+  trigger:
+  - entity_id: person.val
+    platform: zone
+    zone: zone.food_lion
+    event: leave
+  action:
+  - data:
+      message: Val left work
+      title: Hey
+      data:
+        clickAction: /lovelace/people
+    service: notify.mobile_app_pixel_4a
+  mode: single
+- id: '1605817752377'
+  alias: Notify - Kitchen iPad Battery Low
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_ipad_battery_level
+    below: 20
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      message: 'Kitchen iPad Battery is low. Current level: {{ states.sensor.kitchen_ipad_battery_level.state
+        }}%'
+      title: Alert
+      data:
+        color: '#2DF56D'
+        clickAction: /ui-system/0
+        icon_url: https://evilrobot.space/img/hassimg/triangle-alert.png
+  mode: single
+- id: '1607991039497'
+  alias: Notify - Aurora
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.aurora_visibility
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      title: Look up!
+      message: Aurora!
+      data:
+        clickAction: /lovelace/weather
+  mode: single
+- id: '1608036536337'
+  alias: Notify - MC Send snapshot when motion detected
+  description: ''
+  use_blueprint:
+    path: vorion/send-camera-snapshot-notification-on-motion.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.motion_sensor_128
+      camera: camera.man_cave_camera
+      notify_device: 645aaef3fd0511eab19d41a7b91f1adf

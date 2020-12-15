@@ -33,7 +33,7 @@ lovelace:
     - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
       type: module
     - url: /hacsfiles/vertical-style-card/vertical-style-card.js
-      type: js
+      type: module
     - url: /hacsfiles/banner-card/banner-card.js
       type: module
     - url: /hacsfiles/untappd-card/untappd-card.js
@@ -43,9 +43,9 @@ lovelace:
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
     - url: /hacsfiles/lovelace-card-tools/card-tools.js
-      type: js
+      type: module
     - url: /hacsfiles/light-entity-card/light-entity-card.js
-      type: js
+      type: module
     - url: /hacsfiles/weather-card/weather-card.js
       type: module
     - url: /hacsfiles/text-divider-row/text-divider-row.js
@@ -437,7 +437,6 @@ sensor:
 #Display current HA uptime
   - platform: uptime
     name: Uptime
-    unit_of_measurement: hours
 
 # Display info about last login
   - platform: authenticated
@@ -474,18 +473,6 @@ sensor:
       - 'date'
       - 'time_date'
       - 'time_utc'
-  - platform: template
-    sensors:
-      simple_time:
-        entity_id: sensor.time
-        friendly_name: "Time"
-        value_template: "{{ now().strftime('%I:%M %P') }}"
-  - platform: template
-    sensors:
-      simple_date:
-        entity_id: sensor.time
-        friendly_name: "Date"
-        value_template: "{{ now().strftime('%A %b %d, %Y') }}"
 
 # Untappd sensor and templating
   - platform: untappd

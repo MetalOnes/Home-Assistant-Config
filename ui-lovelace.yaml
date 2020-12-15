@@ -1161,6 +1161,8 @@ views:
             camera_image: camera.geomagnetic_field
             entity: camera.geomagnetic_field
             show_state: false
+          - type: entity
+            entity: binary_sensor.aurora_visibility
 
 #
 # People tab
