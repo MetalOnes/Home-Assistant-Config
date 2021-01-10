@@ -38,8 +38,8 @@ switch.air_purifier:
   icon: mdi:air-filter
 
 switch.couch_lights_185:
-  friendly_name: Couch Lights
-  icon: mdi:sofa
+  friendly_name: Lava Lamp
+  icon: mdi:lava-lamp
 
 switch.music_lights_186:
   friendly_name: Music Lights
@@ -47,11 +47,11 @@ switch.music_lights_186:
 
 switch.party_lights_184:
   friendly_name: "Party Lights (Both)"
-  icon: mdi:lava-lamp
+  icon: mdi:light-switch
 
 switch.party_mode_virtual_204:
   friendly_name: Party Mode
-  icon: mdi:lava-lamp
+  icon: mdi:mushroom
 
 switch.lr_tv:
   icon: mdi:television

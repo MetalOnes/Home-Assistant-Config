@@ -10,6 +10,10 @@ homeassistant:
   external_url: !secret external_url
   media_dirs:
     bender: /media/benderstore
+  whitelist_external_dirs:
+    - /home/homeassistant/.homeassistant/www/tmp
+  # allowlist_external_dirs:
+  #   - /local/tmp
 
 frontend:
   themes: !include_dir_merge_named themes/
@@ -107,6 +111,12 @@ lovelace:
       icon: mdi:play-circle-outline
       show_in_sidebar: true
       filename: ui-media.yaml
+    ui-3dprint:
+      mode: yaml
+      title: "3D Printing"
+      icon: mdi:printer-3d
+      show_in_sidebar: true
+      filename: ui-3dprint.yaml
     #ui-floorplan:
     #  mode: yaml
     #  title: Floorplan
@@ -173,6 +183,13 @@ sun:
 xbox:
   client_id: !secret azure_cid
   client_secret: !secret azure_secret
+
+# OctoPrint
+octoprint:
+  host: 192.168.1.220
+  api_key: !secret octo_api
+  bed: true
+  number_of_tools: 1
 
 ##########################################
 # Lights
@@ -301,6 +318,12 @@ camera:
     input: !secret cornercam_url
     name: Corner Cam
 
+# 3D Printer Cam
+  - platform: mjpeg
+    name: OctoPrint
+    still_image_url: http://192.168.1.220/webcam/?action=snapshot
+    mjpeg_url: http://192.168.1.220/webcam/?action=stream
+
 
 #### Not actual cams, but images to use in HA
 
@@ -404,6 +427,14 @@ sensor:
   - platform: cert_expiry
     host: evilrobot.space
 
+  - platform: template
+    sensors:
+      cert_exp_date:  
+        friendly_name: Cert Exp Date
+        device_class: timestamp
+        value_template: >
+          {{ as_timestamp(states('sensor.cert_expiry_timestamp_evilrobot_space')) | timestamp_custom('%Y-%m-%d', False) }}
+
 # Harmony Status
   - platform: template
     sensors:
@@ -456,7 +487,7 @@ sensor:
       - type: ipv4_address
         arg: ens160
 
-# Reformatting last boot time
+# Reformatting last boot times
   - platform: template
     sensors:
       server_uptime:  
@@ -464,6 +495,13 @@ sensor:
         device_class: timestamp
         value_template: >
           {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%Y-%m-%d %H:%M', False) }}
+  - platform: template
+    sensors:
+      hass_uptime:  
+        friendly_name: HASS Uptime
+        device_class: timestamp
+        value_template: >
+          {{ as_timestamp(states('sensor.uptime')) | timestamp_custom('%Y-%m-%d %H:%M', False) }}
 
 
 # Date and Time
@@ -514,6 +552,73 @@ sensor:
     api_key: !secret steam_api
     accounts:
       - !secret steam_id64
+
+# Octoprint
+  - platform: template
+    sensors:
+      octoprint_time_elapsed_format:
+        friendly_name: 'Printing Time Elapsed'
+        value_template: >-
+          {% set etime = states.sensor.octoprint_time_elapsed.state | int %}
+          {% set seconds = etime % 60 %}
+          {% set minutes = ((etime % 3600) / 60) | int %}
+          {% set hours = ((etime % 86400) / 3600) | int %}
+          {% set days = (etime / 86400) | int %}
+          {%- if days > 0 -%}
+            {%- if days == 1 -%}
+              1 day
+            {%- else -%}
+              {{ days }} days
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+            {%- if hours == 1 -%}
+              1 hour
+            {%- else -%}
+              {{ hours }} hours
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes > 0 -%}
+            {%- if minutes == 1 -%}
+              1 minute
+            {%- else -%}
+              {{ minutes }} minutes
+            {%- endif -%}
+          {%- endif -%}
+      octoprint_time_remaining_format:
+        friendly_name: 'Printing Time Remaining'
+        value_template: >-
+          {% set rtime = states.sensor.octoprint_time_remaining.state | int %}
+          {% set seconds = rtime % 60 %}
+          {% set minutes = ((rtime % 3600) / 60) | int %}
+          {% set hours = ((rtime % 86400) / 3600) | int %}
+          {% set days = (rtime / 86400) | int %}
+          {%- if days > 0 -%}
+            {%- if days == 1 -%}
+              1 day
+            {%- else -%}
+              {{ days }} days
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+            {%- if hours == 1 -%}
+              1 hour
+            {%- else -%}
+              {{ hours }} hours
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes > 0 -%}
+            {%- if minutes == 1 -%}
+              1 minute
+            {%- else -%}
+              {{ minutes }} minutes
+            {%- endif -%}
+          {%- endif -%}
+
 
 #########################################
 # LEDfx/WLED Things
@@ -704,27 +809,6 @@ rest_command:
     headers:
       authorization: 'Basic a29kaTprb2Rp'
 # LEDfx related
-  ledfx_wled1_wave:
-    url: "http://192.168.1.10:8888/api/presets"
-    method: put
-    headers:
-      accept: 'application/json'
-    payload: '{"id":"wled1-wavelength","action":"activate"}'
-    content_type: 'application/json'
-  ledfx_both_wave:
-    url: "http://192.168.1.10:8888/api/presets"
-    method: put
-    headers:
-      accept: 'application/json'
-    payload: '{"id":"both-wavelength","action":"activate"}'
-    content_type: 'application/json'
-  ledfx_wled1_off:
-    url: "http://192.168.1.10:8888/api/presets"
-    method: put
-    headers:
-      accept: 'application/json'
-    payload: '{"id":"wled1-off","action":"activate"}'
-    content_type: 'application/json'
   ledfx_all_off:
     url: "http://192.168.1.10:8888/api/presets"
     method: put
@@ -770,6 +854,11 @@ rest_command:
     url: "http://192.168.1.13/json/state"
     method: post
     payload: '{"ps":2}'
+    content_type: 'application/json'
+  desk_printdone:
+    url: "http://192.168.1.13/json/state"
+    method: post
+    payload: '{"ps":5}'
     content_type: 'application/json'
   
   wled1_startup:

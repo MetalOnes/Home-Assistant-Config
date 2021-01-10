@@ -126,3 +126,37 @@ sensor.network_throughput_out_ens160:
 
 sensor.ipv4_address_ens160:
   friendly_name: LAN IP
+
+sensor.octoprint_actual_tool0_temp:
+  friendly_name: "Nozzle Temp"
+  unit_of_measurement: '°F'
+  icon: mdi:printer-3d-nozzle
+
+sensor.octoprint_target_tool0_temp:
+  friendly_name: "Nozzle Target Temp"
+  unit_of_measurement: '°F'
+  icon: mdi:printer-3d-nozzle
+
+sensor.octoprint_actual_bed_temp:
+  friendly_name: "Bed Temp"
+  unit_of_measurement: '°F'
+
+sensor.octoprint_target_bed_temp:
+  friendly_name: "Bed Target Temp"
+  unit_of_measurement: '°F'
+
+sensor.octoprint_job_percentage:
+  friendly_name: "Current Job"
+  icon: mdi:timelapse
+
+sensor.octoprint_time_elapsed_format:
+  icon: mdi:av-timer
+  friendly_name: "Print Time Elapsed"
+
+sensor.octoprint_time_remaining_format:
+  icon: mdi:av-timer
+  friendly_name: "Print Time Remaining"
+
+sensor.octoprint_current_state:
+  friendly_name: "Ender 3 Pro Current State"
+  icon: mdi:printer-3d

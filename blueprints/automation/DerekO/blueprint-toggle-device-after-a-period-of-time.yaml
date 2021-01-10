@@ -1,0 +1,31 @@
+blueprint:
+  name: Toggle device status after a period of time
+  description: Once a device has been in a defined status for a period of time, toggle
+    it's status
+  domain: automation
+  input:
+    trigger_device:
+      name: Device
+      description: Which device to monitor and toggle?
+      selector:
+        entity: {}
+    trigger_state:
+      name: State
+      description: What state begins time period?
+    trigger_time:
+      name: Duration
+      description: What period to wait before toggling state?
+      selector:
+        time: {}
+  source_url: https://community.home-assistant.io/t/blueprint-toggle-device-after-a-period-of-time/257591
+mode: restart
+max_exceeded: silent
+trigger:
+  platform: state
+  entity_id: !input 'trigger_device'
+  to: !input 'trigger_state'
+  for: !input 'trigger_time'
+action:
+  service: homeassistant.toggle
+  data:
+    entity_id: '{{ trigger.entity_id }}'

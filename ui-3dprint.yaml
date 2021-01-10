@@ -1,0 +1,69 @@
+title: 3D Printing
+views:
+  - title: 3D Printing
+    cards:
+      - type: entities
+        entities:
+          - type: custom:button-card
+            entity: sensor.octoprint_current_state
+            name: "Ender 3 Pro Current State:"
+            show_state: true
+            layout: icon_name_state2nd
+            state:
+              - value: 'Printing'
+                color: green
+                icon: mdi:printer-3d-nozzle
+                styles:
+                  state:
+                    - color: green
+              - value: 'Operational'
+                color: white
+                styles:
+                  state:
+                    - color: white
+              - value: 'Error'
+                color: red
+                styles:
+                  state:
+                    - color: red
+          - type: section
+            label: "Current Job"
+
+          - sensor.octoprint_job_percentage
+          - sensor.octoprint_time_elapsed_format
+          - sensor.octoprint_time_remaining_format
+          - type: section
+            label: "Binary Sensors"
+          - binary_sensor.octoprint_printing
+          - binary_sensor.octoprint_printing_error
+          
+          - type: section
+            label: "Temps (6 Hours)"
+          - type: custom:mini-graph-card
+            line_width: 2
+            lower_bound: 0
+            upper_bound: 250
+            points_per_hour: 12
+            show_legend: true
+            entities:
+              - entity: sensor.octoprint_actual_bed_temp
+                unit: '°C'
+                name: Bed
+                color: orange
+                show_fill: false
+                hours_to_show: 6
+                smoothing: false
+              - entity: sensor.octoprint_actual_tool0_temp
+                name: Nozzle
+                color: blue
+                unit: '°C'
+                show_fill: false
+                smoothing: false
+                hours_to_show: 6
+                
+
+      - type: picture-entity
+        entity: camera.octoprint
+        show_state: false
+        show_name: false
+

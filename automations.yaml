@@ -523,7 +523,6 @@
     data:
       message: The LR Lamp is {{ states.light.lamp_107.state}}
   mode: single
-
 - id: '1582992426158'
   alias: Vanity Light 100
   description: ''
@@ -753,3 +752,63 @@
       motion_sensor: binary_sensor.motion_sensor_128
       camera: camera.man_cave_camera
       notify_device: 645aaef3fd0511eab19d41a7b91f1adf
+- id: '1607321039497'
+  alias: Notify - Print Error
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.octoprint_printing_error
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_4a
+    data:
+      title: Print Error!
+      message: D'oh!
+      data:
+        clickAction: /ui-3dprint
+  mode: single
+- id: '1609821039497'
+  alias: Notify - Print Done
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 99.99
+  condition: []
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.octoprint
+      filename: /home/homeassistant/.homeassistant/www/tmp/3dprint.jpg
+  - service: notify.mobile_app_pixel_4a
+    data:
+      title: Print's Done!
+      message: Woo-hoo!
+      data:
+        clickAction: /ui-3dprint
+        image: /local/tmp/3dprint.jpg
+  mode: single
+- id: '1609185883514'
+  alias: Lava Lamp Auto-Off
+  description: ''
+  use_blueprint:
+    path: DerekO/blueprint-toggle-device-after-a-period-of-time.yaml
+    input:
+      trigger_time: '7:00:00'
+      trigger_device: switch.couch_lights_185
+      trigger_state: 'on'
+- id: '1607121039497'
+  alias: Desk - Print Done
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 99.99
+  condition: []
+  action:
+  - service: script.turn_on
+    entity_id: script.desk_printdone
+  - delay: 00:00:10
+  - service: script.turn_on
+    entity_id: script.desk_normal

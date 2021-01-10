@@ -77,7 +77,7 @@ views:
                 ]]]
               up: >
                 [[[ return `
-                  <span>HASS Uptime:<br>${states['sensor.uptime'].state} Hours</span>`
+                  <span>HASS Last Boot:<br>${states['sensor.hass_uptime'].state}</span>`
                 ]]]
               log: >
                 [[[ return `
@@ -159,7 +159,7 @@ views:
             entities:
               - sensor.myip
               - sensor.ipv4_address_ens160
-              - sensor.ssl_certificate_expiry
+              - sensor.cert_exp_date
           - type: "custom:mini-graph-card"
             entities:
               - entity: sensor.network_throughput_in_ens160

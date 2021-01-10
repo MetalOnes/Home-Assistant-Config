@@ -148,6 +148,11 @@ desk_rainbow:
   sequence:
     - service: rest_command.desk_rainbow
 
+desk_printdone:
+  alias: "Desk LEDs Print Done preset"
+  sequence:
+    - service: rest_command.desk_printdone
+
 
 ledfx_wled1_off:
   alias: "LEDfx WLED 1 Shutdown Sequence"
@@ -183,9 +188,12 @@ ledfx_all_off:
     - service: light.turn_off
       data:
         entity_id: light.chicken
-    # - service: light.turn_off
-    #   data:
-    #     entity_id: light.couch
+    - service: light.turn_off
+      data:
+        entity_id: light.2811_1
+    - service: light.turn_off
+      data:
+        entity_id: light.2811_2
     # - service: switch.turn_off
     #   data:
     #     entity_id: switch.couch_lights_185
@@ -244,22 +252,3 @@ ledfx_xmas:
         entity_id: light.chicken
     - delay: '00:00:05'
     - service: rest_command.ledfx_xmas
-
-# ledfx_waverainbeat:
-#   alias: "LEDfx WaveRainBeat Preset"
-#   sequence:
-#     - service: switch.turn_on
-#       data:
-#         entity_id: switch.couch_lights_185
-#     - delay: '00:00:03'
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.wled1
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.mantle
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.couch
-#     - delay: '00:00:02'
-#     - service: rest_command.ledfx_waverainbeat

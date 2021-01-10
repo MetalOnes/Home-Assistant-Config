@@ -9,7 +9,7 @@ ExteriorAll:
     - switch.back_holiday_214
     - light.front_porch_leds
     - light.2811_1
-    - light.2811_2_master
+    - light.2811_2
 
 Ext Back:
   name: "Exterior Back"
@@ -44,7 +44,7 @@ HolidayExterior:
     - switch.front_holiday_213
     - switch.back_holiday_214
     - light.2811_1
-    - light.2811_2_master
+    - light.2811_2
 
 
 Living Room:
