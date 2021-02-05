@@ -104,7 +104,7 @@ wled1_startup:
     - delay: '00:00:05'
     - service: light.turn_off
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
 
 wled1_shutdown_anim:
   alias: "WLED1 - Shutdown Animation"
@@ -113,7 +113,7 @@ wled1_shutdown_anim:
     - delay: '00:00:03'
     - service: light.turn_off
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
 
 wled1_cyane_anim:
   alias: "WLED1 - Cyane Animation"
@@ -122,7 +122,7 @@ wled1_cyane_anim:
     - delay: '00:00:03'
     - service: light.turn_off
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
 
 wled1_orange_anim:
   alias: "WLED1 - Red-Orange Animation"
@@ -131,7 +131,7 @@ wled1_orange_anim:
     - delay: '00:00:03'
     - service: light.turn_off
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
 
 desk_alert:
   alias: "Desk LEDs Alert preset"
@@ -152,95 +152,67 @@ desk_printdone:
   alias: "Desk LEDs Print Done preset"
   sequence:
     - service: rest_command.desk_printdone
-
-
-ledfx_wled1_off:
-  alias: "LEDfx WLED 1 Shutdown Sequence"
-  sequence:
-    - service: rest_command.ledfx_wled1_off
+    - service: rest_command.desk2_100percent
+    - delay: '00:00:10'
+    - service: rest_command.desk_normal
     - service: light.turn_off
       data:
-        entity_id: light.wled1
+        entity_id: light.desk2
 
-ledfx_wled1_wave:
-  alias: "LEDfx WLED 1 Wave Preset Sequence"
-  sequence:
-    - service: light.turn_on
-      data:
-        entity_id: light.wled1
-    - delay: '00:00:05'
-    - service: rest_command.ledfx_wled1_wave
 
 ledfx_all_off:
   alias: "LEDfx Shutdown Sequence"
   sequence:
     - service: rest_command.ledfx_all_off
     - delay: "00:00:02"
-    - service: light.turn_off
-      data:
-        entity_id: light.wled1
-    - service: light.turn_off
-      data:
-        entity_id: light.mantle
-    - service: light.turn_off
-      data:
-        entity_id: light.dining_shelf
-    - service: light.turn_off
-      data:
-        entity_id: light.chicken
-    - service: light.turn_off
-      data:
-        entity_id: light.2811_1
-    - service: light.turn_off
-      data:
-        entity_id: light.2811_2
-    # - service: switch.turn_off
-    #   data:
-    #     entity_id: switch.couch_lights_185
+    - service: homeassistant.turn_off
+      entity_id: group.living_wled_lights
 
-ledfx_both_wave:
-  alias: "LEDfx Both Wave Preset Sequence"
+ledfx_brp:
+  alias: "LEDfx BRP Scene"
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
     - service: light.turn_on
       data:
         entity_id: light.mantle
+    - service: light.turn_on
+      data:
+        entity_id: light.clock
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_shelf
     - delay: '00:00:05'
-    - service: rest_command.ledfx_both_wave
+    - service: rest_command.ledfx_brp
 
-ledfx_waverain:
-  alias: "LEDfx WaveRain Preset"
+ledfx_fowlbrp:
+  alias: "LEDfx BRP with Fowl Scene"
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
     - service: light.turn_on
       data:
         entity_id: light.mantle
-    - delay: '00:00:05'
-    - service: rest_command.ledfx_waverain
-ledfx_waverainenergy:
-  alias: "LEDfx WaveRainEnergy Preset"
-  sequence:
     - service: light.turn_on
       data:
-        entity_id: light.wled1
-    - service: light.turn_on
-      data:
-        entity_id: light.mantle
+        entity_id: light.clock
     - service: light.turn_on
       data:
         entity_id: light.dining_shelf
+    - service: light.turn_on
+      data:
+        entity_id: light.goose
     - delay: '00:00:05'
-    - service: rest_command.ledfx_waverainenergy
-ledfx_xmas:
-  alias: "LEDfx Xmas-ish Preset"
+    - service: rest_command.ledfx_fowlbrp
+
+ledfx_plasma:
+  alias: "LEDfx Plasma Scene"
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.wled1
+        entity_id: light.ent_cent
     - service: light.turn_on
       data:
         entity_id: light.mantle
@@ -249,6 +221,27 @@ ledfx_xmas:
         entity_id: light.dining_shelf
     - service: light.turn_on
       data:
-        entity_id: light.chicken
+        entity_id: light.clock
     - delay: '00:00:05'
-    - service: rest_command.ledfx_xmas
+    - service: rest_command.ledfx_plasma
+
+ledfx_fowlplasma:
+  alias: "LEDfx Plasma with Fowl Scene"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ent_cent
+    - service: light.turn_on
+      data:
+        entity_id: light.mantle
+    - service: light.turn_on
+      data:
+        entity_id: light.clock
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_shelf
+    - service: light.turn_on
+      data:
+        entity_id: light.goose
+    - delay: '00:00:05'
+    - service: rest_command.ledfx_fowlplasma

@@ -657,34 +657,16 @@ remote:
     name: Living Room
     host: !secret livingroom_harmony_ip
 
-##########################################
-# Telegram Bot
-##########################################
-
-telegram_bot:
-  platform: polling
-  api_key:  !secret telegram_bot_api_key
-  allowed_chat_ids:
-    - !secret e_chat_id
-    - !secret v_chat_id
-
 #########################################
 # Notifications
 #########################################
 
 notify:
-  - name: telegram_e
-    platform: telegram
-    chat_id: !secret e_chat_id
-  - name: telegram_v
-    platform: telegram
-    chat_id: !secret v_chat_id
   - name: all_devices
     platform: group
     services:
       - service: mobile_app_pixel4a
       - service: mobile_app_moto_g_power
-      - service: telegram_e
 
 #########################################
 # Google calendar
@@ -810,32 +792,43 @@ rest_command:
       authorization: 'Basic a29kaTprb2Rp'
 # LEDfx related
   ledfx_all_off:
-    url: "http://192.168.1.10:8888/api/presets"
+    url: "http://192.168.1.10:8888/api/scenes"
     method: put
     headers:
       accept: 'application/json'
     payload: '{"id":"all-off","action":"activate"}'
     content_type: 'application/json'
-  ledfx_waverain:
-    url: "http://192.168.1.10:8888/api/presets"
+    
+  ledfx_brp:
+    url: "http://192.168.1.10:8888/api/scenes"
     method: put
     headers:
       accept: 'application/json'
-    payload: '{"id":"waverain","action":"activate"}'
+    payload: '{"id":"brp","action":"activate"}'
     content_type: 'application/json'
-  ledfx_waverainenergy:
-    url: "http://192.168.1.10:8888/api/presets"
+
+  ledfx_fowlbrp:
+    url: "http://192.168.1.10:8888/api/scenes"
     method: put
     headers:
       accept: 'application/json'
-    payload: '{"id":"waverainenergy","action":"activate"}'
+    payload: '{"id":"fowlbrp","action":"activate"}'
     content_type: 'application/json'
-  ledfx_xmas:
-    url: "http://192.168.1.10:8888/api/presets"
+
+  ledfx_plasma:
+    url: "http://192.168.1.10:8888/api/scenes"
     method: put
     headers:
       accept: 'application/json'
-    payload: '{"id":"xmas-ish","action":"activate"}'
+    payload: '{"id":"plasma","action":"activate"}'
+    content_type: 'application/json'
+
+  ledfx_fowlplasma:
+    url: "http://192.168.1.10:8888/api/scenes"
+    method: put
+    headers:
+      accept: 'application/json'
+    payload: '{"id":"fowlplasma","action":"activate"}'
     content_type: 'application/json'
 
   # WLED Commands
@@ -860,6 +853,36 @@ rest_command:
     method: post
     payload: '{"ps":5}'
     content_type: 'application/json'
+
+  desk2_20percent:
+    url: "http://192.168.1.22/json/state"
+    method: post
+    content_type: 'application/json'
+    payload: '{"on":true,"bri":15,"transition":7,"ps":-1,"pss":0,"pl":-1,"ccnf":{"min":1,"max":5,"time":12},"nl":{"on":false,"dur":60,"fade":true,"mode":1,"tbri":0,"rem":-1},"udpn":{"send":false,"recv":true},"lor":0,"mainseg":0,"seg":[{"id":0,"start":0,"stop":5,"len":5,"grp":1,"spc":0,"on":true,"bri":128,"col":[[0,0,255],[0,0,0],[0,0,0]],"fx":98,"sx":173,"ix":20,"pal":2,"sel":true,"rev":false,"mi":false}]}'
+
+  desk2_40percent:
+    url: "http://192.168.1.22/json/state"
+    method: post
+    content_type: 'application/json'
+    payload: '{"on":true,"bri":15,"transition":7,"ps":-1,"pss":0,"pl":-1,"ccnf":{"min":1,"max":5,"time":12},"nl":{"on":false,"dur":60,"fade":true,"mode":1,"tbri":0,"rem":-1},"udpn":{"send":false,"recv":true},"lor":0,"mainseg":0,"seg":[{"id":0,"start":0,"stop":5,"len":5,"grp":1,"spc":0,"on":true,"bri":128,"col":[[0,0,255],[0,0,0],[0,0,0]],"fx":98,"sx":173,"ix":40,"pal":2,"sel":true,"rev":false,"mi":false}]}'
+
+  desk2_60percent:
+    url: "http://192.168.1.22/json/state"
+    method: post
+    content_type: 'application/json'
+    payload: '{"on":true,"bri":15,"transition":7,"ps":-1,"pss":0,"pl":-1,"ccnf":{"min":1,"max":5,"time":12},"nl":{"on":false,"dur":60,"fade":true,"mode":1,"tbri":0,"rem":-1},"udpn":{"send":false,"recv":true},"lor":0,"mainseg":0,"seg":[{"id":0,"start":0,"stop":5,"len":5,"grp":1,"spc":0,"on":true,"bri":128,"col":[[0,0,255],[0,0,0],[0,0,0]],"fx":98,"sx":173,"ix":60,"pal":2,"sel":true,"rev":false,"mi":false}]}'
+
+  desk2_80percent:
+    url: "http://192.168.1.22/json/state"
+    method: post
+    content_type: 'application/json'
+    payload: '{"on":true,"bri":15,"transition":7,"ps":-1,"pss":0,"pl":-1,"ccnf":{"min":1,"max":5,"time":12},"nl":{"on":false,"dur":60,"fade":true,"mode":1,"tbri":0,"rem":-1},"udpn":{"send":false,"recv":true},"lor":0,"mainseg":0,"seg":[{"id":0,"start":0,"stop":5,"len":5,"grp":1,"spc":0,"on":true,"bri":128,"col":[[0,0,255],[0,0,0],[0,0,0]],"fx":98,"sx":173,"ix":80,"pal":2,"sel":true,"rev":false,"mi":false}]}'
+
+  desk2_100percent:
+    url: "http://192.168.1.22/json/state"
+    method: post
+    content_type: 'application/json'
+    payload: '{"on":true,"bri":15,"transition":7,"mainseg":0,"seg":[{"id":0,"start":0,"stop":5,"grp":1,"spc":0,"on":true,"bri":128,"col":[[8,255,0],[0,0,0],[0,0,0]],"fx":1,"sx":171,"ix":167,"pal":2,"sel":true,"rev":false,"mi":false},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0},{"stop":0}]}'
   
   wled1_startup:
     url: "http://192.168.1.11/json/state"

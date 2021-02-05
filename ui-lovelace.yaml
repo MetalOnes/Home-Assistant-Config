@@ -185,14 +185,6 @@ views:
                         brightness: 45
                         white_value: 0
                         icon_color: blue
-                      - rgb_color: [255,0,0]
-                        brightness: 45
-                        white_value: 0
-                        icon_color: red
-                      - rgb_color: [0,255,00]
-                        brightness: 45
-                        white_value: 0
-                        icon_color: green
                       - icon_color: 'linear-gradient(to right, orange , yellow, green, cyan, blue, violet)'
                         effect: custom
                       - icon_color: 'linear-gradient(to right, red, green, blue)'
@@ -455,6 +447,12 @@ views:
                 away: false
                 none: false
               hvac: true
+            style: |
+              ha-card {
+                --st-font-size-xl: 32px;
+                --st-font-size-m: 20px;
+                --st-font-size-title: 20px;
+              }
 
 # Temps
           - type: custom:mini-graph-card
@@ -540,8 +538,8 @@ views:
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
-                entity: light.2811_2
-                name: Mantle 2
+                entity: light.clock
+                name: Clock
                 template: rgb_light_button
               - type: "custom:button-card"
                 entity: switch.couch_lights_185
@@ -615,8 +613,9 @@ views:
                 template: light_switch_button
               
               - type: "custom:button-card"
-                color_type: blank-card
-                color_off: var(--disabled-text-color)
+                entity: light.desk2
+                name: Desk 2
+                template: rgb_light_button
               - type: "custom:button-card"
                 color_type: blank-card
                 color_off: var(--disabled-text-color)

@@ -29,14 +29,21 @@
   action:
   - entity_id: group.holidayexterior
     service: homeassistant.turn_on
+
 - alias: Exterior Sunrise
   trigger:
-  - platform: sun
-    event: sunrise
+  - platform: template
+    value_template: '{{ state_attr(''sun.sun'', ''elevation'') > states(''input_number.exterior_sunrise_angle'')
+      | float | round(2) }}
+
+      '
   action:
     service: homeassistant.turn_off
     entity_id: group.exteriorall
   id: 65a50dab892b470f945987c56d5fced3
+
+
+
 - alias: Interior Sunset
   trigger:
   - platform: template
@@ -73,6 +80,7 @@
     - light.dining_room_lamp_160
     - switch.man_cave_lights_133
     - light.vanity_211
+    - light.clock
   id: 0189628f95734ed2afaf1750079bbfed
 - alias: EricHomeDeskLEDs
   trigger:
@@ -416,20 +424,6 @@
       message: '{{trigger.event.data.service_data.message}}'
   initial_state: true
   mode: single
-- id: 690a98bd95c4445e95482bff678738fa
-  alias: Notify - Update available
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.updater
-    from: 'off'
-    to: 'on'
-  action:
-  - service: notify.telegram_e
-    data:
-      title: '*HA Update*'
-      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
-        }} is available.
-  mode: single
 - id: 793c7c6976f44fad8282de519ef9b2b6
   alias: Notify -  Front door changed
   trigger:
@@ -439,9 +433,6 @@
   - condition: template
     value_template: '{{ states(''person.eric'') != ''home'' }}'
   action:
-  - service: notify.telegram_e
-    data:
-      message: Front door has been {{states.lock.front_door_19.state }}
   - service: notify.mobile_app_pixel_4a
     data:
       title: Door Alert
@@ -450,13 +441,14 @@
         image: https://evilrobot.space/img/hassimg/sh/042-handle-1.png
   mode: single
 - id: 097d75a6587c4281956879be21681e8b
-  alias: NotifyTG - Public IP Changed
+  alias: Notify - Public IP Changed
   trigger:
   - platform: state
     entity_id: sensor.myipopendnscom
   action:
-  - service: notify.telegram_e
+  - service: notify.mobile_app_pixel_4a
     data:
+      title: Public IP Changed
       message: Your public IP has changed to {{states.sensor.myipopendnscom.state
         }}
   mode: single
@@ -468,10 +460,6 @@
     value_template: '{{states.sensor.ssl_certificate_expiry.state}}'
     below: '10'
   action:
-  - service: notify.telegram_e
-    data:
-      message: SSL Certificate expires in {{states.sensor.ssl_certificate_expiry.state}}
-        days
   - service: notify.mobile_app_Pixel4a
     data:
       title: SSL Certificate Expiry
@@ -481,48 +469,7 @@
         image: https://evilrobot.space/img/hassimg/sh/007-smart-key.png
         clickAction: /ui-system/0
   mode: single
-- id: b41d8697dc4840a289f587c4eebf08a9
-  alias: NotifyTG - TeleBot Start
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: /start
-  action:
-  - service: notify.telegram_e
-    data:
-      message: commands
-      data:
-        keyboard:
-        - /lrlampstat, /lrlamptoggle
-  mode: single
-- id: telebot_lrlampstat
-  alias: NotifyTG -  Lamp Stat
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: /lrlampstat
-  action:
-  - service: notify.telegram_e
-    data:
-      message: The LR Lamp is {{ states.light.lamp_107.state}}
-  mode: single
-- id: telebot_lrlamptoggle
-  alias: NotifyTG -  LR Lamp Toggle
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: /lrlamptoggle
-  action:
-  - service: light.toggle
-    entity_id: light.lamp_107
-  - delay: '[object Object]'
-  - service: notify.telegram_e
-    data:
-      message: The LR Lamp is {{ states.light.lamp_107.state}}
-  mode: single
+
 - id: '1582992426158'
   alias: Vanity Light 100
   description: ''
@@ -652,9 +599,6 @@
   - platform: state
     entity_id: binary_sensor.bathroom_hygrostat
   action:
-  - service: notify.telegram_e
-    data:
-      message: Hygrometer is {{states.binary_sensor.bathroom_hygrostat.state }}
   - service: notify.mobile_app_pixel_4a
     data:
       title: Sensor Alert
@@ -809,6 +753,47 @@
   action:
   - service: script.turn_on
     entity_id: script.desk_printdone
-  - delay: 00:00:10
-  - service: script.turn_on
-    entity_id: script.desk_normal
+
+- id: '1607121039420'
+  alias: Desk - Print 20
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 19.99
+  condition: []
+  action:
+  - service: rest_command.desk2_20percent
+
+- id: '1607121039440'
+  alias: Desk - Print 40
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 39.99
+  condition: []
+  action:
+  - service: rest_command.desk2_40percent
+
+- id: '1607121039460'
+  alias: Desk - Print 60
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 59.99
+  condition: []
+  action:
+  - service: rest_command.desk2_60percent
+
+- id: '1607121039480'
+  alias: Desk - Print 80
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 79.99
+  condition: []
+  action:
+  - service: rest_command.desk2_80percent

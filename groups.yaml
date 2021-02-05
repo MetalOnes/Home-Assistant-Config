@@ -105,7 +105,7 @@ Int Lights:
 - light.tv
 - light.cabinets
 - light.dining_room_lamp_160
-- light.wled1
+- light.ent_cent
 - light.mantle
 - light.dining_shelf
 - light.fireplace
@@ -175,3 +175,11 @@ Vera Scenes:
     - scene.switch_to_away
     - scene.switch_to_home
     - scene.switch_to_night
+
+Living WLED Lights:
+  entities:
+    - light.clock
+    - light.ent_cent
+    - light.mantle
+    - light.dining_shelf
+    - light.goose

@@ -257,12 +257,17 @@ views:
                 label: "Lights"
               - type: custom:numberbox-card
                 entity: input_number.int_sa
-                name: "Int Lights - Solar Angle"
+                name: "Int Lights - Sunset Angle"
                 speed: 0
                 border: false
               - type: custom:numberbox-card
                 entity: input_number.ext_sa
-                name: "Ext Lights - Solar Angle"
+                name: "Ext Lights - Sunset Angle"
+                speed: 0
+                border: false
+              - type: custom:numberbox-card
+                entity: input_number.exterior_sunrise_angle
+                name: "Ext Lights - Sunrise Angle"
                 speed: 0
                 border: false
   

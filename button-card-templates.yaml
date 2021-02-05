@@ -116,26 +116,28 @@
       ]]]
     show_label: true
     show_state: true
+    show_name: false
     color: auto
     color_off: var(--state-icon-color)
     aspect_ratio: 4/1
+    layout: icon_state
     styles:
-      grid:
-        - grid-template-areas: '"n s i" "n l i" "n l i"'
-        - grid-template-rows: 1fr 1fr 1fr
-        - grid-template-columns: 1fr 2fr 1fr
-      label:
-        - justify-self: start
-      name:
-        - color: var(--state-icon-active-color)
+    #   grid:
+    #     - grid-template-areas: '"n s i" "n l i" "n l i"'
+    #     - grid-template-rows: 1fr 1fr 1fr
+    #     - grid-template-columns: 1fr 2fr 1fr
+    #   label:
+    #     - justify-self: start
+    #   name:
+    #     - color: var(--state-icon-active-color)
 
-      state:
-        - justify-self: start
-        - color: var(--state-icon-active-color)
+    #   state:
+    #     - justify-self: start
+    #     - color: var(--state-icon-active-color)
 
       card:
         - margin: 0 3px
-        - background-color: var(--primary-background-color)
+        - border: '2px solid var(--divider-color)'
 
 
 
